@@ -30,7 +30,6 @@
 ## 快速安装
 
 ```bash
-# 以安装 triton-ascend 3.2.1 为例
 pip install triton-ascend==3.2.1 --extra-index-url=https://triton-ascend.osinfra.cn/pypi/simple
 ```
 
