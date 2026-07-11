@@ -14,12 +14,8 @@
 
 **软件依赖**
 
-确定CANN、Python和TorchNPU软件版本并安装。其中，可以参考昇腾社区官网《[CANN快速安装](https://www.hiascend.com/cann/download)》
-完成驱动与固件安装。
-
-- CANN版本推荐：9.0.0
-- Python版本推荐：python3.11
-- TorchNPU版本推荐：2.7.1.post4
+确定CANN、Python和TorchNPU软件版本并安装,可以参考昇腾社区官网《[CANN快速安装](https://www.hiascend.com/cann/download)》完成驱动与固件安装。
+注：当前源码安装默认分支的**Triton-Ascend**版本是3.2.0。
 
 **表1** 产品版本配套说明表
 <table style="table-layout: fixed; width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
@@ -134,7 +130,7 @@ pip install -e .
     cp  {PATH_TO}/llvm-project/build/bin/FileCheck ${LLVM_INSTALL_PREFIX}/bin/FileCheck
     ```
 
-3. **编译Triton-Asecnd**：目前源码编译的Triton-Ascend版本是3.2.0，后续运行样例时注意CANN和TorchNPU的配套版本。
+3. **编译Triton-Asecnd**
 
     ```bash
     git clone https://github.com/triton-lang/triton-ascend.git && cd triton-ascend
