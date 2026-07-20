@@ -1,0 +1,193 @@
+# PO translation file for docs/zh/triton_api/Extension_Ops/get_element.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 08:49+0000\n"
+"PO-Revision-Date: 2026-07-20 08:49+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:0
+msgid "# triton.language.get_element"
+msgstr "# triton.language.get_element"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:4
+msgid ""
+"简介：根据给定的索引，从输入张量中读取单个元素。\n"
+"原型：\n"
+msgstr ""
+"Description: Reads a single element from the input tensor based on the given index.  \n"
+"Prototype:\n"
+
+#. type: code
+#: docs/zh/triton_api/Extension_Ops/get_element.md:6
+msgid ""
+"```python\n"
+"triton.language.get_element(\n"
+"    src,\n"
+"    indice,\n"
+"    _builder=None,\n"
+"    _generator=None\n"
+") -> scalar\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:8
+msgid "可以作为tensor的成员函数调用，如`x.get_element(...)`，与`get_element(x, ...)`等效。"
+msgstr "Can be called as a member function of a tensor, such as `x.get_element(...)`, which is equivalent to `get_element(x, ...)`."
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:10
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:12
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:14
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `src`        | `tensor`          | 要被访问的源张量                                                     |\n"
+"| `indice`       | `tuple of ints` 或 `tuple of tensors`    | 用于指定元素位置的索引                                                    |\n"
+"| `_builder` |- | 保留参数，暂不支持外部调用                                            |\n"
+"| `_generator`   | -               | 保留参数，暂不支持外部调用                                                |\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `src`        | `tensor`          | The source tensor to be accessed                                |\n"
+"| `indice`       | `tuple of ints` or `tuple of tensors` | Indices used to specify element positions                       |\n"
+"| `_builder` |- | Reserved parameter, external calls not supported for now         |\n"
+"| `_generator`   | -               | Reserved parameter, external calls not supported for now        |\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:16
+msgid ""
+"返回值：\n"
+"`scalar`：与 `src` 张量元素类型相同的标量值\n"
+msgstr ""
+"Return value:  \n"
+"`scalar`: a scalar value of the same element type as the `src` tensor.\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:18
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:20
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:22
+msgid ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- |\n"
+"| Ascend A2/A3 | √    | √     | √     | √     | √     | √       | √         |  √       | √    | √    |  √    | ×    |\n"
+msgstr ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- |\n"
+"| Ascend A2/A3 | √    | √     | √     | √     | √     | √       | √         |  √       | √    | √    |  √    | ×    |\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:24
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:26
+msgid ""
+"支持任意形状的张量，但需满足：\n"
+"`indice` 的长度必须与 `src` 张量的维度数相同。\n"
+msgstr ""
+"Supports tensors of arbitrary shape, with the following requirement:\n"
+"The length of `indice` must be equal to the number of dimensions of the `src` tensor.\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:28
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Limitations"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:30
+msgid "无特殊限制"
+msgstr "No special restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:32
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:34
+msgid "以下示例实现了get_element的调用："
+msgstr "The following example demonstrates the invocation of `get_element`:"
+
+#. type: code
+#: docs/zh/triton_api/Extension_Ops/get_element.md:36
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def index_select_manual_kernel(in_ptr, indices_ptr, out_ptr, dim,\n"
+"                                g_stride: tl.constexpr, indice_length: tl.constexpr,\n"
+"                                g_block: tl.constexpr, g_block_sub: tl.constexpr,\n"
+"                                other_block: tl.constexpr):\n"
+"    \"\"\"\n"
+"    Manual implementation using tl.get_element and tl.insert_slice.\n"
+"    \"\"\"\n"
+"    g_begin = tl.program_id(0) * g_block\n"
+"    for goffs in range(0, g_block, g_block_sub):\n"
+"        g_idx = tl.arange(0, g_block_sub) + g_begin + goffs\n"
+"        g_mask = g_idx < indice_length\n"
+"        indices = tl.load(indices_ptr + g_idx, g_mask, other=0)\n"
+"\n"
+"        for other_offset in range(0, g_stride, other_block):\n"
+"            tmp_buf = tl.zeros((g_block_sub, other_block), in_ptr.dtype.element_ty)\n"
+"            other_idx = tl.arange(0, other_block) + other_offset\n"
+"            other_mask = other_idx < g_stride\n"
+"\n"
+"            # Manual gather: iterate over each index\n"
+"            for i in range(0, g_block_sub):\n"
+"                gather_offset = tl.get_element(indices, (i,)) * g_stride\n"
+"                val = tl.load(in_ptr + gather_offset + other_idx, other_mask)\n"
+"                tmp_buf = tl.insert_slice(tmp_buf, val[None, :],\n"
+"                                          offsets=(i, 0), sizes=(1, other_block), strides=(1, 1))\n"
+"\n"
+"            tl.store(out_ptr + g_idx[:, None] * g_stride + other_idx[None, :],\n"
+"                     tmp_buf, g_mask[:, None] & other_mask[None, :])\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:38
+msgid "## 3. 语义GAP"
+msgstr "## 3. Semantic Gap"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/get_element.md:40
+msgid "无语义差异"
+msgstr "No semantic difference."
+
+#. type: blank
+#: docs/zh/triton_api/Extension_Ops/get_element.md:41
+msgid ""
+"\n"
+"\n"
+msgstr ""

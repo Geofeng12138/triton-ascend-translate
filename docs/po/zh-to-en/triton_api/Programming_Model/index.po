@@ -1,0 +1,51 @@
+# PO translation file for docs/zh/triton_api/Programming_Model/index.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 09:14+0000\n"
+"PO-Revision-Date: 2026-07-20 09:14+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/index.md:0
+msgid "# 编程模型"
+msgstr "# Programming Model"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/index.md:2
+msgid ""
+"|api|简要说明|\n"
+"|--|--|\n"
+"| tensor | 表示一个值或指针的 N 维数组 |\n"
+"| [program_id](./program_id.md) | 沿指定轴返回当前程序实例的 id |\n"
+"| [num_programs](./num_programs.md) | 沿指定轴返回当前程序实例的数量 |\n"
+msgstr ""
+"|api|Brief Description|\n"
+"|--|--|\n"
+"| tensor | Represents an N-dimensional array of values or pointers |\n"
+"| [program_id](./program_id.md) | Returns the id of the current program instance along the specified axis |\n"
+"| [num_programs](./num_programs.md) | Returns the number of current program instances along the specified axis |\n"
+
+#. type: blank
+#: docs/zh/triton_api/Programming_Model/index.md:3
+msgid ""
+"\n"
+"\n"
+msgstr ""
+
+#. type: code
+#: docs/zh/triton_api/Programming_Model/index.md:4
+msgid ""
+"```{toctree}\n"
+":maxdepth: 3\n"
+":hidden:\n"
+"program_id.md\n"
+"num_programs.md\n"
+"\n"
+msgstr ""

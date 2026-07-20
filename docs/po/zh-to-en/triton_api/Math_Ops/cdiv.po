@@ -1,0 +1,187 @@
+# PO translation file for docs/zh/triton_api/Math_Ops/cdiv.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 09:00+0000\n"
+"PO-Revision-Date: 2026-07-20 09:00+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:0
+msgid "# triton.language.cdiv"
+msgstr "# triton.language.cdiv"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:4
+msgid ""
+"简介：计算张量的向上取整除法\n"
+"函数原型：\n"
+msgstr ""
+"Introduction: Computes the ceiling division of a tensor.  \n"
+"Function prototype:\n"
+
+#. type: code
+#: docs/zh/triton_api/Math_Ops/cdiv.md:6
+msgid ""
+"```python\n"
+"triton.language.cdiv(x, div)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:8
+msgid "可以作为张量的成员函数调用, 如`x.cdiv(...)`, 与`cdiv(x, ...)`等效。"
+msgstr "Can be called as a member function of a tensor, such as `x.cdiv(...)`, which is equivalent to `cdiv(x, ...)`."
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:10
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:12
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:14
+msgid ""
+"| 参数名 | 类型 | 说明 |\n"
+"| :---: | :---: | :---: |\n"
+"| `x` | `tensor` | 张量数据, 被除数 |\n"
+"| `div`   | `tensor` | 张量数据, 除数 |\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"| :---: | :---: | :---: |\n"
+"| `x` | `tensor` | Tensor data, dividend |\n"
+"| `div` | `tensor` | Tensor data, divisor |\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:16
+msgid ""
+"返回值：\n"
+"`out`：同`x`、`div`的shape的张量\n"
+msgstr ""
+"Return value:  \n"
+"`out`: A tensor with the same shape as `x` and `div`.\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:18
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:20
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:22
+msgid ""
+"|       | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 |fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n"
+"| GPU          | √ | √ | √ | √ | √ | √ | √ | √ | × | × | × | × | √ |\n"
+"| Ascend A2/A3 | √ | √ | √ | × | × | × | × | √ | × | × | × | × | × |\n"
+msgstr ""
+"|       | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n"
+"| GPU          | √ | √ | √ | √ | √ | √ | √ | √ | × | × | × | × | √ |\n"
+"| Ascend A2/A3 | √ | √ | √ | × | × | × | × | √ | × | × | × | × | × |\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:24
+msgid "结论：Ascend 对比 GPU , 不支持uint, bool输入。"
+msgstr "Conclusion: Compared with GPU, Ascend does not support uint and bool inputs."
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:26
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:28
+msgid ""
+"|        | 支持维度范围         |\n"
+"| -------- | ---------------------- |\n"
+"| GPU    | 无限制 |\n"
+"| Ascend | 无限制 |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| -------- | ---------------------- |\n"
+"| GPU    | Unlimited |\n"
+"| Ascend | Unlimited |\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:30
+msgid "结论：在 Shape 方面, GPU 与 Ascend 平台无差异。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms."
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:32
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:34
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capabilities are lacking and cannot be achieved."
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:36
+msgid "输入范围：0~16777216"
+msgstr "Input range: 0~16777216"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:38
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/cdiv.md:40
+msgid "以下示例实现了对输入张量 `x` 和`y`做向上取整除法运算："
+msgstr "The following example implements ceiling division on input tensors `x` and `y`:"
+
+#. type: code
+#: docs/zh/triton_api/Math_Ops/cdiv.md:42
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def fn_npu_(output_ptr, x_ptr, y_ptr,\n"
+"            XB: tl.constexpr, YB: tl.constexpr, ZB: tl.constexpr,\n"
+"            XNUMEL: tl.constexpr, YNUMEL: tl.constexpr, ZNUMEL: tl.constexpr):\n"
+"    xoffs = tl.program_id(0) * XB\n"
+"    yoffs = tl.program_id(1) * YB\n"
+"    zoffs = tl.program_id(2) * ZB\n"
+"\n"
+"    xidx = tl.arange(0, XB) + xoffs\n"
+"    yidx = tl.arange(0, YB) + yoffs\n"
+"    zidx = tl.arange(0, ZB) + zoffs\n"
+"\n"
+"    idx = xidx[:, None, None] * YNUMEL * ZNUMEL + yidx[None, :, None] * ZNUMEL + zidx[None, None, :]\n"
+"\n"
+"    X = tl.load(x_ptr + idx)\n"
+"    Y = tl.load(y_ptr + idx)\n"
+"\n"
+"    ret = tl.cdiv(X, Y)\n"
+"\n"
+"    tl.store(output_ptr + idx, ret)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Math_Ops/cdiv.md:43
+msgid ""
+"\n"
+"\n"
+msgstr ""

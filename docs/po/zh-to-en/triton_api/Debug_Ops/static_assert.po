@@ -1,0 +1,121 @@
+# PO translation file for docs/zh/triton_api/Debug_Ops/static_assert.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 08:48+0000\n"
+"PO-Revision-Date: 2026-07-20 08:48+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/static_assert.md:0
+msgid "# triton.language.static_assert"
+msgstr "# triton.language.static_assert"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/static_assert.md:2
+msgid "## 1. 函数概述"
+msgstr "## 1. Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/static_assert.md:4
+msgid "`static_assert` 用于在编译时断言条件是否成立，如果条件不满足则编译失败。这是一个编译时检查工具，不需要设置调试环境变量。"
+msgstr "`static_assert` is used to assert whether a condition holds at compile time. If the condition is not satisfied, compilation fails. This is a compile-time checking tool that does not require setting debug environment variables."
+
+#. type: code
+#: docs/zh/triton_api/Debug_Ops/static_assert.md:6
+msgid ""
+"```python\n"
+"triton.language.static_assert(cond, msg='', _semantic=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/static_assert.md:8
+msgid "## 2. 规格"
+msgstr "## 2. Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/static_assert.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/static_assert.md:12
+msgid ""
+"| 参数 | 类型 | 默认值 | 含义说明 |\n"
+"|------|------|--------|----------|\n"
+"| `cond` | `bool` | 必需 | 编译时需要断言的条件表达式 |\n"
+"| `msg` | `str` | `''` | 断言失败时显示的错误消息 |\n"
+"| `_semantic` | - | - | 保留参数，暂不支持外部调用 |\n"
+msgstr ""
+"| Parameter | Type | Default | Description |\n"
+"|-----------|------|---------|-------------|\n"
+"| `cond` | `bool` | Required | The condition expression to assert at compile time |\n"
+"| `msg` | `str` | `''` | Error message displayed when assertion fails |\n"
+"| `_semantic` | - | - | Reserved parameter, currently not supported for external calls |\n"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/static_assert.md:14
+msgid "### 2.2 类型支持"
+msgstr "### 2.2 Type Support"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/static_assert.md:16
+msgid "A3："
+msgstr "A3:"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/static_assert.md:18
+msgid ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | × | × | × | × | × | × | × | × | × | × | × | × | ✓ |\n"
+"| Ascend A2/A3 | × | × | × | × | × | × | × | × | × | × | × | × | ✓ |\n"
+msgstr ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | × | × | × | × | × | × | × | × | × | × | × | × | ✓ |\n"
+"| Ascend A2/A3 | × | × | × | × | × | × | × | × | × | × | × | × | ✓ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/static_assert.md:20
+msgid "**注意：** `cond` 语句中值的类型必须为 `constexpr`。"
+msgstr "**Note:** The type of the value in the `cond` statement must be `constexpr`."
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/static_assert.md:22
+msgid "### 2.3 使用方法"
+msgstr "### 2.3 Usage"
+
+#. type: code
+#: docs/zh/triton_api/Debug_Ops/static_assert.md:24
+msgid ""
+"```python\n"
+"import triton.language as tl\n"
+"\n"
+"@triton.jit\n"
+"def basic_static_assert_example(x_ptr, BLOCK_SIZE: tl.constexpr):\n"
+"    # 基本断言：检查BLOCK_SIZE是否为2的幂次\n"
+"    tl.static_assert((BLOCK_SIZE & (BLOCK_SIZE - 1)) == 0)\n"
+"\n"
+"    # 带自定义错误消息的断言\n"
+"    tl.static_assert(BLOCK_SIZE >= 64, \"BLOCK_SIZE must be at least 64 for performance\")\n"
+"\n"
+"    # 在static_assert的条件中出现非常量会编译错误\n"
+"    # val = tl.load(x_ptr)\n"
+"    # tl.static_assert(val <= 64)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Debug_Ops/static_assert.md:25
+msgid ""
+"\n"
+"\n"
+msgstr ""

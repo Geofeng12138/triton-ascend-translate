@@ -1,0 +1,157 @@
+# PO translation file for docs/zh/triton_api/Reduction_Ops/xor_sum.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 09:19+0000\n"
+"PO-Revision-Date: 2026-07-20 09:19+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:0
+msgid "# triton.language.xor_sum"
+msgstr "# triton.language.xor_sum"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:4
+msgid "简介：`triton.language.xor_sum` 计算输入tensor沿指定轴的异或和，返回异或操作结果。"
+msgstr "Introduction: `triton.language.xor_sum` computes the XOR sum of the input tensor along a specified axis and returns the result of the XOR operation."
+
+#. type: code
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:6
+msgid ""
+"```python\n"
+"triton.language.xor_sum(input, axis=None, keep_dims=False)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:12
+msgid ""
+"| 参数名 | 类型 | 说明 |\n"
+"|--------|------|------|\n"
+"| `input` | `Tensor` | 输入tensor |\n"
+"| `axis` | `int` 或 `None` | 沿着哪个维度进行异或和操作。如果为None，则对所有维度进行异或操作 |\n"
+"| `keep_dims` | `bool` | 如果为True，保持被操作的维度为长度1 |\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"|----------------|------|-------------|\n"
+"| `input` | `Tensor` | Input tensor |\n"
+"| `axis` | `int` or `None` | The dimension along which to perform the XOR sum operation. If None, XOR is performed over all dimensions |\n"
+"| `keep_dims` | `bool` | If True, the reduced dimensions are kept with length 1 |\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:14
+msgid ""
+"返回值：\n"
+"`tensor`：输入tensor沿指定轴的异或和，返回异或操作结果\n"
+msgstr ""
+"Return value:  \n"
+"`tensor`: The XOR sum of the input tensor along the specified axis, returning the result of the XOR operation.\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:20
+msgid ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"| Ascend A2/A3 | ✓ | ✓ | × | ✓ | × | ✓ | × | ✓ | × | × | × | ✓ |\n"
+"| GPU支持 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | × | × | × | ✓ |\n"
+msgstr ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"| Ascend A2/A3 | ✓ | ✓ | × | ✓ | × | ✓ | × | ✓ | × | × | × | ✓ |\n"
+"| GPU Support | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | × | × | × | ✓ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:22
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:24
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms."
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:26
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Limitations"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:28
+msgid ""
+"> 相对社区能力缺失且无法实现\n"
+"> keep_dims=True需要测试更多规格，来确定是否全面支持。目前已测3D dim=2情况下，支持 keep_dims=True。\n"
+msgstr ""
+"Relative community capability is missing and cannot be implemented.  \n"
+"`keep_dims=True` requires testing on more specifications to determine whether it is fully supported. Currently, in the tested 3D `dim=2` case, `keep_dims=True` is supported.\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:30
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:32
+msgid "以下示例实现了对2Dshape的tensor进行xor_sum运算："
+msgstr "The following example implements the xor_sum operation on a 2D shape tensor:"
+
+#. type: code
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:34
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def triton_xorsum_2d(in_ptr0, out_ptr0, dim: tl.constexpr, M: tl.constexpr, N: tl.constexpr, MNUMEL: tl.constexpr,\n"
+"                     NNUMEL: tl.constexpr):\n"
+"    mblk_idx = tl.arange(0, MNUMEL)\n"
+"    nblk_idx = tl.arange(0, NNUMEL)\n"
+"    mmask = mblk_idx < M\n"
+"    nmask = nblk_idx < N\n"
+"    mask = (mmask[:, None]) & (nmask[None, :])\n"
+"    idx = mblk_idx[:, None] * N + nblk_idx[None, :]\n"
+"    x = tl.load(in_ptr0 + idx, mask=mask, other=-float('inf'))\n"
+"    tmp4 = tl.xor_sum(x, axis=dim)\n"
+"    if dim == 0:\n"
+"        tl.store(out_ptr0 + tl.arange(0, N), tmp4, None)\n"
+"    else:\n"
+"        tl.store(out_ptr0 + tl.arange(0, M), tmp4, None)\n"
+"\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Reduction_Ops/xor_sum.md:35
+msgid ""
+"\n"
+"\n"
+msgstr ""

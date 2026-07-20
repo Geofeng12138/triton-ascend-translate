@@ -1,0 +1,176 @@
+# PO translation file for docs/zh/triton_api/Logical_Ops/logical_or.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 08:57+0000\n"
+"PO-Revision-Date: 2026-07-20 08:57+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:0
+msgid "# triton.language.tensor.logical_or"
+msgstr "# triton.language.tensor.logical_or"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:4
+msgid "简介：用于对两个张量进行逐元素逻辑或运算"
+msgstr "Introduction: Used to perform element-wise logical OR operation on two tensors."
+
+#. type: code
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:6
+msgid ""
+"```python\n"
+"x.logical_or(y)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:8
+msgid "作为`tensor`的成员函数调用, 如`x0.logical_or(x1)`。"
+msgstr "Called as a member function of `tensor`, e.g., `x0.logical_or(x1)`."
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:10
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:12
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:14
+msgid ""
+"| 参数名 | 类型 | 说明 |\n"
+"| :---: | :---: | :---: |\n"
+"| `input` | `tensor` | 张量数据, 左操作数, 代表要进行比较的主数据 |\n"
+"| `other`   | `tensor` | 张量数据, 右操作数, 与`input`逐元素进行逻辑或 |\n"
+"| `_builder` | - | 保留参数，暂不支持外部调用 |\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"| :---: | :---: | :---: |\n"
+"| `input` | `tensor` | Tensor data, left operand, representing the main data to be compared |\n"
+"| `other` | `tensor` | Tensor data, right operand, performs element-wise logical OR with `input` |\n"
+"| `_builder` | - | Reserved parameter, currently not supported for external calls |\n"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:16
+msgid ""
+"返回值：\n"
+"`tl.tensor`：同`input`的shape的张量\n"
+msgstr ""
+"Return value:  \n"
+"`tl.tensor`: a tensor with the same shape as `input`.\n"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:18
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:20
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:22
+msgid ""
+"|       | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 |fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n"
+"| GPU          | × | × | × | × | × | × | × | × | × | × | × | × | √ |\n"
+"| Ascend A2/A3 | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | × | √ | √ |\n"
+msgstr ""
+"|       | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n"
+"| GPU          | × | × | × | × | × | × | × | × | × | × | × | × | √ |\n"
+"| Ascend A2/A3 | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | × | √ | √ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:24
+msgid "结论：在 DataType 方面, Ascend相比GPU额外增加了对整型、浮点型（除fp64,fp8）的支持。"
+msgstr "Conclusion: In terms of DataType, Ascend provides additional support for integer and floating-point types (except fp64, fp8) compared to GPU."
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:26
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:28
+msgid ""
+"|        | 支持维度范围         |\n"
+"| -------- | ---------------------- |\n"
+"| GPU    | 无限制 |\n"
+"| Ascend A2/A3 | 无限制 |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| -------- | ---------------------- |\n"
+"| GPU    | Unlimited |\n"
+"| Ascend A2/A3 | Unlimited |\n"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:30
+msgid "结论：在 Shape 方面, GPU 与 Ascend 平台无差异。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms."
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:32
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Limitations"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:34
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capability is lacking and cannot be achieved."
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:36
+msgid "无。"
+msgstr "None."
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:38
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:40
+msgid "以下示例实现了对三维张量`x0`、`x1`做逻辑或运算："
+msgstr "The following example implements the logical OR operation on three-dimensional tensors `x0` and `x1`:"
+
+#. type: code
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:42
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def triton_logical_or_3d(in_ptr0, in_ptr1, out_ptr0, XB, YB, ZB, L: tl.constexpr, M: tl.constexpr, N: tl.constexpr):\n"
+"    lblk_idx = tl.arange(0, L) + tl.program_id(0) * XB\n"
+"    mblk_idx = tl.arange(0, M) + tl.program_id(1) * YB\n"
+"    nblk_idx = tl.arange(0, N) + tl.program_id(2) * ZB\n"
+"    idx = lblk_idx[:, None, None] * N * M + mblk_idx[None, :, None] * N + nblk_idx[None, None, :]\n"
+"    x0 = tl.load(in_ptr0 + idx)\n"
+"    x1 = tl.load(in_ptr1 + idx)\n"
+"    ret = x0.logical_or(x1)\n"
+"    odx = lblk_idx[:, None, None] * N * M + mblk_idx[None, :, None] * N + nblk_idx[None, None, :]\n"
+"    tl.store(out_ptr0 + odx, ret)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Logical_Ops/logical_or.md:43
+msgid ""
+"\n"
+"\n"
+msgstr ""

@@ -1,0 +1,157 @@
+# PO translation file for docs/zh/triton_api/Programming_Model/program_id.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 09:15+0000\n"
+"PO-Revision-Date: 2026-07-20 09:15+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/program_id.md:0
+msgid "# triton.language.program_id"
+msgstr "# triton.language.program_id"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/program_id.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/program_id.md:4
+msgid ""
+"简介：返回当前程序实例沿给定 axis 的 ID。\n"
+"函数原型：\n"
+msgstr ""
+"Introduction: Returns the ID of the current program instance along the given axis.  \n"
+"Function prototype:\n"
+
+#. type: code
+#: docs/zh/triton_api/Programming_Model/program_id.md:6
+msgid ""
+"```python\n"
+"triton.language.program_id(axis)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/program_id.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/program_id.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/program_id.md:12
+msgid ""
+"| 参数名 | 类型 | 说明 |\n"
+"| :---: | :---: | :---: |\n"
+"| `axis` | `int` |  3D 启动网格的轴。必须是 0、1 或 2 |\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"| :---: | :---: | :---: |\n"
+"| `axis` | `int` | Axis of the 3D launch grid. Must be 0, 1, or 2 |\n"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/program_id.md:14
+msgid ""
+"返回值：\n"
+"由轴的值组成的tl.tensor\n"
+msgstr ""
+"Return value:  \n"
+"A `tl.tensor` composed of axis values.\n"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/program_id.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/program_id.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/program_id.md:20
+msgid ""
+"|       | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 |fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n"
+"| GPU          | × | × | √ | × | × | × | × | × | × | × | × | × | × |\n"
+"| Ascend A2/A3 | × | × | √ | × | × | × | × | × | × | × | × | × | × |\n"
+msgstr ""
+"|       | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n"
+"| GPU          | × | × | √ | × | × | × | × | × | × | × | × | × | × |\n"
+"| Ascend A2/A3 | × | × | √ | × | × | × | × | × | × | × | × | × | × |\n"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/program_id.md:22
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/program_id.md:24
+msgid "无相关设置"
+msgstr "No related settings"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/program_id.md:26
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/program_id.md:28
+msgid "无"
+msgstr "None"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/program_id.md:30
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Programming_Model/program_id.md:32
+msgid "在triton kernel中会用到，用于获取PID"
+msgstr "Used in the Triton kernel to obtain the PID."
+
+#. type: code
+#: docs/zh/triton_api/Programming_Model/program_id.md:34
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def fn_npu_(output_ptr, x_ptr, y_ptr, z_ptr,\n"
+"            XB: tl.constexpr, YB: tl.constexpr, ZB: tl.constexpr,\n"
+"            XNUMEL: tl.constexpr, YNUMEL: tl.constexpr, ZNUMEL: tl.constexpr):\n"
+"    xoffs = tl.program_id(0) * XB\n"
+"    yoffs = tl.program_id(1) * YB\n"
+"    zoffs = tl.program_id(2) * ZB\n"
+"\n"
+"    xidx = tl.arange(0, XB) + xoffs\n"
+"    yidx = tl.arange(0, YB) + yoffs\n"
+"    zidx = tl.arange(0, ZB) + zoffs\n"
+"\n"
+"    idx = xidx[:, None, None] * YNUMEL * ZNUMEL + yidx[None, :, None] * ZNUMEL + zidx[None, None, :]\n"
+"\n"
+"    X = tl.load(x_ptr + idx)\n"
+"    Y = tl.load(y_ptr + idx)\n"
+"\n"
+"    ...\n"
+"\n"
+"    tl.store(output_ptr + idx, ret)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Programming_Model/program_id.md:35
+msgid ""
+"\n"
+"\n"
+msgstr ""

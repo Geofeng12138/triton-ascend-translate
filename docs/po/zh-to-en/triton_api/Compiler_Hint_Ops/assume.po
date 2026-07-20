@@ -1,0 +1,120 @@
+# PO translation file for docs/zh/triton_api/Compiler_Hint_Ops/assume.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 08:44+0000\n"
+"PO-Revision-Date: 2026-07-20 08:44+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/assume.md:0
+msgid "# triton.language.assume"
+msgstr "# triton.language.assume"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/assume.md:2
+msgid "## 1. 函数概述"
+msgstr "## 1. Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/assume.md:4
+msgid "`assume` 用于向编译器提供条件假设信息，允许编译器基于已知为真的条件进行优化。这是一个编译器提示操作，不会在运行时检查条件。"
+msgstr "`assume` is used to provide conditional assumption information to the compiler, allowing the compiler to optimize based on conditions known to be true. This is a compiler hint operation and does not check the condition at runtime."
+
+#. type: code
+#: docs/zh/triton_api/Compiler_Hint_Ops/assume.md:6
+msgid ""
+"```python\n"
+"triton.language.assume(cond, _semantic=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/assume.md:8
+msgid "## 2. 规格"
+msgstr "## 2. Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/assume.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/assume.md:12
+msgid ""
+"| 参数 | 类型 | 默认值 | 含义说明 |\n"
+"|------|------|--------|----------|\n"
+"| `cond` | `bool` | 必需 | 编译器可以假设为真的条件表达式 |\n"
+"| `_semantic` | - | - | 保留参数，暂不支持外部调用 |\n"
+msgstr ""
+"| Parameter | Type | Default | Description |\n"
+"|-----------|------|---------|-------------|\n"
+"| `cond` | `bool` | Required | A conditional expression that the compiler can assume to be true |\n"
+"| `_semantic` | - | - | Reserved parameter, external calls not currently supported |\n"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/assume.md:14
+msgid "### 2.2 类型支持"
+msgstr "### 2.2 Type Support"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/assume.md:16
+msgid "A3："
+msgstr "A3:"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/assume.md:18
+msgid ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | × | × | × | × | × | × | × | × | × | × | × | × | ✓ |\n"
+"| Ascend A2/A3 | × | × | × | × | × | × | × | × | × | × | × | × | ✓ |\n"
+msgstr ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | × | × | × | × | × | × | × | × | × | × | × | × | ✓ |\n"
+"| Ascend A2/A3 | × | × | × | × | × | × | × | × | × | × | × | × | ✓ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/assume.md:20
+msgid "### 2.3 使用方法"
+msgstr "### 2.3 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/assume.md:22
+msgid "`assume` 操作允许开发者在确保正确性的前提下，帮助编译器生成更高效的代码。"
+msgstr "The `assume` operation allows developers to help the compiler generate more efficient code while ensuring correctness."
+
+#. type: code
+#: docs/zh/triton_api/Compiler_Hint_Ops/assume.md:24
+msgid ""
+"```python\n"
+"import triton.language as tl\n"
+"\n"
+"@triton.jit\n"
+"def basic_assume_example(x_ptr, y_ptr, BLOCK_SIZE: tl.constexpr):\n"
+"    # 假设BLOCK_SIZE是2的幂次，编译器可以基于此优化除法运算\n"
+"    tl.assume((BLOCK_SIZE & (BLOCK_SIZE - 1)) == 0)\n"
+"\n"
+"    offsets = tl.arange(0, BLOCK_SIZE)\n"
+"    x = tl.load(x_ptr + offsets)\n"
+"    y = tl.load(y_ptr + offsets)\n"
+"\n"
+"    # 编译器知道BLOCK_SIZE是2的幂次，可以优化除法为移位操作\n"
+"    result = x // BLOCK_SIZE + y % BLOCK_SIZE\n"
+"    tl.store(y_ptr + offsets, result)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Compiler_Hint_Ops/assume.md:25
+msgid ""
+"\n"
+"\n"
+msgstr ""

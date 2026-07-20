@@ -1,0 +1,193 @@
+# PO translation file for docs/zh/triton_api/Extension_Ops/insert_slice.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 08:51+0000\n"
+"PO-Revision-Date: 2026-07-20 08:51+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:0
+msgid "# triton.language.insert_slice"
+msgstr "# triton.language.insert_slice"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:4
+msgid ""
+"简介：将一个张量（子张量）插入到另一个张量的指定位置，即将一个张量按照操作指定的偏移量、大小和步幅参数插入到另一个张量中。\n"
+"原型：\n"
+msgstr ""
+"Introduction: Insert a tensor (sub-tensor) into a specified position of another tensor, that is, insert one tensor into another tensor according to the offset, size, and stride parameters specified by the operation.\n"
+"Prototype:\n"
+
+#. type: code
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:6
+msgid ""
+"```python\n"
+"triton.language.insert_slice(\n"
+"    ful,\n"
+"    sub,\n"
+"    offsets,\n"
+"    sizes,\n"
+"    strides,\n"
+"    _builder=None,\n"
+"    _generator=None\n"
+") -> tensor\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:12
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `ful`        | `tensor`          | 接收插入的目标张量                                                     |\n"
+"| `sub`       | `tensor`    | 要插入的子张量，其形状必须与`sizes`参数指定的形状匹配                                                        |\n"
+"| `offsets`     | `tuple of ints`    | 指定在`ful`张量中插入的起始偏移量（每个维度） |\n"
+"| `sizes` | `tuple of ints` | 指定插入区域的大小（每个维度）                                             |\n"
+"| `strides` | `tuple of ints` | 指定插入区域的步长（每个维度）                                            |\n"
+"| `_builder` |- | 保留参数，暂不支持外部调用                                            |\n"
+"| `_generator`   | -               | 保留参数，暂不支持外部调用                                                |\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `ful` | `tensor` | The target tensor to receive the insertion |\n"
+"| `sub` | `tensor` | The sub-tensor to be inserted, whose shape must match the shape specified by the `sizes` parameter |\n"
+"| `offsets` | `tuple of ints` | Specifies the starting offsets (per dimension) for insertion into the `ful` tensor |\n"
+"| `sizes` | `tuple of ints` | Specifies the size of the insertion region (per dimension) |\n"
+"| `strides` | `tuple of ints` | Specifies the stride of the insertion region (per dimension) |\n"
+"| `_builder` | - | Reserved parameter, external calls not supported for now |\n"
+"| `_generator` | - | Reserved parameter, external calls not supported for now |\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:14
+msgid ""
+"返回值：\n"
+"`tensor`：插入子张量后的新张量\n"
+msgstr ""
+"Return value:  \n"
+"`tensor`: a new tensor after inserting the sub-tensor\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:20
+msgid ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- |\n"
+"| Ascend A2/A3 | √    | √     | √     | √     | √     | √       | √         |  √       | √    | √    |  √    | ×    |\n"
+msgstr ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- |\n"
+"| Ascend A2/A3 | √    | √     | √     | √     | √     | √       | √         |  √       | √    | √    |  √    | ×    |\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:22
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:24
+msgid "支持任意形状的张量，但需满足："
+msgstr "Supports tensors of arbitrary shapes, provided that:"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:26
+msgid ""
+"1. `ful`和`sub`的维度数必须相同\n"
+"2. `offsets`、`sizes`、`strides`的长度必须与张量维度数相同\n"
+"3. 插入区域不能超出`ful`张量的边界\n"
+msgstr ""
+"1. The number of dimensions of `ful` and `sub` must be the same.\n"
+"2. The lengths of `offsets`, `sizes`, and `strides` must be the same as the number of tensor dimensions.\n"
+"3. The insertion region must not exceed the boundaries of the `ful` tensor.\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:28
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Limitations Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:30
+msgid "无特殊限制"
+msgstr "No special restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:32
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:34
+msgid "以下示例实现了将切片计算结果插入回原张量："
+msgstr "The following example demonstrates inserting the slice computation result back into the original tensor:"
+
+#. type: code
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:36
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def triton_kernel(x_ptr, y_ptr, output_ptr, n_elements, BLOCK_SIZE: tl.constexpr, SLICE_OFFSET: tl.constexpr, SLICE_SIZE: tl.constexpr):\n"
+"    pid = tl.program_id(axis=0)\n"
+"    block_start = pid * BLOCK_SIZE\n"
+"    offsets = block_start + tl.arange(0, BLOCK_SIZE)\n"
+"    mask = offsets < n_elements\n"
+"    x = tl.load(x_ptr + offsets, mask=mask)\n"
+"    y = tl.load(y_ptr + offsets, mask=mask)\n"
+"    # 提取切片\n"
+"    x_sub = tl.extract_slice(x, [block_start+SLICE_OFFSET], [SLICE_SIZE], [1])\n"
+"    y_sub = tl.extract_slice(y, [block_start+SLICE_OFFSET], [SLICE_SIZE], [1])\n"
+"    output_sub = x_sub + y_sub\n"
+"    # 加载原始输出张量\n"
+"    output = tl.load(output_ptr + offsets, mask=mask)\n"
+"    # 将计算结果插入回原张量\n"
+"    output = tl.insert_slice(output, output_sub, [block_start+SLICE_OFFSET], [SLICE_SIZE], [1])\n"
+"    tl.store(output_ptr + offsets, output, mask=mask)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:38
+msgid "## 3. 语义GAP"
+msgstr "## 3. Semantic Gap"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:40
+msgid "无语义差异"
+msgstr "No semantic difference."
+
+#. type: blank
+#: docs/zh/triton_api/Extension_Ops/insert_slice.md:41
+msgid ""
+"\n"
+"\n"
+msgstr ""

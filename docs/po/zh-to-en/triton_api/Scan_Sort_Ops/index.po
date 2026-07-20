@@ -1,0 +1,61 @@
+# PO translation file for docs/zh/triton_api/Scan_Sort_Ops/index.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 09:21+0000\n"
+"PO-Revision-Date: 2026-07-20 09:21+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/index.md:0
+msgid "# 扫描/排序操作"
+msgstr "# Scan/Sort Operations"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/index.md:2
+msgid ""
+"| api | 简要说明 |\n"
+"| --- | --- |\n"
+"| [associative_scan](./associative_scan.md) | 沿指定 axis 将 combine_fn 应用于 input 张量的每个元素和携带的值，并更新携带的值 |\n"
+"| [cumprod](./cumprod.md) | 返回沿指定 axis 的 input 张量中所有元素的累积乘积 |\n"
+"| [cumsum](./cumsum.md) | 返回沿指定 axis 的 input 张量中所有元素的累积和 |\n"
+"| [histogram](./histogram.md) | 基于 input 张量计算 1 个具有 num_bins 个 bin 的直方图，每个 bin 宽度为 1，起始于 0 |\n"
+"| [sort](./sort.md) | 沿着指定维度对张量进行排序 |\n"
+"| [topk](./topk.md) | 返回沿指定维度的前 k 个最大元素 |\n"
+msgstr ""
+"| api | brief description |\n"
+"| --- | --- |\n"
+"| [associative_scan](./associative_scan.md) | Applies `combine_fn` to each element of the input tensor and the carried value along the specified axis, and updates the carried value |\n"
+"| [cumprod](./cumprod.md) | Returns the cumulative product of all elements in the input tensor along the specified axis |\n"
+"| [cumsum](./cumsum.md) | Returns the cumulative sum of all elements in the input tensor along the specified axis |\n"
+"| [histogram](./histogram.md) | Computes a histogram with `num_bins` bins based on the input tensor, each bin having a width of 1 and starting at 0 |\n"
+"| [sort](./sort.md) | Sorts the tensor along the specified dimension |\n"
+"| [topk](./topk.md) | Returns the top k largest elements along the specified dimension |\n"
+
+#. type: code
+#: docs/zh/triton_api/Scan_Sort_Ops/index.md:4
+msgid ""
+"```{toctree}\n"
+":maxdepth: 3\n"
+":hidden:\n"
+"associative_scan.md\n"
+"cumprod.md\n"
+"cumsum.md\n"
+"histogram.md\n"
+"sort.md\n"
+"topk.md\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Scan_Sort_Ops/index.md:5
+msgid ""
+"\n"
+"\n"
+msgstr ""

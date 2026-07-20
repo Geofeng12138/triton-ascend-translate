@@ -1,0 +1,191 @@
+# PO translation file for docs/zh/triton_api/Shape_Manipulation_Ops/join.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 09:24+0000\n"
+"PO-Revision-Date: 2026-07-20 09:24+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:0
+msgid "# triton.language.join"
+msgstr "# triton.language.join"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:2
+msgid "## 1 功能作用说明"
+msgstr "## 1 Function Description"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:4
+msgid "将两个相同形状的输入张量沿着新的最小维度连接，输出张量比输入张量多一个维度，大小为2，保持其他维度不变。"
+msgstr "Concatenates two input tensors of the same shape along a new smallest dimension. The output tensor has one more dimension than the input tensors, with a size of 2, while keeping the other dimensions unchanged."
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:6
+msgid "**语法：**"
+msgstr "**Syntax:**"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:8
+msgid ""
+"- `triton.language.join(x, y)` - 函数调用形式\n"
+"- `x.join(y)` - 成员函数形式\n"
+msgstr ""
+"- `triton.language.join(x, y)` - function call form\n"
+"- `x.join(y)` - member function form\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:10
+msgid "**功能：**"
+msgstr "**Features:**"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:12
+msgid ""
+"- 将两个相同形状的输入张量沿着新的最小维度连接\n"
+"- 输出张量比输入张量多一个维度，大小为2\n"
+"- 保持其他维度不变\n"
+msgstr ""
+"- Concatenate two input tensors of the same shape along a new minimum dimension\n"
+"- The output tensor has one more dimension than the input tensors, with a size of 2\n"
+"- Keep other dimensions unchanged\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:14
+msgid "## 2 参数规格"
+msgstr "## 2 Parameter Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:16
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:18
+msgid ""
+"| 参数名 | 类型 | 必需 | 说明 |\n"
+"|--------|------|------|------|\n"
+"| x | tensor | 是 | 第一个输入张量 |\n"
+"| y | tensor | 是 | 第二个输入张量 |\n"
+msgstr ""
+"| Parameter Name | Type | Required | Description |\n"
+"|----------------|------|----------|-------------|\n"
+"| x | tensor | Yes | The first input tensor |\n"
+"| y | tensor | Yes | The second input tensor |\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:20
+msgid "**返回值：**"
+msgstr "**Return value:**"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:22
+msgid ""
+"- **类型：** tensor\n"
+"- **形状：** 输入tensor广播后的形状加上一个大小为2的维度\n"
+"- **数据类型：** 与输入张量相同\n"
+"- **内存布局：** 在新增维度上堆叠x和y\n"
+msgstr ""
+"- **Type:** tensor\n"
+"- **Shape:** The shape of the input tensor after broadcasting, plus a dimension of size 2\n"
+"- **Data type:** Same as the input tensor\n"
+"- **Memory layout:** Stack x and y along the new dimension\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:24
+msgid "**约束条件：**"
+msgstr "**Constraints:**"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:26
+msgid "- 两个输入张量必须具有可以广播到相同形状的形状和数据类型"
+msgstr "- The two input tensors must have shapes and data types that can be broadcast to the same shape."
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:28
+msgid "### 2.2 DataType支持表"
+msgstr "### 2.2 DataType Support Table"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:30
+msgid ""
+"| 支持情况 | int8 | int16 | int32 | int64 | uint8 | uint16 | uint32 | uint64 | float16 | float32 | bfloat16 | float8e4 | float8e5 | float64 | bool |\n"
+"|----------|:----:|:-----:|:-----:|:-----:|:----:|:-----:|:-----:|:-----:|:------:|:------:|:-------:|:----:|:----:|:------:|:---:|\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | ✓ | ✓ | × | × | × | ✓ | ✓ | ✓ | × | × | × | ✓ |\n"
+"| GPU支持 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+msgstr ""
+"| Support Status | int8 | int16 | int32 | int64 | uint8 | uint16 | uint32 | uint64 | float16 | float32 | bfloat16 | float8e4 | float8e5 | float64 | bool |\n"
+"|----------|:----:|:-----:|:-----:|:-----:|:----:|:-----:|:-----:|:-----:|:------:|:------:|:-------:|:----:|:----:|:------:|:---:|\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | ✓ | ✓ | × | × | × | ✓ | ✓ | ✓ | × | × | × | ✓ |\n"
+"| GPU Support | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:32
+msgid "### 2.3 Shape支持表"
+msgstr "### 2.3 Shape Support Table"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:34
+msgid "支持任意维度数、任意形状大小。"
+msgstr "Supports any number of dimensions and any shape size."
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:36
+msgid "### 2.4 特殊限制说明"
+msgstr "### 2.4 Special Restrictions Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:38
+msgid "无"
+msgstr "None"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:40
+msgid "### 2.5 使用方法"
+msgstr "### 2.5 Usage"
+
+#. type: code
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:42
+msgid ""
+"```python\n"
+"import torch\n"
+"import triton\n"
+"import triton.language as tl\n"
+"\n"
+"@triton.jit\n"
+"def join_example(out_ptr):\n"
+"    # 创建两个2x3的张量\n"
+"    x = tl.zeros([2, 3], dtype=tl.float32)\n"
+"    y = tl.full([2, 3], 1.0, dtype=tl.float32)\n"
+"\n"
+"    # 连接，变成2x2x3\n"
+"    z = tl.join(x, y)\n"
+"\n"
+"    # 将结果写回外部张量\n"
+"    offs = (\n"
+"        tl.arange(0, 2)[:, None, None] * (2 * 3)\n"
+"        + tl.arange(0, 2)[None, :, None] * 3\n"
+"        + tl.arange(0, 3)[None, None, :]\n"
+"    )\n"
+"    tl.store(out_ptr + offs, z)\n"
+"\n"
+"## 调用示例\n"
+"out = torch.empty((2, 2, 3), dtype=torch.float32, device=\"npu\")\n"
+"join_example[(1,)](out)\n"
+"print(out.shape)  # 输出: torch.Size([2, 2, 3])\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Shape_Manipulation_Ops/join.md:43
+msgid ""
+"\n"
+"\n"
+msgstr ""

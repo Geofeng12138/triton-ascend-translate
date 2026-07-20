@@ -1,0 +1,64 @@
+# PO translation file for docs/zh/triton_api/Reduction_Ops/index.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 09:17+0000\n"
+"PO-Revision-Date: 2026-07-20 09:17+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/index.md:0
+msgid "# 归约操作"
+msgstr "# Reduction Operations"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/index.md:2
+msgid ""
+"|api|简要说明|\n"
+"|--|--|\n"
+"|[argmax](./argmax.md) |返回沿指定 axis 轴上 input 张量中所有元素的最大索引 |\n"
+"|[argmin](./argmin.md) |返回沿指定 axis 轴上 input 张量中所有元素的最小索引 |\n"
+"|[max](./max.md) |返回沿指定 axis 轴上 input 张量中所有元素的最大值 |\n"
+"|[min](./min.md) |返回沿指定 axis 轴上 input 张量中所有元素的最小值 |\n"
+"|[reduce](./reduce.md) |将 combine_fn 应用于沿指定 axis 的 input 张量中的所有元素 |\n"
+"|[sum](./sum.md) |返回 input 张量中，沿指定 axis 的所有元素的总和 |\n"
+"|[xor_sum](./xor_sum.md) |返回 input 张量中，沿指定 axis 的所有元素的异或和 |\n"
+msgstr ""
+"|api|Brief Description|\n"
+"|--|--|\n"
+"|[argmax](./argmax.md) |Returns the indices of the maximum values of all elements in the input tensor along the specified axis |\n"
+"|[argmin](./argmin.md) |Returns the indices of the minimum values of all elements in the input tensor along the specified axis |\n"
+"|[max](./max.md) |Returns the maximum values of all elements in the input tensor along the specified axis |\n"
+"|[min](./min.md) |Returns the minimum values of all elements in the input tensor along the specified axis |\n"
+"|[reduce](./reduce.md) |Applies combine_fn to all elements in the input tensor along the specified axis |\n"
+"|[sum](./sum.md) |Returns the sum of all elements in the input tensor along the specified axis |\n"
+"|[xor_sum](./xor_sum.md) |Returns the XOR sum of all elements in the input tensor along the specified axis |\n"
+
+#. type: blank
+#: docs/zh/triton_api/Reduction_Ops/index.md:3
+msgid ""
+"\n"
+"\n"
+msgstr ""
+
+#. type: code
+#: docs/zh/triton_api/Reduction_Ops/index.md:4
+msgid ""
+"```{toctree}\n"
+":maxdepth: 3\n"
+":hidden:\n"
+"argmax.md\n"
+"argmin.md\n"
+"max.md\n"
+"min.md\n"
+"reduce.md\n"
+"sum.md\n"
+"xor_sum.md\n"
+"\n"
+msgstr ""

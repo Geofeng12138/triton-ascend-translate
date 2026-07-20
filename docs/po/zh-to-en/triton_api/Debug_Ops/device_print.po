@@ -1,0 +1,154 @@
+# PO translation file for docs/zh/triton_api/Debug_Ops/device_print.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 08:48+0000\n"
+"PO-Revision-Date: 2026-07-20 08:48+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_print.md:0
+msgid "# triton.language.device_print"
+msgstr "# triton.language.device_print"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_print.md:2
+msgid "## 1. 函数概述"
+msgstr "## 1. Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_print.md:4
+msgid "`device_print` 用于在NPU运行时从设备端打印信息，与`static_print`不同，这是在内核执行时实时输出信息。 第一个参数必须为`string`, 后面的参数必须为`scalars`或者`tensors`。 **使用`device_print`需要将环境变量`TRITON_DEVICE_PRINT`的值设置为`True`。**"
+msgstr "`device_print` is used to print information from the device side during NPU runtime. Unlike `static_print`, it outputs information in real-time while the kernel is executing. The first parameter must be a `string`, and subsequent parameters must be `scalars` or `tensors`. **To use `device_print`, the environment variable `TRITON_DEVICE_PRINT` must be set to `True`.**"
+
+#. type: code
+#: docs/zh/triton_api/Debug_Ops/device_print.md:6
+msgid ""
+"```python\n"
+"triton.language.device_print(prefix, *args, hex=False, _semantic=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_print.md:8
+msgid "## 2. 规格"
+msgstr "## 2. Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_print.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_print.md:12
+msgid ""
+"| 参数 | 类型 | 默认值 | 含义说明 |\n"
+"|------|------|--------|----------|\n"
+"| `prefix` | `str` | 必需 | 打印值之前的前缀字符串 |\n"
+"| `args` | `tensor`/`scalar` | 必需 | 要打印的值，可以是任意张量或标量 |\n"
+"| `hex` | `bool` | `False` | 是否以十六进制格式打印所有值 |\n"
+"| `_semantic` | - | - | 保留参数，暂不支持外部调用 |\n"
+msgstr ""
+"| Parameter | Type | Default | Description |\n"
+"|-----------|------|---------|-------------|\n"
+"| `prefix` | `str` | Required | Prefix string before the printed value |\n"
+"| `args` | `tensor`/`scalar` | Required | Value(s) to print, can be any tensor or scalar |\n"
+"| `hex` | `bool` | `False` | Whether to print all values in hexadecimal format |\n"
+"| `_semantic` | - | - | Reserved parameter, external calls not supported yet |\n"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_print.md:14
+msgid "### 2.2.1 Data Type支持"
+msgstr "### 2.2.1 Data Type Support"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_print.md:16
+msgid "A3："
+msgstr "A3:"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_print.md:18
+msgid ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | × | × | ×| × | ✓ | ✓ | ✓ | × | ✓ | ✓ |\n"
+msgstr ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | × | × | × | × | ✓ | ✓ | ✓ | × | ✓ | ✓ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_print.md:20
+msgid "### 2.2.2 Shape 支持"
+msgstr "### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_print.md:22
+msgid ""
+"|        | 支持维度范围          |\n"
+"| ------ | --------------- |\n"
+"| GPU    | 仅支持 1~5维 tensor |\n"
+"| Ascend | 仅支持 1~5维 tensor |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| ------ | ----------------------- |\n"
+"| GPU    | Only supports 1~5D tensor |\n"
+"| Ascend | Only supports 1~5D tensor |\n"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_print.md:24
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Limitations"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_print.md:26
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capability is lacking and cannot be achieved."
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_print.md:28
+msgid "Ascend 对比 GPU 缺失uint8、uint16、uint32、uint64、fp64的支持能力（硬件限制）。"
+msgstr "Ascend lacks support for uint8, uint16, uint32, uint64, and fp64 compared to GPU (hardware limitation)."
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_print.md:30
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_print.md:32
+msgid "**注意**：`prefix`字符串前缀在使用`device_print`时是必须加上的，否则会导致编译错误。"
+msgstr "**Note**: The `prefix` string prefix must be added when using `device_print`, otherwise it will cause a compilation error."
+
+#. type: code
+#: docs/zh/triton_api/Debug_Ops/device_print.md:34
+msgid ""
+"```python\n"
+"import triton\n"
+"import triton.language as tl\n"
+"\n"
+"@triton.jit\n"
+"def kernel(x_ptr):\n"
+"    idx = tl.arange(0,3)\n"
+"    idy = tl.arange(0,4)\n"
+"    offset = idx[:,None] * 4 + idy[None,:]\n"
+"    val = tl.load(x_ptr + offset)\n"
+"    # 打印二维张量val的值\n"
+"    tl.device_print(\"val:\",val)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Debug_Ops/device_print.md:35
+msgid ""
+"\n"
+"\n"
+msgstr ""

@@ -1,0 +1,166 @@
+# PO translation file for docs/zh/triton_api/Extension_Ops/extract_slice.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 08:49+0000\n"
+"PO-Revision-Date: 2026-07-20 08:49+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:0
+msgid "# triton.language.extract_slice"
+msgstr "# triton.language.extract_slice"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:4
+msgid ""
+"简介：从输入张量中按照操作指定的偏移量、大小和步幅参数提取一个张量。\n"
+"原型：\n"
+msgstr ""
+"Introduction: Extract a tensor from the input tensor according to the offset, size, and stride parameters specified by the operation.  \n"
+"Prototype:\n"
+
+#. type: code
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:6
+msgid ""
+"```python\n"
+"triton.language.extract_slice(\n"
+"    ful,\n"
+"    offsets,\n"
+"    sizes,\n"
+"    strides,\n"
+"    _builder=None,\n"
+"    _generator=None\n"
+") -> tensor\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:12
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `ful`        | `tensor`          | 要提取切片的源张量                                                     |\n"
+"| `offsets`       | `tuple of ints`    | 切片在各个维度上的起始偏移量                                                        |\n"
+"| `sizes`     | `tuple of ints`    | 切片在各个维度上的大小 |\n"
+"| `strides` | `tuple of ints` | 切片在各个维度上的步长                                             |\n"
+"| `_builder` |- | 保留参数，暂不支持外部调用                                            |\n"
+"| `_generator`   | -               | 保留参数，暂不支持外部调用                                                |\n"
+msgstr ""
+"| Parameter Name | Type             | Description                                                        |\n"
+"| ------------- | ---------------- | ------------------------------------------------------------------ |\n"
+"| `ful`         | `tensor`         | The source tensor from which to extract the slice                  |\n"
+"| `offsets`     | `tuple of ints`  | The starting offsets of the slice along each dimension             |\n"
+"| `sizes`       | `tuple of ints`  | The size of the slice along each dimension                         |\n"
+"| `strides`     | `tuple of ints`  | The stride of the slice along each dimension                       |\n"
+"| `_builder`    | -                | Reserved parameter, external calls are not supported               |\n"
+"| `_generator`  | -                | Reserved parameter, external calls are not supported               |\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:14
+msgid ""
+"返回值：\n"
+"`tensor`：提取的切片张量\n"
+msgstr ""
+"Return value:  \n"
+"`tensor`: the extracted slice tensor\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:20
+msgid ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 |  bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- |\n"
+"| Ascend A2/A3 | √    | √     | √     | √     | √     | √       | √         |  √       | √    | √    |  √    | ×    |\n"
+msgstr ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- |\n"
+"| Ascend A2/A3 | √    | √     | √     | √     | √      | √      | √      | √     | √    | √    | √    | ×    |\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:22
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:24
+msgid "支持任意形状的张量，但切片尺寸不能超过源张量对应维度的尺寸"
+msgstr "Supports tensors of arbitrary shape, but the slice size must not exceed the size of the corresponding dimension of the source tensor."
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:26
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Limitations"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:28
+msgid "无特殊限制"
+msgstr "No special restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:30
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:32
+msgid "以下示例实现了从计算结果中提取前32个元素："
+msgstr "The following example demonstrates extracting the first 32 elements from the computation result:"
+
+#. type: code
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:34
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def triton_kernel(x_ptr, y_ptr, output_ptr, n_elements, BLOCK_SIZE: tl.constexpr):\n"
+"    pid = tl.program_id(axis=0)\n"
+"    block_start = pid * BLOCK_SIZE\n"
+"    offsets = block_start + tl.arange(0, BLOCK_SIZE)\n"
+"    mask = offsets < n_elements\n"
+"    x = tl.load(x_ptr + offsets, mask=mask)\n"
+"    y = tl.load(y_ptr + offsets, mask=mask)\n"
+"    output = x + y\n"
+"    # 提取前32个元素\n"
+"    out_sub = tl.extract_slice(output, [block_start], [32], [1])\n"
+"    out_idx = block_start + tl.arange(0, 32)\n"
+"    out_msk = out_idx < n_elements\n"
+"    tl.store(output_ptr + out_idx, out_sub, mask=out_msk)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Extension_Ops/extract_slice.md:35
+msgid ""
+"\n"
+"\n"
+msgstr ""

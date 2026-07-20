@@ -1,0 +1,154 @@
+# PO translation file for docs/zh/triton_api/Creation_Ops/full.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 08:47+0000\n"
+"PO-Revision-Date: 2026-07-20 08:47+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/full.md:0
+msgid "# triton.language.full"
+msgstr "# triton.language.full"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/full.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/full.md:4
+msgid "简介：`triton.language.full`返回一个填充了给定形状和数据类型的标量值的张量"
+msgstr "Introduction: `triton.language.full` returns a tensor filled with a scalar value of a given shape and data type."
+
+#. type: code
+#: docs/zh/triton_api/Creation_Ops/full.md:6
+msgid ""
+"```python\n"
+"triton.language.full(shape, value, dtype, _semantic=None)¶\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/full.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/full.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/full.md:12
+msgid ""
+"| 参数名           | 类型                  | 说明                                   |\n"
+"| ------------- | ----------------- | ---------------------------- |\n"
+"| `shape`           | `tuple of ints`               | 新数组的形状，例如 (8, 16) 或 (8, ) |\n"
+"| `value`            | `scalar`               | 用于填充数组的标量值 |\n"
+"| `dtype`            | `tl.dtype`               |  新数组的数据类型，例如 tl.float16  |\n"
+"| `_semantic`            | `Optional[str]`               | 保留参数，暂不支持外部调用|\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"| ------------- | ----------------- | ---------------------------- |\n"
+"| `shape` | `tuple of ints` | Shape of the new array, e.g., (8, 16) or (8, ) |\n"
+"| `value` | `scalar` | Scalar value used to fill the array |\n"
+"| `dtype` | `tl.dtype` | Data type of the new array, e.g., tl.float16 |\n"
+"| `_semantic` | `Optional[str]` | Reserved parameter, external calls not supported for now |\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/full.md:14
+msgid ""
+"返回值：\n"
+"`tensor`：完成填充之后的tensor\n"
+msgstr ""
+"Return value:  \n"
+"`tensor`: the tensor after padding is completed\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/full.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/full.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/full.md:20
+msgid ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"| Ascend A2/A3 | ✓ | ✓ | × | ✓ | × | ✓ | × | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+"| GPU支持 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+msgstr ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"| Ascend A2/A3 | ✓ | ✓ | × | ✓ | × | ✓ | × | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+"| GPU Support | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/full.md:22
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/full.md:24
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms."
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/full.md:26
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/full.md:28
+msgid ""
+"> 相对社区能力缺失且无法实现\n"
+"> 无\n"
+msgstr ""
+"> Relative community capability is lacking and cannot be achieved  \n"
+"> None\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/full.md:30
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/full.md:32
+msgid "以下示例实现了返回填充了100数值的(XB,YB,ZB)shape的tensor："
+msgstr "The following example implements returning a tensor of shape (XB, YB, ZB) filled with the value 100:"
+
+#. type: code
+#: docs/zh/triton_api/Creation_Ops/full.md:34
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def fn_f32(output_ptr,XB : tl.constexpr,YB : tl.constexpr,ZB : tl.constexpr):\n"
+"    xidx=tl.arange(0,XB)\n"
+"    yidx=tl.arange(0,YB)\n"
+"    zidx=tl.arange(0,ZB)\n"
+"\n"
+"    ret = tl.full((XB,YB,ZB),value = 100,dtype = tl.float32)\n"
+"\n"
+"    oidx=xidx[:,None,None]*YB*ZB+yidx[None,:,None]*ZB+zidx[None,None,:]\n"
+"\n"
+"    tl.store(output_ptr+oidx,ret)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Creation_Ops/full.md:35
+msgid ""
+"\n"
+"\n"
+msgstr ""

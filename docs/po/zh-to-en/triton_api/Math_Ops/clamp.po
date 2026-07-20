@@ -1,0 +1,208 @@
+# PO translation file for docs/zh/triton_api/Math_Ops/clamp.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 09:01+0000\n"
+"PO-Revision-Date: 2026-07-20 09:01+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:0
+msgid "# triton.language.clamp"
+msgstr "# triton.language.clamp"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:2
+msgid "## 1. 函数概述"
+msgstr "## 1. Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:4
+msgid "简介：限制张量x的范围为[min，max]之间。"
+msgstr "Introduction: Limits the range of tensor x to between [min, max]."
+
+#. type: code
+#: docs/zh/triton_api/Math_Ops/clamp.md:6
+msgid ""
+"```python\n"
+"triton.language.clamp(x, min, max, propagate_nan: constexpr = PropagateNan.NONE, _semantic=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:8
+msgid "## 2. 规格"
+msgstr "## 2. Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:12
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `x`        | `tensor`          | 张量数据                                                      |\n"
+"| `min`       | `tensor`       | 下界（可为张量或标量，会广播到 `x` 的 shape） |\n"
+"| `max`       | `tensor`       | 上界（可为张量或标量，会广播到 `x` 的 shape） |\n"
+"| `propagate_nan` | `triton.language.core.constexpr` | 是否对min或max做Nan的传播                                              |\n"
+"| `_semantic`   | -                 | 保留参数，暂不支持外部调用\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `x`           | `tensor`          | Tensor data |\n"
+"| `min`         | `tensor`          | Lower bound (can be a tensor or scalar, broadcast to the shape of `x`) |\n"
+"| `max`         | `tensor`          | Upper bound (can be a tensor or scalar, broadcast to the shape of `x`) |\n"
+"| `propagate_nan` | `triton.language.core.constexpr` | Whether to propagate NaN for min or max |\n"
+"| `_semantic`   | -                 | Reserved parameter, currently not supported for external calls |\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:14
+msgid ""
+"返回值：\n"
+"`x`：输出张量的shape与输入x的shape相同\n"
+msgstr ""
+"Return value:  \n"
+"`x`: The shape of the output tensor is the same as the shape of the input `x`.\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:16
+msgid "### 2.2 OP 规格"
+msgstr "### 2.2 OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:20
+msgid ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | ×    | ×     | ×     | ×     | ×     | ×      | ×      | ×     | √    | √    | √    | √    | ×    |\n"
+"| Ascend A2/A3 | ×    | ×     | ×     | ×     | ×     | ×      | ×      | ×     | √    | √    | ×    | √    | ×    |\n"
+msgstr ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | ×    | ×     | ×     | ×     | ×     | ×      | ×      | ×     | √    | √    | √    | √    | ×    |\n"
+"| Ascend A2/A3 | ×    | ×     | ×     | ×     | ×     | ×      | ×      | ×     | √    | √    | ×    | √    | ×    |\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:22
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:24
+msgid ""
+"|        | 支持维度范围          |\n"
+"| ------ | --------------- |\n"
+"| GPU    | 仅支持 1~5维 tensor |\n"
+"| Ascend | 仅支持 1~5维 tensor |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| ------ | ----------------------- |\n"
+"| GPU    | Only supports 1~5D tensor |\n"
+"| Ascend | Only supports 1~5D tensor |\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:26
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异，均支持 1 至 5 维张量。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms; both support 1 to 5-dimensional tensors."
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:28
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:30
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capability is lacking and cannot be achieved."
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:32
+msgid "Ascend 相比 GPU 缺失 fp64 支持。"
+msgstr "Ascend lacks fp64 support compared to GPU."
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:34
+msgid "#### 2.3.1 propagate_nan 参数限制"
+msgstr "#### 2.3.1 propagate_nan Parameter Restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:36
+msgid "**注意：当 `propagate_nan=tl.PropagateNAN.NONE` 时，系统会自动添加 NaN 值处理逻辑，这会导致：**"
+msgstr "**Note: When `propagate_nan=tl.PropagateNAN.NONE`, the system will automatically add NaN value handling logic, which will result in:**"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:38
+msgid ""
+"1. **UB 空间使用增加**：额外的 NaN 检测和处理需要占用更多的 UB 空间\n"
+"2. **可能的性能下降**：由于增加了额外的计算逻辑，可能导致算子执行性能下降\n"
+msgstr ""
+"1. **Increased UB Space Usage**: Additional NaN detection and handling require more UB space.  \n"
+"2. **Potential Performance Degradation**: Due to the added computational logic, operator execution performance may decrease.\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:40
+msgid "**建议：**"
+msgstr "**Recommendation:**"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:42
+msgid ""
+"- 如果输入数据不包含 NaN 值，或不需要严格的 NaN 处理语义，建议使用默认值或根据实际需求选择合适的 `propagate_nan` 参数值\n"
+"- 在 UB 空间紧张的场景下，应特别注意此参数的选择，避免因 UB 空间不足导致编译失败\n"
+msgstr ""
+"- If the input data does not contain NaN values or does not require strict NaN handling semantics, it is recommended to use the default value or select an appropriate `propagate_nan` parameter value based on actual requirements.  \n"
+"- In scenarios where UB space is limited, special attention should be paid to the selection of this parameter to avoid compilation failures caused by insufficient UB space.\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:44
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/clamp.md:46
+msgid "以下示例实现了对输入张量 `x` 做截断计算："
+msgstr "The following example implements truncation computation on the input tensor `x`:"
+
+#. type: code
+#: docs/zh/triton_api/Math_Ops/clamp.md:48
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def tt_clamp_2d(in_ptr, out_ptr, min_ptr, max_ptr,\n"
+"                   xnumel: tl.constexpr, ynumel: tl.constexpr, znumel: tl.constexpr,\n"
+"                   XB: tl.constexpr, YB: tl.constexpr, ZB: tl.constexpr):\n"
+"       xoffs = tl.program_id(0) * XB\n"
+"       yoffs = tl.program_id(1) * YB\n"
+"       xidx = tl.arange(0, XB) + xoffs\n"
+"       yidx = tl.arange(0, YB) + yoffs\n"
+"       idx = xidx[:, None] * ynumel + yidx[None, :]\n"
+"\n"
+"       x = tl.load(in_ptr + idx)\n"
+"       min_ = tl.load(min_ptr + idx)\n"
+"       max_ = tl.load(max_ptr + idx)\n"
+"       ret = tl.clamp(x, min_, max_)\n"
+"\n"
+"       tl.store(out_ptr + idx, ret)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Math_Ops/clamp.md:49
+msgid ""
+"\n"
+"\n"
+msgstr ""

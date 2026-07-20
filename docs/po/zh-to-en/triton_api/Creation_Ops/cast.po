@@ -1,0 +1,250 @@
+# PO translation file for docs/zh/triton_api/Creation_Ops/cast.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 08:46+0000\n"
+"PO-Revision-Date: 2026-07-20 08:46+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:0
+msgid "# triton.language.cast"
+msgstr "# triton.language.cast"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:2
+msgid "## 1 功能作用说明"
+msgstr "## 1 Function Description"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:4
+msgid "将张量转换为指定的数据类型，支持数值类型转换、位级别重解释（bitcast）、浮点降精度舍入模式，以及Ascend扩展的整数溢出处理模式。"
+msgstr "Convert the tensor to the specified data type, supporting numeric type conversion, bit-level reinterpretation (bitcast), floating-point precision reduction rounding mode, and Ascend-extended integer overflow handling mode."
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:6
+msgid "**语法：**"
+msgstr "**Syntax:**"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:8
+msgid ""
+"- `triton.language.cast(input, dtype, fp_downcast_rounding=None, bitcast=False)` - 函数调用形式\n"
+"- `input.cast(dtype, fp_downcast_rounding=None, bitcast=False)` - 成员函数形式\n"
+msgstr ""
+"- `triton.language.cast(input, dtype, fp_downcast_rounding=None, bitcast=False)` - Function call form\n"
+"- `input.cast(dtype, fp_downcast_rounding=None, bitcast=False)` - Member function form\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:10
+msgid "**功能：**"
+msgstr "**Function:**"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:12
+msgid ""
+"- 数值类型转换：整型<->整型、浮点<->浮点、整型<->浮点\n"
+"- 位级别重解释（bitcast）：不改变比特，只改变解释类型\n"
+"- 浮点降精度支持舍入模式：`rtne`（默认，四舍六入五成双）、`rtz`（向零）\n"
+"- 整数转换（Ascend 扩展）支持溢出模式：`trunc`（截断，默认）、`saturate`（饱和）\n"
+msgstr ""
+"- Numeric type conversion: integer <-> integer, float <-> float, integer <-> float\n"
+"- Bit-level reinterpretation (bitcast): bits unchanged, only the interpretation type changes\n"
+"- Float precision reduction supports rounding modes: `rtne` (default, round to nearest, ties to even), `rtz` (toward zero)\n"
+"- Integer conversion (Ascend extension) supports overflow modes: `trunc` (truncation, default), `saturate` (saturation)\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:14
+msgid "## 2 参数规格"
+msgstr "## 2 Parameter Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:16
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:18
+msgid ""
+"| 参数名 | 类型 | 必需 | 说明 |\n"
+"|--------|------|------|------|\n"
+"| input | tensor | 是 | 输入张量 |\n"
+"| dtype | tl.dtype | 是 | 目标数据类型 |\n"
+"| fp_downcast_rounding | str | 否 | 仅对浮点降精度有效，`rtne` 或 `rtz` |\n"
+"| bitcast | bool | 否 | 是否执行位级别重解释，默认 False |\n"
+"| overflow_mode | str | 否 | Ascend 扩展：整数溢出处理，`trunc` 或 `saturate` |\n"
+msgstr ""
+"| Parameter Name | Type | Required | Description |\n"
+"|--------|------|------|------|\n"
+"| input | tensor | Yes | Input tensor |\n"
+"| dtype | tl.dtype | Yes | Target data type |\n"
+"| fp_downcast_rounding | str | No | Only valid for floating-point downcasting, `rtne` or `rtz` |\n"
+"| bitcast | bool | No | Whether to perform bit-level reinterpretation, default False |\n"
+"| overflow_mode | str | No | Ascend extension: integer overflow handling, `trunc` or `saturate` |\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:20
+msgid "**返回值：**"
+msgstr "**Return value:**"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:22
+msgid ""
+"- **类型：** tensor\n"
+"- **形状：** 与输入张量相同\n"
+"- **数据类型：** 与dtype参数指定的目标类型相同\n"
+"- **内存布局：** 根据bitcast参数决定是否进行位级别重解释\n"
+msgstr ""
+"- **Type:** tensor\n"
+"- **Shape:** Same as the input tensor\n"
+"- **Data type:** Same as the target type specified by the `dtype` parameter\n"
+"- **Memory layout:** Whether to perform bit-level reinterpretation is determined by the `bitcast` parameter\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:24
+msgid "**约束条件：**"
+msgstr "**Constraints:**"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:26
+msgid ""
+"- `fp_downcast_rounding` 仅在浮点降精度时可设置，否则将报错\n"
+"- `bitcast=True` 时不进行数值转换，忽略舍入/溢出模式\n"
+"- `overflow_mode` 仅对整型有意义（Ascend 扩展）\n"
+msgstr ""
+"- `fp_downcast_rounding` can only be set when downcasting floating-point precision; otherwise, an error will be reported.\n"
+"- When `bitcast=True`, no numerical conversion is performed, and rounding/overflow modes are ignored.\n"
+"- `overflow_mode` is only meaningful for integer types (Ascend extension).\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:28
+msgid "### 2.2 DataType支持表"
+msgstr "### 2.2 DataType Support Table"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:30
+msgid ""
+"| 支持情况 | int8 | int16 | int32 | int64 | uint8 | uint16 | uint32 | uint64 | float16 | float32 | bfloat16 | float8e4 | float8e5 | float64 | bool |\n"
+"|----------|:----:|:-----:|:-----:|:-----:|:----:|:-----:|:-----:|:-----:|:------:|:------:|:-------:|:----:|:----:|:------:|:---:|\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | ✓ | ✓ | × | × | × | ✓ | ✓ | ✓ | × | × | × | ✓ |\n"
+"| GPU支持 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+msgstr ""
+"| Support Status | int8 | int16 | int32 | int64 | uint8 | uint16 | uint32 | uint64 | float16 | float32 | bfloat16 | float8e4 | float8e5 | float64 | bool |\n"
+"|----------|:----:|:-----:|:-----:|:-----:|:----:|:-----:|:-----:|:-----:|:------:|:------:|:-------:|:----:|:----:|:------:|:---:|\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | ✓ | ✓ | × | × | × | ✓ | ✓ | ✓ | × | × | × | ✓ |\n"
+"| GPU Support | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:32
+msgid "### 2.3 Shape支持表"
+msgstr "### 2.3 Shape Support Table"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:34
+msgid "支持任意维度数、任意形状大小。"
+msgstr "Supports any number of dimensions and any shape size."
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:36
+msgid "### 2.4 特殊限制说明"
+msgstr "### 2.4 Special Limitations"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:38
+msgid "无"
+msgstr "None"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:40
+msgid "### 2.5 使用方法"
+msgstr "### 2.5 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:42
+msgid "**基本用法：**"
+msgstr "**Basic Usage:**"
+
+#. type: code
+#: docs/zh/triton_api/Creation_Ops/cast.md:44
+msgid ""
+"```python\n"
+"import triton\n"
+"import triton.language as tl\n"
+"\n"
+"@triton.jit\n"
+"def cast_example():\n"
+"    # 创建float32张量\n"
+"    x = tl.zeros([2, 3], dtype=tl.float32)\n"
+"\n"
+"    # 转换为int32\n"
+"    y = tl.cast(x, tl.int32)\n"
+"\n"
+"    return y\n"
+"\n"
+"## 调用示例\n"
+"result = cast_example()\n"
+"print(result.dtype)  # 输出: int32\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:46
+msgid "**高级用法：**"
+msgstr "**Advanced Usage:**"
+
+#. type: code
+#: docs/zh/triton_api/Creation_Ops/cast.md:48
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def cast_advanced_example():\n"
+"    # 创建float32张量\n"
+"    x = tl.zeros([2, 3], dtype=tl.float32)\n"
+"\n"
+"    # 位级别重解释\n"
+"    y = x.cast(tl.int32, bitcast=True)\n"
+"\n"
+"    # 浮点降精度，向零舍入\n"
+"    z = x.cast(tl.float16, fp_downcast_rounding=\"rtz\")\n"
+"\n"
+"    # float32 → int8，启用饱和模式（Ascend 扩展，超出 int8 范围的值会被截断到 [-128, 127]）\n"
+"    w = x.cast(tl.int8, overflow_mode=\"saturate\")\n"
+"\n"
+"    return y, z, w\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cast.md:50
+msgid "**实际应用场景：**"
+msgstr "**Practical Application Scenarios:**"
+
+#. type: code
+#: docs/zh/triton_api/Creation_Ops/cast.md:52
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def quantization_kernel(x_ptr, output_ptr, scale, zero_point, M, N, BLOCK_M: tl.constexpr, BLOCK_N: tl.constexpr):\n"
+"    # 加载float32数据\n"
+"    x = tl.load(x_ptr + offsets, mask=mask)\n"
+"\n"
+"    # 量化：转换为int8\n"
+"    x_quantized = tl.cast(x * scale + zero_point, tl.int8, overflow_mode=\"saturate\")\n"
+"\n"
+"    # 存储量化结果\n"
+"    tl.store(output_ptr + offsets, x_quantized, mask=mask)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Creation_Ops/cast.md:53
+msgid ""
+"\n"
+"\n"
+msgstr ""

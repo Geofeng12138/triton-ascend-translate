@@ -1,0 +1,125 @@
+# PO translation file for docs/zh/triton_api/Compiler_Hint_Ops/debug_barrier.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 08:44+0000\n"
+"PO-Revision-Date: 2026-07-20 08:44+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/debug_barrier.md:0
+msgid "# triton.language.debug_barrier"
+msgstr "# triton.language.debug_barrier"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/debug_barrier.md:2
+msgid "## 1. 函数概述"
+msgstr "## 1. Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/debug_barrier.md:4
+msgid "`debug_barrier` 插入一条屏障指令，用于在调试时同步块中的所有线程，确保线程间的执行顺序。在同一块中的所有其他线程也到达该点之前，任何线程都不会继续执行该调用。"
+msgstr "`debug_barrier` inserts a barrier instruction used to synchronize all threads in a block during debugging, ensuring the execution order among threads. No thread will continue execution past this call until all other threads in the same block have also reached this point."
+
+#. type: code
+#: docs/zh/triton_api/Compiler_Hint_Ops/debug_barrier.md:6
+msgid ""
+"```python\n"
+"triton.language.debug_barrier(_semantic=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/debug_barrier.md:8
+msgid "## 2. 规格"
+msgstr "## 2. Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/debug_barrier.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/debug_barrier.md:12
+msgid ""
+"| 参数 | 类型 | 默认值 | 含义说明 |\n"
+"|------|------|--------|----------|\n"
+"| `_semantic` | - | - | 保留参数，暂不支持外部调用 |\n"
+msgstr ""
+"| Parameter | Type | Default Value | Description |\n"
+"|-----------|------|---------------|-------------|\n"
+"| `_semantic` | - | - | Reserved parameter, external calls not supported for now |\n"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/debug_barrier.md:14
+msgid "### 2.2 类型支持"
+msgstr "### 2.2 Type Support"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/debug_barrier.md:16
+msgid "A3："
+msgstr "A3:"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/debug_barrier.md:18
+msgid ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | - | - | - | - | - | - | - | - | - | - | - | - | - |\n"
+"| Ascend A2/A3 | - | - | - | - | - | - | - | - | - | - | - | - | - |\n"
+msgstr ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | - | - | - | - | - | - | - | - | - | - | - | - | - |\n"
+"| Ascend A2/A3 | - | - | - | - | - | - | - | - | - | - | - | - | - |\n"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/debug_barrier.md:20
+msgid "### 2.3 使用方法"
+msgstr "### 2.3 Usage"
+
+#. type: code
+#: docs/zh/triton_api/Compiler_Hint_Ops/debug_barrier.md:22
+msgid ""
+"```python\n"
+"import triton.language as tl\n"
+"\n"
+"@triton.jit\n"
+"def debug_barrier_basic(A, B, C, BLOCK_SIZE: tl.constexpr):\n"
+"    pid = tl.program_id(0)\n"
+"    offsets = pid * BLOCK_SIZE + tl.arange(0, BLOCK_SIZE)\n"
+"\n"
+"    # 阶段1：加载数据\n"
+"    a = tl.load(A + offsets)\n"
+"\n"
+"    # 插入调试屏障，确保所有线程都完成了数据加载\n"
+"    tl.debug_barrier()\n"
+"\n"
+"    # 阶段2：处理数据\n"
+"    b = a * 2\n"
+"\n"
+"    # 再次插入屏障，确保所有线程都完成了计算\n"
+"    tl.debug_barrier()\n"
+"\n"
+"    # 阶段3：存储结果\n"
+"    tl.store(C + offsets, b)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/debug_barrier.md:24
+msgid "**注意：** `debug_barrier` 主要用于调试，通常不应在性能关键的生产代码中使用，因为它可能会因同步而引入开销。"
+msgstr "**Note:** `debug_barrier` is primarily used for debugging and should generally not be used in performance-critical production code, as it may introduce overhead due to synchronization."
+
+#. type: blank
+#: docs/zh/triton_api/Compiler_Hint_Ops/debug_barrier.md:25
+msgid ""
+"\n"
+"\n"
+msgstr ""

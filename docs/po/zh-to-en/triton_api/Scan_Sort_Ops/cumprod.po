@@ -1,0 +1,161 @@
+# PO translation file for docs/zh/triton_api/Scan_Sort_Ops/cumprod.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 09:20+0000\n"
+"PO-Revision-Date: 2026-07-20 09:20+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:0
+msgid "# triton.language.cumprod"
+msgstr "# triton.language.cumprod"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:4
+msgid "简介：`triton.language.cumprod` 计算输入tensor沿指定轴的累积乘积，返回累积乘积结果。"
+msgstr "Introduction: `triton.language.cumprod` computes the cumulative product of the input tensor along a specified axis, returning the cumulative product result."
+
+#. type: code
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:6
+msgid ""
+"```python\n"
+"triton.language.cumprod(input, axis=0, reverse=False)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:12
+msgid ""
+"| 参数名 | 类型 | 说明 |\n"
+"|--------|------|------|\n"
+"| `input` | `Tensor` | 输入tensor |\n"
+"| `axis` | `int` | 沿着哪个维度进行累积乘积操作，默认为0 |\n"
+"| `reverse` | `bool` | 如果为True，沿反方向进行累积乘积操作 |\n"
+msgstr ""
+"| Parameter | Type | Description |\n"
+"|-----------|------|-------------|\n"
+"| `input` | `Tensor` | Input tensor |\n"
+"| `axis` | `int` | The dimension along which to perform the cumulative product operation, default is 0 |\n"
+"| `reverse` | `bool` | If True, performs the cumulative product operation in the reverse direction |\n"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:14
+msgid "`cumprod` 函数计算沿指定轴的累积乘积（前缀乘积）。例如，对于输入 `[a, b, c, d]`，累积乘积结果为 `[a, a*b, a*b*c, a*b*c*d]`。"
+msgstr "The `cumprod` function computes the cumulative product (prefix product) along a specified axis. For example, for the input `[a, b, c, d]`, the cumulative product result is `[a, a*b, a*b*c, a*b*c*d]`."
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:16
+msgid "当 `reverse=True` 时，计算反向累积乘积：`[a*b*c*d, b*c*d, c*d, d]`。"
+msgstr "When `reverse=True`, compute the reverse cumulative product: `[a*b*c*d, b*c*d, c*d, d]`."
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:18
+msgid "与 `cumsum` 不同，`cumprod` 没有 `dtype` 参数，因此在使用时需要注意数据类型的溢出问题，特别是对于整数类型的累积乘积。"
+msgstr "Unlike `cumsum`, `cumprod` does not have a `dtype` parameter, so attention must be paid to data type overflow issues when using it, especially for cumulative products of integer types."
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:20
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:22
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:24
+msgid ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"| Ascend A2/A3 | ✓ | ✓ | × | ✓ | × | ✓ | × | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+"| GPU支持 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+msgstr ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"| Ascend A2/A3 | ✓ | ✓ | × | ✓ | × | ✓ | × | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+"| GPU Support | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:26
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:28
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms."
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:30
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Limitations"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:32
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:34
+msgid "以下示例实现了对2Dshape的tensor进行cumprod运算："
+msgstr "The following example implements the cumprod operation on a 2D shape tensor:"
+
+#. type: code
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:36
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def triton_kernel_2d(\n"
+"        out_ptr0,\n"
+"        in_ptr0,\n"
+"        dim: tl.constexpr,\n"
+"        reverse: tl.constexpr,\n"
+"        numel_x: tl.constexpr,\n"
+"        numel_r: tl.constexpr,\n"
+"        XBLOCK: tl.constexpr,\n"
+"        RBLOCK: tl.constexpr,\n"
+"):\n"
+"    tl.static_assert(\n"
+"        numel_x == XBLOCK, \"numel_x must be equal to XBLOCK in this kernel\"\n"
+"    )\n"
+"    tl.static_assert(\n"
+"        numel_r == RBLOCK, \"numel_r must be equal to RBLOCK in this kernel\"\n"
+"    )\n"
+"    idx_x = tl.arange(0, XBLOCK)\n"
+"    idx_r = tl.arange(0, RBLOCK)\n"
+"    idx = idx_x[:, None] * numel_r + idx_r[None, :]\n"
+"    x = tl.load(in_ptr0 + idx)\n"
+"    ret = tl.cumprod(x, axis=dim, reverse=reverse)\n"
+"    tl.store(out_ptr0 + idx, ret)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Scan_Sort_Ops/cumprod.md:37
+msgid ""
+"\n"
+"\n"
+msgstr ""

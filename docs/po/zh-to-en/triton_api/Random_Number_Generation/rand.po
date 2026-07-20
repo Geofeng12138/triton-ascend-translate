@@ -1,0 +1,162 @@
+# PO translation file for docs/zh/triton_api/Random_Number_Generation/rand.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 09:15+0000\n"
+"PO-Revision-Date: 2026-07-20 09:15+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:0
+msgid "# triton.language.rand"
+msgstr "# triton.language.rand"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:4
+msgid ""
+"简介：给定 1 个 seed 标量和 1 个 offset 块，返回 1 个 在 **U**(**0**,**1**) 中的 float32 类型的随机块。\n"
+"原型：\n"
+msgstr ""
+"**Description:** Given a seed scalar and an offset block, returns a random block of type float32 in **U**(**0**,**1**).  \n"
+"**Prototype:**\n"
+
+#. type: code
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:6
+msgid ""
+"```python\n"
+"triton.language.rand(\n"
+" seed,\n"
+" offset,\n"
+" n_rounds: constexpr = 10\n"
+")\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:12
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `seed`        | `int`或 `tensor`           | 用于生成随机数的种子                                                   |\n"
+"| `offset`       |`int`或 `tensor`     | 用于生成随机数的偏移量                     |\n"
+"| `n_rounds`     | `constexpr`，默认值为10   | Philox 算法的迭代轮数 |\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `seed`        | `int` or `tensor` | Seed used to generate random numbers |\n"
+"| `offset`      | `int` or `tensor` | Offset used to generate random numbers |\n"
+"| `n_rounds`    | `constexpr`, default value is 10 | Number of rounds for the Philox algorithm |\n"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:14
+msgid ""
+"返回值：\n"
+"1 个 float32 类型的随机块，其shape与offset的shape相同，其值在 `[0.0, 1.0)` 区间内均匀分布\n"
+msgstr ""
+"Return value:  \n"
+"A random block of type `float32`, with the same shape as `offset`, and values uniformly distributed in the interval `[0.0, 1.0)`.\n"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:20
+msgid "输入seed的type："
+msgstr "Input seed type:"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:22
+msgid ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| Ascend A2/A3 | √    | √     | √     | √     | √    | √     | √     |√     | ×    | ×    | ×    | ×    | √    |\n"
+msgstr ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| Ascend A2/A3 | √    | √     | √     | √     | √    | √     | √     |√     | ×    | ×    | ×    | ×    | √    |\n"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:24
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:26
+msgid "无特殊要求"
+msgstr "No special requirements"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:28
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:30
+msgid "> 相对社区能力暂不支持"
+msgstr "Community capabilities are not currently supported."
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:32
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:34
+msgid "以下示例实现了对rand的调用："
+msgstr "The following example demonstrates a call to `rand`:"
+
+#. type: code
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:36
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def kernel_rand(x_ptr, n_rounds: tl.constexpr, N: tl.constexpr, XBLOCK: tl.constexpr):\n"
+"    block_offset = tl.program_id(0) * XBLOCK\n"
+"    block_size = XBLOCK if block_offset + XBLOCK <= N else N - block_offset\n"
+"    for inner_idx in range(block_size):\n"
+"        global_offset = block_offset + inner_idx\n"
+"        rand_vals = tl.rand(5, 10 + global_offset, n_rounds) # 对每个索引生成一个随机数\n"
+"        tl.store(x_ptr + global_offset, rand_vals) # 存储随机数\n"
+"\n"
+"y_calf = torch.zeros(shape, dtype=eval('torch.float32')).npu()\n"
+"numel = y_calf.numel()\n"
+"ncore = 1 if numel < 32 else 32\n"
+"xblock = math.ceil(numel / ncore)\n"
+"kernel_rand[ncore, 1, 1](y_calf, 10, numel, xblock)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Random_Number_Generation/rand.md:37
+msgid ""
+"\n"
+"\n"
+msgstr ""

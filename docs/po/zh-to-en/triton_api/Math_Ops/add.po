@@ -1,0 +1,172 @@
+# PO translation file for docs/zh/triton_api/Math_Ops/add.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 09:00+0000\n"
+"PO-Revision-Date: 2026-07-20 09:00+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:0
+msgid "# triton.language.add"
+msgstr "# triton.language.add"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:4
+msgid ""
+"简介：加法  ，与四则运算 ‘+’等价\n"
+"原型：\n"
+msgstr ""
+"Introduction: Addition, equivalent to the arithmetic operator '+'.  \n"
+"Prototype:\n"
+
+#. type: code
+#: docs/zh/triton_api/Math_Ops/add.md:6
+msgid ""
+"```python\n"
+"triton.language.add(x, y, sanitize_overflow: constexpr = True, _builder=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:12
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `x`        | `tensor or Number`     |     第一个入参     |\n"
+"| `y`       | `tensor or Number`     |     第二个入参     |\n"
+"| `sanitize_overflow`     | `bool`    | 是否对整数加法做溢出检查，默认值为True,无需显示指定 |\n"
+"| `_builder`   | -                 | 保留参数，暂不支持外部调用                                                |\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `x` | `tensor or Number` | The first input parameter |\n"
+"| `y` | `tensor or Number` | The second input parameter |\n"
+"| `sanitize_overflow` | `bool` | Whether to perform overflow checking for integer addition. The default value is True and does not need to be explicitly specified. |\n"
+"| `_builder` | - | Reserved parameter, currently not supported for external calls |\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:14
+msgid ""
+"返回值：\n"
+"`tl.tensor`：加法结果\n"
+msgstr ""
+"Return value:  \n"
+"`tl.tensor`: The result of addition\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:20
+msgid ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"|GPU| √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ |\n"
+"|Ascend A2/A3| √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ |\n"
+msgstr ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"|GPU| √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ |\n"
+"|Ascend A2/A3| √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:22
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:24
+msgid ""
+"|        | 支持维度范围          |\n"
+"| ------ | --------------- |\n"
+"| GPU    | 无限制 |\n"
+"| Ascend |无限制  |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| ------ | ----------------------- |\n"
+"| GPU    | Unlimited               |\n"
+"| Ascend | Unlimited               |\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:26
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms."
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:28
+msgid "### 2.3 使用方法"
+msgstr "### 2.3 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:30
+msgid "以下示例实现了对输入张量 `x_ptr, y_ptr` 做加法计算："
+msgstr "The following example implements addition on the input tensors `x_ptr, y_ptr`:"
+
+#. type: code
+#: docs/zh/triton_api/Math_Ops/add.md:32
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def add_kernel(x_ptr,  # *Pointer* to first input vector.\n"
+"               y_ptr,  # *Pointer* to second input vector.\n"
+"               output_ptr,  # *Pointer* to output vector.\n"
+"               n_elements,  # Size of the vector.\n"
+"               BLOCK_SIZE: tl.constexpr,  # Number of elements each program should process.\n"
+"               ):\n"
+"    pid = tl.program_id(axis=0)\n"
+"    block_start = pid * BLOCK_SIZE\n"
+"    offsets = block_start + tl.arange(0, BLOCK_SIZE)\n"
+"    # Create a mask to guard memory operations against out-of-bounds accesses.\n"
+"    mask = offsets < n_elements\n"
+"    x = tl.load(x_ptr + offsets, mask=mask)\n"
+"    y = tl.load(y_ptr + offsets, mask=mask)\n"
+"    output = x + y # 等价于 output = tl.add(x,y)\n"
+"    tl.store(output_ptr + offsets, output, mask=mask)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:34
+msgid "## 3. 特殊说明"
+msgstr "## 3. Special Notes"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/add.md:36
+msgid "> Ascend A3 对比 GPU 不支持fp64"
+msgstr "Ascend A3 vs GPU: fp64 not supported"
+
+#. type: blank
+#: docs/zh/triton_api/Math_Ops/add.md:37
+msgid ""
+"\n"
+"\n"
+msgstr ""

@@ -1,0 +1,153 @@
+# PO translation file for docs/zh/triton_api/Creation_Ops/zeros_like.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 08:47+0000\n"
+"PO-Revision-Date: 2026-07-20 08:47+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:0
+msgid "# triton.language.zeros_like"
+msgstr "# triton.language.zeros_like"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:4
+msgid "简介：`triton.language.zeros_like`返回与给定张量具有相同形状和类型的零的张量。"
+msgstr "Description: `triton.language.zeros_like` returns a tensor of zeros with the same shape and type as the given tensor."
+
+#. type: code
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:6
+msgid ""
+"```python\n"
+"triton.language.zeros_like(input)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:12
+msgid ""
+"| 参数名           | 类型                  | 说明                                   |\n"
+"| ------------- | ----------------- | ---------------------------- |\n"
+"| `input`           | `Tensor`               | 输入tensor |\n"
+msgstr ""
+"| Parameter Name | Type     | Description          |\n"
+"|----------------|----------|----------------------|\n"
+"| `input`        | `Tensor` | Input tensor         |\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:14
+msgid ""
+"返回值：\n"
+"`tensor`：返回与给定张量具有相同形状和类型的零的张量。\n"
+msgstr ""
+"Return value:  \n"
+"`tensor`: Returns a tensor of zeros with the same shape and type as the given tensor.\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:20
+msgid ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"| Ascend A2/A3 | ✓ | ✓ | × | ✓ | × | ✓ | × | ✓ | ✓ | ✓ | ✓ | × |\n"
+"| GPU支持 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | × |\n"
+msgstr ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"| Ascend A2/A3 | ✓ | ✓ | × | ✓ | × | ✓ | × | ✓ | ✓ | ✓ | ✓ | × |\n"
+"| GPU Support | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | × |\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:22
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:24
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms."
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:26
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Limitations"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:28
+msgid ""
+"> 相对社区能力缺失且无法实现\n"
+"> 无\n"
+msgstr ""
+"Relative community capability is lacking and cannot be achieved  \n"
+"None\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:30
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:32
+msgid "以下示例实现了返回与给定张量具有相同形状和类型的零的张量。："
+msgstr "The following example returns a tensor of zeros with the same shape and type as the given tensor."
+
+#. type: code
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:34
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def fn_npu_(output_ptr, x_ptr, XB: tl.constexpr, YB: tl.constexpr, ZB: tl.constexpr):\n"
+"    xidx = tl.arange(0, XB)\n"
+"    yidx = tl.arange(0, YB)\n"
+"    zidx = tl.arange(0, ZB)\n"
+"\n"
+"    idx = xidx[:, None, None] * YB * ZB + yidx[None, :, None] * ZB + zidx[None, None, :]\n"
+"\n"
+"    X = tl.load(x_ptr + idx)\n"
+"\n"
+"    ret = tl.zeros_like(X)\n"
+"\n"
+"    oidx = xidx[:, None, None] * YB * ZB + yidx[None, :, None] * ZB + zidx[None, None, :]\n"
+"\n"
+"    tl.store(output_ptr + oidx, ret)\n"
+"\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Creation_Ops/zeros_like.md:35
+msgid ""
+"\n"
+"\n"
+msgstr ""

@@ -1,0 +1,190 @@
+# PO translation file for docs/zh/triton_api/Shape_Manipulation_Ops/view.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 09:27+0000\n"
+"PO-Revision-Date: 2026-07-20 09:27+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:0
+msgid "# triton.language.view"
+msgstr "# triton.language.view"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:2
+msgid "## 1 功能作用说明"
+msgstr "## 1 Function Description"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:4
+msgid "创建张量的视图，改变形状但不复制数据，类似于reshape，但更强调视图的概念，保持数据在内存中的连续性。"
+msgstr "Create a view of a tensor, changing its shape without copying data, similar to `reshape`, but with a stronger emphasis on the concept of a view, maintaining the continuity of data in memory."
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:6
+msgid "**语法：**"
+msgstr "**Syntax:**"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:8
+msgid ""
+"- `triton.language.view(input, shape)` - 函数调用形式\n"
+"- `input.view(shape)` - 成员函数形式\n"
+msgstr ""
+"- `triton.language.view(input, shape)` - function call form\n"
+"- `input.view(shape)` - member function form\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:10
+msgid "**功能：**"
+msgstr "**Function:**"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:12
+msgid ""
+"- 创建张量的视图，改变形状但不复制数据\n"
+"- 类似于reshape，但更强调视图的概念\n"
+"- 保持数据在内存中的连续性\n"
+msgstr ""
+"- Create a view of a tensor, changing its shape without copying the data  \n"
+"- Similar to `reshape`, but with a stronger emphasis on the concept of a view  \n"
+"- Maintains the contiguity of data in memory\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:14
+msgid "## 2 参数规格"
+msgstr "## 2 Parameter Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:16
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:18
+msgid ""
+"| 参数名 | 类型 | 必需 | 说明 |\n"
+"|--------|------|------|------|\n"
+"| input | tensor | 是 | 输入张量 |\n"
+"| shape | List[int] | 是 | 目标形状 |\n"
+msgstr ""
+"| Parameter Name | Type | Required | Description |\n"
+"|----------------|------|----------|-------------|\n"
+"| input | tensor | Yes | Input tensor |\n"
+"| shape | List[int] | Yes | Target shape |\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:20
+msgid "**返回值：**"
+msgstr "**Return value:**"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:22
+msgid ""
+"- **类型：** tensor\n"
+"- **形状：** 与shape参数指定的目标形状相同\n"
+"- **数据类型：** 与输入张量相同\n"
+"- **内存布局：** 与输入张量在内存中连续\n"
+msgstr ""
+"- **Type:** tensor\n"
+"- **Shape:** Same as the target shape specified by the `shape` parameter\n"
+"- **Data type:** Same as the input tensor\n"
+"- **Memory layout:** Contiguous in memory with the input tensor\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:24
+msgid "**约束条件：**"
+msgstr "**Constraints:**"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:26
+msgid ""
+"- 输入和输出张量的总元素数必须相等\n"
+"- 输出张量必须与输入张量在内存中连续\n"
+msgstr ""
+"- The total number of elements in the input and output tensors must be equal\n"
+"- The output tensor must be contiguous in memory with the input tensor\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:28
+msgid "### 2.2 DataType支持表"
+msgstr "### 2.2 DataType Support Table"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:30
+msgid ""
+"| 支持情况 | int8 | int16 | int32 | int64 | uint8 | uint16 | uint32 | uint64 | float16 | float32 | bfloat16 | float8e4 | float8e5 | float64 | bool |\n"
+"|----------|:----:|:-----:|:-----:|:-----:|:----:|:-----:|:-----:|:-----:|:------:|:------:|:-------:|:----:|:----:|:------:|:---:|\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | ✓ | ✓ | × | × | × | ✓ | ✓ | ✓ | × | × | × | ✓ |\n"
+"| GPU支持 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+msgstr ""
+"| Support Status | int8 | int16 | int32 | int64 | uint8 | uint16 | uint32 | uint64 | float16 | float32 | bfloat16 | float8e4 | float8e5 | float64 | bool |\n"
+"|----------|:----:|:-----:|:-----:|:-----:|:----:|:-----:|:-----:|:-----:|:------:|:------:|:-------:|:----:|:----:|:------:|:---:|\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | ✓ | ✓ | × | × | × | ✓ | ✓ | ✓ | × | × | × | ✓ |\n"
+"| GPU Support | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:32
+msgid "### 2.3 Shape支持表"
+msgstr "### 2.3 Shape Support Table"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:34
+msgid "支持任意维度数、任意形状大小。"
+msgstr "Supports any number of dimensions and any shape size."
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:36
+msgid "### 2.4 特殊限制说明"
+msgstr "### 2.4 Special Restrictions Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:38
+msgid "无"
+msgstr "None"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:40
+msgid "### 2.5 使用方法"
+msgstr "### 2.5 Usage"
+
+#. type: code
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:42
+msgid ""
+"```python\n"
+"import torch\n"
+"import triton\n"
+"import triton.language as tl\n"
+"\n"
+"@triton.jit\n"
+"def view_example(out_ptr):\n"
+"    # 创建2x3x4的张量\n"
+"    x = tl.zeros([2, 3, 4], dtype=tl.float32)\n"
+"\n"
+"    # 创建视图，变成6x4\n"
+"    y = tl.view(x, [6, 4])\n"
+"\n"
+"    # 将结果写回外部张量\n"
+"    offs = tl.arange(0, 6)[:, None] * 4 + tl.arange(0, 4)[None, :]\n"
+"    tl.store(out_ptr + offs, y)\n"
+"\n"
+"## 调用示例\n"
+"out = torch.empty((6, 4), dtype=torch.float32, device=\"npu\")\n"
+"view_example[(1,)](out)\n"
+"print(out.shape)  # 输出: torch.Size([6, 4])\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Shape_Manipulation_Ops/view.md:43
+msgid ""
+"\n"
+"\n"
+msgstr ""

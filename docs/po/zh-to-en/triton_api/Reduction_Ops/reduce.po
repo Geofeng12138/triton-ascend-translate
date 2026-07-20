@@ -1,0 +1,175 @@
+# PO translation file for docs/zh/triton_api/Reduction_Ops/reduce.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 09:18+0000\n"
+"PO-Revision-Date: 2026-07-20 09:18+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:0
+msgid "# triton.language.reduce"
+msgstr "# triton.language.reduce"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:4
+msgid "简介：`triton.language.reduce` 沿指定轴 `axis` 对输入 tensor 应用 `combine_fn` 进行规约，返回规约后的结果张量。"
+msgstr "Introduction: `triton.language.reduce` applies `combine_fn` along the specified axis `axis` to perform reduction on the input tensor, returning the reduced result tensor."
+
+#. type: code
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:6
+msgid ""
+"```python\n"
+"triton.language.reduce(input, axis, combine_fn, keep_dims=False, _semantic=None, _generator=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:12
+msgid ""
+"| 参数名 | 类型 | 说明 |\n"
+"|--------|------|------|\n"
+"| `input` | `Tensor` 或 `tuple of Tensor` | 输入tensor，可以是单个tensor或tensor元组 |\n"
+"| `axis` | `int` 或 `None` | 沿着哪个维度进行reduce操作。如果为None，则reduce所有维度 |\n"
+"| `combine_fn` | `Callable` | 用于组合两个标量tensor组的函数（必须用@triton.jit标记） |\n"
+"| `keep_dims` | `bool` | 如果为True，保持被reduce的维度为长度1 |\n"
+"| `_semantic` | `Optional[str]` | 保留参数，暂不支持外部调用 |\n"
+"| `_generator` | `Optional[Generator]` | 保留参数，暂不支持外部调用 |\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"|--------|------|------|\n"
+"| `input` | `Tensor` or `tuple of Tensor` | Input tensor, can be a single tensor or a tuple of tensors |\n"
+"| `axis` | `int` or `None` | The dimension along which to perform the reduce operation. If None, all dimensions are reduced |\n"
+"| `combine_fn` | `Callable` | Function used to combine two groups of scalar tensors (must be decorated with `@triton.jit`) |\n"
+"| `keep_dims` | `bool` | If True, keep the reduced dimensions with length 1 |\n"
+"| `_semantic` | `Optional[str]` | Reserved parameter, external calls not supported for now |\n"
+"| `_generator` | `Optional[Generator]` | Reserved parameter, external calls not supported for now |\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:14
+msgid "**注意**：此函数也可以作为tensor的成员函数调用，如 `x.reduce(...)` 而不是 `reduce(x, ...)`"
+msgstr "**Note**: This function can also be called as a member function of a tensor, such as `x.reduce(...)` instead of `reduce(x, ...)`."
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:16
+msgid ""
+"返回值：\n"
+"`tensor`：沿指定轴 `axis` 规约后的结果张量。\n"
+msgstr ""
+"Return value:  \n"
+"`tensor`: The resulting tensor after reduction along the specified axis `axis`.\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:18
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:20
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:22
+msgid ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"| Ascend A2/A3 | ✓ | ✓ | × | ✓ | × | ✓ | × | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+"| GPU支持 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+msgstr ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"| Ascend A2/A3 | ✓ | ✓ | × | ✓ | × | ✓ | × | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+"| GPU Support | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:24
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:26
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异。"
+msgstr "Conclusion: There is no difference between GPU and Ascend platforms in terms of Shape."
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:28
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:30
+msgid ""
+"> 相对社区能力缺失且无法实现\n"
+"> keep_dims=True需要测试更多规格，来确定是否全面支持。目前已测3D dim=2情况下，支持 keep_dims=True。\n"
+msgstr ""
+"Relative community capability is missing and cannot be achieved.  \n"
+"`keep_dims=True` requires testing on more specifications to determine whether it is fully supported. Currently, it has been tested that in the 3D `dim=2` case, `keep_dims=True` is supported.\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:32
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:34
+msgid "以下示例实现了对2Dshape的tensor进行reduce计算，其中的combine_fn使用简单加法："
+msgstr "The following example implements reduce computation on a 2D shape tensor, where combine_fn uses simple addition:"
+
+#. type: code
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:36
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def _reduce_combine(a, b):\n"
+"    return a + b\n"
+"\n"
+"@triton.jit\n"
+"def tt_reduce_2d(in_ptr, out_ptr,\n"
+"                 xnumel: tl.constexpr, ynumel: tl.constexpr, znumel: tl.constexpr,\n"
+"                 XB: tl.constexpr, YB: tl.constexpr, ZB: tl.constexpr, dim: tl.constexpr):\n"
+"    xoffs = tl.program_id(0) * XB\n"
+"    yoffs = tl.program_id(1) * YB\n"
+"    xidx = tl.arange(0, XB) + xoffs\n"
+"    yidx = tl.arange(0, YB) + yoffs\n"
+"    idx = xidx[:, None] * ynumel + yidx[None, :]\n"
+"\n"
+"    x = tl.load(in_ptr + idx)\n"
+"    ret = tl.reduce(x, dim, _reduce_combine)\n"
+"\n"
+"    if dim == 0:\n"
+"        oidx = yidx\n"
+"    else:\n"
+"        oidx = xidx\n"
+"    tl.store(out_ptr + oidx, ret)\n"
+"\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Reduction_Ops/reduce.md:37
+msgid ""
+"\n"
+"\n"
+msgstr ""

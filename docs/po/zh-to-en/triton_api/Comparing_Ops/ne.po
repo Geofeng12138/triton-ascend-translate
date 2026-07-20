@@ -1,0 +1,168 @@
+# PO translation file for docs/zh/triton_api/Comparing_Ops/ne.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 08:44+0000\n"
+"PO-Revision-Date: 2026-07-20 08:44+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:0
+msgid "# ne"
+msgstr "# ne"
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:4
+msgid "简介：用于比较两个张量的元素, 与`!=`等价。"
+msgstr "Introduction: Used to compare elements of two tensors, equivalent to `!=`."
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:6
+msgid "作为`tensor`的内置运算符使用, 如`x!=y`。"
+msgstr "Used as a built-in operator for `tensor`, such as `x!=y`."
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:12
+msgid ""
+"| 参数名 | 类型 | 说明 |\n"
+"| :---: | :---: | :---: |\n"
+"| `input` | `tensor` | 张量数据, 左操作数, 代表要进行比较的主数据 |\n"
+"| `other`   | `tensor` | 张量数据, 右操作数, 与`input`逐元素进行比较 |\n"
+"| `_builder` | - | 保留参数，暂不支持外部调用 |\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"| :---: | :---: | :---: |\n"
+"| `input` | `tensor` | Tensor data, left operand, representing the primary data to be compared |\n"
+"| `other` | `tensor` | Tensor data, right operand, compared element-wise with `input` |\n"
+"| `_builder` | - | Reserved parameter, external invocation not supported for now |\n"
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:14
+msgid ""
+"返回值：\n"
+"`tl.tensor`：同`input`的shape的张量\n"
+msgstr ""
+"Return value:  \n"
+"`tl.tensor`: A tensor with the same shape as `input`.\n"
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:20
+msgid ""
+"|       | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 |fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n"
+"| GPU          | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ |\n"
+"| Ascend A2/A3 | √ | √ | √ | × | × | × | × | √ | √ | √ | × | √ | √ |\n"
+msgstr ""
+"|       | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n"
+"| GPU          | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ |\n"
+"| Ascend A2/A3 | √ | √ | √ | × | × | × | × | √ | √ | √ | × | √ | √ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:22
+msgid "结论：Triton-Ascend 对比 GPU 缺失 uint8/uint16/uint32/uint64、fp64 的支持能力。"
+msgstr "Conclusion: Triton-Ascend lacks support for uint8/uint16/uint32/uint64 and fp64 compared to GPU."
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:24
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:26
+msgid ""
+"|        | 支持维度范围         |\n"
+"| -------- | ---------------------- |\n"
+"| GPU    | 无限制 |\n"
+"| Ascend A2/A3 | 无限制 |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| -------- | ---------------------- |\n"
+"| GPU    | Unlimited |\n"
+"| Ascend A2/A3 | Unlimited |\n"
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:28
+msgid "结论：在 Shape 方面, GPU 与 Ascend 平台无差异。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms."
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:30
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:32
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capacity is lacking and cannot be realized."
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:34
+msgid "Triton-Ascend 对比 GPU 缺失 fp64 的支持能力，uint8/uint16/uint32/uint64 类型支持开发中。"
+msgstr "Triton-Ascend lacks fp64 support compared to GPU, and support for uint8/uint16/uint32/uint64 types is under development."
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:36
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Comparing_Ops/ne.md:38
+msgid "以下示例实现了对张量`x0`、`x1`做`!=`运算："
+msgstr "The following example implements the `!=` operation on tensors `x0` and `x1`:"
+
+#. type: code
+#: docs/zh/triton_api/Comparing_Ops/ne.md:40
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def triton_ne(in_ptr0, in_ptr1, out_ptr0, N: tl.constexpr, XBLOCK: tl.constexpr, XBLOCK_SUB: tl.constexpr):\n"
+"       offset = tl.program_id(0) * XBLOCK\n"
+"       base1 = tl.arange(0, XBLOCK_SUB)\n"
+"       loops1: tl.constexpr = XBLOCK // XBLOCK_SUB\n"
+"       for loop1 in range(loops1):\n"
+"           x_index = offset + (loop1 * XBLOCK_SUB) + base1\n"
+"           tmp0 = tl.load(in_ptr0 + x_index, mask=x_index < N)\n"
+"           tmp1 = tl.load(in_ptr1 + x_index, mask=x_index < N)\n"
+"           tmp2 = tmp0 != tmp1\n"
+"           tl.store(out_ptr0 + x_index, tmp2, mask=x_index < N)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Comparing_Ops/ne.md:41
+msgid ""
+"\n"
+"\n"
+msgstr ""

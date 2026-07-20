@@ -1,0 +1,175 @@
+# PO translation file for docs/zh/triton_api/Math_Ops/div.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 09:02+0000\n"
+"PO-Revision-Date: 2026-07-20 09:02+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:0
+msgid "# div"
+msgstr "# div"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:4
+msgid "简介：除法，四则运算 ‘/’，无tl.div方法"
+msgstr "Introduction: Division, the arithmetic operation '/', no `tl.div` method."
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:6
+msgid "底层实现与fdiv算子相同，只不过fdiv明确限制入参必须是float类型，‘/’无此限制，它会把非浮点型转换为浮点型再做计算"
+msgstr "The underlying implementation is the same as the `fdiv` operator, except that `fdiv` explicitly restricts input parameters to float type, while '/' has no such restriction—it converts non-floating-point types to floating-point types before performing the calculation."
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:12
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `self`        | `tensor or Number`     |     第一个入参 ，被除数    |\n"
+"| `other`       | `tensor or Number`     |     第二个入参 ，除数    |\n"
+msgstr ""
+"| Parameter Name | Type                | Description                                                  |\n"
+"| ------------- | ------------------- | ------------------------------------------------------------ |\n"
+"| `self`        | `tensor or Number`  | First input parameter, dividend                             |\n"
+"| `other`       | `tensor or Number`  | Second input parameter, divisor                             |\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:14
+msgid ""
+"返回值：\n"
+"`tl.tensor`：除法结果\n"
+"返回结果类型：总是返回浮点型\n"
+msgstr ""
+"Return value:  \n"
+"`tl.tensor`: The result of division  \n"
+"Return type: Always returns a floating-point type\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:16
+msgid ""
+"| 输入类型            | 处理方式                 | 结果类型      |\n"
+"| --------------------- | -------------------------- | --------------- |\n"
+"| `int / int`     | 两个都转成 `float32` | `float32` |\n"
+"| `int / float`   | int 转 float             | float 类型    |\n"
+"| `float / float` | 统一到更高精度 float     | 高精度 float  |\n"
+"| `float / int`   | int 转 float             | float 类型    |\n"
+msgstr ""
+"| Input Type          | Handling Method            | Result Type     |\n"
+"| ------------------- | -------------------------- | --------------- |\n"
+"| `int / int`         | Both converted to `float32`| `float32`       |\n"
+"| `int / float`       | int converted to float     | float type      |\n"
+"| `float / float`     | Unified to higher precision float | High precision float |\n"
+"| `float / int`       | int converted to float     | float type      |\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:18
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:20
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:22
+msgid ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"|GPU| √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ |\n"
+"|Ascend A2/A3| × | √ | × | √ | × | √ | × | √ | √ | √ | √ | √ |\n"
+msgstr ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"|GPU| √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ |\n"
+"|Ascend A2/A3| × | √ | × | √ | × | √ | × | √ | √ | √ | √ | √ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:24
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:26
+msgid ""
+"|        | 支持维度范围          |\n"
+"| ------ | --------------- |\n"
+"| GPU    | 无限制 |\n"
+"| Ascend A2/A3 |无限制  |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| ------ | ----------------------- |\n"
+"| GPU    | Unlimited               |\n"
+"| Ascend A2/A3 | Unlimited               |\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:28
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异。"
+msgstr "Conclusion: There is no difference between GPU and Ascend platforms in terms of Shape."
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:30
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:32
+msgid "Ascend A3 对比 GPU 缺失uint8、uint16、uint32、uint64、fp64的支持"
+msgstr "Ascend A3 compared to GPU lacks support for uint8, uint16, uint32, uint64, and fp64."
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:34
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/div.md:36
+msgid "以下示例实现了对输入张量 `in_ptr0, in_ptr1` 做除法计算："
+msgstr "The following example implements division calculation on the input tensors `in_ptr0, in_ptr1`."
+
+#. type: code
+#: docs/zh/triton_api/Math_Ops/div.md:38
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def triton_div(in_ptr0, in_ptr1, out_ptr0, XBLOCK: tl.constexpr, XBLOCK_SUB: tl.constexpr):\n"
+"    offset = tl.program_id(0) * XBLOCK\n"
+"    base1 = tl.arange(0, XBLOCK_SUB)\n"
+"    loops1: tl.constexpr = (XBLOCK + XBLOCK_SUB - 1) // XBLOCK_SUB\n"
+"    for loop1 in range(loops1):\n"
+"        x0 = offset + (loop1 * XBLOCK_SUB) + base1\n"
+"        tmp0 = tl.load(in_ptr0 + (x0), None)\n"
+"        tmp1 = tl.load(in_ptr1 + (x0), None)\n"
+"        tmp2 = tmp0 / tmp1\n"
+"        tl.store(out_ptr0 + (x0), tmp2, None)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Math_Ops/div.md:39
+msgid ""
+"\n"
+"\n"
+msgstr ""

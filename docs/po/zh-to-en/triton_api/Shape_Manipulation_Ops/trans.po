@@ -1,0 +1,182 @@
+# PO translation file for docs/zh/triton_api/Shape_Manipulation_Ops/trans.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 09:27+0000\n"
+"PO-Revision-Date: 2026-07-20 09:27+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:0
+msgid "# triton.language.trans"
+msgstr "# triton.language.trans"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:2
+msgid "## 1 功能作用说明"
+msgstr "## 1 Function Description"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:4
+msgid "根据dims参数转置张量的维度，不改变张量的数据，仅改变维度的顺序。专门优化的转置操作。"
+msgstr "Transposes the dimensions of a tensor according to the `dims` parameter, without changing the tensor's data, only the order of the dimensions. A specially optimized transpose operation."
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:6
+msgid "**语法：**"
+msgstr "**Syntax:**"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:8
+msgid ""
+"- `triton.language.trans(input, dims)` - 函数调用形式\n"
+"- `input.trans(dims)` - 成员函数形式\n"
+msgstr ""
+"- `triton.language.trans(input, dims)` - Function call form\n"
+"- `input.trans(dims)` - Member function form\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:10
+msgid "**功能：**"
+msgstr "**Features:**"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:12
+msgid ""
+"- 根据dims参数转置张量的维度\n"
+"- 不改变张量的数据，仅改变维度的顺序\n"
+"- 专门优化的转置操作\n"
+msgstr ""
+"- Transpose the dimensions of a tensor according to the `dims` parameter  \n"
+"- Does not change the tensor data, only the order of dimensions  \n"
+"- Specially optimized transpose operation\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:14
+msgid "## 2 参数规格"
+msgstr "## 2 Parameter Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:16
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:18
+msgid ""
+"| 参数名 | 类型 | 必需 | 说明 |\n"
+"|--------|------|------|------|\n"
+"| input | tensor | 是 | 输入张量 |\n"
+"| dims | List[int] | 是 | 转置后的维度顺序 |\n"
+msgstr ""
+"| Parameter Name | Type | Required | Description |\n"
+"|----------------|------|----------|-------------|\n"
+"| input | tensor | Yes | Input tensor |\n"
+"| dims | List[int] | Yes | Dimension order after transposition |\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:20
+msgid "**返回值：**"
+msgstr "**Return value:**"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:22
+msgid ""
+"- **类型：** tensor\n"
+"- **形状：** 按照dims参数重新排列的维度\n"
+"- **数据类型：** 与输入张量相同\n"
+"- **内存布局：** 通过改变步长信息实现转置，无数据拷贝\n"
+msgstr ""
+"- **Type:** tensor\n"
+"- **Shape:** dimensions rearranged according to the `dims` parameter\n"
+"- **Data type:** same as the input tensor\n"
+"- **Memory layout:** transpose achieved by modifying stride information, no data copy\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:24
+msgid "**约束条件：**"
+msgstr "**Constraints:**"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:26
+msgid "- dims必须包含输入张量的所有维度索引"
+msgstr "- dims must include all dimension indices of the input tensor"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:28
+msgid "### 2.2 DataType支持表"
+msgstr "### 2.2 DataType Support Table"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:30
+msgid ""
+"| 支持情况 | int8 | int16 | int32 | int64 | uint8 | uint16 | uint32 | uint64 | float16 | float32 | bfloat16 | float8e4 | float8e5 | float64 | bool |\n"
+"|----------|:----:|:-----:|:-----:|:-----:|:----:|:-----:|:-----:|:-----:|:------:|:------:|:-------:|:----:|:----:|:------:|:---:|\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | ✓ | ✓ | × | × | × | ✓ | ✓ | ✓ | × | × | × | ✓ |\n"
+"| GPU支持 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+msgstr ""
+"| Support Status | int8 | int16 | int32 | int64 | uint8 | uint16 | uint32 | uint64 | float16 | float32 | bfloat16 | float8e4 | float8e5 | float64 | bool |\n"
+"|----------|:----:|:-----:|:-----:|:-----:|:----:|:-----:|:-----:|:-----:|:------:|:------:|:-------:|:----:|:----:|:------:|:---:|\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | ✓ | ✓ | × | × | × | ✓ | ✓ | ✓ | × | × | × | ✓ |\n"
+"| GPU Support | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:32
+msgid "### 2.3 Shape支持表"
+msgstr "### 2.3 Shape Support Table"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:34
+msgid "支持任意维度数、任意形状大小。"
+msgstr "Supports any number of dimensions and any shape size."
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:36
+msgid "### 2.4 特殊限制说明"
+msgstr "### 2.4 Special Restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:38
+msgid "* 不支持维度高于8的转置"
+msgstr "* Transposition of dimensions higher than 8 is not supported"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:40
+msgid "### 2.5 使用方法"
+msgstr "### 2.5 Usage"
+
+#. type: code
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:42
+msgid ""
+"```python\n"
+"import triton\n"
+"import triton.language as tl\n"
+"\n"
+"@triton.jit\n"
+"def trans_example():\n"
+"    # 创建2x3x4的张量\n"
+"    x = tl.zeros([2, 3, 4], dtype=tl.float32)\n"
+"\n"
+"    # 转置维度，变成4x2x3\n"
+"    y = tl.trans(x, [2, 0, 1])\n"
+"\n"
+"    return y\n"
+"\n"
+"## 调用示例\n"
+"result = trans_example()\n"
+"print(result.shape)  # 输出: (4, 2, 3)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Shape_Manipulation_Ops/trans.md:43
+msgid ""
+"\n"
+"\n"
+msgstr ""
