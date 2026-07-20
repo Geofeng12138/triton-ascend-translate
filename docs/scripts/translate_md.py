@@ -15,7 +15,6 @@
 # limitations under the License.
 # This file is a part of the triton-ascend project.
 #
-
 """
 PO-based translation system for Chinese Markdown (docs/zh/) to English (docs/en/).
 
@@ -64,10 +63,8 @@ ZH_DIR = Path("docs/zh")
 EN_DIR = Path("docs/en")
 PO_DIR = Path("docs/po") / "zh-to-en"
 
-SYSTEM_PROMPT = (
-    "You are a professional technical documentation translation expert, "
-    "proficient in Chinese-to-English technical document translation."
-)
+SYSTEM_PROMPT = ("You are a professional technical documentation translation expert, "
+                 "proficient in Chinese-to-English technical document translation.")
 
 # Prompt for translating individual paragraph blocks.
 BLOCK_TRANSLATION_PROMPT = """Translate the following Chinese text fragment into English.
@@ -88,6 +85,7 @@ Text to translate:
 # ---------------------------------------------------------------------------
 # PO file I/O helpers
 # ---------------------------------------------------------------------------
+
 
 def _escape_po(s: str) -> str:
     """Escape a string for use in a PO msgid/msgstr value (single-line)."""
@@ -177,21 +175,19 @@ def write_po_file(filepath: Path, entries: dict, source_file_rel: str):
     now_str = time.strftime("%Y-%m-%d %H:%M%z")
 
     # Header entry
-    lines.append(
-        f'# PO translation file for {source_file_rel}\n'
-        f'#\n'
-        f'msgid ""\n'
-        f'msgstr ""\n'
-        f'"Project-Id-Version: triton-ascend-docs\\n"\n'
-        f'"POT-Creation-Date: {now_str}\\n"\n'
-        f'"PO-Revision-Date: {now_str}\\n"\n'
-        f'"Last-Translator: Auto Translation (DeepSeek)\\n"\n'
-        f'"Language-Team: English\\n"\n'
-        f'"Language: en\\n"\n'
-        f'"MIME-Version: 1.0\\n"\n'
-        f'"Content-Type: text/plain; charset=UTF-8\\n"\n'
-        f'"Content-Transfer-Encoding: 8bit\\n"\n'
-    )
+    lines.append(f'# PO translation file for {source_file_rel}\n'
+                 f'#\n'
+                 f'msgid ""\n'
+                 f'msgstr ""\n'
+                 f'"Project-Id-Version: triton-ascend-docs\\n"\n'
+                 f'"POT-Creation-Date: {now_str}\\n"\n'
+                 f'"PO-Revision-Date: {now_str}\\n"\n'
+                 f'"Last-Translator: Auto Translation (DeepSeek)\\n"\n'
+                 f'"Language-Team: English\\n"\n'
+                 f'"Language: en\\n"\n'
+                 f'"MIME-Version: 1.0\\n"\n'
+                 f'"Content-Type: text/plain; charset=UTF-8\\n"\n'
+                 f'"Content-Transfer-Encoding: 8bit\\n"\n')
 
     for entry in sorted_entries:
         entry_type = entry.get("type", "text")
@@ -228,6 +224,7 @@ def write_po_file(filepath: Path, entries: dict, source_file_rel: str):
 # ---------------------------------------------------------------------------
 # Markdown block splitting
 # ---------------------------------------------------------------------------
+
 
 def _is_heading_line(line: str) -> bool:
     """Check if a line is a Markdown heading."""
@@ -348,6 +345,7 @@ def rebuild_markdown(blocks: list[dict], po_entries: dict) -> str:
 # ---------------------------------------------------------------------------
 # Translator class
 # ---------------------------------------------------------------------------
+
 
 class MarkdownTranslator:
     """PO-based Markdown translator using DeepSeek API."""
@@ -551,6 +549,7 @@ class MarkdownTranslator:
 # CLI entry point
 # ---------------------------------------------------------------------------
 
+
 def write_empty_json(output_json: str, reason: str = ""):
     """Write an empty results JSON (used for error / no-work outcomes)."""
     report = {
@@ -570,9 +569,7 @@ def write_empty_json(output_json: str, reason: str = ""):
 
 
 async def async_main():
-    parser = argparse.ArgumentParser(
-        description="PO-based Markdown translation: docs/zh/ → docs/en/",
-    )
+    parser = argparse.ArgumentParser(description="PO-based Markdown translation: docs/zh/ → docs/en/", )
     parser.add_argument(
         "--files",
         help="Comma-separated file paths (relative to docs/zh/)",
