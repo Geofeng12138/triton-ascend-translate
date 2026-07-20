@@ -1,0 +1,221 @@
+# PO translation file for docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 11:09+0000\n"
+"PO-Revision-Date: 2026-07-20 11:09+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:0
+msgid "# triton.language.load_tensor_descriptor"
+msgstr "# triton.language.load_tensor_descriptor"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:4
+msgid "简介：该函数用于从张量描述符加载数据块"
+msgstr "Introduction: This function is used to load a data block from a tensor descriptor."
+
+#. type: code
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:6
+msgid ""
+"```python\n"
+"triton.language.load_tensor_descriptor(\n"
+"    desc: tensor_descriptor_base,\n"
+"    offsets: Sequence[constexpr | tensor],\n"
+"    _semantic=None\n"
+") -> tensor\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specification"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:12
+msgid ""
+"| 参数名         | 类型                              | 说明                                                         |\n"
+"| ----------- | ------------------------------- | ---------------------------------------------------------- |\n"
+"| `desc`      | `tensor_descriptor_base`        | 张量描述符对象，由 `make_tensor_descriptor` 创建，定义了内存布局（形状、步长、块大小等）。 |\n"
+"| `offsets`   | `Sequence[constexpr \\| tensor]` | 数据加载的起始偏移量序列，用于指定当前线程块要加载的数据位置                             |\n"
+"| `_semantic` | -                               | 保留参数，暂不支持外部调用                                            |\n"
+msgstr ""
+"| Parameter | Type                             | Description                                                                                |\n"
+"|-----------|----------------------------------|--------------------------------------------------------------------------------------------|\n"
+"| `desc`    | `tensor_descriptor_base`        | Tensor descriptor object, created by `make_tensor_descriptor`, defining the memory layout (shape, stride, block size, etc.). |\n"
+"| `offsets` | `Sequence[constexpr \\| tensor]` | Sequence of starting offsets for data loading, used to specify the data position to be loaded by the current thread block. |\n"
+"| `_semantic` | -                               | Reserved parameter, currently not supported for external calls.                            |\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:14
+msgid "返回值：`tensor` - 根据张量描述符内存布局信息，从指定偏移量处加载的数据块"
+msgstr "Return value: `tensor` - A data block loaded from the specified offset based on the memory layout information of the tensor descriptor."
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:20
+msgid ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"|GPU| √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | × |\n"
+"|Ascend A2/A3| √ | √ | × | √ | × | √ | × | √ | √ | √ | √ | × |\n"
+msgstr ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"|GPU| √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | × |\n"
+"|Ascend A2/A3| √ | √ | × | √ | × | √ | × | √ | √ | √ | √ | × |\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:22
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:24
+msgid ""
+"|        | 支持维度范围          |\n"
+"| ------ | --------------- |\n"
+"| GPU    | 仅支持 1~5维 tensor |\n"
+"| Ascend | 仅支持 1~5维 tensor |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| ------ | ----------------------- |\n"
+"| GPU    | Only supports 1~5D tensor |\n"
+"| Ascend | Only supports 1~5D tensor |\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:26
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异，均支持 1 至 5 维张量。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms, both support 1 to 5 dimensional tensors."
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:28
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Limitations"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:30
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capability is lacking and cannot be achieved."
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:32
+msgid "结论：Ascend 对比 GPU 缺失uint16、uint32、uint64的支持能力（硬件限制）。"
+msgstr "Conclusion: Ascend lacks support for uint16, uint32, and uint64 compared to GPU (hardware limitation)."
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:34
+msgid ""
+"| 差异点            | 描述                                                         | 解决途径                                                |\n"
+"| ----------------- | ------------------------------------------------------------ | ------------------------------------------------------- |\n"
+"| 绑定使用限制      | `make_tensor_descriptor` / `load_tensor_descriptor` / `store_tensor_descriptor` 需配套使用，不能与 `tl.load()` / `tl.store()` 混用。 | 升级至 Triton 3.4.0 版本同步上游函数（如 `cast`）可解决 |\n"
+"| Triton 版本兼容性 | Triton 3.2.0 存在部分函数（如 `cast`）的兼容性问题。建议升级 Triton版本至 3.4.0 来修复绑定限制。 | 升级至 Triton 3.4.0                                     |\n"
+msgstr ""
+"| Difference | Description | Solution |\n"
+"|------------|-------------|----------|\n"
+"| Binding usage restriction | `make_tensor_descriptor` / `load_tensor_descriptor` / `store_tensor_descriptor` must be used together and cannot be mixed with `tl.load()` / `tl.store()`. | Upgrading to Triton 3.4.0 to synchronize upstream functions (such as `cast`) can resolve this. |\n"
+"| Triton version compatibility | Triton 3.2.0 has compatibility issues with some functions (such as `cast`). It is recommended to upgrade the Triton version to 3.4.0 to fix the binding restriction. | Upgrade to Triton 3.4.0 |\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:36
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:38
+msgid "`load_tensor_descriptor` 提供两种调用形式："
+msgstr "`load_tensor_descriptor` provides two calling forms:"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:40
+msgid "* 面向对象方法调用（推荐）"
+msgstr "* Object-oriented method invocation (recommended)"
+
+#. type: code
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:42
+msgid ""
+"```python\n"
+"value = desc.load(offsets)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:44
+msgid "* 函数式接口调用"
+msgstr "* Functional interface invocation"
+
+#. type: code
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:46
+msgid ""
+"```python\n"
+"value = triton.language.load_tensor_descriptor(desc, offsets)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:48
+msgid "以下示例实现了对输入张量 `x` 做就地绝对值计算："
+msgstr "The following example implements in-place absolute value computation on the input tensor `x`:"
+
+#. type: code
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:50
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def inplace_abs(in_out_ptr, M, N, M_BLOCK: tl.constexpr, N_BLOCK: tl.constexpr):\n"
+"    # 创建张量描述符\n"
+"    desc = tl.make_tensor_descriptor(\n"
+"        in_out_ptr,\n"
+"        shape=[M, N],\n"
+"        strides=[N, 1],\n"
+"        block_shape=[M_BLOCK, N_BLOCK],\n"
+"    )\n"
+" # 计算当前线程对应的偏移量\n"
+"    moffset = tl.program_id(0) * M_BLOCK\n"
+"    noffset = tl.program_id(1) * N_BLOCK\n"
+" # 加载数据，计算绝对值，存储结果\n"
+"    value = desc.load([moffset, noffset])\n"
+"    desc.store([moffset, noffset], tl.abs(value))\n"
+"## 初始化张量\n"
+"M, N = 256, 256\n"
+"x = torch.randn(M, N, device=\"npu\")\n"
+"## 配置块大小和网格\n"
+"M_BLOCK, N_BLOCK = 32, 32\n"
+"grid = (M // M_BLOCK, N // N_BLOCK)\n"
+"inplace_abs[grid](x, M, N, M_BLOCK, N_BLOCK)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Memory_Pointer_Ops/load_tensor_descriptor.md:51
+msgid ""
+"\n"
+"\n"
+msgstr ""

@@ -1,0 +1,163 @@
+# PO translation file for docs/zh/triton_api/Extension_Ops/parallel.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 10:48+0000\n"
+"PO-Revision-Date: 2026-07-20 10:48+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/parallel.md:0
+msgid "# triton.language.parallel"
+msgstr "# triton.language.parallel"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/parallel.md:2
+msgid "## 1. 函数概述"
+msgstr "## 1. Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/parallel.md:4
+msgid "`parallel` 是一个专门用于多核心并行执行的迭代器，继承自 `range` 类，提供显式的多核心并行语义。"
+msgstr "`parallel` is an iterator specifically designed for multi-core parallel execution, inheriting from the `range` class and providing explicit multi-core parallel semantics."
+
+#. type: code
+#: docs/zh/triton_api/Extension_Ops/parallel.md:6
+msgid ""
+"```python\n"
+"triton.language.parallel(arg1, arg2=None, step=None, num_stages=None,\n"
+"                         loop_unroll_factor=None, bind_sub_block: bool = False,\n"
+"                         _semantic=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/parallel.md:8
+msgid "## 2. 规格"
+msgstr "## 2. Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/parallel.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/parallel.md:12
+msgid ""
+"| 参数 | 类型 | 默认值 | 含义说明 |\n"
+"|------|------|--------|----------|\n"
+"| `arg1` | `int` /`constexpr`| 必需 | 起始值（单参数时作为结束值，从0开始） |\n"
+"| `arg2` | `int`/`constexpr` | - | 结束值（不包含在范围内） |\n"
+"| `step` | `int` /`constexpr`| `1` | 每次迭代的步长增量 |\n"
+"| `num_stages` | `int` | - | 流水线阶段数（同时执行的迭代数量） |\n"
+"| `loop_unroll_factor` | `int` | - | 循环展开因子（<2表示不展开） |\n"
+"| `bind_sub_block` | `bool` | `False` | **关键参数**：绑定到子块，启用多核心并行执行 |\n"
+"| `_semantic` | - | - | 保留参数，暂不支持外部调用 |\n"
+msgstr ""
+"| Parameter | Type | Default | Description |\n"
+"|-----------|------|---------|-------------|\n"
+"| `arg1` | `int` / `constexpr` | Required | Start value (when single parameter, used as end value, starting from 0) |\n"
+"| `arg2` | `int` / `constexpr` | - | End value (not included in the range) |\n"
+"| `step` | `int` / `constexpr` | `1` | Step increment per iteration |\n"
+"| `num_stages` | `int` | - | Number of pipeline stages (number of iterations executed simultaneously) |\n"
+"| `loop_unroll_factor` | `int` | - | Loop unroll factor (<2 means no unrolling) |\n"
+"| `bind_sub_block` | `bool` | `False` | **Key parameter**: bind to sub-block, enable multi-core parallel execution |\n"
+"| `_semantic` | - | - | Reserved parameter, external calls not supported for now |\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/parallel.md:14
+msgid ""
+"> **注意**：`parallel` 相比于 `range` 移除了以下参数：\n"
+">\n"
+"> - `disallow_acc_multi_buffer`\n"
+"> - `flatten`\n"
+"> - `warp_specialize`\n"
+"> - `disable_licm`\n"
+msgstr ""
+"> **Note**: `parallel` removes the following parameters compared to `range`:\n"
+">\n"
+"> - `disallow_acc_multi_buffer`\n"
+"> - `flatten`\n"
+"> - `warp_specialize`\n"
+"> - `disable_licm`\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/parallel.md:16
+msgid "### 2.2 类型支持"
+msgstr "### 2.2 Type Support"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/parallel.md:18
+msgid "A3："
+msgstr "A3:"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/parallel.md:20
+msgid ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | × | × | × | × | × |\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | ×|×| × | × | ✓ | × | × | × | × | × |\n"
+msgstr ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | × | × | × | × | × |\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | × | × | × | × | ✓ | × | × | × | × | × |\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/parallel.md:22
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/parallel.md:24
+msgid "`bind_sub_block` 为真时在IR中并体现出跟`range`的区别，功能是否实现待验证。"
+msgstr "When `bind_sub_block` is true, the difference from `range` is reflected in the IR; whether the functionality is implemented remains to be verified."
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/parallel.md:26
+msgid "## 3. 使用方法"
+msgstr "## 3. Usage"
+
+#. type: code
+#: docs/zh/triton_api/Extension_Ops/parallel.md:28
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def parallel_kernel(\n"
+"    input_ptr,\n"
+"    output_ptr0,\n"
+"    output_ptr1,\n"
+"    pd_ptr,\n"
+"    n_elements : tl.constexpr,\n"
+"):\n"
+"    x = tl.arange(0,n_elements)\n"
+"    x0 = x // 4\n"
+"    x1 = x % 4\n"
+"\n"
+"    a_ptr = input_ptr + x0\n"
+"    b_ptr = input_ptr + x0\n"
+"    for i in tl.parallel(0, 3, 1, bind_sub_block = False):\n"
+"        a_ptr += x0\n"
+"        b_ptr += x0\n"
+"    a_ptr += x1\n"
+"    b_ptr += x1\n"
+"    val = tl.load(a_ptr + 0)\n"
+"    tl.store(output_ptr0 + x,val)\n"
+"    val = tl.load(b_ptr)\n"
+"    tl.store(output_ptr1 + x,val)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Extension_Ops/parallel.md:29
+msgid ""
+"\n"
+"\n"
+msgstr ""

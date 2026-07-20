@@ -1,0 +1,137 @@
+# PO translation file for docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 10:41+0000\n"
+"PO-Revision-Date: 2026-07-20 10:41+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:0
+msgid "# triton.language.max_contiguous"
+msgstr "# triton.language.max_contiguous"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:2
+msgid "## 1. 函数概述"
+msgstr "## 1. Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:4
+msgid "`max_contiguous` 用于向编译器声明输入张量中的连续性模式，告知编译器输入张量的前`value`个数是连续的。"
+msgstr "`max_contiguous` is used to declare the contiguity pattern in the input tensor to the compiler, indicating that the first `value` dimensions of the input tensor are contiguous."
+
+#. type: code
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:6
+msgid ""
+"```python\n"
+"triton.language.max_contiguous(input, values, _builder=None, _semantic=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:8
+msgid "## 2. 规格"
+msgstr "## 2. Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:12
+msgid ""
+"| 参数 | 类型 | 默认值 | 含义说明 |\n"
+"|------|------|--------|----------|\n"
+"| `input` | `Tensor` | 必需 | 输入张量，其内存访问具有特定的连续性模式 |\n"
+"| `values` | `constexpr[int]` 或 `list[constexpr[int]]` | 必需 | 描述连续性模式的编译时常量整数（或整数序列） |\n"
+"| `_semantic` | - | - | 保留参数，暂不支持外部调用 |\n"
+msgstr ""
+"| Parameter | Type | Default | Description |\n"
+"|-----------|------|--------|-------------|\n"
+"| `input` | `Tensor` | Required | Input tensor whose memory access has a specific contiguous pattern |\n"
+"| `values` | `constexpr[int]` or `list[constexpr[int]]` | Required | Compile-time constant integer (or sequence of integers) describing the contiguous pattern |\n"
+"| `_semantic` | - | - | Reserved parameter, external calls not supported for now |\n"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:14
+msgid ""
+"**`values`描述着每个维度的连续性特征，所以`values` 的维度要与`input` 的维度相同。\n"
+"注意当`shape`的最后一维为`1`时出现的降维情况。**\n"
+msgstr ""
+"**`values` describes the continuous features of each dimension, so the dimensions of `values` must match those of `input`.  \n"
+"Note the dimensionality reduction that occurs when the last dimension of `shape` is `1`.**\n"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:16
+msgid "如：二维 `input`对应通用`values`入参为`[1,1]`。"
+msgstr "For example: the two-dimensional `input` corresponds to the general `values` input parameter as `[1,1]`."
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:18
+msgid "### 2.2 类型支持"
+msgstr "### 2.2 Type Support"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:20
+msgid ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | × | × | ×| × | ✓ | ✓ | ✓ | × | ✓ | ✓ |\n"
+msgstr ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | × | × | × | × | ✓ | ✓ | ✓ | × | ✓ | ✓ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:22
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:24
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capability deficiency and inability to achieve"
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:26
+msgid "Ascend 对比 GPU 缺失uint8、uint16、uint32、uint64、fp64的支持能力（硬件限制）。"
+msgstr "Ascend lacks support for uint8, uint16, uint32, uint64, and fp64 compared to GPU (hardware limitation)."
+
+#. type: text
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:28
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: code
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:30
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def triton_max_contiguous(A, B, BLOCK_SIZE : tl.constexpr):\n"
+"    offsets = tl.arange(0, BLOCK_SIZE)\n"
+"    val = tl.load(A + offsets)\n"
+"    # 声明offset里的前BLOCK_SIZE个数是连续的\n"
+"    input_data = tl.max_contiguous(val, [BLOCK_SIZE])\n"
+"\n"
+"    # 编译器可以生成更高效的内存访问指令\n"
+"    result = input_data* 2\n"
+"    tl.store(B + offsets, result)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Compiler_Hint_Ops/max_contiguous.md:31
+msgid ""
+"\n"
+"\n"
+msgstr ""

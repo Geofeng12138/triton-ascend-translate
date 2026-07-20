@@ -1,0 +1,73 @@
+# PO translation file for docs/zh/triton_api/Logical_Ops/index.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 10:52+0000\n"
+"PO-Revision-Date: 2026-07-20 10:52+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/index.md:0
+msgid "# 逻辑操作"
+msgstr "# Logical Operations"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/index.md:2
+msgid ""
+"|api|简要说明|\n"
+"|--|--|\n"
+"|[and](./and.md) | 逻辑与操作 |\n"
+"|[or](./or.md) | 逻辑或操作 |\n"
+"|[not](./not.md) | 逻辑非操作 |\n"
+"|[logical_and](./logical_and.md)| 用于对两个张量进行逐元素逻辑与运算 |\n"
+"|[logical_or](./logical_or.md)| 用于对两个张量进行逐元素逻辑或运算 |\n"
+"|[not](./not.md) | 将tensor的值按位取反。 |\n"
+"|[invert](./invert.md) | 将tensor每个值按比特位进行翻转。 |\n"
+"|[lshift](./lshift.md) | 根据给定值 将tensor张量进行左移位。 |\n"
+"|[rshift](./rshift.md) | 根据给定值 将tensor张量进行右移位。 |\n"
+"|[xor](./xor.md) | 计算两个元素的异或值。 |\n"
+msgstr ""
+"|api|Brief Description|\n"
+"|--|--|\n"
+"|[and](./and.md) | Logical AND operation |\n"
+"|[or](./or.md) | Logical OR operation |\n"
+"|[not](./not.md) | Logical NOT operation |\n"
+"|[logical_and](./logical_and.md)| Performs element-wise logical AND on two tensors |\n"
+"|[logical_or](./logical_or.md)| Performs element-wise logical OR on two tensors |\n"
+"|[not](./not.md) | Bitwise NOT on tensor values. |\n"
+"|[invert](./invert.md) | Bitwise invert each value of the tensor. |\n"
+"|[lshift](./lshift.md) | Left shift the tensor by a given value. |\n"
+"|[rshift](./rshift.md) | Right shift the tensor by a given value. |\n"
+"|[xor](./xor.md) | Compute the XOR of two elements. |\n"
+
+#. type: blank
+#: docs/zh/triton_api/Logical_Ops/index.md:3
+msgid ""
+"\n"
+"\n"
+msgstr ""
+
+#. type: code
+#: docs/zh/triton_api/Logical_Ops/index.md:4
+msgid ""
+"```{toctree}\n"
+":maxdepth: 3\n"
+":hidden:\n"
+"and.md\n"
+"or.md\n"
+"not.md\n"
+"logical_and.md\n"
+"logical_or.md\n"
+"not.md\n"
+"invert.md\n"
+"lshift.md\n"
+"rshift.md\n"
+"xor.md\n"
+"\n"
+msgstr ""

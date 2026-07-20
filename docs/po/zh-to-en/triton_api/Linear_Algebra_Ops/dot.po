@@ -1,0 +1,219 @@
+# PO translation file for docs/zh/triton_api/Linear_Algebra_Ops/dot.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 10:51+0000\n"
+"PO-Revision-Date: 2026-07-20 10:51+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:0
+msgid "# triton.language.dot"
+msgstr "# triton.language.dot"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:4
+msgid ""
+"简介：对两个tensor进行矩阵乘操作。tensor需要是二维或三维并且维度需一致。对于三维块，tl.dot执行批量矩阵乘法，其中每个块的第一维代表批量维度。\n"
+"原型：\n"
+msgstr ""
+"Introduction: Performs matrix multiplication on two tensors. The tensors must be two-dimensional or three-dimensional and have consistent dimensions. For three-dimensional blocks, `tl.dot` performs batch matrix multiplication, where the first dimension of each block represents the batch dimension.  \n"
+"Prototype:\n"
+
+#. type: code
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:6
+msgid ""
+"```python\n"
+"triton.language.dot(input, other, acc=None, input_precision=None, allow_tf32=None, max_num_imprecise_acc=None, out_dtype=triton.language.float32, _semantic=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:12
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `input`        | `int8 fp16 bf16 fp32`     |     第一个输入，2D or 3D 张量， 为了避免溢出 取值范围限制为-5-5     |\n"
+"| `other`       | `int8 fp16 bf16 fp32`     |     第二个输入,  2D or 3D 张量，为了避免溢出 取值范围限制为-5-5    |\n"
+"| `acc`           | `int32  float32`    | 存累加结果的张量, accumulator tensor. If not None, the result is added to this tensor, acc_dtype支持 {:code:`float16`, :code:`float32`, :code:`int32`} |\n"
+"| `input_precision`   | -                 |  Available options for NVIDIA 通过选择精度模式来决定是否启用 Tensor Cores 加速    |\n"
+"| `max_num_imprecise_acc`     | `int`    | 多少次低精度的累加数（当前昇腾不支持低精度累加） |\n"
+"| `out_dtype`     | `fp32  int32`    | 输出结果类型|\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `input` | `int8 fp16 bf16 fp32` | First input, 2D or 3D tensor. To avoid overflow, the value range is limited to -5 to 5. |\n"
+"| `other` | `int8 fp16 bf16 fp32` | Second input, 2D or 3D tensor. To avoid overflow, the value range is limited to -5 to 5. |\n"
+"| `acc` | `int32 float32` | Accumulator tensor. If not None, the result is added to this tensor. `acc_dtype` supports {:code:`float16`, :code:`float32`, :code:`int32`}. |\n"
+"| `input_precision` | - | Available options for NVIDIA. Select the precision mode to enable Tensor Cores acceleration. |\n"
+"| `max_num_imprecise_acc` | `int` | Number of low-precision accumulations (currently Ascend does not support low-precision accumulation). |\n"
+"| `out_dtype` | `fp32 int32` | Output result type. |\n"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:14
+msgid ""
+"返回值：\n"
+"`tl.tensor`：矩阵乘结果\n"
+msgstr ""
+"Return value:  \n"
+"`tl.tensor`: result of matrix multiplication\n"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:20
+msgid ""
+"|   输入类型     | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | √    | √     | √     | √     | √      | √      | √      | √     | √    | √    | √    | √    | √    |\n"
+"| Ascend A2/A3 | √    | √     | √     | ×     | ×      | ×      | ×      | ×     | √    | √    | ×    | √    | ✓    |\n"
+msgstr ""
+"| Input Type | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | √    | √     | √     | √     | √      | √      | √      | √     | √    | √    | √    | √    | √    |\n"
+"| Ascend A2/A3 | √    | √     | √     | ×     | ×      | ×      | ×      | ×     | √    | √    | ×    | √    | ✓    |\n"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:22
+msgid "结论：Ascend 对比 GPU 缺失uint8、uint16、uint32、uint64、fp64的支持能力（硬件限制）。"
+msgstr "Conclusion: Ascend lacks support for uint8, uint16, uint32, uint64, and fp64 compared to GPU (hardware limitation)."
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:24
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:26
+msgid ""
+"|        | 支持维度范围          |\n"
+"| ------ | --------------- |\n"
+"| GPU    | 无限制 |\n"
+"| Ascend A2/A3 |无限制  |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| ------ | ----------------------- |\n"
+"| GPU    | Unlimited               |\n"
+"| Ascend A2/A3 | Unlimited               |\n"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:28
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms."
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:30
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:32
+msgid "- Ascend 对比 GPU 缺失uint8、uint16、uint32、uint64、fp64的支持能力（硬件限制）。"
+msgstr "- Ascend lacks support for uint8, uint16, uint32, uint64, and fp64 compared to GPU (hardware limitation)."
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:34
+msgid "- acc 不能支持fp16，为了精度硬件默认就是fp32"
+msgstr "- `acc` does not support fp16; for precision, the hardware defaults to fp32."
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:36
+msgid "- max_num_imprecise_acc 暂时不支持"
+msgstr "- max_num_imprecise_acc is not currently supported"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:38
+msgid "- out_dtype对比GPU 缺乏int8和FP16的类型支持"
+msgstr "- `out_dtype` comparison: GPU lacks support for int8 and FP16 types."
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:40
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:42
+msgid "以下示例实现了对输入张量 `x_ptr, y_ptr` 做矩阵乘计算，参考  ascend/examples/generalization_cases/test_matmul.py："
+msgstr "The following example implements matrix multiplication computation on input tensors `x_ptr, y_ptr`. Refer to ascend/examples/generalization_cases/test_matmul.py:"
+
+#. type: code
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:44
+msgid ""
+"```@triton.jit\n"
+"def matmul_kernel(\n"
+"        a_ptr, b_ptr, c_ptr,\n"
+"        M: tl.constexpr,\n"
+"        N: tl.constexpr,\n"
+"        K: tl.constexpr,\n"
+"        acc_dtype: tl.constexpr,\n"
+"        stride_am: tl.constexpr,\n"
+"        stride_ak: tl.constexpr,\n"
+"        stride_bk: tl.constexpr,\n"
+"        stride_bn: tl.constexpr,\n"
+"        stride_cm: tl.constexpr,\n"
+"        stride_cn: tl.constexpr,\n"
+"        BLOCK_M: tl.constexpr, BLOCK_N: tl.constexpr, BLOCK_K: tl.constexpr,\n"
+"):\n"
+"    pid = tl.program_id(axis=0)\n"
+"    num_pid_n = tl.cdiv(N, BLOCK_N)\n"
+"    pid_m = pid // num_pid_n\n"
+"    pid_n = pid % num_pid_n\n"
+"\n"
+"    offs_am = (pid_m * BLOCK_M + tl.arange(0, BLOCK_M))\n"
+"    offs_bn = (pid_n * BLOCK_N + tl.arange(0, BLOCK_N))\n"
+"    offs_k = tl.arange(0, BLOCK_K)\n"
+"    a_ptrs = a_ptr + (offs_am[:, None] * stride_am + offs_k[None, :] * stride_ak)\n"
+"    b_ptrs = b_ptr + (offs_k[:, None] * stride_bk + offs_bn[None, :] * stride_bn)\n"
+"\n"
+"    accumulator = tl.zeros((BLOCK_M, BLOCK_N), dtype=acc_dtype)\n"
+"    for k in range(0, tl.cdiv(K, BLOCK_K)):\n"
+"        a = tl.load(a_ptrs, mask=offs_k[None, :] < K - k * BLOCK_K, other=0.0)\n"
+"        b = tl.load(b_ptrs, mask=offs_k[:, None] < K - k * BLOCK_K, other=0.0)\n"
+"        accumulator = tl.dot(a, b, accumulator, out_dtype=acc_dtype)\n"
+"        a_ptrs += BLOCK_K * stride_ak\n"
+"        b_ptrs += BLOCK_K * stride_bk\n"
+"    c = accumulator.to(c_ptr.dtype.element_ty)\n"
+"\n"
+"    offs_cm = pid_m * BLOCK_M + tl.arange(0, BLOCK_M)\n"
+"    offs_cn = pid_n * BLOCK_N + tl.arange(0, BLOCK_N)\n"
+"    c_ptrs = c_ptr + stride_cm * offs_cm[:, None] + stride_cn * offs_cn[None, :]\n"
+"    c_mask = (offs_cm[:, None] < M) & (offs_cn[None, :] < N)\n"
+"    tl.store(c_ptrs, c, mask=c_mask)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot.md:45
+msgid ""
+"\n"
+"\n"
+msgstr ""

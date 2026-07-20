@@ -1,0 +1,61 @@
+# PO translation file for docs/zh/triton_api/Memory_Pointer_Ops/index.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 11:09+0000\n"
+"PO-Revision-Date: 2026-07-20 11:09+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/index.md:0
+msgid "# 内存/指针操作"
+msgstr "# Memory/Pointer Operations"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/index.md:2
+msgid ""
+"|api|简要说明|\n"
+"|--|--|\n"
+"|[load](./tl.load.md) |返回一个张量，其值从由指针定义的内存位置加载|\n"
+"|[store](./tl.store.md) |将数据张量存储到由指针定义的内存位置|\n"
+"|[make_block_ptr](./tl.make_block_ptr.md) |返回指向父张量中某个块的指针|\n"
+"|[advance](./tl.advance.md) |推进一个块指针|\n"
+"|[load_tensor_descriptor](./load_tensor_descriptor.md) | 从张量描述符加载数据块 |\n"
+"|[make_tensor_descriptor](./make_tensor_descriptor.md) | 创建张量描述符对象 |\n"
+msgstr ""
+"|api|Brief Description|\n"
+"|--|--|\n"
+"|[load](./tl.load.md) |Returns a tensor whose values are loaded from the memory location defined by the pointer|\n"
+"|[store](./tl.store.md) |Stores the data tensor to the memory location defined by the pointer|\n"
+"|[make_block_ptr](./tl.make_block_ptr.md) |Returns a pointer to a block within the parent tensor|\n"
+"|[advance](./tl.advance.md) |Advances a block pointer|\n"
+"|[load_tensor_descriptor](./load_tensor_descriptor.md) | Loads a block of data from a tensor descriptor |\n"
+"|[make_tensor_descriptor](./make_tensor_descriptor.md) | Creates a tensor descriptor object |\n"
+
+#. type: blank
+#: docs/zh/triton_api/Memory_Pointer_Ops/index.md:3
+msgid ""
+"\n"
+"\n"
+msgstr ""
+
+#. type: code
+#: docs/zh/triton_api/Memory_Pointer_Ops/index.md:4
+msgid ""
+"```{toctree}\n"
+":maxdepth: 3\n"
+":hidden:\n"
+"tl.load.md\n"
+"tl.store.md\n"
+"tl.make_block_ptr.md\n"
+"tl.advance.md\n"
+"load_tensor_descriptor.md\n"
+"make_tensor_descriptor.md\n"
+"\n"
+msgstr ""

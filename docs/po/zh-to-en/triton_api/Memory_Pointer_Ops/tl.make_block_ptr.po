@@ -1,0 +1,321 @@
+# PO translation file for docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 11:12+0000\n"
+"PO-Revision-Date: 2026-07-20 11:12+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:0
+msgid "# triton.language.make_block_ptr"
+msgstr "# triton.language.make_block_ptr"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:4
+msgid ""
+"简介：创建指向GM上张量的指针\n"
+"原型：\n"
+msgstr ""
+"Introduction: Create a pointer to a tensor on GM\n"
+"Prototype:\n"
+
+#. type: code
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:6
+msgid ""
+"```python\n"
+"triton.language.make_block_ptr(\n"
+" base: triton.PointerType,\n"
+" shape: List[tensor],\n"
+" strides: tuple(int | constexpr),\n"
+" offsets: tuple(int | constexpr),\n"
+" block_shape:tuple(int | constexpr),\n"
+" order:tuple(constexpr),\n"
+" _semantic=None\n"
+")\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specification"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:12
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `base`        | `triton.PointerType`          | 张量的基指针                                                      |\n"
+"| `shape`       | `tuple(int \\| constexpr)`    | 张量在GM上的形状                                                        |\n"
+"| `strides`     | `tuple(int \\| constexpr)`    | 张量各维度的步长列表 |\n"
+"| `offsets`     | `tuple(int \\| constexpr)`    | 张量各维度的基址偏移量列表 |\n"
+"| `block_shape` | `tuple(constexpr)` | 单次从全局内存加载 / 存储的块的形状                                              |\n"
+"| `order` | `tuple(constexpr)` | 单次从全局内存加载 / 存储的块的形状                                              |\n"
+"| `_semantic`   | -                 | 保留参数，暂不支持外部调用                                                |\n"
+msgstr ""
+"| Parameter Name | Type                | Description                                                             |\n"
+"| -------------- | ----------------- | ----------------------------------------------------------------------- |\n"
+"| `base`         | `triton.PointerType`          | Base pointer of the tensor                                              |\n"
+"| `shape`        | `tuple(int \\| constexpr)`    | Shape of the tensor in global memory                                    |\n"
+"| `strides`      | `tuple(int \\| constexpr)`    | List of strides for each dimension of the tensor                        |\n"
+"| `offsets`      | `tuple(int \\| constexpr)`    | List of base address offsets for each dimension of the tensor           |\n"
+"| `block_shape`  | `tuple(constexpr)`           | Shape of the block loaded/stored from/to global memory in a single operation |\n"
+"| `order`        | `tuple(constexpr)`           | Shape of the block loaded/stored from/to global memory in a single operation |\n"
+"| `_semantic`    | -                            | Reserved parameter; external calls are not supported for now            |\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:14
+msgid "返回值：`pointer_type<blocked<shape, element_type>>`： 指向tensor的指针"
+msgstr "Return value: `pointer_type<blocked<shape, element_type>>`: pointer to the tensor"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:20
+msgid ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | √    | √     | √     | √     | √      | √      | √      | √     | √    | √    | √    | √    | ×    |\n"
+"| Ascend A2/A3 | √    | √     | √     | ×     | ×      | ×      | ×      | √     | √    | √    | ×    | √    | ×    |\n"
+msgstr ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | √    | √     | √     | √     | √      | √      | √      | √     | √    | √    | √    | √    | ×    |\n"
+"| Ascend A2/A3 | √    | √     | √     | ×     | ×      | ×      | ×      | √     | √    | √    | ×    | √    | ×    |\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:22
+msgid "结论：Ascend 对比 GPU 缺失uint8、uint16、uint32、uint64、fp64的支持能力（硬件限制）。"
+msgstr "Conclusion: Ascend lacks support for uint8, uint16, uint32, uint64, and fp64 compared to GPU (hardware limitation)."
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:24
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:26
+msgid ""
+"|        | 支持维度范围          |\n"
+"| ------ | --------------- |\n"
+"| GPU    | 仅支持 1~5维 tensor |\n"
+"| Ascend A2/A3 | 仅支持 1~5维 tensor |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| ------ | ----------------------- |\n"
+"| GPU    | Only supports 1~5D tensor |\n"
+"| Ascend A2/A3 | Only supports 1~5D tensor |\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:28
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异，均支持 1 至 5 维张量。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms, both supporting 1 to 5-dimensional tensors."
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:30
+msgid "#### 2.2.3 社区约束"
+msgstr "#### 2.2.3 Community Constraints"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:32
+msgid "`tl.make_block_ptr`的结果不允许进行算数运算，需要改变偏移量时，可以通过："
+msgstr "The result of `tl.make_block_ptr` does not allow arithmetic operations. To change the offset, you can do so by:"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:34
+msgid "1. 重新调用make_block_ptr，修改`offset`参数:"
+msgstr "1. Call `make_block_ptr` again and modify the `offset` parameter:"
+
+#. type: code
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:36
+msgid ""
+"   ```python\n"
+"   for block_idx in range(pid, NUM_BLOCKS, 20):\n"
+"       task_hz_idx = block_idx // NUM_BLOCKS_M\n"
+"       task_m_idx = block_idx % NUM_BLOCKS_M\n"
+"       off_z = task_hz_idx // H\n"
+"       off_h = task_hz_idx % H\n"
+"       qvk_offset = off_z.to(tl.int64) * stride_qz + off_h.to(tl.int64) * stride_qh\n"
+"       # Create block pointers for Q, K, V, Output\n"
+"       Q_block_ptr = tl.make_block_ptr(\n"
+"           base=Q + qvk_offset,\n"
+"           shape=(N_CTX, HEAD_DIM),\n"
+"           strides=(stride_qm, stride_qk),\n"
+"           offsets=(task_m_idx * BLOCK_M, 0),\n"
+"           block_shape=(BLOCK_M, HEAD_DIM),\n"
+"           order=(1, 0),\n"
+"       )\n"
+"   ```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:38
+msgid "2. 调用`tl.advance`调整偏移量:"
+msgstr "2. Call `tl.advance` to adjust the offset."
+
+#. type: code
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:40
+msgid ""
+"   ```python\n"
+"   block_ptr_in=tl.make_block_ptr(\n"
+"       base = x_ptr,\n"
+"       shape = (XB,YB,ZB),\n"
+"       strides = (YB*ZB,ZB,1),\n"
+"       offsets = (9,6,5),\n"
+"       block_shape = (XB,YB,ZB),\n"
+"       order = (2,1,0),\n"
+"   )\n"
+"   bbptr = tl.advance(block_ptr_in,(-9,-6,-5))\n"
+"   ```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:42
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Limitations"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:44
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capability deficiency and inability to achieve"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:46
+msgid "- Ascend 对比 GPU 缺失uint8、uint16、uint32、uint64、fp64的支持能力（硬件限制）。"
+msgstr "- Ascend lacks support for uint8, uint16, uint32, uint64, and fp64 compared to GPU (hardware limitation)."
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:48
+msgid "- Ascend只允许通过调整`order`参数的顺序来表达转置语义，不能通过调整`stride`参数的顺序实现转置语义。"
+msgstr "- Ascend only allows expressing transpose semantics by adjusting the order of the `order` parameter, and cannot achieve transpose semantics by adjusting the order of the `stride` parameter."
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:50
+msgid ""
+"- | 差异点                                 | 描述                                                         | 解决途径                       |\n"
+"  | -------------------------------------- | ------------------------------------------------------------ | ------------------------------ |\n"
+"  | 与分支、循环语句搭配使用时的泛化性问题 | 当前`tl.make_block_ptr`，如果与较复杂的循环和分支语句搭配使用，可能会出现编译问题 | 大量泛化测试暴露问题，迭代解决 |\n"
+msgstr ""
+"- | Difference | Description | Solution |\n"
+"  | -------------------------------------- | ------------------------------------------------------------ | ------------------------------ |\n"
+"  | Generalization issue when used with branching and loop statements | Currently, `tl.make_block_ptr` may encounter compilation issues when used with complex loops and branching statements | Extensive generalization testing to expose issues, iterative resolution |\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:52
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:54
+msgid "以下示例实现了通过tl.make_block_ptr读取一个tensor并将其转置的功能："
+msgstr "The following example implements the functionality of reading a tensor and transposing it using `tl.make_block_ptr`:"
+
+#. type: code
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:56
+msgid ""
+"```python\n"
+"import torch\n"
+"import torch_npu\n"
+"import triton\n"
+"import triton.language as tl\n"
+"import pytest\n"
+"import test_common\n"
+"\n"
+"@pytest.mark.parametrize('shape', [(1, 4, 2)])\n"
+"@pytest.mark.parametrize('permute_order', [(2, 0, 1)])\n"
+"def test_makeblockptr_order(shape, permute_order):\n"
+"\n"
+"    @triton.jit\n"
+"    def triton_kernel(in0_ptr: tl.tensor, # of tl.pointer_type\n"
+"                out0_ptr: tl.tensor, # of tl.pointer_type\n"
+"                in0_stride0: int, in0_stride1: int, in0_stride2: int, # strides for in0\n"
+"                in0_stride_order0: tl.constexpr, in0_stride_order1: tl.constexpr, in0_stride_order2: tl.constexpr, # stride order for in0\n"
+"                out0_stride0: int, out0_stride1: int, out0_stride2: int, # strides for out0\n"
+"                out0_stride_order0: tl.constexpr, out0_stride_order1: tl.constexpr, out0_stride_order2: tl.constexpr, # stride order for out0\n"
+"                s0: int, s1: int, s2: int,\n"
+"                tile_size0: tl.constexpr, tile_size1: tl.constexpr, tile_size2: tl.constexpr,\n"
+"                ):\n"
+"        tile_id0 = tl.program_id(axis=0)\n"
+"        tile_id1 = tl.program_id(axis=1)\n"
+"        tile_id2 = tl.program_id(axis=2)\n"
+"        offset0 = (tile_id0 * tile_size0).to(tl.int32)\n"
+"        offset1 = (tile_id1 * tile_size1).to(tl.int32)\n"
+"        offset2 = (tile_id2 * tile_size2).to(tl.int32)\n"
+"        in0_bptr = tl.make_block_ptr(in0_ptr,\n"
+"                                    (s0, s1, s2),\n"
+"                                    (in0_stride0, in0_stride1, in0_stride2),\n"
+"                                    (offset0, offset1, offset2),\n"
+"                                    (tile_size0, tile_size1, tile_size2),\n"
+"                                    order=(in0_stride_order0, in0_stride_order1, in0_stride_order2))\n"
+"        in0 = tl.load(in0_bptr, boundary_check=(in0_stride_order0, in0_stride_order1, in0_stride_order2)).to(in0_ptr.type.element_ty)\n"
+"\n"
+"        out0 = in0\n"
+"\n"
+"        out0_bptr = tl.make_block_ptr(out0_ptr, (s0, s1, s2), (out0_stride0, out0_stride1, out0_stride2), (offset0, offset1, offset2), (tile_size0, tile_size1, tile_size2),\n"
+"                                    order=(out0_stride_order0, out0_stride_order1, out0_stride_order2))\n"
+"        tl.store(out0_bptr, out0.to(out0_bptr.type.element_ty), boundary_check=(out0_stride_order0, out0_stride_order1, out0_stride_order2))\n"
+"\n"
+"    def triton_func(in0: torch.Tensor, permute_order):\n"
+"        # in fact, it adjusts the layout metadata instead of doing a real permutation.\n"
+"        in0_permuted_tmp = in0.permute(permute_order)\n"
+"        in0_permuted_shape = in0_permuted_tmp.size()\n"
+"        in0_permuted_strides = in0_permuted_tmp.stride()\n"
+"        in0_stride_order = [len(permute_order)-1-i for i in permute_order]\n"
+"        shape = (in0_permuted_shape[0], in0_permuted_shape[1], in0_permuted_shape[2])\n"
+"        tile_sizes = (shape[0], shape[1], shape[2])\n"
+"        out0 = torch.empty(shape, dtype=in0.dtype, device=in0.device)\n"
+"        out0_strides = out0.stride()\n"
+"        out0_stride_order = [len(permute_order)-1-i for i in range(len(permute_order))]\n"
+"        grid = (shape[0]//tile_sizes[0], shape[1]//tile_sizes[1], shape[2]//tile_sizes[2])\n"
+"        triton_kernel[grid](\n"
+"                in0, out0,\n"
+"                in0_permuted_strides[0], in0_permuted_strides[1], in0_permuted_strides[2], # stride for in0\n"
+"                in0_stride_order[0], in0_stride_order[1], in0_stride_order[2], # stride order for in0\n"
+"                out0_strides[0], out0_strides[1], out0_strides[2], # stride for out0\n"
+"                out0_stride_order[0], out0_stride_order[1], out0_stride_order[2], # stride order for out0\n"
+"                shape[0], shape[1], shape[2], # task indexing space\n"
+"                tile_size0=tile_sizes[0],\n"
+"                tile_size1=tile_sizes[1],\n"
+"                tile_size2=tile_sizes[2],\n"
+"            )\n"
+"        return out0\n"
+"\n"
+"    x0 = torch.randint(0, 9, shape, dtype=torch.int32).npu()\n"
+"    torch_ref = torch.permute(x0, permute_order)\n"
+"    triton_cal = triton_func(x0, permute_order)\n"
+"    test_common.validate_cmp(\"int32\", triton_cal, torch_ref)\n"
+"\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.make_block_ptr.md:57
+msgid ""
+"\n"
+"\n"
+msgstr ""

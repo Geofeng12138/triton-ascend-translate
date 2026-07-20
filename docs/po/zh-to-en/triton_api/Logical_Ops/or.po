@@ -1,0 +1,187 @@
+# PO translation file for docs/zh/triton_api/Logical_Ops/or.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 10:55+0000\n"
+"PO-Revision-Date: 2026-07-20 10:55+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:0
+msgid "# triton.language.tensor.__or__"
+msgstr "# triton.language.tensor.__or__"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:2
+msgid "## 1. 函数概述"
+msgstr "## 1. Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:4
+msgid "简介：计算两个元素的或运算。"
+msgstr "Introduction: Computes the OR operation of two elements."
+
+#. type: code
+#: docs/zh/triton_api/Logical_Ops/or.md:6
+msgid ""
+"```python\n"
+"# 通过操作符\n"
+"x | y\n"
+"\n"
+"# 或直接调用 dunder 方法\n"
+"x.__or__(y)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:8
+msgid "## 2. 规格"
+msgstr "## 2. Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:12
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `x`        | `tensor`          | 张量数据                                                      |\n"
+"| `y`        | `tensor`          | 张量数据                                                      |\n"
+"| `_semantic`   | -                 | 保留参数，暂不支持外部调用\n"
+msgstr ""
+"| Parameter Name | Type     | Description                                      |\n"
+"|---------------|----------|--------------------------------------------------|\n"
+"| `x`           | `tensor` | Tensor data                                      |\n"
+"| `y`           | `tensor` | Tensor data                                      |\n"
+"| `_semantic`   | -        | Reserved parameter, currently not supported for external calls |\n"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:14
+msgid ""
+"返回值：\n"
+"`out`：同x、y的shape的张量\n"
+msgstr ""
+"Return value:  \n"
+"`out`: A tensor with the same shape as `x` and `y`.\n"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:16
+msgid "### 2.2 OP 规格"
+msgstr "### 2.2 OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:20
+msgid ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | √     | √      | √      | √     | ×     | ×      | ×     | √      | ×    | ×    | ×    | ×    | √    |\n"
+"| Ascend A2/A3 | √    | √     | √     | √     | ×     | ×      | ×      | √     | ×    | ×    | ×    | ×    | √    |\n"
+msgstr ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | √    | √     | √     | √     | ×      | ×      | ×      | √     | ×    | ×    | ×    | ×    | √    |\n"
+"| Ascend A2/A3 | √ | √     | √     | √     | ×      | ×      | ×      | √     | ×    | ×    | ×    | ×    | √    |\n"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:22
+msgid "结论：Ascend 相比 GPU 缺失 uint 类型支持。"
+msgstr "Conclusion: Ascend lacks support for the uint type compared to GPU."
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:24
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:26
+msgid ""
+"|        | 支持维度范围          |\n"
+"| ------ | --------------- |\n"
+"| GPU    | 仅支持 1~5维 tensor |\n"
+"| Ascend A2/A3 | 仅支持 1~5维 tensor |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| ------ | ----------------------- |\n"
+"| GPU    | Only supports 1~5D tensor |\n"
+"| Ascend A2/A3 | Only supports 1~5D tensor |\n"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:28
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异，均支持 1 至 5 维张量。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms; both support 1 to 5-dimensional tensors."
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:30
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:32
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capability deficiency and inability to achieve"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:34
+msgid "Ascend 相比 GPU 缺失 uint 类型支持。"
+msgstr "Ascend lacks support for the uint type compared to GPU."
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:36
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Logical_Ops/or.md:38
+msgid "以下示例计算两个输入张量的逐元素或运算："
+msgstr "The following example computes the element-wise OR operation of two input tensors:"
+
+#. type: code
+#: docs/zh/triton_api/Logical_Ops/or.md:40
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def fn_npu_(output_ptr, x_ptr, y_ptr, z_ptr,\n"
+"            XB: tl.constexpr, YB: tl.constexpr, ZB: tl.constexpr,\n"
+"            XNUMEL: tl.constexpr, YNUMEL: tl.constexpr, ZNUMEL: tl.constexpr):\n"
+"    xoffs = tl.program_id(0) * XB\n"
+"    yoffs = tl.program_id(1) * YB\n"
+"    zoffs = tl.program_id(2) * ZB\n"
+"\n"
+"    xidx = tl.arange(0, XB) + xoffs\n"
+"    yidx = tl.arange(0, YB) + yoffs\n"
+"    zidx = tl.arange(0, ZB) + zoffs\n"
+"\n"
+"    idx = xidx[:, None, None] * YNUMEL * ZNUMEL + yidx[None, :, None] * ZNUMEL + zidx[None, None, :]\n"
+"\n"
+"    X = tl.load(x_ptr + idx)\n"
+"    Y = tl.load(y_ptr + idx)\n"
+"\n"
+"    ret = X | Y\n"
+"\n"
+"    tl.store(output_ptr + idx, ret)\n"
+"\n"
+"x = test_common.generate_tensor(shape, dtype).npu()\n"
+"y = test_common.generate_tensor(shape, dtype).npu()\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Logical_Ops/or.md:41
+msgid ""
+"\n"
+"\n"
+msgstr ""

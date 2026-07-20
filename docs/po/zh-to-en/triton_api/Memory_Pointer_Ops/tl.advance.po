@@ -1,0 +1,193 @@
+# PO translation file for docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 11:11+0000\n"
+"PO-Revision-Date: 2026-07-20 11:11+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:0
+msgid "# triton.language.advance"
+msgstr "# triton.language.advance"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:4
+msgid ""
+"简介：将`tl.make_block_ptr`的offset增加一个偏移量\n"
+"原型：\n"
+msgstr ""
+"Introduction: Add an offset to the offset of `tl.make_block_ptr`  \n"
+"Prototype:\n"
+
+#. type: code
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:6
+msgid ""
+"```python\n"
+"triton.language.advance(\n"
+" base: triton.PointerType,\n"
+" offsets: tuple(int | constexpr),\n"
+" _semantic=None\n"
+")\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:12
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `base`        | `triton.PointerType`          |需要被更新的指针，`tl.make_block_ptr`的结果                                |\n"
+"| `offsets`     | `tuple(int \\| constexpr)`    | 张量各维度的基址偏移量列表，`len(offsets)`需要与`len(base.offsets)`相等 |\n"
+"| `_semantic`   | -                 | 保留参数，暂不支持外部调用|\n"
+msgstr ""
+"| Parameter Name | Type                | Description                                                                 |\n"
+"| ------------- | ----------------- | --------------------------------------------------------------------------- |\n"
+"| `base`        | `triton.PointerType`          | The pointer to be updated, result of `tl.make_block_ptr`                     |\n"
+"| `offsets`     | `tuple(int \\| constexpr)`    | List of base offsets for each dimension of the tensor; `len(offsets)` must equal `len(base.offsets)` |\n"
+"| `_semantic`   | -                 | Reserved parameter, external calls not supported for now                     |\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:14
+msgid "返回值：`pointer_type<blocked<shape, element_type>>`： 指向tensor的指针"
+msgstr "Return value: `pointer_type<blocked<shape, element_type>>`: pointer to the tensor"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:20
+msgid ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | √    | √     | √     | √     | √      | √      | √      | √     | √    | √    | √    | √    | ×    |\n"
+"| Ascend A2/A3 | √    | √     | √     | ×     | ×      | ×      | ×      | √     | √    | √    | ×    | √    | ×    |\n"
+msgstr ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | √    | √     | √     | √     | √      | √      | √      | √     | √    | √    | √    | √    | ×    |\n"
+"| Ascend A2/A3 | √    | √     | √     | ×     | ×      | ×      | ×      | √     | √    | √    | ×    | √    | ×    |\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:22
+msgid "结论：Ascend 对比 GPU 缺失uint8、uint16、uint32、uint64、fp64的支持能力（硬件限制）。"
+msgstr "Conclusion: Ascend lacks support for uint8, uint16, uint32, uint64, and fp64 compared to GPU (hardware limitation)."
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:24
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:26
+msgid ""
+"|        | 支持维度范围          |\n"
+"| ------ | --------------- |\n"
+"| GPU    | 仅支持 1~5维 tensor |\n"
+"| Ascend A2/A3 | 仅支持 1~5维 tensor |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| ------ | ----------------------- |\n"
+"| GPU    | Only supports 1~5D tensor |\n"
+"| Ascend A2/A3 | Only supports 1~5D tensor |\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:28
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异，均支持 1 至 5 维张量。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms, both support 1 to 5 dimensional tensors."
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:30
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:32
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "> Relative community capability deficiency and inability to achieve"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:34
+msgid ""
+"- Ascend 对比 GPU 缺失uint8、uint16、uint32、uint64、fp64的支持能力（硬件限制）。\n"
+"- Ascend只允许通过调整`order`参数的顺序来表达转置语义，不能通过调整`stride`参数的顺序实现转置语义。\n"
+"- 当前`tl.make_tensor_ptr`，如果与较复杂的循环和分支语句搭配使用，可能会出现编译问题\n"
+msgstr ""
+"- Ascend lacks support for uint8, uint16, uint32, uint64, and fp64 compared to GPU (hardware limitation).\n"
+"- Ascend only allows expressing transpose semantics by adjusting the order of the `order` parameter, not by adjusting the order of the `stride` parameter.\n"
+"- Currently, `tl.make_tensor_ptr` may cause compilation issues when used with complex loops and branch statements.\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:36
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:38
+msgid "参考以下示例："
+msgstr "Refer to the following example:"
+
+#. type: code
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:40
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def fn_npu_3d(output_ptr, x_ptr, y_ptr, z_ptr, output_ptr1, XB: tl.constexpr, YB: tl.constexpr, ZB: tl.constexpr):\n"
+"    block_ptr_in = tl.make_block_ptr(\n"
+"        base=x_ptr,\n"
+"        shape=(XB, YB, ZB),\n"
+"        strides=(YB * ZB, ZB, 1),\n"
+"        offsets=(3, 1, 2),\n"
+"        block_shape=(XB, YB, ZB),\n"
+"        order=(2, 1, 0),\n"
+"    )\n"
+"    bbptr = tl.advance(block_ptr_in, (-3, -1, -2))\n"
+"    # XB,YB,1\n"
+"    X = tl.load(bbptr)\n"
+"\n"
+"    block_ptr_out = tl.make_block_ptr(\n"
+"        base=output_ptr,\n"
+"        shape=(XB, YB, ZB),\n"
+"        strides=(YB * ZB, ZB, 1),\n"
+"        offsets=(0, 0, 0),\n"
+"        block_shape=(XB, YB, ZB),\n"
+"        order=(2, 1, 0),\n"
+"    )\n"
+"    tl.store(block_ptr_out, X)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.advance.md:41
+msgid ""
+"\n"
+"\n"
+msgstr ""

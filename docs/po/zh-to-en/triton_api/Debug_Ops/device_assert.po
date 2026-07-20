@@ -1,0 +1,121 @@
+# PO translation file for docs/zh/triton_api/Debug_Ops/device_assert.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 10:44+0000\n"
+"PO-Revision-Date: 2026-07-20 10:44+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_assert.md:0
+msgid "# triton.language.device_assert"
+msgstr "# triton.language.device_assert"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_assert.md:2
+msgid "**使用`device_assert`需要将环境变量`TRITON_DEBUG`的值设置为非`0`才能生效。**"
+msgstr "**To use `device_assert`, the environment variable `TRITON_DEBUG` must be set to a non-zero value to take effect.**"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_assert.md:4
+msgid "## 1. 函数概述"
+msgstr "## 1. Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_assert.md:6
+msgid "`device_assert` 用于在GPU运行时从设备端进行断言检查，如果条件不满足则输出错误信息。"
+msgstr "`device_assert` is used to perform assertion checks from the device side during GPU runtime, outputting an error message if the condition is not met."
+
+#. type: code
+#: docs/zh/triton_api/Debug_Ops/device_assert.md:8
+msgid ""
+"```python\n"
+"triton.language.device_assert(cond, msg='', _semantic=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_assert.md:10
+msgid "## 2. 规格"
+msgstr "## 2. Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_assert.md:12
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_assert.md:14
+msgid ""
+"| 参数 | 类型 | 默认值 | 含义说明 |\n"
+"|------|------|--------|----------|\n"
+"| `cond` | `bool` | 必需 | 运行时需要断言的条件表达式 |\n"
+"| `msg` | `str` | `''` | 断言失败时显示的错误消息 |\n"
+"| `_semantic` | - | - | 保留参数，暂不支持外部调用 |\n"
+msgstr ""
+"| Parameter | Type | Default | Description |\n"
+"|-----------|------|---------|-------------|\n"
+"| `cond` | `bool` | Required | The condition expression to assert at runtime |\n"
+"| `msg` | `str` | `''` | Error message displayed when assertion fails |\n"
+"| `_semantic` | - | - | Reserved parameter, external calls not supported for now |\n"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_assert.md:16
+msgid "### 2.2 类型支持"
+msgstr "### 2.2 Type Support"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_assert.md:18
+msgid "A3："
+msgstr "A3:"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_assert.md:20
+msgid ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | × | × | × | × | × | × | × | × | × | × | × | × | ✓ |\n"
+"| Ascend A2/A3 | × | × | × | × | × | × | × | × | × | × | × | × | ✓ |\n"
+msgstr ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | × | × | × | × | × | × | × | × | × | × | × | × | ✓ |\n"
+"| Ascend A2/A3 | × | × | × | × | × | × | × | × | × | × | × | × | ✓ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Debug_Ops/device_assert.md:22
+msgid "### 2.3 使用方法"
+msgstr "### 2.3 Usage"
+
+#. type: code
+#: docs/zh/triton_api/Debug_Ops/device_assert.md:24
+msgid ""
+"```python\n"
+"import triton.language as tl\n"
+"\n"
+"@triton.jit\n"
+"def basic_device_assert_example(x_ptr, BLOCK_SIZE: tl.constexpr):\n"
+"    # 基本断言：检查程序ID\n"
+"    pid = tl.program_id(0)\n"
+"    tl.device_assert(pid >= 0, \"Program ID must be non-negative\")\n"
+"\n"
+"    offsets = tl.arange(0, BLOCK_SIZE)\n"
+"    x = tl.load(x_ptr + offsets)\n"
+"\n"
+"    # 检查数据有效性（比如检查张量中没有负值）\n"
+"    tl.device_assert(tl.min(x) >= 0, \"All values must be non-negative\")\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Debug_Ops/device_assert.md:25
+msgid ""
+"\n"
+"\n"
+msgstr ""
