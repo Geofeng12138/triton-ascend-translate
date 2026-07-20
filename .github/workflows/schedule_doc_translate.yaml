@@ -15,7 +15,7 @@
 # This file is a part of the triton-ascend project.
 #
 
-name: Auto Doc Translate (zh → en) — PO-based
+name: Auto Doc Translate
 
 on:
   schedule:
