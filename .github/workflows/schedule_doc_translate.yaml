@@ -51,7 +51,7 @@ jobs:
       GH_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           token: ${{ env.GH_TOKEN }}
           ref: ${{ env.TARGET_BRANCH }}
