@@ -15,7 +15,7 @@
 # This file is a part of the triton-ascend project.
 #
 
-name: Auto Doc Translate (zh → en)
+name: Auto Doc Translate (zh → en) — PO-based
 
 on:
   schedule:
@@ -91,7 +91,7 @@ jobs:
             echo "files=$files" >> $GITHUB_OUTPUT
           fi
 
-      - name: Translate docs/zh/ to docs/en/
+      - name: Translate docs/zh/ to docs/en/ (PO-based)
         if: steps.detect.outputs.has_changes == 'true'
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
@@ -100,7 +100,7 @@ jobs:
             --files "${{ steps.detect.outputs.files }}" \
             --output-json /tmp/translation_results.json
 
-      - name: Process translated files
+      - name: Process translated files (en + po)
         if: steps.detect.outputs.has_changes == 'true'
         id: results
         run: |
@@ -109,6 +109,7 @@ jobs:
             exit 1
           fi
 
+          # Read the list of successfully translated .en files
           success_files=$(python3 -c "
           import json
           with open('/tmp/translation_results.json') as f:
@@ -125,15 +126,24 @@ jobs:
           count=0
           file_list=""
           while IFS= read -r file; do
-            [ -n "$file" ] && [ -f "$file" ] && {
+            [ -z "$file" ] && continue
+            if [ -f "$file" ]; then
               count=$((count + 1))
               file_list="${file_list}- <code>${file}</code>"$'\n'
               git add "$file"
-            }
+            fi
+
+            # Also stage the corresponding .po file (if it exists)
+            # Convert e.g. docs/en/quick_start.md -> docs/po/zh-to-en/quick_start.po
+            po_file="${file/docs\/en\//docs/po/zh-to-en/}"
+            po_file="${po_file%.md}.po"
+            if [ -f "$po_file" ]; then
+              git add "$po_file"
+            fi
           done <<< "$success_files"
 
           [ $count -eq 0 ] && echo "No files to commit" && exit 1
-          echo "Staged $count translated file(s)"
+          echo "Staged $count translated file(s) + corresponding .po files"
           {
             echo "file_count=$count"
             echo "file_list<<EOF"
@@ -154,7 +164,7 @@ jobs:
           git checkout -b "${BRANCH_NAME}"
 
           count=$(git diff --cached --name-only | wc -l)
-          git commit -s -m "[Doc] Auto-translate ${count} file(s) from zh to en"
+          git commit -s -m "[Doc] Auto-translate ${count} file(s) from zh to en (PO-based)"
           git push origin "${BRANCH_NAME}"
 
       - name: Create Pull Request
@@ -182,6 +192,12 @@ jobs:
           Translated **${FILE_COUNT}** file(s) from \`docs/zh/\` to \`docs/en/\`:
 
           ${FILE_LIST}
+
+          This PR uses the **PO-based translation workflow**:
+          - \`docs/po/zh-to-en/*.po\` files store block-level translations (msgid/msgstr pairs)
+          - Only new/changed text blocks are re-translated — existing translations are preserved
+          - Translation memory ensures consistency across runs
+
           ---
 
           [Workflow run](${RUN_URL})
