@@ -1,0 +1,243 @@
+# PO translation file for docs/zh/examples/02_fused_softmax_example.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-21 11:35+0000\n"
+"PO-Revision-Date: 2026-07-21 11:35+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/examples/02_fused_softmax_example.md:0
+msgid "# 融合 Softmax （Fused Softmax）"
+msgstr "# Fused Softmax"
+
+#. type: text
+#: docs/zh/examples/02_fused_softmax_example.md:2
+msgid ""
+"在本节中，我们将使用 Triton 编写一个融合的 softmax 操作的程序。\n"
+"在此过程中，你会学习到：\n"
+msgstr "In this section, we will write a fused softmax operation program using Triton. Along the way, you will learn:"
+
+#. type: text
+#: docs/zh/examples/02_fused_softmax_example.md:4
+msgid ""
+"- 内核融合对于带宽受限操作的优势。\n"
+"- Triton 中缩减操作。\n"
+msgstr ""
+"- The advantages of kernel fusion for bandwidth-limited operations.\n"
+"- Reduction operations in Triton.\n"
+
+#. type: text
+#: docs/zh/examples/02_fused_softmax_example.md:6
+msgid "## 使用原生 PyTorch 对 X 逐行进行 Softmax 计算"
+msgstr "## Using native PyTorch to perform row-wise Softmax computation on X"
+
+#. type: code
+#: docs/zh/examples/02_fused_softmax_example.md:8
+msgid ""
+"```Python\n"
+"import torch\n"
+"import torch_npu\n"
+"\n"
+"import triton\n"
+"import triton.language as tl\n"
+"\n"
+"def naive_softmax(x):\n"
+"    \"\"\"\n"
+"    我们减去最大元素以避免溢出。Softmax 对于这种偏移是不变的。\n"
+"    \"\"\"\n"
+"    # 读取 MN 个元素；写入 M 个元素\n"
+"    x_max = x.max(dim=1)[0]\n"
+"    # 读取 MN + M 个元素；写入 MN 个元素\n"
+"    z = x - x_max[:, None]\n"
+"    # 读取 MN 个元素；写入 MN 个元素\n"
+"    numerator = torch.exp(z)\n"
+"    # 读取 MN 个元素；写入 M 个元素\n"
+"    denominator = numerator.sum(dim=1)\n"
+"    # 读取 MN + M 个元素；写入 MN 个元素\n"
+"    ret = numerator / denominator[:, None]\n"
+"    # 总计：读取 5MN + 2M 个元素；写入 3MN + 2M 个元素\n"
+"    return ret\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/examples/02_fused_softmax_example.md:10
+msgid "内核融合的目的"
+msgstr "The purpose of kernel fusion"
+
+#. type: text
+#: docs/zh/examples/02_fused_softmax_example.md:12
+msgid ""
+"当在 PyTorch 中以原生方式实现时，计算`y=naive_softmax(x)`需要从 DRAM 中读取 5MN+2M 个元素，并写回 3MN+2M 个元素。显然这是非常低效的；我们更希望使用一个自定义的“融合”内核，它只需读取一次 x，并在芯片上完成所有必要的计算。\n"
+"这样一来只需读取和写回 2MN 个字节，因此我们可以期望理论上的加速比大约为 4 倍（即 (8MN+4M)/2MN）。\n"
+msgstr ""
+"When implemented natively in PyTorch, computing `y=naive_softmax(x)` requires reading 5MN+2M elements from DRAM and writing back 3MN+2M elements. This is clearly very inefficient; we would prefer to use a custom \"fused\" kernel that reads x only once and performs all necessary computations on-chip.\n"
+"\n"
+"This way, only 2MN bytes need to be read and written back, so we can expect a theoretical speedup of approximately 4x (i.e., (8MN+4M)/2MN).\n"
+
+#. type: text
+#: docs/zh/examples/02_fused_softmax_example.md:14
+msgid "`torch.jit.script`旨在自动执行这种“内核融合”，但它仍然远未达到理想状态。"
+msgstr "`torch.jit.script` aims to automatically perform this kind of \"kernel fusion,\" but it is still far from ideal."
+
+#. type: text
+#: docs/zh/examples/02_fused_softmax_example.md:16
+msgid "## 计算内核"
+msgstr "## Compute Kernel"
+
+#. type: text
+#: docs/zh/examples/02_fused_softmax_example.md:18
+msgid ""
+"softmax 内核工作原理如下：每个计算单元（program）以程序数量为步长加载输入矩阵X的一组行数据，执行归一化处理后，将结果写入输出矩阵Y。\n"
+"注意：Triton 的一个重要限制是每个块必须具有 2 的幂次数的元素，因此，如果我们要处理任意可能的输入形状，需要在内部「填充」每一行，并确保内存操作正确性。\n"
+msgstr ""
+"The softmax kernel works as follows: each compute unit (program) loads a set of rows of the input matrix X in strides equal to the number of programs, performs normalization, and writes the result to the output matrix Y.\n"
+"\n"
+"Note: An important limitation of Triton is that each block must have a power-of-two number of elements. Therefore, if we need to handle arbitrary input shapes, we must internally \"pad\" each row and ensure memory operation correctness.\n"
+
+#. type: code
+#: docs/zh/examples/02_fused_softmax_example.md:20
+msgid ""
+"```Python\n"
+"@triton.jit\n"
+"def softmax_kernel(output_ptr, input_ptr, input_row_stride, output_row_stride, n_rows, n_cols, BLOCK_SIZE: tl.constexpr):\n"
+"    # 程序起始行\n"
+"    row_start = tl.program_id(0)\n"
+"    row_step = tl.num_programs(0)\n"
+"    for row_idx in tl.range(row_start, n_rows, row_step):\n"
+"        # 步长表示我们需要对指针增加多少以推进 1 行\n"
+"        row_start_ptr = input_ptr + row_idx * input_row_stride\n"
+"        # 块大小是大于 n_cols 的下一个二的幂，因此我们可以适配\n"
+"        # 单个块中的行\n"
+"        col_offsets = tl.arange(0, BLOCK_SIZE)\n"
+"        input_ptrs = row_start_ptr + col_offsets\n"
+"        # 将行加载到 SRAM 中，使用掩码，因为 BLOCK_SIZE 可能大于 n_cols\n"
+"        mask = col_offsets < n_cols\n"
+"        row = tl.load(input_ptrs, mask=mask, other=-float('inf'))\n"
+"        # 为了数值稳定性而减去最大值\n"
+"        row_minus_max = row - tl.max(row, axis=0)\n"
+"        # 请注意，Triton 中的指数运算速度很快，但是是近似的。\n"
+"        numerator = tl.exp(row_minus_max)\n"
+"        denominator = tl.sum(numerator, axis=0)\n"
+"        softmax_output = numerator / denominator\n"
+"        # 将输出写回 DRAM\n"
+"        output_row_start_ptr = output_ptr + row_idx * output_row_stride\n"
+"        output_ptrs = output_row_start_ptr + col_offsets\n"
+"        tl.store(output_ptrs, softmax_output, mask=mask)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/examples/02_fused_softmax_example.md:22
+msgid "我们可以创建一个辅助函数，该函数能够将核函数及其元参数加入执行队列，以处理任意给定的输入张量。"
+msgstr "We can create a helper function that adds the kernel function and its meta-parameters to the execution queue to process any given input tensor."
+
+#. type: code
+#: docs/zh/examples/02_fused_softmax_example.md:24
+msgid ""
+"```Python\n"
+"kernels = {}\n"
+"\n"
+"def softmax(x):\n"
+"    n_rows, n_cols = x.shape\n"
+"\n"
+"    # 每次循环迭代的块大小是大于或等于`x`列数的最小二的幂\n"
+"    BLOCK_SIZE = triton.next_power_of_2(n_cols)\n"
+"    # 分配输出空间\n"
+"    y = torch.empty_like(x)\n"
+"\n"
+"    # 预编译内核以获取寄存器使用情况并计算线程占用情况。\n"
+"    kernel, num_programs = kernels.get(BLOCK_SIZE, (None, 0))\n"
+"    if kernel is None:\n"
+"        num_programs = 32\n"
+"        kernel = softmax_kernel\n"
+"        kernels[BLOCK_SIZE] = (kernel, num_programs)\n"
+"\n"
+"    num_programs = min(num_programs, n_rows)\n"
+"\n"
+"    kernel[(num_programs, 1, 1)](\n"
+"        y,\n"
+"        x,\n"
+"        x.stride(0),\n"
+"        y.stride(0),\n"
+"        n_rows,\n"
+"        n_cols,\n"
+"        BLOCK_SIZE\n"
+"    )\n"
+"    return y\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/examples/02_fused_softmax_example.md:26
+msgid "## 单元测试"
+msgstr "## Unit Tests"
+
+#. type: text
+#: docs/zh/examples/02_fused_softmax_example.md:28
+msgid "需要在一个具有不规则行和列数的矩阵上测试处理好的内核，此举可以验证Padding机制是否起作用"
+msgstr "Need to test the processed kernel on a matrix with irregular numbers of rows and columns, which can verify whether the padding mechanism is working."
+
+#. type: code
+#: docs/zh/examples/02_fused_softmax_example.md:30
+msgid ""
+"```Python\n"
+"torch.manual_seed(0)\n"
+"x = torch.randn(1823, 781, device='npu')\n"
+"y_triton = softmax(x)\n"
+"y_torch = torch.softmax(x, axis=1)\n"
+"assert torch.allclose(y_triton, y_torch), (y_triton, y_torch)\n"
+"print(y_triton)\n"
+"print(y_torch)\n"
+"print(f'The maximum difference between torch and triton is '\n"
+"      f'{torch.max(torch.abs(y_triton-y_torch))}')\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/examples/02_fused_softmax_example.md:32
+msgid "Out:"
+msgstr "Out:"
+
+#. type: code
+#: docs/zh/examples/02_fused_softmax_example.md:34
+msgid ""
+"```bash\n"
+"tensor([[0.0002, 0.0017, 0.0009,  ..., 0.0009, 0.0013, 0.0073],\n"
+"        [0.0001, 0.0004, 0.0006,  ..., 0.0006, 0.0004, 0.0003],\n"
+"        [0.0007, 0.0002, 0.0006,  ..., 0.0011, 0.0004, 0.0039],\n"
+"        ...,\n"
+"        [0.0021, 0.0002, 0.0015,  ..., 0.0012, 0.0014, 0.0022],\n"
+"        [0.0003, 0.0002, 0.0007,  ..., 0.0005, 0.0006, 0.0007],\n"
+"        [0.0034, 0.0014, 0.0005,  ..., 0.0007, 0.0016, 0.0028]],\n"
+"       device='npu:0')\n"
+"tensor([[0.0002, 0.0017, 0.0009,  ..., 0.0009, 0.0013, 0.0073],\n"
+"        [0.0001, 0.0004, 0.0006,  ..., 0.0006, 0.0004, 0.0003],\n"
+"        [0.0007, 0.0002, 0.0006,  ..., 0.0011, 0.0004, 0.0039],\n"
+"        ...,\n"
+"        [0.0021, 0.0002, 0.0015,  ..., 0.0012, 0.0014, 0.0022],\n"
+"        [0.0003, 0.0002, 0.0007,  ..., 0.0005, 0.0006, 0.0007],\n"
+"        [0.0034, 0.0014, 0.0005,  ..., 0.0007, 0.0016, 0.0028]],\n"
+"       device='npu:0')\n"
+"The maximum difference between torch and triton is 1.4901161193847656e-08\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/examples/02_fused_softmax_example.md:36
+msgid "\"The maximum difference between torch and triton is 1.4901161193847656e-08\" 表示Triton和PyTorch的输出结果非常接近，肉眼不可区分。"
+msgstr "\"The maximum difference between torch and triton is 1.4901161193847656e-08\" indicates that the output results of Triton and PyTorch are very close and indistinguishable to the naked eye."
+
+#. type: blank
+#: docs/zh/examples/02_fused_softmax_example.md:37
+msgid ""
+"\n"
+"\n"
+msgstr ""

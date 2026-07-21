@@ -1,0 +1,335 @@
+# PO translation file for docs/zh/migration_guide/performance_guidelines.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-21 11:42+0000\n"
+"PO-Revision-Date: 2026-07-21 11:42+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:0
+msgid "# NPU高性能编程指南"
+msgstr "# NPU High-Performance Programming Guide"
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:2
+msgid "## 合并Grid分核"
+msgstr "## Merge Grid Core Splitting"
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:4
+msgid "### 一、自动合并Grid分核优化原则"
+msgstr "### 1. Principles of Automatic Merging Grid Core Optimization"
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:6
+msgid "部分场景下，Triton算子从GPU迁移到NPU。由于体系结构的差异，基于GPU开发的Triton算子Grid分核数较多。在NPU上执行时，无法一次全部调度，多轮下发导致下发时延过大，影响算子性能。基于NPU优Triton算子过程中，需要首先检查Grid分核数。当分核数较大时，使用TRITON_ALL_BLOCKS_PARALLEL环境变量提升算子执行性能。"
+msgstr "In some scenarios, Triton operators are migrated from GPU to NPU. Due to architectural differences, Triton operators developed on GPU have a large number of grid blocks. When executed on NPU, they cannot be fully scheduled in one go, and multiple rounds of dispatch lead to excessive dispatch latency, affecting operator performance. During the optimization of Triton operators on NPU, it is necessary to first check the number of grid blocks. When the number of blocks is large, use the `TRITON_ALL_BLOCKS_PARALLEL` environment variable to improve operator execution performance."
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:8
+msgid "## 指令并行优化"
+msgstr "## Instruction Parallelism Optimization"
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:10
+msgid "### 一、指令并行优化核心原则"
+msgstr "### 1. Core Principles of Instruction Parallelism Optimization"
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:12
+msgid ""
+"Triton算子在NPU上执行时，为了提升性能，NPU底层提供multi buffer、指令并行等并行机制，将“数据搬入/数据计算/数据搬出”并行起来，以此来提升性能；但是某些场景下存在multi buffer无法使能问题，影响并行度，导致算子执行性能降低；在性能优化过程中，存在此类问题时，可以参考以下几点做排查，并按照代码示例优化：\\\n"
+"1、数据搬运和计算存在数据依赖，产生同步，必须依赖Vector运算后，才能触发MTE搬运，导致并行度低；\\\n"
+"2、算子内，无多个数据加载或者单次执行完成无Tiling切分，该场景下无法使能multi buffer；\\\n"
+"3、multi buffer需要额外增加UB空间的使用，计算过程中UB空间不足，无法使能multi buffer；\n"
+msgstr ""
+"When Triton operators execute on the NPU, to improve performance, the NPU underlying layer provides parallel mechanisms such as multi-buffer and instruction parallelism, which parallelize \"data loading / data computation / data offloading\" to enhance performance. However, in certain scenarios, multi-buffer may fail to be enabled, affecting parallelism and leading to reduced operator execution performance. During performance optimization, if such issues arise, refer to the following points for troubleshooting and optimize according to the code examples:\n"
+"\n"
+"1. Data loading and computation have data dependencies, causing synchronization. The MTE loading can only be triggered after Vector computation is completed, resulting in low parallelism.\n"
+"2. Within the operator, there are no multiple data loads, or a single execution completes without Tiling partitioning. In such scenarios, multi-buffer cannot be enabled.\n"
+"3. Multi-buffer requires additional UB space usage. If there is insufficient UB space during computation, multi-buffer cannot be enabled.\n"
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:16
+msgid "- 示例1：减少同步，提升并行度"
+msgstr "- Example 1: Reduce synchronization to improve parallelism"
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:18
+msgid "    在算子调优过程中，增加指令并行度是算子调优的重要手段。在如下的tl.load语句中，当N > M时, load加载的数据只能填充部分data指向的tensor内存空间中，剩下未填充的部分，如果用户未指定other值，则GPU默认填充为0，为了减少用户迁移的适配工作，NPU保持行为和GPU一致。NPU会先用Vector核对data指向的全部内存空间设置为指定值(如果用户未指定other值，同样设置为0)，然后在使用MTE2指令搬运数据到data指向的部分内存空间，这样就会导致MTE2和Vector产生依赖，无法高效并行，影响性能："
+msgstr "During operator tuning, increasing instruction-level parallelism is an important approach. In the following `tl.load` statement, when N > M, the loaded data can only fill part of the tensor memory space pointed to by `data`. For the remaining unfilled portion, if the user does not specify an `other` value, the GPU defaults to filling it with 0. To reduce the adaptation effort for user migration, the NPU maintains behavior consistent with the GPU. The NPU first uses the Vector core to set the entire memory space pointed to by `data` to the specified value (if the user does not specify an `other` value, it is also set to 0), and then uses the MTE2 instruction to transfer data to the partial memory space pointed to by `data`. This creates a dependency between MTE2 and Vector, preventing efficient parallelism and impacting performance."
+
+#. type: code
+#: docs/zh/migration_guide/performance_guidelines.md:20
+msgid ""
+"    ```diff\n"
+"    @triton.jit\n"
+"    def npu_vector_add_kernel(\n"
+"        input,                          # [Tensor] input tensor (1 x col)\n"
+"        output,                         # [Tensor] output tensor (1 x col)\n"
+"        M: tl.constexpr,                # len of the vector\n"
+"        BLOCK_SIZE: tl.constexpr\n"
+"    ):\n"
+"        N :tl.constexpr = BLOCK_SIZE\n"
+"        idx = tl.arange(0, N)\n"
+"        mask = idx < M\n"
+"        data = tl.load(input + idx, mask = mask) # 或者指定other=-1等值\n"
+"    ```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:22
+msgid "    为了提升性能，在load加载数据只能部分填充到指向的内存空间时，如果未填充的部分不影响后续的计算结果，可以在load语句中，添加care_padding=False来去掉默认值的填充，增加并行度，提升性能，上面算子的优化写法如下："
+msgstr "To improve performance, when a load operation only partially fills the target memory space and the unfilled portion does not affect subsequent computation results, you can add `care_padding=False` to the load statement to skip default value padding, thereby increasing parallelism and enhancing performance. The optimized version of the above operator is as follows:"
+
+#. type: code
+#: docs/zh/migration_guide/performance_guidelines.md:24
+msgid ""
+"    ```diff\n"
+"    @triton.jit\n"
+"    def npu_vector_add_kernel(\n"
+"        input,                          # [Tensor] input tensor (1 x col)\n"
+"        output,                         # [Tensor] output tensor (1 x col)\n"
+"        M: tl.constexpr,                # len of the vector\n"
+"        BLOCK_SIZE: tl.constexpr\n"
+"    ):\n"
+"        idx = tl.arange(0, N)\n"
+"        mask = idx < M\n"
+"    -   data = tl.load(input + idx, mask = mask) # 或者指定other=-1等值\n"
+"    +   data = tl.load(input + idx, mask = mask, care_padding=False) # 或者指定other=-1等值\n"
+"    ```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:26
+msgid "- 示例2：在Triton算子内，使用for循环，增加Tiling，提升并行度"
+msgstr "- Example 2: Within the Triton operator, use a for loop to add Tiling and improve parallelism."
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:28
+msgid ""
+"    在Triton算子编程中，mask运算经常运用在load/store/where等语法中，在性能优化过程中，需要特别注意这类运算导致的性能下降。当Triton算子内逻辑是单次顺序执行，开始->数据搬入->计算->数据搬出->结束，指令无法并行，执行效率低;可以通过在算子使用for循环增加tiling，将单次处理量减少，多次处理，能够让\"数据搬入/计算/数据搬出\"并行起来，减少串行的等待时间，提升整体性能；同时使用for循环增加Tiling，也能降低单次处理消耗的UB空间。\n"
+"    需要注意：增加数据Tiling也同时需要考虑改变数据切块后的数学是否等价。\n"
+msgstr ""
+"In Triton operator programming, `mask` operations are often used in syntax such as load/store/where. During performance optimization, special attention must be paid to the performance degradation caused by such operations. When the logic within a Triton operator is a single sequential execution — start → data load → computation → data store → end — instructions cannot be parallelized, resulting in low execution efficiency. By using a `for` loop to add tiling in the operator, the single processing volume can be reduced and processed in multiple batches, allowing \"data load / computation / data store\" to run in parallel, reducing serial waiting time and improving overall performance. Additionally, using a `for` loop to add tiling also reduces the UB space consumed per single processing step.  \n"
+"Note: When increasing data tiling, it is also necessary to consider whether the mathematics after changing the data partitioning remains equivalent.\n"
+
+#. type: code
+#: docs/zh/migration_guide/performance_guidelines.md:30
+msgid ""
+"    ```diff\n"
+"    @triton.jit\n"
+"    def alloc_extend_kernel(\n"
+"            pre_lens_ptr,\n"
+"            seq_lens_ptr,\n"
+"            free_page_ptr,\n"
+"            out_indices,\n"
+"            bs_upper: tl.constexpr,\n"
+"            page_size: tl.constexpr,\n"
+"            max_num_extend_tokens: tl.constexpr,\n"
+"    +       BLOCK_SIZE: tl.constexpr = 1024,\n"
+"    ):\n"
+"        pid = tl.program_id(0)\n"
+"\n"
+"        load_offset = tl.arange(0, bs_upper)\n"
+"        seq_lens = tl.load(seq_lens_ptr + load_offset, mask=load_offset <= pid)\n"
+"        pre_lens = tl.load(pre_lens_ptr + load_offset, mask=load_offset <= pid)\n"
+"        extend_lens = seq_lens - pre_lens\n"
+"\n"
+"        seq_len = tl.load(seq_lens_ptr + pid)\n"
+"        pre_len = tl.load(pre_lens_ptr + pid)\n"
+"        extend_len = seq_len - pre_len\n"
+"\n"
+"        sum_extend_lens = tl.sum(extend_lens)\n"
+"        output_start_loc = sum_extend_lens - extend_len\n"
+"\n"
+"        num_pages_after = (seq_lens + page_size - 1) // page_size\n"
+"        num_pages_before = (pre_lens + page_size - 1) // page_size\n"
+"        num_new_pages = num_pages_after - num_pages_before\n"
+"\n"
+"        num_page_start_loc_self = (seq_len + page_size - 1) // page_size - (\n"
+"                pre_len + page_size - 1\n"
+"        ) // page_size\n"
+"        sum_num_new_pages = tl.sum(num_new_pages)\n"
+"        new_page_start_loc = sum_num_new_pages - num_page_start_loc_self\n"
+"\n"
+"        # Part 2: fill the new full pages\n"
+"        num_part2 = (\n"
+"                seq_len // page_size * page_size\n"
+"                - (pre_len + page_size - 1) // page_size * page_size\n"
+"        )\n"
+"\n"
+"    -   # load data at once\n"
+"    -   offset_many_page = tl.arange(0, max_num_extend_tokens)\n"
+"    -   page_start = tl.load(\n"
+"    -       free_page_ptr + new_page_start_loc + offset_many_page // page_size,\n"
+"    -       mask=offset_many_page < num_part2,\n"
+"    -   )\n"
+"    -   tl.store(\n"
+"    -       out_indices + output_start_loc + offset_many_page,\n"
+"    -       page_start * page_size + offset_many_page % page_size,\n"
+"    -       mask=offset_many_page < num_part2,\n"
+"    -   )\n"
+"\n"
+"    +   # load data using loop\n"
+"    +   num_loop = tl.cdiv(max_num_extend_tokens, BLOCK_SIZE)\n"
+"    +   blk_offset = tl.arange(0, BLOCK_SIZE)\n"
+"    +   for i in range(num_loop):\n"
+"    +       offset_many_page = blk_offset + i * BLOCK_SIZE\n"
+"    +       page_start = tl.load(\n"
+"    +           free_page_ptr + new_page_start_loc + offset_many_page // page_size,\n"
+"    +           mask=offset_many_page < num_part2,\n"
+"    +       )\n"
+"    +       tl.store(\n"
+"    +           out_indices + output_start_loc + offset_many_page,\n"
+"    +           page_start * page_size + offset_many_page % page_size,\n"
+"    +           mask=offset_many_page < num_part2,\n"
+"    +       )\n"
+"    ```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:32
+msgid "## 数据类型优化"
+msgstr "## Data Type Optimization"
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:34
+msgid "### 一、数据类型优化核心原则"
+msgstr "### 1. Core Principles of Data Type Optimization"
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:36
+msgid ""
+"A2/A3 向量运算单元的部分运算操作不支持某些数据类型，这种场景下，对应的向量运算会退化为标量运算，影响性能。在确定不影响整体算子精度的情况下，建议使用支持的数据类型，提升性能。\n"
+"主要涉及以下操作\n"
+msgstr "The A2/A3 vector arithmetic unit does not support certain data types for some operations. In such cases, the corresponding vector operations degrade to scalar operations, impacting performance. If it does not affect the overall operator precision, it is recommended to use supported data types to improve performance. The following operations are primarily involved."
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:38
+msgid ""
+"|  **OP名称**  |  **不支持的数据类型**  |\n"
+"|---|---|\n"
+"| Vector ADD | int64 |\n"
+"| Vector CMP | int64/int32 |\n"
+msgstr ""
+"| **OP Name** | **Unsupported Data Types** |\n"
+"|---|---|\n"
+"| Vector ADD | int64 |\n"
+"| Vector CMP | int64/int32 |\n"
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:40
+msgid "### 二、代码示例"
+msgstr "### 2. Code Examples"
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:42
+msgid "- Vector Add Triton算子示例代码"
+msgstr "- Vector Add Triton Operator Example Code"
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:44
+msgid "    如下Triton算子，当x, y input tensor使用的数据类型是int64时，会导致x1+y1运算展开为Scalar运算，降低性能，在不影响精度的情况下，建议使用int32数据类型。"
+msgstr "For the following Triton operator, when the data type used by the x and y input tensors is int64, the x1 + y1 operation will be expanded into scalar operations, reducing performance. Without affecting precision, it is recommended to use the int32 data type."
+
+#. type: code
+#: docs/zh/migration_guide/performance_guidelines.md:46
+msgid ""
+"    ``` diff\n"
+"    @triton.jit\n"
+"    def npu_vector_add_kernel(\n"
+"        x,                          # [Tensor] input tensor (1 x col)\n"
+"        y,                          # [Tensor] input tensor (1 x col)\n"
+"        z,                          # [Tensor] output tensor (1 x col)\n"
+"        vector_len: tl.constexpr,   # len of the vector\n"
+"        BLOCK_SIZE: tl.constexpr\n"
+"    ):\n"
+"        pid = tl.program_id(axis=0)\n"
+"        offset = pid * BLOCK_SIZE + tl.arange(BLOCK_SIZE)\n"
+"        len_mask = offset < vector_len\n"
+"        x1 = tl.load(x + offset, mask=len_mask)\n"
+"        y1 = tl.load(y + offset, mask=len_mask)\n"
+"        z1 = x1 + y1\n"
+"        tl.store(z + offset, z1, mask=len_mask)\n"
+"    ```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:48
+msgid "- Vector Cmp Triton算子示例代码"
+msgstr "- Vector Cmp Triton operator example code"
+
+#. type: text
+#: docs/zh/migration_guide/performance_guidelines.md:50
+msgid ""
+"    如下Triton算子，做mask运算时，使用到了Cmp操作，Cmp不支持int64/int32数据类型，会导致cols < N运算展开为Scalar运算，降低性能，在不影响精度的情况下，建议使用fp32数据类型。\n"
+"    在Triton算子编程中，mask运算经常运用在load/store/where等语法中，在性能优化过程中，需要特别注意这类运算导致的性能下降。\n"
+msgstr ""
+"For the following Triton operator, the Cmp operation is used during mask computation. Cmp does not support int64/int32 data types, which causes the `cols < N` operation to be expanded into scalar operations, degrading performance. Without affecting precision, it is recommended to use the fp32 data type.  \n"
+"In Triton operator programming, mask operations are frequently used in syntax such as load/store/where. During performance optimization, special attention should be paid to the performance degradation caused by such operations.\n"
+
+#. type: code
+#: docs/zh/migration_guide/performance_guidelines.md:52
+msgid ""
+"    ``` diff\n"
+"    @triton.jit\n"
+"    def npu_vector_cmp_kernel(\n"
+"        X,                 # [Tensor] input tensor (row x col)\n"
+"        Out,               # [Tensor] output tensor (row x col)\n"
+"        Mean,              # [Vector] mean tensor (row, ) of X\n"
+"        Rstd,              # [Vector] std tensor (row, ) of X\n"
+"        stride_x_row,      # [Scalar] stride of row of x\n"
+"        stride_out_row,    # [Scalar] stride of row of out, normally equals to stride_x_row\n"
+"        M,                 # [Scalar] row number\n"
+"        N,                 # [Scalar] col number\n"
+"        eps,               # [Scalar] epsilon to avoid division by zeros\n"
+"        BLOCK_M: tl.constexpr,\n"
+"        BLOCK_N: tl.constexpr\n"
+"    ):\n"
+"        group_m = tl.program_id(0)\n"
+"        group_n = tl.program_id(1)\n"
+"        row = group_m\n"
+"\n"
+"        # calculate index & offset\n"
+"        Mean = Mean + group_n * M\n"
+"        Rstd = Rstd + group_n * M\n"
+"        X = X + row * stride_x_row + group_n * N\n"
+"        Out = Out + row * stride_out_row + group_n * N\n"
+"\n"
+"        cols = tl.arange(0, BLOCK_N)  # cols is int64\n"
+"        x = tl.load(X + cols, mask=cols < N, other=0.0).to(tl.float32)\n"
+"\n"
+"        # calculate mean & rstd\n"
+"        mean = tl.sum(x, axis=0) / N\n"
+"        tl.store(Mean + row, mean)\n"
+"        # [Changed begin]\n"
+"    -   xbar = tl.where(cols < N, X - mean, 0.0)\n"
+"    +   cols_cmp = cols.to(tl.float32)\n"
+"    +   xbar = tl.where(cols_cmp < N, x - mean, 0.0)\n"
+"        # [Changed end]\n"
+"\n"
+"        var = tl.sum(xbar * xbar, axis=0) / N\n"
+"        rstd = 1 / tl.sqrt(var + eps)\n"
+"        tl.store(Rstd + row, rstd)\n"
+"\n"
+"        # calculate Out\n"
+"        mask = cols < N\n"
+"        out = (x - mean) * rstd\n"
+"        tl.store(Out + cols, out, mask=mask)\n"
+"    ```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/migration_guide/performance_guidelines.md:53
+msgid ""
+"\n"
+"\n"
+msgstr ""

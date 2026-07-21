@@ -1,163 +1,220 @@
 # Triton-Ascend Debugging Guide
 
-## 1 Overview
 
-This document is the **Triton-Ascend Debugging Guide**, which is intended for engineers who participate in adapting Triton to Ascend NPU. It systematically describes the common debugging methods and tools used during Triton-Ascend compilation and running.
+## 1 Introduction
 
-The contents of this document are as follows:
 
-| Section| Description|
-|------|--------|
-| **1. Overview**| Describes the core objectives of debugging (focusing on the `ttir.mlir` → `ttadapter.mlir` conversion) and provides guidance on common issues.|
-| **2. Compilation Process Overview**| Describes the key phases of the Triton-Ascend end-to-end compilation chain, providing a context basis for subsequent debugging.|
-| **3. Temporary File Guide**| Describes the storage locations and functions of intermediate files (such as the `.mlir`, `.ll`, and`.o` files) generated during the compilation, facilitating manual check.|
-| **4. Interpreter Mode**| Describes how to set `TRITON_INTERPRET` to `1` to run the kernel on the CPU and use the result as the accuracy benchmark of the NPU computing result.|
-| **5. Debugging Methods**| The following practical debugging methods are provided:<br>• Static/Runtime printing<br>• Compilation error debugging<br>|
-| **Appendix A**| Provides a quick reference table of common environment variables to improve debugging efficiency.|
+This document is the **Triton-Ascend Debugging Guide**, intended for engineers involved in the adaptation and development of Triton with Ascend NPUs. It systematically introduces common debugging methods and tools used during the compilation and execution of Triton-Ascend.
 
-You are advised to refer to the corresponding sections as required to efficiently locate and resolve various exceptions in Triton-Ascend integration.
+
+The full content overview is as follows:
+
+
+| Section | Main Content |
+|---------|--------------|
+| **1. Overview** | Describes the core goal of debugging (focusing on the `ttir.mlir` → `ttadapter.mlir` transformation) and provides categorized guidance for common issues. |
+| **2. Compilation Flow Overview** | Introduces the key stages of the Triton-Ascend end-to-end compilation chain, providing context for subsequent debugging. |
+| **3. Temporary File Guide** | Details the storage locations and purposes of intermediate files generated during compilation (e.g., `.mlir`, `.ll`, `.o`), facilitating manual inspection. |
+| **4. Interpreter Mode** | Introduces how to run kernels on the CPU using `TRITON_INTERPRET=1`, serving as a precision baseline for NPU computation results. |
+| **5. Debugging Methods** | Provides various practical debugging techniques:<br>• Static/runtime printing<br>• Compilation error debugging methods<br> |
+| **Appendix A** | Quick reference table for commonly used environment variables to improve debugging efficiency. |
+
+
+Developers are advised to refer to the corresponding sections based on specific issues, so as to efficiently locate and resolve various anomalies in the Triton-Ascend integration.
+
 
 ### 1.1 Triton-Ascend Common Issue Classification and Debugging Guide
 
-During development, issues can be classified into different types. The following table provides guidance for quickly identifying issue types and preferred debugging methods.
 
-| Issue Type| Typical Symptom/Description| Preferred Debugging Method|
+During development, issues can generally be categorized into the following types. The table below provides a quick reference for identifying issue types and preferred debugging methods.
+
+
+| Problem Type | Typical Manifestation/Description | Recommended Primary Debugging Method |
 | :--- | :--- | :--- |
-| **Accuracy issue**| The NPU running result is different from the benchmark reference result (such as the PyTorch or Triton CPU interpreter).| 4. Interpreter mode<br> 5.1 Debugging by printing|
-| **Compilation error (MLIRCompileError)**| If the compilation fails in the conversion phase, `MLIRCompileError` is thrown on the Python side.| 5.2 Compilation error debugging|
+| **Precision Issue** | The NPU execution result differs from the benchmark reference result (e.g., PyTorch or Triton CPU interpreter). | 4. Interpreter Mode <br> 5.1 Print Debugging Method |
+| **Compilation Error (MLIRCompileError)** | Failure during the compilation and transformation phase, usually throwing `MLIRCompileError` on the Python side. | 5.2 Compilation Error Debugging Method |
 
-## 2 Triton-Ascend Compilation Process Overview
 
-Understanding the complete compilation chain is the basis for effective debugging. The compilation process of Triton-Ascend consists of the following phases:
+## 2 Overview of Triton-Ascend Compilation Process
 
-| Phase| Input| Output| Tool/Component| Description|
+
+Understanding the complete compilation chain is the foundation for effective debugging. The compilation process of Triton-Ascend follows these main stages:
+
+
+| Stage | Input | Output | Tool/Component | Description |
 | :--- | :--- | :--- | :--- | :--- |
-| **Python Kernel compilation**| `triton_kernel.py` (Python) | `ttir.mlir` (MLIR) | Triton JIT compiler| Compiles the Triton Python kernel written by users into the standard Triton IR (TTIR).|
-| **Triton IR adaptation and transformation**| `ttir.mlir` | `ttadapter.mlir` | Ascend-adapted Triton backend| **Key debugging phase**. Converts TTIR into the adapter IR for the Ascend NPU backend.|
-| **MLIR compilation and code generation**| `ttadapter.mlir` | `.o` (executable object file)| BiSheng compiler (`bishengir-compile`)| The adapter IR is further compiled and optimized to generate binary code that can be executed on the NPU.|
+| **Python Kernel Compilation** | `triton_kernel.py` (Python) | `ttir.mlir` (MLIR) | Triton JIT Compiler | Compiles the user-written Triton Python kernel into standard Triton IR (TTIR). |
+| **Triton IR Adaptation and Conversion** | `ttir.mlir` | `ttadapter.mlir` | Triton Backend Adapted for Ascend | **Key debugging stage**. Converts TTIR into adapter IR targeting the Ascend NPU backend. |
+| **MLIR Compilation and Code Generation** | `ttadapter.mlir` | `.o` (Executable Object File) | Bisheng Compiler (`bishengir-compile`) | Further compiles and optimizes the adapter IR to generate binary code executable on the NPU. |
+
 
 ```bash
-# Triton-Ascend compilation process
+# Triton-Ascend 编译流程示意
 [Python Kernel]
      ↓ (triton.compile)
 [ttir.mlir]
      ↓        │ (TRITON_DEBUG=1 → ~/.triton/dump/)
 [ttadapter.mlir]
      ↓ (bishengir-compile)
-[NPU executable file.o]
+[NPU 可执行文件 .o]
 ```
 
-**This guide focuses on** the second phase, that is, the `ttir.mlir` → `ttadapter.mlir` conversion. This phase is the main function of Triton-Ascend.
+
+**Debugging Focus of This Guide** is centered on the second stage: the conversion process from `ttir.mlir` to `ttadapter.mlir`, which is the main functionality of Triton-Ascend.
+
 
 ## 3 Triton-Ascend Temporary File Guide
 
-During the compilation of Triton-Ascend, the system generates multiple temporary files for caching and debugging. Understanding the location and usage of these files is critical for efficient debugging.
 
-### 3.1 Cache
+During the compilation process of Triton-Ascend, the system generates various temporary files for caching and debugging. Understanding the locations and purposes of these files is crucial for efficient debugging.
 
-Triton uses the cache mechanism to accelerate the repeated compilation process. Intermediate files generated during compilation are cached in the user directory to avoid repeated compilation of the same kernel.
+
+### 3.1 Cache Files
+
+
+Triton uses a caching mechanism to accelerate repeated compilation processes. Intermediate files generated during compilation are cached in the user directory to avoid recompiling the same kernel.
+
 
 Cache directory structure:
 
-- Default path: **~/.triton/cache/**
 
-Main cache content:
+- Default path: ~/.triton/cache/
+
+
+Main cached content:
+
 
 - Input file cache: ttir.mlir file generated by the original Triton kernel
 
-- Output file cache: ttadapter.mlir file converted to adapt to Ascend
 
-- Compilation product cache: executable file generated after compilation
+- Output file cache: ttadapter.mlir file after Ascend adaptation conversion
 
-Naming conventions of cache files:
-Cache files are usually named using MD5 hash values to ensure that the same kernel code corresponds to the same cache file.
 
-**Recommendations for cache management:**
+- Build artifact cache: the final compiled executable file
 
-Periodic clearing: Cache files may occupy a large amount of disk space. You can periodically clear the cache files.
+
+Cache file naming convention:  
+Cache files are typically named using MD5 hash values to ensure that the same kernel code corresponds to the same cache file.
+
+
+**Cache Management Recommendations:**
+
+
+Regular Cleanup: The cache may occupy significant disk space, so it can be cleaned regularly:
+
 
 ```bash
 rm -rf ~/.triton/cache
 ```
 
-Disabling cache during debugging: You are advised to temporarily disable the cache to ensure that the compilation is performed each time when debugging compilation issues.
+
+Disable cache during debugging: When debugging compilation issues, it is recommended to temporarily disable the cache to ensure recompilation every time.
+
 
 ```bash
 export TRITON_ALWAYS_COMPILE=1
 ```
 
-Cache verification: If you suspect that the issue is caused by the cache, delete related cache files and perform the test again.
 
-### 3.2 Dump Files
+Cache Verification: If you suspect that the cache is causing issues, delete the relevant cache files and retest.
 
-You can set the environment variable **TRITON_DEBUG** to **1** to dump intermediate representation files to disks during compilation. These files are key resources for debugging compilation issues.
+
+### 3.2 Debugging Dump Files
+
+
+By setting the environment variable `TRITON_DEBUG=1`, intermediate representation files can be dumped to disk during the compilation process. These files are key resources for debugging compilation issues.
+
 
 Dump directory structure:
 
-- Default path: **~/.triton/dump/**
 
-Directory naming: A subdirectory named by a timestamp or unique ID is generated for each compilation session.
+- Default path: ~/.triton/dump/
 
-Main dump files:
+
+Directory Naming: Each compilation session generates a subdirectory named with a timestamp or unique ID.
+
+
+Main dump file:
+
 
 - kernel.ttir.mlir: Triton IR file (compilation input)
 
-- kernel.ttadapter.mlir: adapter IR file (conversion output)
 
-Enabling debug dump:
-Even if the cache is enabled, the system still generates dump files (overriding files in the directory with the same name) each time the system runs as long as **TRITON_DEBUG=1** is set. However, if the cache is hit and compilation is skipped, IR conversion may not be triggered. As a result, no new dump file is generated. Therefore, during debugging, you are advised to set as follows:
+- kernel.ttadapter.mlir: Adapter IR file (conversion output)
+
+
+Enable debug dump:  
+Even if caching is enabled, as long as `TRITON_DEBUG=1` is set, the system will regenerate the dump file on each run (overwriting files in the directory with the same name). However, if the cache hits and compilation is skipped, the IR transformation may not be triggered, resulting in no new dump being generated. Therefore, it is recommended to also set the following during debugging:
+
 
 ```bash
-# Set environment variables before running the Triton program.
+# 在运行 Triton 程序前设置环境变量
 export TRITON_DEBUG=1
 export TRITON_ALWAYS_COMPILE=1
 
-# Run Triton kernel.
+# 运行 Triton kernel
 python your_triton_program.py
 ```
 
+
 ### 3.3 File Lifecycle Management
 
-Understanding when these temporary files are generated and how they are cleared helps you better manage the debugging environment.
 
-File generation time table
+Understanding the generation timing and cleanup strategies of these temporary files helps to better manage the debugging environment:
 
-| File Type| Generation Phase| Triggering Condition| Clearance Suggestion|
+
+File Generation Timing Table:
+
+
+| File Type | Generation Stage | Trigger Condition | Cleanup Recommendation |
 |----------|----------|----------|----------|
-| Cache file| During each compilation| Generated when the cache is not hit| Periodic clearing or clearing during troubleshooting|
-| Dump file| After **TRITON_DEBUG=1** is set| Generated during each compilation| Manual clearing after debugging|
+| Cache files | During each compilation execution | Generated when cache miss occurs | Clean up periodically or when troubleshooting |
+| Dump files | After setting TRITON_DEBUG=1 | Generated on every compilation | Manually clean up after debugging ends |
 
-- In the production environment, debug dump should be disabled (that is, **TRITON_DEBUG=1** is not set).
 
-- The cache mechanism can significantly improve performance and should not be disabled.
+- Debug dump should be disabled in production environments (do not set `TRITON_DEBUG=1`).
 
-By properly using these temporary files, developers can efficiently locate and solve issues encountered during Triton-Ascend compilation.
+
+- The caching mechanism can significantly improve performance and should not be disabled lightly.
+
+
+By properly utilizing these temporary files, developers can more efficiently locate and resolve issues encountered during the compilation process of Triton-Ascend.
+
 
 ### 3.4 IR File Parsing
 
-The following uses the [01-vector-add.py](../../../third_party/ascend/tutorials/01-vector-add.py#) test case as an example to describe the compilation process:
-This is a simple addition calculation of two tensors. For the calculation logic, see the comments in the sample case.
-You can enable the dump file output by setting **TRITON_DEBUG=1** to obtain **kernel.ttir.mlir** and **kernel.ttadapter.mlir**.
 
-- Run the test case.
+Take the demonstration test case [01-vector-add.py](../../../third_party/ascend/tutorials/01-vector-add.py#) as an example to illustrate the compilation process:  
+This is a simple addition computation of two tensors. Please refer to the annotations in the demonstration test case for the computation logic.  
+By enabling dump file output with `TRITON_DEBUG=1` and disabling caching with `TRITON_ALWAYS_COMPILE=1` to ensure recompilation, you can obtain `kernel.ttir.mlir` and `kernel.ttadapter.mlir`.
+
+
+- Run test case
+
 
 ```bash
-TRITON_DEBUG=1 python 01-vector-add.py
+TRITON_DEBUG=1 TRITON_ALWAYS_COMPILE=1 python 01-vector-add.py
 ```
 
-After the test case is executed, the dump file path is displayed. The default path is **~/.triton/dump**. The following information is displayed:
+
+After running the test case, the dump file path will be printed, which defaults to ~/.triton/dump, as shown below:
+
 
 ```text
 Dumping intermediate results to ~/.triton/dump/xxx
-# xxx is a unique hash identifier.
+# xxx是一串hash的唯一标识符
 ```
 
-Go to the dump path and view **kernel.ttir.mlir** and **kernel.ttadapter.mlir**.
 
-#### 3.4.1 Triton Intermediate Representation (TTIR)
+Enter the dump path and view `kernel.ttir.mlir` and `kernel.ttadapter.mlir`.
 
-- TTIR example
-The **kernel.ttir.mlir** file is as follows:
+
+#### 3.4.1 TTIR (Triton Intermediate Representation)
+
+
+- TTIR Example  
+View kernel.ttir.mlir as follows:
+
 
 ```text
 module {
@@ -184,22 +241,29 @@ module {
     tt.return loc(#loc14)}}
 ```
 
-- TTIR analysis
 
-TTIR is an intermediate representation generated by the frontend of the Triton compiler. It is expressed in the Multi-Level IR (MLIR) format and retains the semantic structure of the original Triton Python kernel. In `kernel.ttir.mlir`:
+- TTIR Parsing
 
-- The `@add_kernel` function receives three pointer parameters (corresponding to the device memory addresses of input A, input B, and output C respectively) and an integer parameter `n` indicating the vector length.
-- Each triton program (vectorized execution unit) processes 1024 elements (represented by the `%c1024_i32` constant), obtains the ID of the current block through the `tt.get_program_id x`, and calculates the global offset.
-- `tt.make_range` and `tt.splat` are used to construct a SIMD-style index tensor and they are used together with `arith.addi` to generate the global address offset processed by each thread.
-- `tt.addptr` and `tt.load` are used to implement vectorized loading, and the mask `%6` (generated by `arith.cmpi slt`) is used to prevent out-of-bounds access.
-- The element-wise floating-point addition `arith.addf` is executed, and the result is returned to the global memory by using `tt.store`.
 
-The TTIR layer is still based on the native abstraction (such as `!tt.ptr<f32>`, `tt.load`, and `tt.store`) of Triton and has not been mapped to the specific memory model or execution unit of the underlying hardware. It is a platform-independent high-level IR.
+TTIR is the intermediate representation generated by the Triton compiler frontend. It is expressed in MLIR (Multi-Level IR) format and preserves the semantic structure of the original Triton Python kernel. In `kernel.ttir.mlir`:
 
-#### 3.4.1 Target-Specific Adapter Representation (TTAdapter IR)
 
-- TTAdapter IR example
-The **kernel.ttadapter.mlir** file is as follows:
+- The function `@add_kernel` takes three pointer parameters (corresponding to the device memory addresses of inputs A, B, and output C) and an integer parameter `n` representing the vector length.
+- Each Triton program (vectorized execution unit) processes 1024 elements (as indicated by the `%c1024_i32` constant), obtains the current block ID via `tt.get_program_id x`, and computes its global offset.
+- Using `tt.make_range` and `tt.splat`, SIMD-style index tensors are constructed, and combined with `arith.addi` to generate the global address offset processed by each thread.
+- Vectorized loading is performed via `tt.addptr` and `tt.load`, with mask `%6` (generated by `arith.cmpi slt`) preventing out-of-bounds access.
+- Element-wise floating-point addition `arith.addf` is executed, and the result is written back to global memory via `tt.store`.
+
+
+At the TTIR level, it is still based on Triton's native abstractions (such as `!tt.ptr<f32>`, `tt.load`/`tt.store`, etc.) and has not yet been mapped to the specific memory model or execution units of the underlying hardware. It is a platform-independent high-level IR.
+
+
+#### 3.4.1 TTAdapter IR (Target-Specific Adapter Representation)
+
+
+- TTAdapter IR Example  
+View kernel.ttadapter.mlir as follows:
+
 
 ```text
 module {
@@ -243,68 +307,93 @@ module {
 }
 ```
 
-- TTAdapter IR parsing
 
-TTIR is converted to TTAdapter IR to adapt to the Ascend NPU architecture in the Triton-Ascend compilation process. TTAdapter IR uses standard MLIR dialect (such as `memref`, `linalg`, and `scf`) and introduces NPU-specific constraints and optimization policies. In `kernel.ttadapter.mlir`:
+- TTAdapter IR Parsing
 
-- The function signature has been converted from the Triton pointer type to `memref<?xi8>` or `memref<?xf32>` with attributes. `tt.divisibility = 16` indicates the memory alignment requirement, and `tt.tensor_kind` distinguishes input (marked with **0**) and output (marked with **1**).
-- The global offset is reconstructed as a local view of a fixed size (1024) by using `memref.reinterpret_cast` for subsequent vectorization.
-- The boundary check logic is introduced to calculate the number of valid elements `%6` and use `scf.if` to control whether to fill zeros (`linalg.fill`) at the end to ensure that the SIMD width is aligned and does not exceed the boundary.
-- `memref.alloc` is used to allocate a local buffer, `memref.copy` is used to securely copy the global memory data to the local host, and `bufferization.to_tensor` is used to convert the data into tensors for operators.
-- The addition operation is performed by `arith.addf` on the tensor. The valid part of the result is truncated by `tensor.extract_slice` and written back to the target memref by `bufferization.materialize_in_destination`.
 
-TTAdapter IR has been abstracted from Triton to adapt to the Ascend NPU format.
+TTAdapter IR is an intermediate representation in the Triton-Ascend compilation flow that converts TTIR to adapt to the Ascend NPU architecture. It adopts standard MLIR dialects (such as `memref`, `linalg`, `scf`, etc.) and introduces NPU-specific constraints and optimization strategies. In `kernel.ttadapter.mlir`:
 
-## 4 Interpreter Mode
 
-The core value of the interpreter is to **isolate hardware differences**. You can set the environment variable `TRITON_INTERPRET` to `1` to forcibly execute kernel computation on the CPU. The result of the kernel computation can be used as the benchmark for determining the NPU computation accuracy.
+- The function signature has been converted from a Triton pointer type to `memref<?xi8>` or `memref<?xf32>` with attributes, where `tt.divisibility = 16` indicates memory alignment requirements, and `tt.tensor_kind` distinguishes inputs (0) from outputs (1).  
+- The global offset is restructured into a fixed-size (1024) local view via `memref.reinterpret_cast` to facilitate subsequent vectorization.  
+- Boundary check logic is introduced: the number of valid elements `%6` is computed, and `scf.if` controls whether to pad the tail with zeros (`linalg.fill`), ensuring SIMD width alignment without out-of-bounds access.  
+- A local temporary buffer is allocated using `memref.alloc`, global memory data is safely copied to the local buffer via `memref.copy`, and then converted to a tensor via `bufferization.to_tensor` for operator use.  
+- The addition operation is performed on tensors using `arith.addf`, the valid portion of the result is extracted via `tensor.extract_slice`, and written back to the target memref using `bufferization.materialize_in_destination`.
+
+
+The TTAdapter IR has been abstracted from Triton and adapted to the format for Ascend NPU.
+
+
+## 4 Interpreter Pattern
+
+
+The core value of the interpreter lies in **isolating hardware differences**. By setting the environment variable `TRITON_INTERPRET=1`, Triton is forced to execute kernel computations on the CPU, and the results can serve as a benchmark for evaluating the computational accuracy of the NPU.
+
 
 **Usage:**
 
-1. Set the environment variable `TRITON_INTERPRET` to `1` and run the program so that the Triton kernel is executed on the CPU interpreter.
-2. Insert a Python breakpoint at the position to be checked in the Triton kernel source code.
+
+1. Set the environment variable `TRITON_INTERPRET=1` and run the program to execute the Triton kernel on the CPU interpreter.
+2. Insert Python breakpoints at the positions that need to be checked in the Triton kernel source code.
+
 
     ```python
-    breakpoint()  # Python built-in breakpoint function
+    breakpoint()  # Python 内置断点函数
     ```
 
-3. The program execution is paused and you enter the Python debugger (`Pdb`). You can print and check the value of any intermediate variable.
+
+3. The program will pause at this point and enter the Python debugger (`Pdb`). You can print and inspect the values of any intermediate variables.
+
 
     ```python
-    (Pdb) p tmp0  # Print the value of variable tmp0.
+    (Pdb) p tmp0  # 打印变量 tmp0 的值
     ```
 
-- Note: The interpreter mode performs all computations on the CPU, which significantly reduces the running efficiency. Therefore, after debugging or verification, you must cancel the setting of the environment variable **TRITON_INTERPRET** or explicitly set it to **0** to ensure that the system performance is not affected.
+
+- Note: The interpreter mode executes all computations on the CPU, significantly reducing runtime efficiency. Therefore, after completing debugging or verification, be sure to unset the environment variable `TRITON_INTERPRET`, or explicitly set it to 0, to ensure system performance is not affected:
+
 
 ```bash
-# Cancel the environment variable.
+# 取消该环境变量
 unset TRITON_INTERPRET
 
-# Explicitly set it to 0.
+# 显式将其设为 0
 export TRITON_INTERPRET=0
 ```
 
+
 ## 5 Debugging Methods
 
-### 5.1 Debugging by Printing
 
-### 5.1.1 Static Printing Debugging
+### 5.1 Print Debugging Method
 
-This method uses `tl.static_print` to print the value of a constant expression during compilation. It is applicable to debugging configuration parameters and constants that are known during compilation.
 
-Setting the environment variable `TRITON_DEVICE_PRINT` to `1` can enable the `tl.static_print` function. This function allows constant values to be printed during kernel compilation. It is an effective method for verifying configuration parameters and constant expressions.
+### 5.1.1 Static Print Debugging Method
 
-Features:
 
-- `tl.static_print` is executed during compilation, not during runtime.
+This method uses `tl.static_print` to print the value of constant expressions at compile time, suitable for debugging configuration parameters and constants known at compile time.
 
-- Only compilation constants (**tl.constexpr** parameters and constant expressions) can be printed.
 
-- The output is displayed in the standard output of the compiler.
+Set the environment variable `TRITON_DEVICE_PRINT=1` to enable the `tl.static_print` function. This function allows printing constant values during kernel compilation, serving as an effective method for verifying configuration parameters and constant expressions.
+
+
+Feature Description:
+
+
+- `tl.static_print` executes at compile time, not at runtime.
+
+
+- Can only print compile-time constants (`tl.constexpr` parameters, constant expressions)
+
+
+- The output is displayed in the compiler's standard output.
+
 
 Usage:
 
-1.In the Triton kernel, add the `tl.static_print` statement for the constant parameters to be debugged.
+
+1. In the Triton kernel, add a `tl.static_print` statement for the constant parameters that need debugging.
+
 
 ```python
 import triton.language as tl
@@ -314,10 +403,10 @@ def triton_kernel(
     out_ptr0,
     in_ptr0,
     in_ptr1,
-    XBLOCK: tl.constexpr,  # Constant parameter during compilation
-    USE_FP16: tl.constexpr  # Constant parameter during compilation
+    XBLOCK: tl.constexpr,  # 编译时常量参数
+    USE_FP16: tl.constexpr  # 编译时常量参数
 ):
-    # Print constant parameters during compilation.
+    # 打印编译时常量参数
     tl.static_print("XBLOCK = ", XBLOCK)
     tl.static_print("USE_FP16 = ", USE_FP16)
 
@@ -325,7 +414,7 @@ def triton_kernel(
     tmp0 = tl.load(in_ptr0 + idx)
     tmp1 = tl.load(in_ptr1 + idx)
 
-    # Print the constant calculation result.
+    # 打印常量计算结果
     elements_per_thread = XBLOCK // 32
     tl.static_print("Elements per thread = ", elements_per_thread)
 
@@ -333,24 +422,29 @@ def triton_kernel(
     tl.store(out_ptr0 + idx, tmp2)
 ```
 
-2.Set the environment variable and run the program for compilation.
+
+2. Set environment variables and run the program for compilation.
+
 
 ```bash
-# Enable Triton debugging output (including static_print).
+# 启用 Triton 调试输出（包含 static_print）
 export TRITON_DEVICE_PRINT=1
 
-# Run the Python program. The output is displayed in the compilation phase.
+# 运行 Python 程序，会在编译阶段看到打印输出
 python your_program.py
 ```
 
-### 5.1.2 Runtime Debugging
 
-You can use `tl.device_print` to flexibly print the values of the variables to be observed.
-Setting the environment variable `TRITON_DEVICE_PRINT` to `1` can enable the `tl.device_print` function. This function allows tensor values to be printed in the kernel. It is an efficient method for verifying the computation accuracy by phase.
+### 5.1.2 Runtime Debugging Methods
 
+
+To use this method, `tl.device_print` allows flexible printing of the values of variables that need to be observed.  
+Set the environment variable `TRITON_DEVICE_PRINT=1` to enable the `tl.device_print` feature. This function allows printing tensor values inside the kernel, making it an efficient way to verify computational accuracy in stages.  
 **Usage:**
 
-1.In the Triton kernel, add the `tl.device_print` statement for the variables to be printed.
+
+In the Triton kernel, add a `tl.device_print` statement for the variable that needs to be printed.
+
 
 ```python
 import triton.language as tl
@@ -361,21 +455,25 @@ def triton_kernel(out_ptr0, in_ptr0, in_ptr1, XBLOCK: tl.constexpr):
     tmp0 = tl.load(in_ptr0 + idx)
     tmp1 = tl.load(in_ptr1 + idx)
     tmp2 = tmp0 + tmp1
-    tl.device_print("tmp2 after addition = ", tmp2)  # Print the intermediate result.
+    tl.device_print("tmp2 after addition = ", tmp2)  # 打印中间结果
     tl.store(out_ptr0 + idx, tmp2)
 ```
 
-2.Set the environment variable `TRITON_DEVICE_PRINT` to `1` and run the program. The window displays the value of the variable.
+
+2. Set the environment variable `TRITON_DEVICE_PRINT=1` and run the program. The window will print the value of this variable.
+
 
 ```bash
-# Enable Triton debugging output (including device_print).
+# 启用 Triton 调试输出（包含 device_print）
 export TRITON_DEVICE_PRINT=1
 
-# Run the Python program. The output is displayed in the compilation phase.
+# 运行 Python 程序，会在编译阶段看到打印输出
 python your_program.py
 ```
 
-After running, the variable content printed by `tl.device_print` is displayed in the `HiIPU Print` block, as shown in the following example:
+
+After running, the variable content printed by `tl.device_print` will be displayed in the `HiIPU Print` block, as shown in the example below:
+
 
 ```text
 -----------------------------------------------------------------------------
@@ -386,87 +484,112 @@ After running, the variable content printed by `tl.device_print` is displayed in
 [1.000000,2.000000,3.000000,4.000000,5.000000,6.000000,7.000000,8.000000,9.000000,10.000000,11.000000,12.000000,13.000000,14.000000,15.000000,16.000000]
 ```
 
-- Note: The print length is limited.
-The length of the tensor printed by `tl.device_print` is limited. When the tensor length exceeds a certain threshold, the output is truncated.
 
-### 5.1.3 Comparing the Two Printing Methods
+- Note: Print length limitation:  
+  `tl.device_print` has a length limit when printing tensors. Specifically, when the tensor length exceeds a certain threshold, the output will be truncated.
 
-| Feature| `tl.device_print` | `tl.static_print` |
-|------|-------------------|-------------------|
-| **Execution time**| Runtime (kernel execution)| Compilation (kernel compilation)|
-| **Output location**| Runtime standard output| Compiler standard output|
-| **Print content**| Runtime tensor values and variables| Compilation constants and constant expressions|
-| **Impact on performance**| There is runtime overhead.| No runtime overhead.|
-| **Enabling environment variables**| `TRITON_DEVICE_PRINT=1` | `TRITON_DEVICE_PRINT=1` |
 
-Description of environment variables:
+### 5.1.3 Comparing Two Printing Methods
 
-**TRITON_DEVICE_PRINT=1**: enables runtime printing and compilation printing.
 
-**TRITON_DEBUG=1**: enables all debugging outputs (including compilation and runtime printing).
+| Feature | `tl.device_print` | `tl.static_print` |
+|---------|-------------------|-------------------|
+| **Execution Timing** | Runtime (during kernel execution) | Compile time (during kernel compilation) |
+| **Output Location** | Runtime standard output | Compiler standard output |
+| **Printable Content** | Runtime tensor values, variables | Compile-time constants, constant expressions |
+| **Performance Impact** | Has runtime overhead | No runtime overhead |
+| **Enable Environment Variable** | `TRITON_DEVICE_PRINT=1` | `TRITON_DEVICE_PRINT=1` |
 
-### 5.2 Compilation Error Debugging
 
-When the `ttir.mlir` → `ttadapter.mlir` conversion fails, the `ttadapter.mlir` cannot be generated and the `MLIRCompileError` error is reported.
-You need to locate the fault at the Triton-Ascend code layer. Triton-Ascend contains the Python and C++ code layers. You need to locate the error code segment based on the call stack information in the error log and use the corresponding debugging method.
+Environment Variable Description:
 
-### 5.2.1 Debugging Python Code
 
-When the call stack information shows that the error is caused by the Python layer code of Triton-Ascend, you can use the built-in debugger pdb of Python for interactive debugging. As an effective tool for locating Python code logic errors, pdb allows you to set breakpoints, perform step-by-step execution, and check variable status.
+TRITON_DEVICE_PRINT=1: Enables runtime printing, and also enables compile-time printing.
 
-Procedure:
 
-Locating faults
-In the error log, find the Python call stack information closest to the user code, which is usually near the top of the stack. For example:
+TRITON_DEBUG=1: Enable all debug output (including compile-time and runtime prints)
+
+
+### 5.2 Compilation Error Debugging Methods
+
+
+When the conversion process from `ttir.mlir` to `ttadapter.mlir` fails and `ttadapter.mlir` cannot be generated, the error `MLIRCompileError` is reported.  
+It is necessary to go into the Triton-Ascend code level to locate the issue. Triton-Ascend includes both Python and C++ code layers. Based on the call stack information in the error log, locate the specific error code snippet and adopt the corresponding debugging method.
+
+
+### 5.2.1 Python Code Debugging Methods
+
+
+When the call stack information indicates that the error originates from the Python-level code of Triton-Ascend, you can use Python's built-in debugger `pdb` for interactive debugging. `pdb` allows you to set breakpoints, step through execution, and inspect variable states, making it an effective tool for locating logic errors in Python code.
+
+
+Steps for Use:
+
+
+Locating the Problem Entry Point  
+Find the Python call stack information closest to the user code in the error log, usually near the top of the stack, for example:
+
 
 ```text
 File "/path/to/triton/ascend/compiler.py", line 123, in compile_fn
     result = lower_function(...)
 ```
 
-Inserting a debugging breakpoint
-Insert a pdb breakpoint in the Python source file that is suspected to be faulty.
+
+Insert Debugging Breakpoints  
+Insert pdb breakpoints in the Python source file where errors are suspected.
+
 
 ```python
 def compile_fn(ttir):
-    import pdb; pdb.set_trace()  # Compatible with all Python versions
+    import pdb; pdb.set_trace()  # 兼容所有Python版本
 ```
 
+
 **Example:**
-Assume that a breakpoint is set in line 123 of `compiler.py`. After the program is suspended, the following information is displayed:
+Assume a breakpoint is set at line 123 of `compiler.py`. After the program pauses:
+
 
 ```python
 python
-(Pdb) l  # View the current code context.
+(Pdb) l  # 查看当前代码上下文
 118     def compile_fn(ttir):
 120         import pdb; pdb.set_trace()
-121         # Check the input parameter.
+121         # 检查输入参数
 122         print(f"ttir type: {type(ttir)}")
-123         result = lower_function(ttir)  # <-- The current suspension position.
+123         result = lower_function(ttir)  # <-- 当前暂停位置
 
-(Pdb) p ttir  # Check the input parameter.
-(Pdb) n # Execute the next line of code.
-(Pdb) p result  # View the result.
+(Pdb) p ttir  # 检查输入参数
+(Pdb) n  # 单步执行到下一行
+(Pdb) p result  # 查看结果
 ```
 
-### 5.2.2 Debugging Environment Variables
 
-When developing or debugging Triton operators, you can set the following environment variables to enable IR printing in different phases, which helps locate faults. The following describes the two key debugging switches.
+### 5.2.2 Environment Variable Debugging Method
+
+
+When developing or debugging Triton operators, you can enable intermediate representation (IR) printing at different stages by setting the following environment variables to help locate issues. Below is a detailed explanation of two key debugging switches.
+
 
 #### 5.2.2.1 `MLIR_ENABLE_DUMP=1`
 
-**Function:**
-Enables **automatic dump of the MLIR high-level IR** and outputs the IR of the current function in readable text to `stderr` before and after each MLIR pass is executed.
 
-**Feature:**
-Small log size: usually dozens to hundreds of lines, which are easy to read.
-Focus on high-level logic: applicable to debugging operator conversion, memory layout, and parallel policies.
+**Feature**
+Enable **automatic dump of MLIR high-level IR**. Before and after each MLIR Pass execution, output the current function's IR in human-readable text format to `stderr`.
 
-**Suggestion:**
-First choice for routine debugging: This log can be used to locate 90% of Triton operator issues.
-It can be used together with `TRITON_DEBUG=1` to further enhance information.
 
-**Enabling method:**
+**Features**  
+Small log volume: typically tens to hundreds of lines, easy to read  
+Focus on high-level logic: suitable for debugging operator transformations, memory layouts, parallel strategies, etc.
+
+
+**Usage Recommendations**  
+For daily debugging, this log is the first choice: 90% of Triton operator issues can be identified through it.  
+Combine with `TRITON_DEBUG=1` to further enhance the information.
+
+
+**Enable Method**
+
 
 ```bash
 export MLIR_ENABLE_DUMP=1
@@ -474,51 +597,59 @@ export TRITON_DEBUG=1
 python your_triton_script.py
 ```
 
+
 #### 5.2.2.2 `TRITON_ENABLE_LLVM_DEBUG=1`
 
-**Function:**
-Enables full debugging logs in the LLVM backend CodeGen phase, including instruction selection, register allocation, instruction scheduling, and machine code generation.
 
-**Feature:**
-Large log size: A single kernel can generate tens of thousands of lines of output.
-Bottom-layer details: Register name, physical/virtual register mapping, and stack frame layout are included.
-Only for LLVM experts: For common Triton developers, this is considered "noise."
+**Features**
+Enable full debugging logs for the LLVM backend CodeGen phase, including low-level processes such as instruction selection, register allocation, instruction scheduling, and machine code generation.
 
-**Suggestion:**
-Enable this function only when LLVM backend bugs are suspected (for example, invalid instructions are generated or performance exceptions occur).
-It can be used together with TRITON_LLVM_DEBUG_ONLY to limit the output scope.
 
-When `TRITON_ENABLE_LLVM_DEBUG=1` is enabled, you can use the `TRITON_LLVM_DEBUG_ONLY` environment variable to specify the module for which the logs will be output. The following is a brief description of the common `DEBUG_TYPE`:
+**Features**  
+Extremely high log volume: a single kernel can generate tens of thousands of lines of output  
+Very low-level details: includes register names, physical/virtual register mappings, stack frame layouts, etc.  
+LLVM experts only: typically considered "noise" for ordinary Triton developers
+
+
+**Usage Recommendations**  
+Enable only when suspecting an LLVM backend bug (e.g., illegal instruction generation, performance anomalies)  
+Use with `TRITON_LLVM_DEBUG_ONLY` to limit output scope
+
+
+When `TRITON_ENABLE_LLVM_DEBUG=1` is enabled, the `TRITON_LLVM_DEBUG_ONLY` environment variable can be used to specify that only debug logs from specific modules are output. Below is a brief explanation of commonly used `DEBUG_TYPE`:
+
 
 ```bash
-## `isel` (Instruction Selection)
-- **Function**: Converts LLVM IR instructions into machine instructions (MachineInstr) of the target architecture.
-- **Debugging content**: Displays the mapping process and pattern matching result between IR and machine instructions.
-- **Application scenario**: The instruction selection is suspected to be incorrect (for example, invalid instructions or inefficient instruction sequences are generated).
+## `isel`（Instruction Selection）
+- **作用**：将 LLVM IR 指令转换为目标架构的机器指令（MachineInstr）。
+- **调试内容**：显示 IR → 机器指令的映射过程、模式匹配结果。
+- **适用场景**：怀疑指令选择错误（如生成了非法指令或低效指令序列）。
 
-## `regalloc` (Register Allocation)
-- **Function**: Allocates physical registers to virtual registers and processes spilling.
-- **Debugging content**: Status before and after register allocation, conflict graph, and active interval analysis.
-- **Application scenario**: The register pressure is high, the performance deteriorates, or unexpected memory access occurs.
+## `regalloc`（Register Allocation）
+- **作用**：为虚拟寄存器分配物理寄存器，并处理溢出（spilling）。
+- **调试内容**：寄存器分配前后状态、冲突图、活跃区间分析。
+- **适用场景**：寄存器压力大、性能下降、或出现意外的内存访问。
 
-## `spiller` (Spiller)
-- **Function**: Spills some values to the stack memory when registers are insufficient.
-- **Debugging content**: Which virtual registers are spilled and the positions of inserted load/store instructions.
-- **Application scenario**: The performance deteriorates due to frequent memory access, and register usage needs to be optimized.
+## `spiller`（Spiller）
+- **作用**：当寄存器不足时，将部分值“溢出”到栈内存。
+- **调试内容**：哪些虚拟寄存器被 spill、插入的 load/store 指令位置。
+- **适用场景**：性能因频繁访存下降，需优化寄存器使用。
 
-## `peephole` (Peephole Optimizer)
-- **Function**: Performs partial optimization (such as constant folding and redundant instruction elimination) at the machine code layer.
-- **Debugging content**: Comparison of instructions before and after optimization.
-- **Application scenario**: The generated code is redundant, but high-level optimization is not overriding.
+## `peephole`（Peephole Optimizer）
+- **作用**：在机器码层面进行局部优化（如常量折叠、冗余指令消除）。
+- **调试内容**：优化前后的指令对比。
+- **适用场景**：生成代码存在明显冗余，但高层优化未覆盖。
 
-## `asm-printer` (Assembly Printer)
-- **Function**: Converts MachineInstr into the final assembly text (such as PTX, AMDGCN, and CCE).
-- **Debugging content**: Generated assembly code, symbol references, and instruction encoding.
-- **Application scenario**: Assembly syntax errors, tag mismatch, or viewing final output.
+## `asm-printer`（Assembly Printer）
+- **作用**：将 MachineInstr 转换为最终汇编文本（如 PTX、AMDGCN、CCE）。
+- **调试内容**：生成的汇编代码、符号引用、指令编码。
+- **适用场景**：汇编语法错误、标签不匹配、或需要查看最终输出。
 ```
 
-**Enabling method:**
-In the following example, it is specified that only `isel` is output.
+
+**Enable Method**  
+Taking the specified output of only `isel` as an example
+
 
 ```bash
 export TRITON_ENABLE_LLVM_DEBUG=1
@@ -526,21 +657,25 @@ export TRITON_LLVM_DEBUG_ONLY="isel"
 python your_triton_script.py
 ```
 
-**Recommended debugging process:**
-Enable `MLIR_ENABLE_DUMP=1` first.
-→ Check whether the conversion at the MLIR layer is correct (for example, ReduceOp → scf.for).
-If the MLIR is normal but the result is incorrect:
-→ It is suspected that the LLVM is faulty. Enable `TRITON_ENABLE_LLVM_DEBUG=1 + TRITON_LLVM_DEBUG_ONLY`.
-Do not directly enable `TRITON_ENABLE_LLVM_DEBUG=1`.
-→ Large log size may mask key information and severely affect the running speed.
 
-## Appendix A: Quick Reference Table for Common Environment Variables
+**Recommended Debugging Workflow**
+First enable `MLIR_ENABLE_DUMP=1`
+→ Verify whether the MLIR layer conversion is correct (e.g., ReduceOp → scf.for)
+If MLIR is correct but the result is wrong
+→ Suspect an LLVM issue, then enable `TRITON_ENABLE_LLVM_DEBUG=1 + TRITON_LLVM_DEBUG_ONLY`
+Avoid directly enabling `TRITON_ENABLE_LLVM_DEBUG=1`
+→ The logs may be too large and obscure critical information, and it severely impacts runtime performance.
 
-| Variable                     | Description                            |
-|--------------------------|----------------------------------|
-| `TRITON_DEBUG=1`         | Enables intermediate IR dump.                |
-| `TRITON_ALWAYS_COMPILE=1` | Enable recompilation and disable cache reuse. |
-| `TRITON_INTERPRET=1`     | Uses the CPU interpreter to execute the kernel.      |
-| `TRITON_DEVICE_PRINT=1`  | Enables runtime print output and compilation print output.     |
-| `MLIR_ENABLE_DUMP=1`  | Enables automatic dump of the MLIR high-level IR. Outputs the IR of the current function in readable text before and after each MLIR pass is executed.|
-| `TRITON_ENABLE_LLVM_DEBUG=1`  | Enables full debugging logs in the LLVM backend CodeGen phase, including instruction selection, register allocation, instruction scheduling, and machine code generation.|
+
+## Appendix A: Quick Reference Table of Common Environment Variables
+
+
+| Variable                   | Description                     |
+|----------------------------|----------------------------------|
+| `TRITON_DEBUG=1`          | Enable intermediate IR dump      |
+| `TRITON_ALWAYS_COMPILE=1` | Force recompilation, disable cache reuse |
+| `TRITON_INTERPRET=1`      | Execute kernel using CPU interpreter |
+| `TRITON_DEVICE_PRINT=1`   | Enable runtime print output, also enables compile-time print output |
+| `MLIR_ENABLE_DUMP=1`      | Enable automatic dump of MLIR high-level IR. Before and after each MLIR Pass execution, output the current function's IR in human-readable text form |
+| `TRITON_ENABLE_LLVM_DEBUG=1` | Enable full debug logging for the LLVM backend CodeGen phase, including instruction selection, register allocation, instruction scheduling, machine code generation, and other low-level processes |
+

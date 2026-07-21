@@ -1,96 +1,102 @@
 # Accuracy Comparison
 
-In this section, you will use Triton to write a simple accuracy comparison program.
-During this process, you will learn:
 
-- The method of comparing the accuracy of each data type in Triton.
-- Reference code: triton-ascend/ascend/examples/tutorials/14-accuracy-comparison.py
+In this section, we will use Triton to write a simple accuracy comparison program.  
+During this process, users will learn:
 
-Compute kernel:
+
+- Accuracy comparison method for each data type in Triton.
+- Reference example code: triton-ascend/ascend/examples/tutorials/14-accuracy-comparison.py
+
+
+Compute Kernel:
+
 
 ```Python
 def test_add(x0, x1):
     """
-    Test the vector addition implemented by Triton and compare its accuracy with that of PyTorch.
+    测试 Triton 实现的向量加法与 PyTorch 的结果,精度比对是否一致。
 
-    Procedure:
-    1. Use PyTorch to compute the reference result (torch_ref).
-    2. Use Triton to compile the kernel and compute the result (triton_cal).
-    3. Call accuracy_comparison to compare the accuracy.
+    步骤：
+    1. 使用 PyTorch 计算参考结果（torch_ref）
+    2. 使用 Triton 编写 kernel 并计算结果（triton_cal）
+    3. 调用 accuracy_comparison 进行精度比对
     """
 
-    # 1. Use PyTorch as the reference implementation (golden truth).
+    # 1. 使用 PyTorch 作为参考实现（golden truth）
     def torch_func(x0, x1):
         res = x0 + x1
         return res
 
-    # 2. Define the Triton kernel (executed on the NPU or GPU).
+    # 2. 定义 Triton kernel（在 NPU/GPU 上执行）
     @triton.jit
     def triton_kernel_add(
-        out_ptr0,   # Pointer to the output: location where the result is stored
-        in_ptr0,    # Pointer 0 to the input: start address of x0
-        in_ptr1,    # Pointer 1 to the input: start address of x1
-        XS: tl.constexpr  # constexpr parameter: vector length, which is determined at compile time
+        out_ptr0,   # 输出指针：结果存储位置
+        in_ptr0,    # 输入指针0：x0 的起始地址
+        in_ptr1,    # 输入指针1：x1 的起始地址
+        XS: tl.constexpr  # constexpr 参数：向量长度，在编译时确定
     ):
-        # Generate an index array of [0, 1, 2,..., XS-1].
+        # 生成 [0, 1, 2, ..., XS-1] 的索引数组
         idx = tl.arange(0, XS)
-        # Load the value of x0 from in_ptr0 + idx.
+        # 从 in_ptr0 + idx 处加载 x0 的值
         tmp0 = tl.load(in_ptr0 + idx)
-        # Load the value of x1 from in_ptr1 + idx.
+        # 从 in_ptr1 + idx 处加载 x1 的值
         tmp1 = tl.load(in_ptr1 + idx)
-        # Perform addition.
+        # 执行加法
         tmp2 = tmp0 + tmp1
-        # Write the result to out_ptr0 + idx.
+        # 将结果写入 out_ptr0 + idx
         tl.store(out_ptr0 + idx, tmp2)
 
-    # 3. Triton encapsulation function: Call the kernel and return the result.
+    # 3. Triton 封装函数：调用 kernel 并返回结果
     def triton_func(x0, x1):
-        y0 = torch.empty_like(x0)  # Create an output tensor with the same shape and dtype as the input.
-        # Start the kernel. grid = [1, 1, 1] indicates that only one block is used.
-        # Note: XS must be passed as a parameter because it is of the tl.constexpr type.
+        y0 = torch.empty_like(x0)  # 创建与输入形状、dtype 相同的输出张量
+        # 启动 kernel：grid = [1, 1, 1] 表示仅使用一个 block
+        # 注意：XS 必须作为参数传入，因为它是 tl.constexpr 类型
         triton_kernel_add[1, 1, 1](y0, x0, x1, XS=x0.numel())
         return y0
 
-    # 4. Obtain the reference result and Triton computation result.
+    # 4. 获取参考结果和 Triton 计算结果
     torch_ref = torch_func(x0, x1)
     triton_cal = triton_func(x0, x1)
 
-    # 5. Compare the accuracy.
+    # 5. 精度比对
     accuracy_comparison(triton_cal, torch_ref)
 
-    # 6. Print success information.
+    # 6. 打印成功信息
     print(f"== dtype:{triton_cal.dtype} == The accuracy comparison between triton_cal and torch_ref was successful.")
 
 
 ```
 
-Create an accuracy comparison function that adapts to each dtype and uses the corresponding accuracy comparison method.
+
+Create a precision comparison function that adapts to each dtype and uses the corresponding precision comparison method.
+
 
 ```Python
 
 def accuracy_comparison(y_cal, y_ref):
     """
-    Accuracy comparison function: Select a proper comparison policy based on the data type.
+    精度比对函数：根据数据类型选择合适的比对策略。
 
-    Processing policies for different data types:
-    - Floating-point types (float16/32, bfloat16): Use torch.testing.assert_close and set the relative/absolute error tolerance.
-    - Integer types (int8/16/32/64): The results must be equal (torch.equal).
-    - Boolean type (bool): Strict comparison is performed on the CPU (to avoid device differences).
+    不同数据类型的处理策略：
+    - 浮点类型（float16/32, bfloat16）：使用 torch.testing.assert_close，设置相对/绝对误差容限
+    - 整数类型（int8/16/32/64）：要求完全相等（torch.equal）
+    - 布尔类型（bool）：CPU 上严格比较（避免设备差异）
     """
-    # Check whether the output data types are consistent.
+    # 检查输出数据类型是否一致
     assert y_cal.dtype == y_ref.dtype, f"dtype mismatch: {y_cal.dtype} vs {y_ref.dtype}"
     tensor_dtype = y_cal.dtype
 
-    # Move the tensor to the NPU (assuming that the test is performed on the NPU).
+    # 将张量移动到 NPU（假设测试在 NPU 上进行）
     y_cal = y_cal.npu()
     y_ref = y_ref.npu()
 
-    # Select different comparison methods based on the data types.
+    # 根据数据类型选择不同的比对方式
     if tensor_dtype == torch.float16:
-        # For the float16 type, the accuracy is low, and a slightly larger error is allowed.
+        # float16 精度较低，允许稍大误差
         torch.testing.assert_close(y_ref, y_cal, rtol=1e-3, atol=1e-3, equal_nan=True)
     elif tensor_dtype == torch.bfloat16:
-        # For bfloat16, the accuracy is lower. You are advised to convert it to float32 before comparison.
+        # bfloat16 精度更低，建议转为 float32 再比较
         torch.testing.assert_close(
             y_ref.to(torch.float32),
             y_cal.to(torch.float32),
@@ -99,13 +105,13 @@ def accuracy_comparison(y_cal, y_ref):
             equal_nan=True
         )
     elif tensor_dtype == torch.float32:
-        # For the float32 type, the accuracy is high. A stricter tolerance is recommended.
+        # float32 精度较高，使用更严格的容差
         torch.testing.assert_close(y_ref, y_cal, rtol=1e-4, atol=1e-4, equal_nan=True)
     elif tensor_dtype in [torch.int64, torch.int32, torch.int16, torch.int8]:
-        # For the integer type, the results must be equal.
+        # 整数类型应完全相等
         assert torch.equal(y_cal, y_ref), f"Integer tensors are not equal for dtype {tensor_dtype}"
     elif tensor_dtype == torch.bool:
-        # For the Boolean type, comparison on the CPU is recommended to avoid differences in Boolean representation between devices.
+        # 布尔类型建议在 CPU 上比较，避免设备间布尔表示差异
         assert torch.equal(y_cal.cpu(), y_ref.cpu()), "Boolean tensors are not equal"
     else:
         raise ValueError(f'Invalid or unsupported tensor dtype: {tensor_dtype}')
@@ -113,8 +119,11 @@ def accuracy_comparison(y_cal, y_ref):
 
 ```
 
-You can run the following command to execute the sample code: tutorials/14-accuracy-comparison.py.
+
+You can use the following command to run the reference example code: `tutorials/14-accuracy-comparison.py`
+
 
 ```Python
 python triton-ascend/ascend/examples/tutorials/14-accuracy-comparison.py
 ```
+

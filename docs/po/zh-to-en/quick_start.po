@@ -1,0 +1,153 @@
+# PO translation file for docs/zh/quick_start.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-21 11:45+0000\n"
+"PO-Revision-Date: 2026-07-21 11:45+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/quick_start.md:0
+msgid "# 快速入门"
+msgstr "# Quick Start"
+
+#. type: text
+#: docs/zh/quick_start.md:2
+msgid "## 项目介绍"
+msgstr "## Project Introduction"
+
+#. type: text
+#: docs/zh/quick_start.md:4
+msgid "**Triton-Ascend**是适配华为Ascend处理器的Triton优化版本，用于高效进行核函数自动调优、算子编译及部署，通过兼容Triton核心语法并针对昇腾NPU特性进行深度优化，能够帮助用户在昇腾平台上快速开发和部署高性能计算任务。"
+msgstr "**Triton-Ascend** is an optimized version of Triton adapted for Huawei Ascend processors, designed for efficient kernel auto-tuning, operator compilation, and deployment. By maintaining compatibility with Triton's core syntax and performing deep optimizations tailored to the characteristics of Ascend NPUs, it helps users quickly develop and deploy high-performance computing tasks on the Ascend platform."
+
+#. type: text
+#: docs/zh/quick_start.md:6
+msgid "本文以**Ubuntu 22.04**环境下通过软件包部署方式在线安装并运行向量加法实例为例，指导用户快速上手使用**Triton-Ascend**。如需体验更多安装方式请阅读[安装指南](./installation_guide.md)文档。"
+msgstr "This document uses the online installation and execution of a vector addition example via package deployment in the **Ubuntu 22.04** environment as a guide to help users quickly get started with **Triton-Ascend**. For more installation methods, please refer to the [Installation Guide](./installation_guide.md) document."
+
+#. type: text
+#: docs/zh/quick_start.md:8
+msgid "## 环境准备"
+msgstr "## Environment Setup"
+
+#. type: text
+#: docs/zh/quick_start.md:10
+msgid "**硬件要求**"
+msgstr "**Hardware Requirements**"
+
+#. type: text
+#: docs/zh/quick_start.md:12
+msgid "支持的操作系统：linux（aarch64/x86_64）"
+msgstr "Supported operating systems: Linux (aarch64/x86_64)"
+
+#. type: text
+#: docs/zh/quick_start.md:14
+msgid "支持的Ascend产品：Atlas A2/A3/950系列"
+msgstr "Supported Ascend products: Atlas A2/A3/950 series"
+
+#. type: text
+#: docs/zh/quick_start.md:16
+msgid "最小硬件配置：单卡32GB内存（推荐）"
+msgstr "Minimum hardware configuration: Single GPU with 32GB memory (recommended)"
+
+#. type: text
+#: docs/zh/quick_start.md:18
+msgid "**软件依赖**"
+msgstr "**Software Dependencies**"
+
+#. type: text
+#: docs/zh/quick_start.md:20
+msgid ""
+"确定CANN、Python和TorchNPU软件版本并安装。其中，可以参考昇腾社区官网《[CANN快速安装](https://www.hiascend.com/cann/download)》\n"
+"完成驱动与固件安装。\n"
+msgstr "Determine the software versions of CANN, Python, and TorchNPU and install them. For reference, see the Ascend community official website \"[CANN Quick Installation](https://www.hiascend.com/cann/download)\" to complete the driver and firmware installation."
+
+#. type: text
+#: docs/zh/quick_start.md:22
+msgid ""
+"- CANN版本：9.0.0\n"
+"- Python版本：python3.11\n"
+"- TorchNPU版本：2.7.1.post4\n"
+msgstr ""
+"- CANN version: 9.0.0\n"
+"- Python version: python3.11\n"
+"- TorchNPU version: 2.7.1.post4\n"
+
+#. type: text
+#: docs/zh/quick_start.md:24
+msgid "注：更多配套关系请参考安装指南的[产品版本配套说明表](./installation_guide.md#环境准备)。"
+msgstr "Note: For more compatibility information, please refer to the [Product Version Compatibility Table](./installation_guide.md#environment-preparation) in the installation guide."
+
+#. type: text
+#: docs/zh/quick_start.md:26
+msgid "## 快速安装"
+msgstr "## Quick Installation"
+
+#. type: code
+#: docs/zh/quick_start.md:28
+msgid ""
+"```bash\n"
+"pip install triton-ascend==3.2.1 --extra-index-url=https://triton-ascend.osinfra.cn/pypi/simple\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/quick_start.md:30
+msgid "## 快速开始"
+msgstr "## Quick Start"
+
+#. type: text
+#: docs/zh/quick_start.md:32
+msgid "**运行tutorials中向量加法实例验证结果**"
+msgstr "**Run the vector addition example in tutorials to verify the result**"
+
+#. type: text
+#: docs/zh/quick_start.md:34
+msgid ""
+"向量加法实例：[01-vector-add.py](../../third_party/ascend/tutorials/01-vector-add.py)\n"
+"通过对比Triton算子与PyTorch原生计算的输出结果，证明昇腾NPU设备可正确调用Triton算子并保证计算精度。\n"
+msgstr ""
+"Vector addition example: [01-vector-add.py](../../third_party/ascend/tutorials/01-vector-add.py)\n"
+"By comparing the output results of the Triton operator with PyTorch native computation, it is demonstrated that the Ascend NPU device can correctly invoke the Triton operator and ensure computational accuracy.\n"
+
+#. type: code
+#: docs/zh/quick_start.md:36
+msgid ""
+"```bash\n"
+"# 设置CANN环境变量（以root用户默认安装路径`/usr/local/Ascend`为例）\n"
+"source /usr/local/Ascend/ascend-toolkit/set_env.sh\n"
+"# 拉取triton-ascend源码仓及用例\n"
+"git clone https://github.com/triton-lang/triton-ascend.git\n"
+"# 运行tutorials实例\n"
+"python3 ./triton-ascend/third_party/ascend/tutorials/01-vector-add.py\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/quick_start.md:38
+msgid "观察到类似的输出即说明环境配置正确。"
+msgstr "Observing similar output indicates that the environment configuration is correct."
+
+#. type: code
+#: docs/zh/quick_start.md:40
+msgid ""
+"```shell\n"
+"tensor([0.8329, 1.0024, 1.3639,  ..., 1.0796, 1.0406, 1.5811], device='npu:0')\n"
+"tensor([0.8329, 1.0024, 1.3639,  ..., 1.0796, 1.0406, 1.5811], device='npu:0')\n"
+"The maximum difference between torch and triton is 0.0\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/quick_start.md:41
+msgid ""
+"\n"
+"\n"
+msgstr ""
