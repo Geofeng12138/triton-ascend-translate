@@ -12,3 +12,13 @@ sphinx:
 python:
   install:
   - requirements: docs/zh/requirement.txt
+
+# English version (using gettext translations from locale/en/LC_MESSAGES/)
+# Source directory is docs/zh/ (the Chinese .md files), with language=en
+# Sphinx will automatically apply .po translations from locale/en/LC_MESSAGES/
+# to produce English HTML output.
+# Triggered by clicking "English" in the Read the Docs language drop-down.
+# https://docs.readthedocs.io/en/stable/localization.html#translating-using-gettext-catalogs
+translations:
+  en:
+    configuration: docs/en/conf.py
