@@ -17,7 +17,6 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-
 """
 English documentation build configuration for Triton Ascend.
 
@@ -76,6 +75,7 @@ html_css_files = ["custom.css"]
 # ── Mock stubs for triton C extensions ──
 _sys.path.insert(0, _os.path.join(_REPO, "python"))
 
+
 def _load_module(module_name, file_path):
     import importlib.util as _ilu
     spec = _ilu.spec_from_file_location(module_name, file_path)
@@ -84,6 +84,7 @@ def _load_module(module_name, file_path):
     module = _ilu.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
 
 _force_mock = (_os.environ.get("TRITON_DOCS_FORCE_MOCK", "").lower() in ("1", "true", "yes")
                or _os.environ.get("READTHEDOCS") == "True")
@@ -110,10 +111,12 @@ import sphinx.util.inspect  # noqa: E402
 
 
 def _unwrap_jit(fn):
+
     def wrapper(obj, **kwargs):
         if isinstance(obj, triton.runtime.JITFunction):
             obj = obj.fn
         return fn(obj, **kwargs)
+
     return wrapper
 
 

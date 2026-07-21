@@ -73,10 +73,10 @@ Rules:
 Text to translate:
 {content}"""
 
-
 # ---------------------------------------------------------------------------
 # PO / POT file parsing
 # ---------------------------------------------------------------------------
+
 
 def parse_pot_file(filepath: Path) -> dict:
     """
@@ -183,23 +183,21 @@ def write_po_file(filepath: Path, entries: dict, source_pot: str = ""):
 
     lines = []
     # Header
-    lines.append(
-        f'# English translations for triton-ascend docs.\n'
-        f'# Copyright (c) 2025 Huawei Technologies Co., Ltd.\n'
-        f'#\n'
-        f'msgid ""\n'
-        f'msgstr ""\n'
-        f'"Project-Id-Version: triton-ascend-docs\\n"\n'
-        f'"POT-Creation-Date: {now_str}\\n"\n'
-        f'"PO-Revision-Date: {now_str}\\n"\n'
-        f'"Last-Translator: Auto Translation (DeepSeek)\\n"\n'
-        f'"Language-Team: English\\n"\n'
-        f'"Language: en\\n"\n'
-        f'"MIME-Version: 1.0\\n"\n'
-        f'"Content-Type: text/plain; charset=UTF-8\\n"\n'
-        f'"Content-Transfer-Encoding: 8bit\\n"\n'
-        f'"Plural-Forms: nplurals=2; plural=(n != 1);\\n"\n'
-    )
+    lines.append(f'# English translations for triton-ascend docs.\n'
+                 f'# Copyright (c) 2025 Huawei Technologies Co., Ltd.\n'
+                 f'#\n'
+                 f'msgid ""\n'
+                 f'msgstr ""\n'
+                 f'"Project-Id-Version: triton-ascend-docs\\n"\n'
+                 f'"POT-Creation-Date: {now_str}\\n"\n'
+                 f'"PO-Revision-Date: {now_str}\\n"\n'
+                 f'"Last-Translator: Auto Translation (DeepSeek)\\n"\n'
+                 f'"Language-Team: English\\n"\n'
+                 f'"Language: en\\n"\n'
+                 f'"MIME-Version: 1.0\\n"\n'
+                 f'"Content-Type: text/plain; charset=UTF-8\\n"\n'
+                 f'"Content-Transfer-Encoding: 8bit\\n"\n'
+                 f'"Plural-Forms: nplurals=2; plural=(n != 1);\\n"\n')
 
     for entry in entries.values():
         msgid = entry["msgid"]
@@ -243,6 +241,7 @@ def _escape_po(s: str) -> str:
 # ---------------------------------------------------------------------------
 # Translation engine
 # ---------------------------------------------------------------------------
+
 
 class PoTranslator:
     """Translate .pot entries to .po using DeepSeek API with translation memory."""
@@ -448,7 +447,8 @@ def run_sphinx_gettext():
     """Run sphinx-build -b gettext to generate/update .pot files."""
     print("Running: sphinx-build -b gettext docs/zh locale/")
     result = subprocess.run(
-        [sys.executable, "-m", "sphinx", "-b", "gettext", "-q", str(ZH_DIR), str(LOCALE_DIR)],
+        [sys.executable, "-m", "sphinx", "-b", "gettext", "-q",
+         str(ZH_DIR), str(LOCALE_DIR)],
         capture_output=True,
         text=True,
     )
@@ -465,6 +465,7 @@ def run_sphinx_gettext():
 # CLI
 # ---------------------------------------------------------------------------
 
+
 def write_empty_json(output_json: str, reason: str = ""):
     report = {
         "success_files": [],
@@ -479,9 +480,7 @@ def write_empty_json(output_json: str, reason: str = ""):
 
 
 async def async_main():
-    parser = argparse.ArgumentParser(
-        description="Sphinx gettext translation: docs/zh/ → locale/en/LC_MESSAGES/"
-    )
+    parser = argparse.ArgumentParser(description="Sphinx gettext translation: docs/zh/ → locale/en/LC_MESSAGES/")
     parser.add_argument("--files", help="Comma-separated .pot file names (relative to locale/zh/LC_MESSAGES/)")
     parser.add_argument("--all", action="store_true", help="Translate all .pot files")
     parser.add_argument("--first-time", action="store_true",
