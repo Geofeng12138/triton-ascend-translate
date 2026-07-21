@@ -21,4 +21,4 @@ python:
 # https://docs.readthedocs.io/en/stable/localization.html#translating-using-gettext-catalogs
 translations:
   en:
-    configuration: docs/en/conf.py
+    configuration: docs/conf_en.py
