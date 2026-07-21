@@ -1,0 +1,154 @@
+# PO translation file for docs/zh/triton_api/Inline_Assembly/inline_asm_elementwise.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 10:50+0000\n"
+"PO-Revision-Date: 2026-07-20 10:50+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Inline_Assembly/inline_asm_elementwise.md:0
+msgid "# triton.language.inline_asm_elementwise"
+msgstr "# triton.language.inline_asm_elementwise"
+
+#. type: text
+#: docs/zh/triton_api/Inline_Assembly/inline_asm_elementwise.md:2
+msgid "## 1. 函数概述"
+msgstr "## 1. Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Inline_Assembly/inline_asm_elementwise.md:4
+msgid "`inline_asm_elementwise` 用于在Triton内核中执行内联汇编代码，实现对张量的逐元素操作。"
+msgstr "`inline_asm_elementwise` is used to execute inline assembly code within a Triton kernel, enabling element-wise operations on tensors."
+
+#. type: code
+#: docs/zh/triton_api/Inline_Assembly/inline_asm_elementwise.md:6
+msgid ""
+"```python\n"
+"triton.language.inline_asm_elementwise(asm, constraints, args, dtype, is_pure, pack, _semantic=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Inline_Assembly/inline_asm_elementwise.md:8
+msgid "## 2. 规格"
+msgstr "## 2. Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Inline_Assembly/inline_asm_elementwise.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Inline_Assembly/inline_asm_elementwise.md:12
+msgid ""
+"| 参数 | 类型 | 默认值 | 含义说明 |\n"
+"|------|------|--------|----------|\n"
+"| `asm` | `str` | 必需 | 要执行的汇编代码，必须匹配目标平台的汇编格式 |\n"
+"| `constraints` | `str` | 必需 | LLVM格式的汇编约束条件 |\n"
+"| `args` | `tensor` | 必需 | 输入张量，其值会传递给汇编块 |\n"
+"| `dtype` | `dtype` / `Sequence[dtype]` | 必需 | 返回张量的元素类型（可以是单个类型或类型元组） |\n"
+"| `is_pure` | `bool` | 必需 | 如果为True，编译器假设汇编块没有副作用 |\n"
+"| `pack` | `int` | 必需 | 每次内联汇编调用处理的元素数量 |\n"
+"| `_semantic` | - | - | 保留参数，暂不支持外部调用 |\n"
+msgstr ""
+"| Parameter | Type | Default | Description |\n"
+"|-----------|------|---------|-------------|\n"
+"| `asm` | `str` | Required | Assembly code to execute, must match the target platform's assembly format |\n"
+"| `constraints` | `str` | Required | LLVM-format assembly constraints |\n"
+"| `args` | `tensor` | Required | Input tensors whose values are passed to the assembly block |\n"
+"| `dtype` | `dtype` / `Sequence[dtype]` | Required | Element type of the returned tensor (can be a single type or a tuple of types) |\n"
+"| `is_pure` | `bool` | Required | If True, the compiler assumes the assembly block has no side effects |\n"
+"| `pack` | `int` | Required | Number of elements processed per inline assembly call |\n"
+"| `_semantic` | - | - | Reserved parameter, external calls not supported for now |\n"
+
+#. type: text
+#: docs/zh/triton_api/Inline_Assembly/inline_asm_elementwise.md:14
+msgid "### 2.2 类型支持"
+msgstr "### 2.2 Type Support"
+
+#. type: text
+#: docs/zh/triton_api/Inline_Assembly/inline_asm_elementwise.md:16
+msgid ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | × | × | ×| × | ✓ |×|   ✓  | × | × | ×  |\n"
+msgstr ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | × | × | × | × | ✓ | × | ✓ | × | × | × |\n"
+
+#. type: text
+#: docs/zh/triton_api/Inline_Assembly/inline_asm_elementwise.md:18
+msgid "Ascend 对比 GPU 的输入张量类型 缺失uint8、uint16、uint32、uint64、fp16、 fp64 、bf16 、bool的支持能力。"
+msgstr "Ascend compared to GPU lacks support for input tensor types uint8, uint16, uint32, uint64, fp16, fp64, bf16, and bool."
+
+#. type: text
+#: docs/zh/triton_api/Inline_Assembly/inline_asm_elementwise.md:20
+msgid "### 2.3 使用方法"
+msgstr "### 2.3 Usage"
+
+#. type: code
+#: docs/zh/triton_api/Inline_Assembly/inline_asm_elementwise.md:22
+msgid ""
+"```python\n"
+"import triton.language as tl\n"
+"@triton.jit\n"
+"def triton_asm_add(x_ptr,\n"
+"               y_ptr,\n"
+"               output_ptr,\n"
+"               n_elements,\n"
+"               BLOCK_SIZE: tl.constexpr,\n"
+"               ):\n"
+"    pid = tl.program_id(axis=0)\n"
+"    block_start = pid * BLOCK_SIZE\n"
+"    offsets = block_start + tl.arange(0, BLOCK_SIZE)\n"
+"    mask = offsets < n_elements\n"
+"    x = tl.load(x_ptr + offsets, mask=mask)\n"
+"    y = tl.load(y_ptr + offsets, mask=mask)\n"
+"    output = tl.inline_asm_elementwise(\n"
+"        asm=\"\"\"\n"
+"        ADD.s64 $0, $1, $2\n"
+"        \"\"\",\n"
+"        constraints=(\n"
+"            \"=l,l,l\"\n"
+"        ),\n"
+"        args=[x, y],\n"
+"        dtype=tl.int64,\n"
+"        is_pure=True,\n"
+"        pack=1,\n"
+"    )\n"
+"    tl.store(output_ptr + offsets, output, mask=mask)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Inline_Assembly/inline_asm_elementwise.md:24
+msgid "## 3. 语义GAP"
+msgstr "## 3. Semantic Gap"
+
+#. type: text
+#: docs/zh/triton_api/Inline_Assembly/inline_asm_elementwise.md:26
+msgid ""
+"1.内联汇编的寄存器仅支持`int64(s64)` 和`float32(f32)`。\n"
+"2.约束限制仅支持`l`。\n"
+"3.目前仅支持输入一维张量，计算高维张量需展开。\n"
+msgstr ""
+"1. The registers for inline assembly only support `int64(s64)` and `float32(f32)`.\n"
+"2. Constraint restrictions only support `l`.\n"
+"3. Currently, only one-dimensional tensors are supported for input; computing higher-dimensional tensors requires flattening.\n"
+
+#. type: blank
+#: docs/zh/triton_api/Inline_Assembly/inline_asm_elementwise.md:27
+msgid ""
+"\n"
+"\n"
+msgstr ""

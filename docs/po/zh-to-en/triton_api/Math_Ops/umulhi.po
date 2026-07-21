@@ -1,0 +1,166 @@
+# PO translation file for docs/zh/triton_api/Math_Ops/umulhi.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 11:09+0000\n"
+"PO-Revision-Date: 2026-07-20 11:09+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:0
+msgid "# triton.language.umulhi"
+msgstr "# triton.language.umulhi"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:2
+msgid "## 1. 函数概述"
+msgstr "## 1. Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:4
+msgid "简介：计算x和y的2N位乘积中每个元素的最显著N位。"
+msgstr "Introduction: Compute the most significant N bits of each element in the 2N-bit product of x and y."
+
+#. type: code
+#: docs/zh/triton_api/Math_Ops/umulhi.md:6
+msgid ""
+"```python\n"
+"triton.language.umulhi(x, y, _semantic=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:8
+msgid "## 2. 规格"
+msgstr "## 2. Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:12
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `x`        | `tensor`          | 张量数据                                                      |\n"
+"| `y`        | `tensor`          | 张量数据                                                      |\n"
+"| `_semantic`   | -                 | 保留参数，暂不支持外部调用           |\n"
+msgstr ""
+"| Parameter Name | Type     | Description                                      |\n"
+"|---------------|----------|--------------------------------------------------|\n"
+"| `x`           | `tensor` | Tensor data                                      |\n"
+"| `y`           | `tensor` | Tensor data                                      |\n"
+"| `_semantic`   | -        | Reserved parameter, currently not supported for external calls |\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:14
+msgid ""
+"返回值：\n"
+"`x`：输出张量的shape与输入x的shape相同\n"
+msgstr ""
+"Return value:  \n"
+"`x`: The shape of the output tensor is the same as that of the input `x`.\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:16
+msgid "### 2.2 OP 规格"
+msgstr "### 2.2 OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:20
+msgid ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | ×    | ×     | √     | ×     | ×     | ×      | ×      | √     | ×    | ×    | ×    | ×    | ×    |\n"
+"| Ascend A2/A3 | ×    | ×     | √     | ×     | ×     | ×      | ×      | ×     | ×    | ×    | ×    | ×    | ×    |\n"
+msgstr ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | ×    | ×     | √     | ×     | ×     | ×      | ×      | √     | ×    | ×    | ×    | ×    | ×    |\n"
+"| Ascend A2/A3 | ×    | ×     | √     | ×     | ×     | ×      | ×      | ×     | ×    | ×    | ×    | ×    | ×    |\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:22
+msgid ""
+"结论：Ascend 相比 GPU 缺失 int64 支持。\n"
+"torch_npu 对 uint8 的支持。\n"
+msgstr ""
+"Conclusion: Ascend lacks int64 support compared to GPU.  \n"
+"torch_npu supports uint8.\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:24
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:26
+msgid ""
+"|        | 支持维度范围          |\n"
+"| ------ | --------------- |\n"
+"| GPU    | 仅支持 1~5维 tensor |\n"
+"| Ascend A2/A3 | 仅支持 1~5维 tensor |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| ------ | ----------------------- |\n"
+"| GPU    | Only supports 1~5D tensor |\n"
+"| Ascend A2/A3 | Only supports 1~5D tensor |\n"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:28
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异，均支持 1 至 5 维张量。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms, both supporting tensors from 1 to 5 dimensions."
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:30
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Limitations"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:32
+msgid "int64不支持"
+msgstr "int64 is not supported"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:34
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Math_Ops/umulhi.md:36
+msgid "以下示例实现了对输入张量 `x` 做显著N位："
+msgstr "The following example implements significant N-bit quantization on the input tensor `x`."
+
+#. type: code
+#: docs/zh/triton_api/Math_Ops/umulhi.md:38
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def umulhi_kernel(X, Y, Z, N: tl.constexpr):\n"
+"    offs = tl.arange(0, N)\n"
+"    x = tl.load(X + offs)\n"
+"    y = tl.load(Y + offs)\n"
+"    z = tl.umulhi(x, y)\n"
+"    tl.store(Z + tl.arange(0, N), z)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Math_Ops/umulhi.md:39
+msgid ""
+"\n"
+"\n"
+msgstr ""

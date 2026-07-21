@@ -1,0 +1,273 @@
+# PO translation file for docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 11:12+0000\n"
+"PO-Revision-Date: 2026-07-20 11:12+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:0
+msgid "# triton.language.store"
+msgstr "# triton.language.store"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:4
+msgid "原型："
+msgstr "Prototype:"
+
+#. type: code
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:6
+msgid ""
+"```python\n"
+"triton.language.store(\n"
+" pointer,\n"
+" value,\n"
+" mask=None,\n"
+" boundary_check=(),\n"
+" cache_modifier='',\n"
+" eviction_policy='',\n"
+" _semantic=None\n"
+")\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:8
+msgid "简介：将一个Tensor/Scalar从UnifiedBuffer按照`pointer`所指的地址存回GlobalMemory"
+msgstr "Introduction: Store a Tensor/Scalar from UnifiedBuffer back to GlobalMemory according to the address pointed to by `pointer`."
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:10
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:12
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:14
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `pointer`        | `triton.PointerType` <br> 或 `tensor<triton.PointerType>` <br> 或`triton.PointerType<tensor>`（来源于`tl.make_block_ptr`）         | 指向GM上待存储地址的指针                                                    |\n"
+"| `value`       | `tensor` 或 `scalar`  | 要存储的值，支持隐式广播和隐式类型转换  |\n"
+"| `mask`       | `int1`或`tensor<int1>`    | 可选参数，当且仅当`pointer` 不来源于`tl.make_block_ptr`时可传入<br>若`mask[i]==False` ，则不会将`value[i]`存储到`pointer[i]`指向的地址,是`True`则正常存储 <br>若`pointer`来源于`tl.make_block_ptr`，则`mask`必须是`None`                                        |\n"
+"| `boundary_check` | `tuple(int)` | 可选参数，当且仅当`pointer`来源于`tl.make_block_ptr`时可传入<br>整数元组，指示需要做边界检查的维度                                         |\n"
+"| `cache_modifier`   | `\"\"` 或 `\"ca\"`或`\"cg\"`                | 可选参数，控制NVIDIA PTX上的cache选项，对Ascend硬件无效                                                |\n"
+"| `eviction_policy`   | `str`                | 控制NVIDIA PTX的eviction策略， 对Ascend硬件无效                                                |\n"
+"| `_semantic`   | -                 | 保留参数，暂不支持外部调用                                                |\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"| ------------- | ---- | ----------- |\n"
+"| `pointer` | `triton.PointerType` <br> or `tensor<triton.PointerType>` <br> or `triton.PointerType<tensor>` (from `tl.make_block_ptr`) | Pointer to the address on GM where data is to be stored |\n"
+"| `value` | `tensor` or `scalar` | The value to be stored, supports implicit broadcasting and implicit type conversion |\n"
+"| `mask` | `int1` or `tensor<int1>` | Optional parameter, can only be passed when `pointer` is not from `tl.make_block_ptr`<br>If `mask[i]==False`, `value[i]` will not be stored to the address pointed by `pointer[i]`; if `True`, normal storage occurs<br>If `pointer` is from `tl.make_block_ptr`, `mask` must be `None` |\n"
+"| `boundary_check` | `tuple(int)` | Optional parameter, can only be passed when `pointer` is from `tl.make_block_ptr`<br>Integer tuple indicating which dimensions require boundary checking |\n"
+"| `cache_modifier` | `\"\"` or `\"ca\"` or `\"cg\"` | Optional parameter, controls cache options on NVIDIA PTX, ineffective on Ascend hardware |\n"
+"| `eviction_policy` | `str` | Controls the eviction policy on NVIDIA PTX, ineffective on Ascend hardware |\n"
+"| `_semantic` | - | Reserved parameter, external calls not supported for now |\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:16
+msgid "返回值：无返回值"
+msgstr "Return value: none"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:18
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:20
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:22
+msgid ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | √    | √     | √     | √     | √      | √      | √      | √     | √    | √    | √    | √    | √    |\n"
+"| Ascend A2/A3 | √    | √     | √     | ×     | ×      | ×      | ×      | √     | √    | √    | ×    | √    |  √    |\n"
+msgstr ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | √    | √     | √     | √     | √      | √      | √      | √     | √    | √    | √    | √    | √    |\n"
+"| Ascend A2/A3 | √    | √     | √     | ×     | ×      | ×      | ×      | √     | √    | √    | ×    | √    | √    |\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:24
+msgid ""
+"结论：Ascend 对比 GPU 缺失uint8、uint16、uint32、uint64、fp64的支持能力（硬件限制）。\n"
+"专家意见：eviction_policy和cache_modifier参见load\n"
+msgstr ""
+"Conclusion: Ascend lacks support for uint8, uint16, uint32, uint64, and fp64 compared to GPU (hardware limitation).  \n"
+"Expert opinion: For eviction_policy and cache_modifier, refer to load.\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:26
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:28
+msgid ""
+"|        | 支持维度范围          |\n"
+"| ------ | --------------- |\n"
+"| GPU    | 支持scalar和1~5维 tensor |\n"
+"| Ascend | 支持scalar和1~5维 tensor |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| ------ | ----------------------- |\n"
+"| GPU    | Supports scalar and 1~5D tensors |\n"
+"| Ascend | Supports scalar and 1~5D tensors |\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:30
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异，均支持 1 至 5 维张量。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms, both support 1 to 5-dimensional tensors."
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:32
+msgid "#### 2.2.3 社区约束"
+msgstr "#### 2.2.3 Community Constraints"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:34
+msgid ""
+"1. 若`pointer`是一个单指针：\n"
+"   - 此时`value`和`mask`必须是一个标量\n"
+"   - `other`会隐式类型转换成`pointer.dtype.element_ty`的数据类型\n"
+"   - 此时不允许传入`boundary_check`\n"
+"2. 若`pointer`是一个N-Dimensional tensor：\n"
+"   - `mask`和`value`会隐式广播到和`pointer`相同的shape\n"
+"   - 此时不允许传入`boundary_check`\n"
+"3. 若`pointer`来自于`tl.make_block_ptr`:\n"
+"   - 此时`mask` 必须是None\n"
+"   - 此时可以通过`boundary_check`设置边界检查\n"
+msgstr ""
+"1. If `pointer` is a single pointer:  \n"
+"   - In this case, `value` and `mask` must be scalars.  \n"
+"   - `other` is implicitly type-cast to the data type of `pointer.dtype.element_ty`.  \n"
+"   - `boundary_check` is not allowed in this case.  \n"
+"2. If `pointer` is an N-dimensional tensor:  \n"
+"   - `mask` and `value` are implicitly broadcast to the same shape as `pointer`.  \n"
+"   - `boundary_check` is not allowed in this case.  \n"
+"3. If `pointer` comes from `tl.make_block_ptr`:  \n"
+"   - In this case, `mask` must be `None`.  \n"
+"   - Boundary checking can be set via `boundary_check`.\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:36
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:38
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capability deficiency and inability to achieve"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:40
+msgid "Ascend 对比 GPU 缺失uint8、uint16、uint32、uint64、fp64的支持能力（硬件限制）, eviction_policy和cache_modifier在NPU上功能还不完善。"
+msgstr "Ascend lacks support for uint8, uint16, uint32, uint64, and fp64 compared to GPU (hardware limitation), and the functionality of eviction_policy and cache_modifier on NPU is not yet complete."
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:42
+msgid ""
+"| 差异点                                 | 描述                                                         | 解决途径                       |\n"
+"| -------------------------------------- | ------------------------------------------------------------ | ------------------------------ |\n"
+"| 离散mask的泛化性问题                   | 当前对于store中离散mask的处理，是将store拆解为atomic {load,select,store}，在corner case中存在一定泛化性问题 | 大量泛化测试暴露问题，迭代解决 |\n"
+"| 与分支、循环语句搭配使用时的泛化性问题 | 当前tl.load的`pointer`和`mask`的计算过程，如果涉及较复杂的循环和分支语句，可能会出现编译问题 | 大量泛化测试暴露问题，迭代解决 |\n"
+msgstr ""
+"| Difference | Description | Solution |\n"
+"| --- | --- | --- |\n"
+"| Generalization issue with discrete masks | The current handling of discrete masks in `store` decomposes the store into atomic {load, select, store} operations, which has certain generalization issues in corner cases | Expose issues through extensive generalization testing, resolve iteratively |\n"
+"| Generalization issue when used with branch and loop statements | If the computation of `pointer` and `mask` in `tl.load` involves complex loops and branch statements, compilation issues may arise | Expose issues through extensive generalization testing, resolve iteratively |\n"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:44
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:46
+msgid "以下示例中通过`triton_ldst_indirect_08_kernel`和`triton_ldst_indirect_08_func`的配合调用，实现了`torch_ldst_indirect_08_func`的功能："
+msgstr "In the following example, the functionality of `torch_ldst_indirect_08_func` is achieved through the coordinated invocation of `triton_ldst_indirect_08_kernel` and `triton_ldst_indirect_08_func`."
+
+#. type: code
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:48
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def triton_ldst_indirect_08_kernel(\n"
+"    out_ptr0, in_ptr1, in_ptr2, in_ptr3, stride_in_r,\n"
+"    XS: tl.constexpr, RS: tl.constexpr\n"
+"):\n"
+"    pid = tl.program_id(0)\n"
+"    in_idx0 = pid * XS + tl.arange(0, XS)\n"
+"    in_idx1 = tl.arange(0, RS)\n"
+"    tmp0 = tl.arange(0, XS)\n"
+"    tmp1 = tl.load(in_ptr1 + in_idx1)\n"
+"    in_idx2 = tmp0[:, None] * stride_in_r + tmp1[None, :]\n"
+"    tmp2 = tl.load(in_ptr2 + in_idx2)\n"
+"    tmp2 = tl_math.exp(tmp2)\n"
+"    tmp3 = tl.load(in_ptr3 + in_idx1)\n"
+"    tmp3 = tmp3 + 1 - 8\n"
+"    out0_idx = in_idx0[:, None] * RS + tmp3[None, :]\n"
+"    tl.store(out_ptr0 + out0_idx, tmp2)\n"
+"\n"
+"def triton_ldst_indirect_08_func(xc, x2, xs, rs): # [8-24] ori 8 16\n"
+"    nr = x2.size()[0]\n"
+"    nc = xc.numel()\n"
+"    stride_in_r = x2.stride()[0]\n"
+"    assert nr == xs, \"test only single core\"\n"
+"    y0 = torch.empty((nr, nc), dtype=x2.dtype, device=x2.device)\n"
+"    xc1 = xc - 1\n"
+"    triton_ldst_indirect_08_kernel[nr // xs, 1, 1](\n"
+"        y0, xc, x2, xc1, stride_in_r, XS = xs, RS = rs)\n"
+"    return y0\n"
+"\n"
+"def torch_ldst_indirect_08_func(xr, xc, x2):\n"
+"    flatten_idx = (xr[:, None] * x2.stride()[0] + xc[None, :]).flatten()\n"
+"    extracted = x2.flatten()[flatten_idx].reshape([xr.numel(), xc.numel()])\n"
+"    print(extracted)\n"
+"    return torch.exp(extracted)\n"
+"\n"
+"DEV = \"npu\"\n"
+"DTYPE = torch.float32\n"
+"offset = 8\n"
+"N0, N1 = 16, 32\n"
+"blocksize = 8\n"
+"lowdimsize = N0\n"
+"assert N1 >= N0+offset, \"N1 must be >= N0+offset\"\n"
+"assert N0 == lowdimsize, \"N0 must be == lowdimsize\"\n"
+"xc = offset + torch.arange(0, N0, device=DEV)\n"
+"xr = torch.arange(0, blocksize, device=DEV)\n"
+"x2 = torch.randn((blocksize, N1), dtype=DTYPE, device=DEV)\n"
+"torch_ref = torch_ldst_indirect_08_func(xr, xc, x2)\n"
+"triton_cal = triton_ldst_indirect_08_func(xc, x2, blocksize, lowdimsize)\n"
+"torch.testing.assert_close(triton_cal, torch_ref)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Memory_Pointer_Ops/tl.store.md:49
+msgid ""
+"\n"
+"\n"
+msgstr ""

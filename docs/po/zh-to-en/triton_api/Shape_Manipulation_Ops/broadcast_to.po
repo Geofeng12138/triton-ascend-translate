@@ -1,0 +1,185 @@
+# PO translation file for docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 11:21+0000\n"
+"PO-Revision-Date: 2026-07-20 11:21+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:0
+msgid "# triton.language.broadcast_to"
+msgstr "# triton.language.broadcast_to"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:2
+msgid "## 1 功能作用说明"
+msgstr "## 1 Function Description"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:4
+msgid "将张量广播到目标形状，自动处理维度对齐。广播操作不会复制数据，而是通过改变张量的形状和步长来实现。"
+msgstr "Broadcast the tensor to the target shape, automatically handling dimension alignment. The broadcast operation does not copy data; instead, it is achieved by changing the tensor's shape and stride."
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:6
+msgid "**语法：**"
+msgstr "**Syntax:**"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:8
+msgid ""
+"- `triton.language.broadcast_to(input, shape)` - 函数调用形式\n"
+"- `input.broadcast_to(shape)` - 成员函数形式\n"
+msgstr ""
+"- `triton.language.broadcast_to(input, shape)` - function call form\n"
+"- `input.broadcast_to(shape)` - member function form\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:10
+msgid "**功能：**"
+msgstr "**Function:**"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:12
+msgid ""
+"- 自动处理维度对齐，将大小为1的维度扩展到目标形状中对应维度的大小\n"
+"- 保持数据不变，仅改变张量的形状信息\n"
+msgstr ""
+"- Automatically handle dimension alignment by expanding dimensions of size 1 to match the corresponding dimension size in the target shape.  \n"
+"- Keep the data unchanged, only modify the shape information of the tensor.\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:14
+msgid "## 2 参数规格"
+msgstr "## 2 Parameter Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:16
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:18
+msgid ""
+"| 参数名 | 类型 | 必需 | 说明 |\n"
+"|--------|------|------|------|\n"
+"| input | tensor | 是 | 输入张量 |\n"
+"| shape | List[int] | 是 | 目标形状 |\n"
+msgstr ""
+"| Parameter Name | Type | Required | Description |\n"
+"|--------|------|------|------|\n"
+"| input | tensor | Yes | Input tensor |\n"
+"| shape | List[int] | Yes | Target shape |\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:20
+msgid "**返回值：**"
+msgstr "**Return value:**"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:22
+msgid ""
+"- **类型：** tensor\n"
+"- **形状：** 与shape参数指定的目标形状相同\n"
+"- **数据类型：** 与输入张量相同\n"
+"- **内存布局：** 通过改变步长信息实现广播，无数据拷贝\n"
+msgstr ""
+"- **Type:** tensor\n"
+"- **Shape:** Same as the target shape specified by the `shape` parameter\n"
+"- **Data type:** Same as the input tensor\n"
+"- **Memory layout:** Broadcasting is achieved by modifying stride information, with no data copy\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:24
+msgid "**约束条件：**"
+msgstr "**Constraints:**"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:26
+msgid ""
+"- 输入张量的维度数必须等于目标形状的维度数\n"
+"- 所有维度必须满足广播规则\n"
+msgstr ""
+"- The number of dimensions of the input tensor must equal the number of dimensions of the target shape.\n"
+"- All dimensions must satisfy the broadcasting rules.\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:28
+msgid "### 2.2 DataType支持表"
+msgstr "### 2.2 DataType Support Table"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:30
+msgid ""
+"| 支持情况 | int8 | int16 | int32 | int64 | uint8 | uint16 | uint32 | uint64 | float16 | float32 | bfloat16 | float8e4 | float8e5 | float64 | bool |\n"
+"|----------|:----:|:-----:|:-----:|:-----:|:----:|:-----:|:-----:|:-----:|:------:|:------:|:-------:|:----:|:----:|:------:|:---:|\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | ✓ | ✓ | × | × | × | ✓ | ✓ | ✓ | × | × | × | ✓ |\n"
+"| GPU支持 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+msgstr ""
+"| Support Status | int8 | int16 | int32 | int64 | uint8 | uint16 | uint32 | uint64 | float16 | float32 | bfloat16 | float8e4 | float8e5 | float64 | bool |\n"
+"|----------|:----:|:-----:|:-----:|:-----:|:----:|:-----:|:-----:|:-----:|:------:|:------:|:-------:|:----:|:----:|:------:|:---:|\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | ✓ | ✓ | × | × | × | ✓ | ✓ | ✓ | × | × | × | ✓ |\n"
+"| GPU Support | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:32
+msgid "### 2.3 Shape支持表"
+msgstr "### 2.3 Shape Support Table"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:34
+msgid "支持任意维度数、任意形状大小。"
+msgstr "Supports any number of dimensions and any shape size."
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:36
+msgid "### 2.4 特殊限制说明"
+msgstr "### 2.4 Special Limitations"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:38
+msgid "与broadcast不同，Triton社区实现的broadcast_to必须保证tensor的shape和目标shape的rank一致"
+msgstr "Unlike broadcast, the broadcast_to implemented by the Triton community must ensure that the rank of the tensor's shape matches the rank of the target shape."
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:40
+msgid "### 2.5 使用方法"
+msgstr "### 2.5 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:42
+msgid "**基本用法：**"
+msgstr "**Basic Usage:**"
+
+#. type: code
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:44
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def matrix_add_bias_kernel(x_ptr, bias_ptr, output_ptr, M, N, BLOCK_M: tl.constexpr, BLOCK_N: tl.constexpr):\n"
+"    # 加载数据块\n"
+"    x = tl.load(x_ptr + offsets, mask=mask)\n"
+"\n"
+"    # 广播bias到匹配的形状\n"
+"    bias = tl.load(bias_ptr)\n"
+"    bias_broadcast = bias.broadcast_to([BLOCK_M, BLOCK_N])\n"
+"\n"
+"    # 执行加法\n"
+"    output = x + bias_broadcast\n"
+"    tl.store(output_ptr + offsets, output, mask=mask)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Shape_Manipulation_Ops/broadcast_to.md:45
+msgid ""
+"\n"
+"\n"
+msgstr ""

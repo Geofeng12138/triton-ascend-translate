@@ -1,0 +1,172 @@
+# PO translation file for docs/zh/triton_api/Reduction_Ops/argmax.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 11:15+0000\n"
+"PO-Revision-Date: 2026-07-20 11:15+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:0
+msgid "# triton.language.argmax"
+msgstr "# triton.language.argmax"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:4
+msgid "简介：在指定维度上返回最大值所在的下标"
+msgstr "Introduction: Returns the index of the maximum value along the specified dimension."
+
+#. type: code
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:6
+msgid ""
+"```python\n"
+"triton.language.argmax(input, axis, tie_break_left=True, keep_dims=False)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:12
+msgid ""
+"| 参数名 | 类型 | 说明 |\n"
+"| :---: | :---: | --- |\n"
+"| `input` | `tensor` | 张量数据，左操作数 |\n"
+"| `axis`   | `int` | 指定在哪个维度上进行规约 |\n"
+"| `keep_dims` | `bool` | 保持规约轴规约后的维度 |\n"
+"| `tie_break_left` | `bool` | 如果多个元素有相同的最大值，返回最左侧最大值的下标 |\n"
+msgstr ""
+"| Parameter | Type | Description |\n"
+"| :---: | :---: | --- |\n"
+"| `input` | `tensor` | Tensor data, left operand |\n"
+"| `axis`   | `int` | Specifies the dimension along which to reduce |\n"
+"| `keep_dims` | `bool` | Whether to keep the reduced dimension |\n"
+"| `tie_break_left` | `bool` | If multiple elements have the same maximum value, return the index of the leftmost maximum |\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:14
+msgid ""
+"返回值：\n"
+"`tl.tensor`：同`input`的shape的张量\n"
+msgstr ""
+"Return value:  \n"
+"`tl.tensor`: A tensor with the same shape as `input`.\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:20
+msgid ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"|GPU| √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ |\n"
+"|Ascend A2A3系列| √ | √ | × | √ | × | √ | × | √ | √ | √ | √ | √ |\n"
+msgstr ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"|GPU| √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ | √ |\n"
+"|Ascend A2A3 series| √ | √ | × | √ | × | √ | × | √ | √ | √ | √ | √ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:22
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:24
+msgid ""
+"|        | 支持维度范围         |\n"
+"| -------- | ---------------------- |\n"
+"| GPU    | 无限制 |\n"
+"| Ascend | 无限制 |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| -------- | ---------------------- |\n"
+"| GPU    | Unlimited |\n"
+"| Ascend | Unlimited |\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:26
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms."
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:28
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:30
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capability deficiency and inability to achieve"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:32
+msgid "Ascend A3 对比 GPU 缺失uint16、uint32、uint64、fp64的支持"
+msgstr "Ascend A3 lacks support for uint16, uint32, uint64, and fp64 compared to GPU."
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:34
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:36
+msgid "更多示例参考triton-ascend代码仓，ascend/examples/generalization_cases/test_argmax.py"
+msgstr "For more examples, refer to the triton-ascend code repository, ascend/examples/generalization_cases/test_argmax.py."
+
+#. type: code
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:38
+msgid ""
+"```@triton.jit\n"
+"def triton_argmax_1d(in_ptr0, out_ptr1, xnumel, XBLOCK: tl.constexpr):\n"
+"    xoffset = tl.program_id(0) + tl.arange(0, XBLOCK)\n"
+"    tmp0 = tl.load(in_ptr0 + xoffset, None)\n"
+"    tmp4 = tl.argmax(tmp0, 0)\n"
+"    tl.store(out_ptr1, tmp4, None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:40
+msgid "## 3. 特殊取值情况"
+msgstr "## 3. Special Value Cases"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:42
+msgid "对于 tensor[nan,inf] 的情况，返回inf所在的下标"
+msgstr "For the case of tensor[nan, inf], return the index where inf is located."
+
+#. type: blank
+#: docs/zh/triton_api/Reduction_Ops/argmax.md:43
+msgid ""
+"\n"
+"\n"
+msgstr ""
