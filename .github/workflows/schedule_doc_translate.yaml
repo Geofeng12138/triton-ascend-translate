@@ -134,13 +134,15 @@ jobs:
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: |
-          ARGS="--files \"${{ steps.detect.outputs.files }}\""
           if [ "${{ steps.first_time_check.outputs.first_time }}" = "true" ]; then
-            ARGS="--all --first-time"
+            python docs/scripts/translate_md.py \
+              --all --first-time \
+              --output-json /tmp/translation_results.json
+          else
+            python docs/scripts/translate_md.py \
+              --files "${{ steps.detect.outputs.files }}" \
+              --output-json /tmp/translation_results.json
           fi
-          python docs/scripts/translate_md.py \
-            $ARGS \
-            --output-json /tmp/translation_results.json
 
       - name: Process translated files (en + po)
         if: steps.detect.outputs.has_changes == 'true'
