@@ -62,6 +62,20 @@ ZH_DIR = Path("docs/zh")
 EN_DIR = Path("docs/en")
 PO_DIR = Path("docs/po") / "zh-to-en"
 
+# Directories under docs/zh/ that should NOT be translated.
+EXCLUDED_DIRS = ["python-api", "triton_api", "triton_api_extension", "libdevice"]
+
+
+def _is_excluded(zh_path: Path) -> bool:
+    """Check if a zh file path belongs to an excluded directory."""
+    try:
+        rel = zh_path.relative_to(ZH_DIR)
+        if rel.parts:
+            return rel.parts[0] in EXCLUDED_DIRS
+    except ValueError:
+        pass
+    return False
+
 SYSTEM_PROMPT = ("You are a professional technical documentation translation expert, "
                  "proficient in Chinese-to-English technical document translation.")
 
@@ -471,6 +485,12 @@ class MarkdownTranslator:
 
     async def translate_files(self, file_list: list[Path], output_json: str) -> int:
         """Translate a list of files sequentially and write a results JSON."""
+        # Filter out excluded directories
+        original_count = len(file_list)
+        file_list = [f for f in file_list if not _is_excluded(f)]
+        skipped_count = original_count - len(file_list)
+        if skipped_count:
+            print(f"Skipped {skipped_count} file(s) in excluded directories (python-api/triton_api/triton_api_extension/libdevice)")
         print(f"Translating {len(file_list)} file(s) using PO workflow")
 
         success_files = []
@@ -498,6 +518,15 @@ class MarkdownTranslator:
         return 0 if success_files else 1
 
     @staticmethod
+    def find_all_zh_files() -> list[Path]:
+        """Find all .md files under docs/zh/ excluding excluded directories."""
+        result = []
+        for md_file in ZH_DIR.rglob("*.md"):
+            if not _is_excluded(md_file):
+                result.append(md_file)
+        return sorted(result)
+
+    @staticmethod
     def find_changed_zh_files() -> list[Path]:
         """Find docs/zh/ .md files that differ from their docs/en/ counterpart.
 
@@ -519,7 +548,9 @@ class MarkdownTranslator:
                 for line in result.stdout.strip().split("\n"):
                     line = line.strip()
                     if line.endswith(".md"):
-                        changed.append(Path(line))
+                        p = Path(line)
+                        if not _is_excluded(p):
+                            changed.append(p)
                 if changed:
                     return changed
         except Exception:
@@ -533,7 +564,9 @@ class MarkdownTranslator:
             return Path("docs/en") / rel
 
         changed = []
-        for md_file in Path("docs/zh").rglob("*.md"):
+        for md_file in ZH_DIR.rglob("*.md"):
+            if _is_excluded(md_file):
+                continue
             en_file = _to_en_path(md_file)
             if not en_file.exists():
                 changed.append(md_file)
@@ -586,6 +619,11 @@ async def async_main():
         default=os.getenv("DEEPSEEK_API_KEY"),
     )
     parser.add_argument(
+        "--first-time",
+        action="store_true",
+        help="First-time full translation: translate all non-excluded docs/zh/ files",
+    )
+    parser.add_argument(
         "--max-concurrent",
         type=int,
         default=5,
@@ -613,7 +651,10 @@ async def async_main():
                 p = Path("docs/zh") / f
             file_list.append(p)
     elif args.all:
-        file_list = MarkdownTranslator.find_changed_zh_files()
+        if args.first_time:
+            file_list = MarkdownTranslator.find_all_zh_files()
+        else:
+            file_list = MarkdownTranslator.find_changed_zh_files()
     else:
         msg = "specify --files or --all"
         print(f"Error: {msg}")

@@ -65,30 +65,68 @@ jobs:
         run: |
           pip install openai
 
+      - name: Check if first-time translation
+        id: first_time_check
+        run: |
+          # First time = no .po files exist yet in docs/po/zh-to-en/
+          po_count=$(find docs/po/zh-to-en/ -name '*.po' 2>/dev/null | wc -l)
+          if [ "$po_count" -eq 0 ]; then
+            echo "first_time=true" >> $GITHUB_OUTPUT
+          else
+            echo "first_time=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Detect changed Chinese Markdown files
         id: detect
         run: |
-          # Use git diff to find changed/new .md files in docs/zh/
-          changed=$(git diff --name-only --diff-filter=ACMUX HEAD -- docs/zh/ || true)
-          if [ -z "$changed" ]; then
-            # No tracked changes — check if any zh file has no en counterpart
-            for f in $(find docs/zh/ -name '*.md'); do
-              en_path="${f/docs\/zh\//docs\/en\/}"
-              if [ ! -f "$en_path" ]; then
-                changed="$changed $f"
-              fi
-            done
-          fi
+          EXCLUDED_DIRS="python-api triton_api triton_api_extension libdevice"
 
-          if [ -z "$changed" ]; then
-            echo "No Chinese doc files changed since last commit"
-            echo "has_changes=false" >> $GITHUB_OUTPUT
-          else
-            # Get unique .md files, strip the 'docs/zh/' prefix, and format as comma-separated list
-            files=$(echo "$changed" | tr ' ' '\n' | sort -u | grep '\.md$' | sed 's|^docs/zh/||' | tr '\n' ',' | sed 's/,$//')
-            echo "Changed files (relative to docs/zh/): $files"
+          is_excluded() {
+            local f="$1"
+            for d in python-api triton_api triton_api_extension libdevice; do
+              case "$f" in
+                docs/zh/$d/*|docs/zh/$d) return 0 ;;
+              esac
+            done
+            return 1
+          }
+
+          if [ "${{ steps.first_time_check.outputs.first_time }}" = "true" ]; then
+            # First time: use --all --first-time which discovers files internally
+            echo "First-time translation: all docs/zh/ files (excluding python-api/triton_api/triton_api_extension/libdevice)"
             echo "has_changes=true" >> $GITHUB_OUTPUT
-            echo "files=$files" >> $GITHUB_OUTPUT
+          else
+            # Incremental: find changed/new .md files
+            changed=$(git diff --name-only --diff-filter=ACMUX HEAD -- docs/zh/ || true)
+            if [ -z "$changed" ]; then
+              for f in $(find docs/zh/ -name '*.md' -not -path '*/python-api/*' -not -path '*/triton_api/*' -not -path '*/triton_api_extension/*' -not -path '*/libdevice/*'); do
+                en_path="${f/docs\/zh\//docs\/en\/}"
+                if [ ! -f "$en_path" ]; then
+                  changed="$changed $f"
+                fi
+              done
+            fi
+
+            # Filter to unique .md files not in excluded dirs
+            if [ -n "$changed" ]; then
+              files=""
+              for f in $(echo "$changed" | tr ' ' '\n' | sort -u | grep '\.md$'); do
+                if ! is_excluded "$f"; then
+                  rel="${f#docs/zh/}"
+                  files="${files}${rel},"
+                fi
+              done
+              files="${files%,}"
+            fi
+
+            if [ -z "$files" ]; then
+              echo "No Chinese doc files changed since last commit"
+              echo "has_changes=false" >> $GITHUB_OUTPUT
+            else
+              echo "Changed files (relative to docs/zh/): $files"
+              echo "has_changes=true" >> $GITHUB_OUTPUT
+              echo "files=$files" >> $GITHUB_OUTPUT
+            fi
           fi
 
       - name: Translate docs/zh/ to docs/en/ (PO-based)
@@ -96,8 +134,12 @@ jobs:
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: |
+          ARGS="--files \"${{ steps.detect.outputs.files }}\""
+          if [ "${{ steps.first_time_check.outputs.first_time }}" = "true" ]; then
+            ARGS="--all --first-time"
+          fi
           python docs/scripts/translate_md.py \
-            --files "${{ steps.detect.outputs.files }}" \
+            $ARGS \
             --output-json /tmp/translation_results.json
 
       - name: Process translated files (en + po)
