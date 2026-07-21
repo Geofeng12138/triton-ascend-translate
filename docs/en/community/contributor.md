@@ -1,8 +1,11 @@
 # Contributors
 
+
 Every release of Triton-Ascend would not have been possible without the following contributors:
 
+
 Updated on 2026-05-06:
+
 
 | No. | Contributor | First Contribution Date | PR |
 |-----|----------------|------|--------|
@@ -152,8 +155,8 @@ Updated on 2026-05-06:
 | 6 | [wangzhanpeng5](https://gitee.com/wangzhanpeng5) | 2025-05-26 | [#5](https://gitee.com/ascend/triton-ascend/pulls/5) |
 | 5 | [yang-bochu](https://gitee.com/yang-bochu) | 2025-05-26 | [#7](https://gitee.com/ascend/triton-ascend/pulls/7) |
 | 4 | [handsome20](https://gitcode.com/handsome20) | 2025-05-26 | [#7](https://gitcode.com/Ascend/triton-ascend/merge_requests/7) |
-| 3 | [zhangyong102](https://gitee.com/zhangyong102) | 2025-05-26 | [#8](https://gitee.com/ascend/triton-ascend/pulls/8) |
-| 2 | [shijingchang](https://gitee.com/shijingchang) | 2025-05-26 | [#9](https://gitee.com/ascend/triton-ascend/pulls/9) |
-| 1 | [zhang-chunli01](https://gitee.com/zhang-chunli01) | 2025-05-23 | [#1](https://gitee.com/ascend/triton-ascend/pulls/1) |
+| 3 | [zhangyong102](https://gitee.com/zhangyong102) | 2025-05-26
+
 
 *Due to repository migration, contributors listed above are counted by contributor ID (IDs from different platforms are treated as separate contributors).*
+

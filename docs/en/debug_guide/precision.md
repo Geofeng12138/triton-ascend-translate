@@ -1,18 +1,26 @@
 # Precision Comparison and Error Analysis
 
-This document describes how to perform precision comparison and error analysis for Triton operators on Ascend NPU, including comparison methods, evaluation criteria, and precautions.
 
-## 1. Precision Comparison Workflow
+This document describes how to perform precision comparison and error analysis of Triton operators on the Ascend NPU, including comparison methods, evaluation criteria, and precautions.
+
+
+## 1. Precision Comparison Process
+
 
 ### Basic Steps
 
-1. **Obtain Reference Result (Golden)**: Compute results using equivalent Torch operators on CPU/GPU/NPU, or results from the same Triton operator on CPU/GPU
 
-2. **Obtain Triton Result**: Run the Triton kernel on Ascend NPU to get the computation result
+1. **Obtain Reference Results** (Golden): Use equivalent Torch operators to compute results on CPU/GPU/NPU, or use the same Triton operator to compute results on CPU/GPU.
 
-3. **Compare and Evaluate**: Use `torch.testing.assert_close` to determine whether the precision requirements are met
+
+2. **Obtain Triton Results**: Run the Triton kernel on the Ascend NPU to obtain the computation results.
+
+
+3. **Comparison Judgment**: Use `torch.testing.assert_close` to determine whether the precision requirements are met.
+
 
 ### Example: Vector Add
+
 
 ```python
 import torch
@@ -21,11 +29,11 @@ import triton.language as tl
 
 
 def test_vector_add(n, dtype):
-    # 1. Input data
+    # 1. 输入数据
     x = torch.randn(n, dtype=dtype, device="cpu")
     y = torch.randn(n, dtype=dtype, device="cpu")
 
-    # 2. Reference result (PyTorch CPU)
+    # 2. 参考结果（PyTorch CPU）
     torch_ref = x + y
 
     # 3. Triton kernel
@@ -43,26 +51,27 @@ def test_vector_add(n, dtype):
 
     triton_cal = triton_func(x, y)
 
-    # 4. Precision comparison
+    # 4. 精度对比
     compare_precision(triton_cal.cpu(), torch_ref)
 ```
 
+
 ## 2. Precision Comparison Function
+
 
 ```python
 def compare_precision(cal, ref):
     """
-    Precision comparison function: selects the appropriate comparison
-    strategy based on the data type.
+    精度对比函数：根据数据类型选择合适的比对策略。
 
-    Args:
-        cal: Computed result
-        ref: Reference result
-        rtol: Relative tolerance
-        atol: Absolute tolerance
+    参数:
+        cal: 计算结果
+        ref: 参考结果
+        rtol: 相对误差容限
+        atol: 绝对误差容限
 
-    Raises:
-        AssertionError: Raised when precision does not meet requirements
+    异常:
+        AssertionError: 精度不达标时抛出
     """
     assert cal.dtype == ref.dtype, f"dtype mismatch: {cal.dtype} vs {ref.dtype}"
     tensor_dtype = cal.dtype
@@ -88,40 +97,57 @@ def compare_precision(cal, ref):
     print(f"dtype: {tensor_dtype} — Precision check passed.")
 ```
 
-## 3. Precision Evaluation Criteria
 
-### Evaluation Rules
+## 3. Precision Judgment Criteria
 
-`torch.testing.assert_close` / `torch.equal` does not raise an exception → **Pass**, otherwise **Fail**.
 
-* `torch.testing.assert_close`: Passes (no exception raised) if tensors are approximately equal within the specified tolerance; otherwise fails (AssertionError raised).
+### Judgment Rules
 
-* `torch.equal`: Returns True only if the two tensors have exactly the same shape and all elements are bitwise identical; otherwise return False.
 
-Internal logic of `torch.testing.assert_close`:
+`torch.testing.assert_close`/`torch.equal` does not raise an exception → **Pass**, otherwise **Fail**.
+
+
+* `torch.testing.assert_close`: Passes (does not raise an exception) if tensors are approximately equal within the specified tolerance; otherwise fails (raises AssertionError).
+
+
+* `torch.equal`: Returns True only if two tensors have exactly the same shape and all elements are absolutely equal at the binary level; otherwise, returns False.
+
+
+The internal logic of `torch.testing.assert_close`:
+
 
 ```
 |cal - ref| <= atol + rtol * |ref|
 ```
 
-That is, the absolute error `|cal - ref|` must satisfy a dynamic error boundary composed of the relative tolerance and absolute tolerance combined.
+
+That is: the absolute error `|cal - ref|` must satisfy a dynamic error boundary formed by the sum of the relative error tolerance and the absolute error tolerance.
+
 
 ### Recommended Tolerances by Data Type
 
-| Data Type | rtol | atol | Notes |
-|---|---|---|---|
+
+| Data Type | rtol | atol | Description |
+|---|---|---|---|---|
 | `float32` | 1e-5 | 1e-5 | Strict |
-| `float16` | 1e-3 | 1e-3 | Lower precision, appropriately relaxed |
-| `bfloat16` | 5e-3 | 5e-3 | Lower precision, appropriately relaxed |
-| `int8/16/32/64` | — | — | Must be exactly equal (`torch.equal`) |
-| `bool` | — | — | Must be exactly equal (`torch.equal`) |
+| `float16` | 1e-3 | 1e-3 | Low precision, appropriately relaxed |
+| `bfloat16` | 5e-3 | 5e-3 | Low precision, appropriately relaxed |
+| `int8/16/32/64` | — | — | Must be exactly identical (`torch.equal`) |
+| `bool` | — | — | Must be exactly identical (`torch.equal`) |
+
+
 
 ## 4. Precautions
 
+
 ### NaN / Inf Handling
 
-`equal_nan=True` treats NaN as equal. Set to `False` if strict detection of NaN differences is required.
+
+`equal_nan=True` treats NaN as equal. If strict detection of NaN differences is required, set it to `False`.
+
 
 ### Integer Types
 
-Integer and boolean types do not allow any error; they must be strictly identical. When comparing across devices, ensure the data has been moved to the same device (e.g., CPU) to avoid misjudgment caused by underlying representation differences.
+
+Integer and boolean types do not allow any deviation and must be strictly identical. When comparing across devices, ensure that the data has been moved to the same device (e.g., CPU) to avoid misjudgment caused by differences in underlying representation.
+
