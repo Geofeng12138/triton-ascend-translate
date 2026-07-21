@@ -76,6 +76,7 @@ def _is_excluded(zh_path: Path) -> bool:
         pass
     return False
 
+
 SYSTEM_PROMPT = ("You are a professional technical documentation translation expert, "
                  "proficient in Chinese-to-English technical document translation.")
 
@@ -490,7 +491,9 @@ class MarkdownTranslator:
         file_list = [f for f in file_list if not _is_excluded(f)]
         skipped_count = original_count - len(file_list)
         if skipped_count:
-            print(f"Skipped {skipped_count} file(s) in excluded directories (python-api/triton_api/triton_api_extension/libdevice)")
+            print(
+                f"Skipped {skipped_count} file(s) in excluded directories (python-api/triton_api/triton_api_extension/libdevice)"
+            )
         print(f"Translating {len(file_list)} file(s) using PO workflow")
 
         success_files = []
