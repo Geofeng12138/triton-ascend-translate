@@ -85,7 +85,7 @@ jobs:
           MAX_JOBS="$NUM_PROCS" \
           python setup.py bdist_wheel --dist-dir=./wheelhouse
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: cibw-wheels-manylinux_2_28_x86_64-wheels-upload
           path: ./wheelhouse/*.whl
