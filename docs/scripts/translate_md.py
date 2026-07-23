@@ -413,14 +413,11 @@ def write_empty_json(output_json: str, reason: str = ""):
 
 
 async def async_main():
-    parser = argparse.ArgumentParser(
-        description="Sphinx gettext translation: docs/zh/ -> locale/en/LC_MESSAGES/")
+    parser = argparse.ArgumentParser(description="Sphinx gettext translation: docs/zh/ -> locale/en/LC_MESSAGES/")
     parser.add_argument("--first-time", action="store_true",
                         help="Generate .pot files via sphinx-build, then translate ALL")
-    parser.add_argument("--all", action="store_true",
-                        help="Translate only changed .pot files (incremental)")
-    parser.add_argument("--skip-gettext", action="store_true",
-                        help="Skip sphinx-build gettext step")
+    parser.add_argument("--all", action="store_true", help="Translate only changed .pot files (incremental)")
+    parser.add_argument("--skip-gettext", action="store_true", help="Skip sphinx-build gettext step")
     parser.add_argument("--files", help="Comma-separated .pot filenames")
     parser.add_argument("--output-json", default=os.getenv("OUTPUT_JSON", "/tmp/translation_results.json"))
     parser.add_argument("--api-key", default=os.getenv("DEEPSEEK_API_KEY"))
