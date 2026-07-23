@@ -97,6 +97,7 @@ def _is_excluded(pot_path: Path) -> bool:
 # PO / POT file parsing
 # ---------------------------------------------------------------------------
 
+
 def parse_pot_file(filepath: Path) -> dict:
     """
     Parse a .pot or .po file and return entries dict.
@@ -222,6 +223,7 @@ def _escape_po(s: str) -> str:
 # Translation engine
 # ---------------------------------------------------------------------------
 
+
 class PoTranslator:
     """Translate .pot entries to .po using DeepSeek API with translation memory."""
 
@@ -334,6 +336,7 @@ class PoTranslator:
 # POT discovery helpers
 # ---------------------------------------------------------------------------
 
+
 def find_all_pot_files() -> list[Path]:
     """Find all .pot files in locale/zh/LC_MESSAGES/, excluding excluded dirs."""
     result = []
@@ -369,7 +372,8 @@ def run_sphinx_gettext():
     """Run sphinx-build -b gettext to generate/update .pot files."""
     print("Running: sphinx-build -b gettext docs/zh locale/", flush=True)
     result = subprocess.run(
-        [sys.executable, "-m", "sphinx", "-b", "gettext", "-q", str(ZH_DIR), str(LOCALE_DIR)],
+        [sys.executable, "-m", "sphinx", "-b", "gettext", "-q",
+         str(ZH_DIR), str(LOCALE_DIR)],
         capture_output=True,
         text=True,
     )
@@ -392,6 +396,7 @@ def run_sphinx_gettext():
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
+
 
 def write_empty_json(output_json: str, reason: str = ""):
     report = {
