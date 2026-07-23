@@ -1,0 +1,2 @@
+# Normalize line endings for translation script (Linux CI must see LF)
+docs/scripts/translate_md.py text eol=lf
