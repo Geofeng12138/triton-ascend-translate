@@ -472,7 +472,5 @@ async def async_main():
     translator = PoTranslator(api_key=api_key)
     return await translator.translate_files(pot_list, output_json)
 
-
 if __name__ == "__main__":
     sys.exit(asyncio.run(async_main()))
-
