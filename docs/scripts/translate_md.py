@@ -375,8 +375,41 @@ def find_changed_pot_files() -> list[Path]:
     return changed
 
 
+def _organize_pot_files():
+    """Move .pot files from locale/ to locale/zh/LC_MESSAGES/.
+
+    The sphinx-build -b gettext command outputs .pot files directly into
+    the output directory (e.g. locale/quick_start.pot) preserving the
+    source directory structure, but our workflow expects them at
+    locale/zh/LC_MESSAGES/ (the standard gettext layout).
+
+    This function finds all .pot files under locale/, determines their
+    source-relative path, and relocates them to locale/zh/LC_MESSAGES/.
+    """
+    count = 0
+    for pot_file in sorted(LOCALE_DIR.rglob("*.pot")):
+        try:
+            rel = pot_file.relative_to(LOCALE_DIR)
+        except ValueError:
+            continue
+        # Skip files already under LC_MESSAGES/
+        if "LC_MESSAGES" in rel.parts:
+            continue
+        target = POT_DIR / rel
+        target.parent.mkdir(parents=True, exist_ok=True)
+        pot_file.replace(target)
+        count += 1
+    return count
+
+
 def run_sphinx_gettext():
-    """Run sphinx-build -b gettext to generate/update .pot files."""
+    """Run sphinx-build -b gettext to generate/update .pot files.
+
+    Sphinx generates .pot files directly into the output directory
+    ({outdir}/... preserving source structure). This function then
+    reorganizes them into locale/zh/LC_MESSAGES/ for the rest of the
+    workflow.
+    """
     print("Running: sphinx-build -b gettext docs/zh locale/", flush=True)
     result = subprocess.run(
         [sys.executable, "-m", "sphinx", "-b", "gettext", "-q",
@@ -394,9 +427,14 @@ def run_sphinx_gettext():
     if result.stderr:
         print(f"  stderr: {result.stderr.strip()}", flush=True)
 
+    # Reorganize .pot files into locale/zh/LC_MESSAGES/
+    moved = _organize_pot_files()
+    if moved == 0:
+        print(f"  No .pot files found in {LOCALE_DIR} after build!", flush=True)
+
     # Verify .pot files were created
     pot_count = len(list(POT_DIR.rglob("*.pot")))
-    print(f"  Generated {pot_count} .pot file(s) in {POT_DIR}", flush=True)
+    print(f"  Generated {moved} .pot file(s), {pot_count} in {POT_DIR}", flush=True)
     return pot_count > 0
 
 
