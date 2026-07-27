@@ -1,11 +1,14 @@
 # Roadmap Guide
 
-Use GitHub Issues to track and manage each organization's plans and mid-to-long-term goals. This document provides references and specifications for community projects on writing Roadmap-type Issues, to help create and maintain high-quality Roadmaps.
 
-Below is a complete Roadmap Issue example demonstrating the practical application of all recommended elements. It is recommended to review this example first for an overall impression, then read the detailed specification instructions that follow.
+Use GitHub Issues to track and manage the plans and medium-to-long-term goals of each organization. This document provides references and guidelines for writing roadmap-type Issues in community projects, helping to create and maintain high-quality roadmaps.
+
+
+Below is a complete roadmap Issue example, demonstrating the practical application of all recommended elements. It is recommended to first review this example to get an overall impression, then read the subsequent detailed specification explanations.
+
 
 ```markdown
-Create Issue title: [Roadmap] Triton-Ascend Roadmap 2026 Q2
+创建 Issue 标题：[Roadmap] Triton-Ascend Roadmap 2026 Q2
 
 ---
 # Triton-Ascend Roadmap 2026 Q2
@@ -61,27 +64,36 @@ Issue: [Related Issue link]
 
 [Triton-Ascend Roadmap 2026 Q1 #xxx](link)
 [FP8 Support Phase 2 #xxx](link)
-
 ```
+
 
 ## 1. Title Format
 
-**Format:** `[Roadmap] <Project Name> Roadmap <Time Range>`, quarterly releases use Q1/Q2/Q3/Q4 markers, semi-annual releases use H1/H2 markers
 
-**Examples:**
+**Format:** `[Roadmap] <Project Name> Roadmap <Time Range>`, use Q1/Q2/Q3/Q4 for quarterly releases, and H1/H2 for semi-annual releases.
+
+
+**Example:**
+
 
 - `[Roadmap] Triton-Ascend Roadmap 2026 Q2`
 - `[Roadmap] Triton-Ascend Roadmap 2026 H1`
 
-## 2. Top-level Content
 
-### 2.1 Opening Description (optional)
+## 2. Top-Level Content
 
-Provide a project overview, vision, or brief summary of the overall direction. For example, a brief description of Triton-Ascend's current quarter goals in upstream alignment, backend performance, and operator coverage.
 
-### 2.2 Focus Section
+### 2.1 Opening Description (Optional)
 
-List the 3-5 most critical focus areas for this cycle, recommended to be grouped by the project's **functional domains** or **technical modules**, covering a holistic perspective:
+
+Provide a brief summary of the project overview, vision, or overall direction. For example, briefly describe the goals of Triton-Ascend for this quarter in terms of upstream alignment, backend performance, and operator coverage.
+
+
+### 2.2 Key Focus Areas Section
+
+
+List the 3-5 most critical focus areas for this cycle, recommended to be grouped by the project's **functional domains** or **technical modules**, covering a global perspective:
+
 
 ```markdown
 ## Focus
@@ -93,15 +105,21 @@ List the 3-5 most critical focus areas for this cycle, recommended to be grouped
 • Ecosystem Integration: Enhance integration with PyTorch, vLLM, and MindSpeed on Ascend backend
 ```
 
-**Characteristics:**
 
-- Summarize and describe the main development directions of the current project for the current cycle at a high level, no need to elaborate in detail
+**Features:**
 
-## 3. Major Functional Module Sections
 
-### 3.1 Section Division Principles
+- High-level summary and description of the main development directions for the current cycle project, without going into detailed specifics.
 
-Group by the project's **functional domains** or **technical modules**, such as:
+
+## 3. Main Functional Modules Section
+
+
+### 3.1 Principles for Section Division
+
+
+Group by the project's **functional areas** or **technical modules**, for example:
+
 
 - **Upstream Compatibility** - Upstream Triton frontend and IR alignment
 - **Backend Performance** - Ascend NPU backend kernel generation and memory optimization
@@ -109,9 +127,12 @@ Group by the project's **functional domains** or **technical modules**, such as:
 - **Usability** - Debugging tools and error reporting
 - **Ecosystem Integration** - Integration with training/inference frameworks
 
-### 3.2 Structure of Each Module
 
-Each module contains multiple **specific work items**, formatted as follows:
+### 3.2 Module Structures
+
+
+Each module contains multiple **specific work items** in the following format:
+
 
 ```markdown
 ## [Module Name]
@@ -129,42 +150,56 @@ Issue: [Related Issue link]   [optional]
 PR: [Related PR link]         [optional]
 ```
 
+
 ## 4. Key Metadata Fields
+
 
 Each work item should contain the following key information:
 
+
 ### 4.1 Goal
 
+
 - **Meaning**: Work objective or brief description
-- **Usage**: Explain the goal of this work item
-- **Example**: `Goal: Support FP8 (E4M3/E5M2) dtype in tl.dot on Ascend backend`
+- **Usage**: Describes the goal of the work item
+- **Example**: `Goal: Support FP8 (E4M3/E5M2) data types in the Ascend backend tl.dot`
+
 
 ### 4.2 Owner
 
-- **Meaning**: Responsible person
-- **Format**: `Owner: @GitHubID`
-- **Usage**: Clarify who is responsible for or leading this work item
-- **Example**: `Owner: @contributor-a`
+
+- **Meaning**: Responsible person  
+- **Format**: `负责人：@GitHubID`  
+- **Usage**: Specify who is responsible for or leads the work item  
+- **Example**: `负责人：@contributor-a`
+
 
 ### 4.3 Issue
+
 
 - **Meaning**: Associated GitHub Issue
 - **Format**: `Issue: <Issue link>`
 - **Usage**: Track detailed design and discussion
 - **Example**: `Issue: https://github.com/triton-lang/triton-ascend/issues`
 
+
 ### 4.4 PR (Pull Request)
 
+
 - **Meaning**: Related implementation PR
-- **Format**: `PR: <PR link>`
-- **Usage**: Link implementation work
-- **Example**: `PR: https://github.com/triton-lang/triton-ascend/pulls`
+- **Format**: `PR：<PR link>`
+- **Usage**: Link to implementation work
+- **Example**: `PR：https://github.com/triton-lang/triton-ascend/pulls`
+
 
 ## 5. Optional Supplementary Content
 
-### 5.1 🙋 Help Wanted Marker
 
-For work items where community developer contributions are especially welcome, it is recommended to use the **[🙋 Help Wanted]** marker to indicate:
+### 5.1 🙋 Welcome Contribution Mark
+
+
+For work items that especially welcome contributions from community developers, it is recommended to use the **[🙋 Welcome Contributions]** label to identify them.
+
 
 ```markdown
 - [ ] **FP8 dtype and mixed-precision ops support [🙋 Help Wanted]**
@@ -173,14 +208,19 @@ Owner: TBD
 Issue: #123
 ```
 
-### 5.2 Sub-issues
 
-List cross-cycle related Roadmap Issues or breakdown Issues for large work items at the bottom of the Roadmap Issue.
+### 5.2 Sub-Issue
+
+
+List cross-cycle related roadmap Issues or decomposition Issues of large work items at the bottom of the roadmap Issue.
+
 
 **Difference from the Issue field in work items:**
 
-- **Issue field in work items**: Links to the specific work item's detailed design, discussion, or tracking Issue
-- **Sub-issues section**: Used to associate Roadmap Issues from other cycles (e.g., unfinished work from the previous quarter), or to break down large work items into multiple independently tracked sub-Issues
+
+- **Issue Field in Work Item**: Links to the specific design, discussion, or tracking issue for that work item  
+- **Sub-Issue Section**: Used to associate roadmap issues from other cycles (such as unfinished work from the previous quarter) or to break down large work items into multiple independently tracked sub-issues
+
 
 ```markdown
 ## Sub-issues
@@ -188,3 +228,4 @@ List cross-cycle related Roadmap Issues or breakdown Issues for large work items
 [Triton-Ascend Roadmap 2026 Q1 #xxx](link)  <!-- Related previous quarter Roadmap -->
 [FP8 Support Phase 2 #xxx](link)            <!-- Breakdown of a large work item -->
 ```
+

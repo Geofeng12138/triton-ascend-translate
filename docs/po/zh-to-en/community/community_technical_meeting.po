@@ -1,0 +1,148 @@
+# PO translation file for docs/zh/community/community_technical_meeting.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-21 11:27+0000\n"
+"PO-Revision-Date: 2026-07-21 11:27+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/community/community_technical_meeting.md:0
+msgid "# 技术例会"
+msgstr "# Technical Regular Meeting"
+
+#. type: text
+#: docs/zh/community/community_technical_meeting.md:2
+msgid "Triton-Ascend 定期召开社区技术会议，作为项目治理的核心决策机制。技术方向、重大提案评审和版本发布等重大事项在技术会议中讨论和决定，由全体 `Maintainer` 投票。会议对所有社区成员开放，任何人均可参与讨论，但决策和投票仅由 `Maintainer` 进行。"
+msgstr "Triton-Ascend holds regular community technical meetings as the core decision-making mechanism for project governance. Major matters such as technical direction, major proposal reviews, and version releases are discussed and decided in the technical meetings, with voting conducted by all `Maintainer`s. The meetings are open to all community members, and anyone can participate in the discussions, but decisions and voting are carried out only by `Maintainer`s."
+
+#. type: text
+#: docs/zh/community/community_technical_meeting.md:4
+msgid "## 会议内容"
+msgstr "## Meeting Content"
+
+#. type: text
+#: docs/zh/community/community_technical_meeting.md:6
+msgid ""
+"- 技术方向讨论与决策\n"
+"- 重大提案（RFC）评审与投票\n"
+"- 版本发布规划与时间线\n"
+"- 社区 Issue 和 PR 优先级排序\n"
+"- 贡献者提名与移除讨论\n"
+msgstr ""
+"- Technical direction discussion and decision-making\n"
+"- Major proposal (RFC) review and voting\n"
+"- Version release planning and timeline\n"
+"- Community Issue and PR priority sorting\n"
+"- Contributor nomination and removal discussion\n"
+
+#. type: text
+#: docs/zh/community/community_technical_meeting.md:8
+msgid "## 会议安排"
+msgstr "## Meeting Schedule"
+
+#. type: text
+#: docs/zh/community/community_technical_meeting.md:10
+msgid ""
+"- **会议频率**：每两周一次\n"
+"- **会议时间**：周四 14:15（UTC+8）\n"
+"- **会议起始日期**：2026 年 6 月 4 日\n"
+"- **会议链接**：[链接](https://us06web.zoom.us/j/86540192059?pwd=X2N3pl5bnZH5CgiuX1zjyZoELItmjP.1)\n"
+"- **会议室号**：865 4019 2059\n"
+"- **会议室密码**：123456\n"
+"- **会议议程与纪要**：[议程&纪要](https://docs.google.com/document/d/1qfat2wZtO2nfZb5FC2dWAcR6sTqgTNSvvh7MzTDoI4s/edit?pli=1&tab=t.0)\n"
+"- **会议 iCalendar**：[iCalendar-ics](https://us06web.zoom.us/meeting/tZIoc-mppzkqH92hP7TBYHppsqZUxg9F8VPf/ics?icsToken=DObLUj7lyTNwJj6XJgAALAAAAOvNV2DJnuObI9tqQGt1c3aeqVgCdzMYHV0m_J0KHIX0i4QUrtvsJwMu_EMF5VKyBKdX4rPWh_raTxvF4jAwMDAwMQ&meetingMasterEventId=1PZVSVC8S8WIBZJ1e4wuZQ)\n"
+msgstr ""
+"- **Meeting Frequency**: Every two weeks\n"
+"- **Meeting Time**: Thursday 14:15 (UTC+8)\n"
+"- **Meeting Start Date**: June 4, 2026\n"
+"- **Meeting Link**: [Link](https://us06web.zoom.us/j/86540192059?pwd=X2N3pl5bnZH5CgiuX1zjyZoELItmjP.1)\n"
+"- **Meeting Room ID**: 865 4019 2059\n"
+"- **Meeting Room Password**: 123456\n"
+"- **Meeting Agenda & Minutes**: [Agenda & Minutes](https://docs.google.com/document/d/1qfat2wZtO2nfZb5FC2dWAcR6sTqgTNSvvh7MzTDoI4s/edit?pli=1&tab=t.0)\n"
+"- **Meeting iCalendar**: [iCalendar-ics](https://us06web.zoom.us/meeting/tZIoc-mppzkqH92hP7TBYHppsqZUxg9F8VPf/ics?icsToken=DObLUj7lyTNwJj6XJgAALAAAAOvNV2DJnuObI9tqQGt1c3aeqVgCdzMYHV0m_J0KHIX0i4QUrtvsJwMu_EMF5VKyBKdX4rPWh_raTxvF4jAwMDAwMQ&meetingMasterEventId=1PZVSVC8S8WIBZJ1e4wuZQ)\n"
+
+#. type: text
+#: docs/zh/community/community_technical_meeting.md:12
+msgid "## 投票规则"
+msgstr "## Voting Rules"
+
+#. type: text
+#: docs/zh/community/community_technical_meeting.md:14
+msgid ""
+"- 未出席会议的 `Maintainer` 须在会议后 3 个工作日内提交投票；逾期未投票视为弃权\n"
+"- 投票通过条件为参与投票的 `Maintainer` 超过半数同意（弃权不计入投票总数）\n"
+"- 投票结果记录于会议纪要中\n"
+msgstr ""
+"- `Maintainer` who did not attend the meeting must submit their vote within 3 working days after the meeting; failure to vote within this period will be considered abstention.\n"
+"- The condition for a vote to pass is that more than half of the participating `Maintainer` agree (abstentions are not counted in the total votes).\n"
+"- The voting results are recorded in the meeting minutes.\n"
+
+#. type: text
+#: docs/zh/community/community_technical_meeting.md:16
+msgid "## 决策流程"
+msgstr "## Decision Process"
+
+#. type: text
+#: docs/zh/community/community_technical_meeting.md:18
+msgid "### 常规决策"
+msgstr "### Routine Decisions"
+
+#. type: text
+#: docs/zh/community/community_technical_meeting.md:20
+msgid "日常开发中的常规决策（如 `Bug` 修复、小功能改进）由相关模块的 `Maintainer` 在 `Issue` 或 `PR` 中审阅决定，无需召开会议。"
+msgstr "Routine decisions in daily development (such as `Bug` fixes, small feature improvements) are reviewed and decided by the `Maintainer` of the relevant module in the `Issue` or `PR`, without the need for a meeting."
+
+#. type: text
+#: docs/zh/community/community_technical_meeting.md:22
+msgid "### 重大决策"
+msgstr "### Major Decisions"
+
+#. type: text
+#: docs/zh/community/community_technical_meeting.md:24
+msgid "以下事项视为重大决策，需由 `Maintainer` 在社区技术会议中集体讨论："
+msgstr "The following matters are considered major decisions and require collective discussion by `Maintainer` in the community technical meeting:"
+
+#. type: text
+#: docs/zh/community/community_technical_meeting.md:26
+msgid ""
+"- 重大架构变更\n"
+"- 破坏性 `API` 变更\n"
+"- 新增核心功能或移除现有功能\n"
+"- 第三方依赖的重大升级\n"
+"- 版本发布规划\n"
+msgstr ""
+"- Major architectural changes\n"
+"- Breaking `API` changes\n"
+"- Addition of core features or removal of existing features\n"
+"- Major upgrades of third-party dependencies\n"
+"- Version release planning\n"
+
+#. type: text
+#: docs/zh/community/community_technical_meeting.md:28
+msgid "重大决策流程："
+msgstr "Major Decision-Making Process:"
+
+#. type: text
+#: docs/zh/community/community_technical_meeting.md:30
+msgid ""
+"1. 提交 `RFC`（征求意见稿），描述变更内容、影响范围和实施方案\n"
+"2. 在技术会议中讨论\n"
+"3. `Maintainer` 共同决策\n"
+msgstr ""
+"1. Submit an `RFC` (Request for Comments) describing the changes, scope of impact, and implementation plan\n"
+"2. Discuss in the technical meeting\n"
+"3. `Maintainer` makes a joint decision\n"
+
+#. type: blank
+#: docs/zh/community/community_technical_meeting.md:31
+msgid ""
+"\n"
+"\n"
+msgstr ""

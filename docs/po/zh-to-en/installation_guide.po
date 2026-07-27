@@ -1,0 +1,686 @@
+# PO translation file for docs/zh/installation_guide.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-21 11:38+0000\n"
+"PO-Revision-Date: 2026-07-21 11:38+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/installation_guide.md:0
+msgid "# 安装指南"
+msgstr "# Installation Guide"
+
+#. type: text
+#: docs/zh/installation_guide.md:2
+msgid "**Triton-Ascend**是适配华为Ascend处理器的Triton优化版本，主要用于提供高效的核函数自动调优、算子编译及部署能力，支持Ascend Atlas A2/A3/950系列产品，兼容Triton核心语法的同时，针对昇腾NPU特性进行了深度优化，包括自动解析核函数参数、优化内存访问逻辑、完善安全部署机制等。"
+msgstr "**Triton-Ascend** is an optimized version of Triton adapted for Huawei Ascend processors, primarily designed to provide efficient kernel auto-tuning, operator compilation, and deployment capabilities. It supports Ascend Atlas A2/A3/950 series products, is compatible with Triton's core syntax, and has been deeply optimized for Ascend NPU features, including automatic parsing of kernel parameters, optimization of memory access logic, and enhancement of secure deployment mechanisms."
+
+#. type: text
+#: docs/zh/installation_guide.md:4
+msgid "## 环境准备"
+msgstr "## Environment Preparation"
+
+#. type: text
+#: docs/zh/installation_guide.md:6
+msgid "**硬件要求**"
+msgstr "**Hardware Requirements**"
+
+#. type: text
+#: docs/zh/installation_guide.md:8
+msgid "- Ascend产品：支持Atlas A2/A3/950系列。"
+msgstr "- Ascend products: Support Atlas A2/A3/950 series."
+
+#. type: text
+#: docs/zh/installation_guide.md:10
+msgid "- NPU配置：建议至少单卡32GB内存。"
+msgstr "- NPU Configuration: It is recommended to have at least 32GB of memory per single card."
+
+#. type: text
+#: docs/zh/installation_guide.md:12
+msgid "- 操作系统：需Linux系统，具体请参考<a href=\"https://www.hiascend.com/hardware/compatibility\" style=\"text-decoration: none; color: #0066cc;\">兼容性查询助手</a>。本文接下来所有操作均以**Ubuntu**环境演示。"
+msgstr "- Operating system: Linux system required. For details, please refer to the <a href=\"https://www.hiascend.com/hardware/compatibility\" style=\"text-decoration: none; color: #0066cc;\">Compatibility Query Assistant</a>. All subsequent operations in this document are demonstrated using the **Ubuntu** environment."
+
+#. type: text
+#: docs/zh/installation_guide.md:14
+msgid "**软件依赖**"
+msgstr "**Software Dependencies**"
+
+#. type: text
+#: docs/zh/installation_guide.md:16
+msgid "确定CANN、Python和TorchNPU软件版本并安装,可以参考昇腾社区官网《[CANN快速安装](https://www.hiascend.com/cann/download)》完成驱动与固件安装。"
+msgstr "Determine the software versions of CANN, Python, and TorchNPU and install them. You can refer to the Ascend community official website \"[CANN Quick Installation](https://www.hiascend.com/cann/download)\" to complete the driver and firmware installation."
+
+#. type: text
+#: docs/zh/installation_guide.md:18
+msgid "注：当前源码安装默认分支的**Triton-Ascend**版本是3.2.0。"
+msgstr "Note: The current source installation default branch's **Triton-Ascend** version is 3.2.0."
+
+#. type: text
+#: docs/zh/installation_guide.md:20
+msgid ""
+"**表1** 产品版本配套说明表\n"
+"<table style=\"table-layout: fixed; width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;\">\n"
+"    <thead>\n"
+"    <tr>\n"
+"    <th style=\"width: 20%; text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd; background-color: #f5f5f5;\">\n"
+"    <strong>Triton-Ascend版本</strong>\n"
+"    </th>\n"
+"    <th style=\"width: 20%; text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd; background-color: #f5f5f5;\">\n"
+"    <strong>Python支持版本</strong>\n"
+"    </th>\n"
+"    <th style=\"width: 20%; text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd; background-color: #f5f5f5;\">\n"
+"    <strong>CANN版本</strong>\n"
+"    </th>\n"
+"    <th style=\"width: 20%; text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd; background-color: #f5f5f5;\">\n"
+"    <strong>TorchNPU版本</strong>\n"
+"    </th>\n"
+"    <th style=\"width: 20%; text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd; background-color: #f5f5f5;\">\n"
+"    <strong>备注</strong>\n"
+"    </th>\n"
+"    </tr>\n"
+"    </thead>\n"
+"    <tbody>\n"
+"    <tr>\n"
+"   <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">3.2.1</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">Python3.9.x<br>Python3.10.x<br>Python3.11.x<br>Python3.12.x<br>Python3.13.x</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">9.0.0</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">2.7.1.post4<br>2.8.0.post4<br>2.9.0.post2<br>2.10.0</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">Python3.9.x不支持aarch64</td>\n"
+"    </tr>\n"
+"    <tr>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">3.2.0</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">Python3.9.x<br>Python3.10.x<br>Python3.11.x</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">8.5.0</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">2.6.0</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">NA</td>\n"
+"    </tr>\n"
+"    <tr>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">3.2.0rc4</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">Python3.9.x<br>Python3.10.x<br>Python3.11.x</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">8.5.0</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">2.6.0</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">NA</td>\n"
+"    </tr>\n"
+"    </tbody>\n"
+"</table>\n"
+msgstr ""
+"**Table 1** Product Version Compatibility Table\n"
+"<table style=\"table-layout: fixed; width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;\">\n"
+"    <thead>\n"
+"    <tr>\n"
+"    <th style=\"width: 20%; text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd; background-color: #f5f5f5;\">\n"
+"    <strong>Triton-Ascend Version</strong>\n"
+"    </th>\n"
+"    <th style=\"width: 20%; text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd; background-color: #f5f5f5;\">\n"
+"    <strong>Python Supported Versions</strong>\n"
+"    </th>\n"
+"    <th style=\"width: 20%; text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd; background-color: #f5f5f5;\">\n"
+"    <strong>CANN Version</strong>\n"
+"    </th>\n"
+"    <th style=\"width: 20%; text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd; background-color: #f5f5f5;\">\n"
+"    <strong>TorchNPU Version</strong>\n"
+"    </th>\n"
+"    <th style=\"width: 20%; text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd; background-color: #f5f5f5;\">\n"
+"    <strong>Remarks</strong>\n"
+"    </th>\n"
+"    </tr>\n"
+"    </thead>\n"
+"    <tbody>\n"
+"    <tr>\n"
+"   <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">3.2.1</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">Python3.9.x<br>Python3.10.x<br>Python3.11.x<br>Python3.12.x<br>Python3.13.x</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">9.0.0</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">2.7.1.post4<br>2.8.0.post4<br>2.9.0.post2<br>2.10.0</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">Python3.9.x does not support aarch64</td>\n"
+"    </tr>\n"
+"    <tr>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">3.2.0</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">Python3.9.x<br>Python3.10.x<br>Python3.11.x</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">8.5.0</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">2.6.0</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">NA</td>\n"
+"    </tr>\n"
+"    <tr>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">3.2.0rc4</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">Python3.9.x<br>Python3.10.x<br>Python3.11.x</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">8.5.0</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">2.6.0</td>\n"
+"    <td style=\"text-align: left; vertical-align: middle; padding: 12px; border: 1px solid #ddd;\">NA</td>\n"
+"    </tr>\n"
+"    </tbody>\n"
+"</table>\n"
+
+#. type: text
+#: docs/zh/installation_guide.md:22
+msgid "## 快速安装"
+msgstr "## Quick Installation"
+
+#. type: code
+#: docs/zh/installation_guide.md:24
+msgid ""
+"```bash\n"
+"# 以安装 triton-ascend 3.2.1 为例\n"
+"pip install triton-ascend==3.2.1 --extra-index-url=https://triton-ascend.osinfra.cn/pypi/simple\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/installation_guide.md:26
+msgid "## 源码安装"
+msgstr "## Source Code Installation"
+
+#. type: text
+#: docs/zh/installation_guide.md:28
+msgid "### 安装依赖"
+msgstr "### Install Dependencies"
+
+#. type: code
+#: docs/zh/installation_guide.md:30
+msgid ""
+"```bash\n"
+"apt update\n"
+"apt install zlib1g-dev clang-15 lld-15\n"
+"apt install ccache # optional\n"
+"update-alternatives --install /usr/bin/clang clang /usr/bin/clang-15 100\n"
+"update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-15 100\n"
+"pip install ninja cmake wheel pybind11 # build-time dependencies\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/installation_guide.md:32
+msgid "### 编译Triton-Ascend"
+msgstr "### Compiling Triton-Ascend"
+
+#. type: code
+#: docs/zh/installation_guide.md:34
+msgid ""
+"```bash\n"
+"git clone https://github.com/triton-lang/triton-ascend.git && cd triton-ascend\n"
+"git checkout main\n"
+"pip install -e .\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/installation_guide.md:36
+msgid "### 自定义LLVM构建（可选）"
+msgstr "### Custom LLVM Build (Optional)"
+
+#. type: text
+#: docs/zh/installation_guide.md:38
+msgid "如果需要自定义构建LLVM过程的，可以执行下面的步骤去编译Triton-Ascend。"
+msgstr "If you need to customize the LLVM build process, you can follow the steps below to compile Triton-Ascend."
+
+#. type: text
+#: docs/zh/installation_guide.md:40
+msgid "1. **代码准备**：通过`git checkout`检出指定版本的LLVM源码并应用补丁。"
+msgstr "1. **Code Preparation**: Check out the specified version of the LLVM source code using `git checkout` and apply the patches."
+
+#. type: code
+#: docs/zh/installation_guide.md:42
+msgid ""
+"    ```bash\n"
+"    git clone --no-checkout https://github.com/llvm/llvm-project.git\n"
+"    cd llvm-project\n"
+"    git checkout f6ded0be897e2878612dd903f7e8bb85448269e5\n"
+"    wget https://raw.githubusercontent.com/triton-lang/triton-ascend/refs/heads/main/third_party/ascend/patch/llvm_patch_f6ded0b.patch\n"
+"    git apply llvm_patch_f6ded0b.patch\n"
+"    ```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/installation_guide.md:44
+msgid "2. **构建LLVM**：路径`{PATH_TO}`为用户第一步检出LLVM源码的路径。"
+msgstr "2. **Building LLVM**: The path `{PATH_TO}` is the path where the user checked out the LLVM source code in the first step."
+
+#. type: code
+#: docs/zh/installation_guide.md:46
+msgid ""
+"    ```bash\n"
+"    # /path/to/llvm-install 路径为用户规划的llvm安装路径,需根据实际调整\n"
+"    export LLVM_INSTALL_PREFIX=/path/to/llvm-install\n"
+"    cd {PATH_TO}/llvm-project\n"
+"    mkdir build\n"
+"    cd build\n"
+"    cmake ../llvm \\\n"
+"        -G Ninja \\\n"
+"        -DCMAKE_C_COMPILER=/usr/bin/clang-15 \\\n"
+"        -DCMAKE_CXX_COMPILER=/usr/bin/clang++-15 \\\n"
+"        -DCMAKE_LINKER=/usr/bin/lld-15 \\\n"
+"        -DCMAKE_BUILD_TYPE=Release \\\n"
+"        -DLLVM_ENABLE_ASSERTIONS=ON \\\n"
+"        -DLLVM_ENABLE_PROJECTS=\"mlir;llvm;lld\" \\\n"
+"        -DLLVM_TARGETS_TO_BUILD=\"host;NVPTX;AMDGPU\" \\\n"
+"        -DLLVM_ENABLE_LLD=ON \\\n"
+"        -DCMAKE_INSTALL_PREFIX=${LLVM_INSTALL_PREFIX}\n"
+"    ninja install\n"
+"\n"
+"    # 拷贝FILECHECK到目标安装路径\n"
+"    cp  {PATH_TO}/llvm-project/build/bin/FileCheck ${LLVM_INSTALL_PREFIX}/bin/FileCheck\n"
+"    ```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/installation_guide.md:48
+msgid "3. **编译Triton-Asecnd**"
+msgstr "3. **Compile Triton-Asecnd**"
+
+#. type: code
+#: docs/zh/installation_guide.md:50
+msgid ""
+"    ```bash\n"
+"    git clone https://github.com/triton-lang/triton-ascend.git && cd triton-ascend\n"
+"    LLVM_SYSPATH=${LLVM_INSTALL_PREFIX} \\\n"
+"    TRITON_BUILD_WITH_CCACHE=true \\\n"
+"    TRITON_BUILD_WITH_CLANG_LLD=true \\\n"
+"    TRITON_BUILD_PROTON=OFF \\\n"
+"    TRITON_WHEEL_NAME=\"triton-ascend\" \\\n"
+"    TRITON_APPEND_CMAKE_ARGS=\"-DTRITON_BUILD_UT=OFF\" \\\n"
+"    python3 setup.py install\n"
+"    ```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/installation_guide.md:52
+msgid "## 开发镜像"
+msgstr "## Development Image"
+
+#. type: text
+#: docs/zh/installation_guide.md:54
+msgid "### 检查镜像版本"
+msgstr "### Check Image Version"
+
+#. type: text
+#: docs/zh/installation_guide.md:56
+msgid ""
+"**表2** CANN版本与镜像标签对照表。更多镜像参见 [OVERVIEW.zh.md](../../docker/OVERVIEW.zh.md) 文档。\n"
+"<table style=\"table-layout: fixed; width: 100%; border-collapse: collapse;\">\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <th style=\"width: 20%; border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f5f5f5;\">CANN版本</th>\n"
+"    <th style=\"width: 20%; border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f5f5f5;\">芯片类型</th>\n"
+"    <th style=\"width: 20%; border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f5f5f5;\">Python版本</th>\n"
+"    <th style=\"width: 40%; border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f5f5f5;\">镜像标签</th>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">8.5.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">A2</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.10</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">8.5.0-910b-ubuntu22.04-py3.10</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">8.5.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">A3</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.10</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">8.5.0-a3-ubuntu22.04-py3.10</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">8.5.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">A2</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.11</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">8.5.0-910b-ubuntu22.04-py3.11</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">8.5.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">A3</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.11</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">8.5.0-a3-ubuntu22.04-py3.11</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">A2</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.11</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0-910b-ubuntu22.04-py3.11</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">A3</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.11</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0-a3-ubuntu22.04-py3.11</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">950</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.11</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0-950-ubuntu22.04-py3.11</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">A2</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.12</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0-910b-ubuntu22.04-py3.12</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">A3</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.12</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0-a3-ubuntu22.04-py3.12</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">950</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.12</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0-950-ubuntu22.04-py3.12</td>\n"
+"  </tr>\n"
+"</table>\n"
+msgstr ""
+"**Table 2** CANN version and image tag mapping table. For more images, refer to the [OVERVIEW.zh.md](../../docker/OVERVIEW.zh.md) document.\n"
+"<table style=\"table-layout: fixed; width: 100%; border-collapse: collapse;\">\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <th style=\"width: 20%; border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f5f5f5;\">CANN Version</th>\n"
+"    <th style=\"width: 20%; border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f5f5f5;\">Chip Type</th>\n"
+"    <th style=\"width: 20%; border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f5f5f5;\">Python Version</th>\n"
+"    <th style=\"width: 40%; border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f5f5f5;\">Image Tag</th>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">8.5.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">A2</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.10</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">8.5.0-910b-ubuntu22.04-py3.10</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">8.5.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">A3</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.10</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">8.5.0-a3-ubuntu22.04-py3.10</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">8.5.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">A2</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.11</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">8.5.0-910b-ubuntu22.04-py3.11</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">8.5.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">A3</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.11</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">8.5.0-a3-ubuntu22.04-py3.11</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">A2</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.11</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0-910b-ubuntu22.04-py3.11</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">A3</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.11</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0-a3-ubuntu22.04-py3.11</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">950</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.11</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0-950-ubuntu22.04-py3.11</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">A2</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.12</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0-910b-ubuntu22.04-py3.12</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">A3</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.12</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0-a3-ubuntu22.04-py3.12</td>\n"
+"  </tr>\n"
+"  <tr style=\"height: 50px;\">\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">950</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">3.12</td>\n"
+"    <td style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">9.0.0-950-ubuntu22.04-py3.12</td>\n"
+"  </tr>\n"
+"</table>\n"
+
+#. type: text
+#: docs/zh/installation_guide.md:58
+msgid "### 镜像使用"
+msgstr "### Using Images"
+
+#. type: code
+#: docs/zh/installation_guide.md:60
+msgid ""
+"```bash\n"
+"docker run -u 0 -dit --shm-size=512g --name=triton-ascend_container \\\n"
+"--security-opt seccomp=unconfined \\\n"
+"--device=/dev/davinci0 \\\n"
+"--device=/dev/davinci1 \\\n"
+"--device=/dev/davinci2 \\\n"
+"--device=/dev/davinci3 \\\n"
+"--device=/dev/davinci4 \\\n"
+"--device=/dev/davinci5 \\\n"
+"--device=/dev/davinci6 \\\n"
+"--device=/dev/davinci7 \\\n"
+"--device=/dev/davinci_manager \\\n"
+"--device=/dev/devmm_svm \\\n"
+"--device=/dev/hisi_hdc \\\n"
+"-v /usr/local/dcmi:/usr/local/dcmi \\\n"
+"-v /usr/local/bin/npu-smi:/usr/local/bin/npu-smi \\\n"
+"-v /usr/local/sbin/npu-smi:/usr/local/sbin/npu-smi \\\n"
+"-v /usr/local/Ascend/driver:/usr/local/Ascend/driver \\\n"
+"-v /home:/home \\\n"
+"-v /etc/ascend_install.info:/etc/ascend_install.info \\\n"
+"triton-ascend-image:latest \\\n"
+"/bin/bash\n"
+"\n"
+"# 进入容器，可在前面的快速安装和源码安装中任选一种方式安装Triton-Ascend\n"
+"docker exec -u root -it triton-ascend_container /bin/bash\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/installation_guide.md:62
+msgid "## 运行样例"
+msgstr "## Running Examples"
+
+#. type: text
+#: docs/zh/installation_guide.md:64
+msgid "**运行tutorials中向量加法实例验证结果**"
+msgstr "**Run the vector addition example in tutorials to verify the result**"
+
+#. type: text
+#: docs/zh/installation_guide.md:66
+msgid "向量加法实例：<a href=\"https://github.com/triton-lang/triton-ascend/blob/main/third_party/ascend/tutorials/01-vector-add.py\" style=\"text-decoration: none; color: #0066cc;\">01-vector-add.py </a>"
+msgstr "Vector Addition Example: <a href=\"https://github.com/triton-lang/triton-ascend/blob/main/third_party/ascend/tutorials/01-vector-add.py\" style=\"text-decoration: none; color: #0066cc;\">01-vector-add.py </a>"
+
+#. type: code
+#: docs/zh/installation_guide.md:68
+msgid ""
+"```bash\n"
+"# 设置CANN环境变量（以root用户默认安装路径`/usr/local/Ascend`为例）\n"
+"source /usr/local/Ascend/ascend-toolkit/set_env.sh\n"
+"# 拉取triton-ascend源码仓及用例（可选，非源码编译安装运行示例时需拉源码仓）\n"
+"git clone https://github.com/triton-lang/triton-ascend.git\n"
+"# 运行tutorials实例\n"
+"python3 ./third_party/ascend/tutorials/01-vector-add.py\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/installation_guide.md:70
+msgid "观察到类似的输出即说明环境配置正确："
+msgstr "Observing similar output indicates that the environment configuration is correct:"
+
+#. type: code
+#: docs/zh/installation_guide.md:72
+msgid ""
+"```text\n"
+"tensor([0.8329, 1.0024, 1.3639,  ..., 1.0796, 1.0406, 1.5811], device='npu:0')\n"
+"tensor([0.8329, 1.0024, 1.3639,  ..., 1.0796, 1.0406, 1.5811], device='npu:0')\n"
+"The maximum difference between torch and triton is 0.0\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/installation_guide.md:74
+msgid "## 安装常见问题"
+msgstr "## Installation FAQ"
+
+#. type: text
+#: docs/zh/installation_guide.md:76
+msgid "**问题一：安装TorchNPU时出现报错“ERROR: No matching distribution found for torch==2.7.1+cpu”**"
+msgstr "**Issue 1: Error \"ERROR: No matching distribution found for torch==2.7.1+cpu\" occurs when installing TorchNPU**"
+
+#. type: text
+#: docs/zh/installation_guide.md:80
+msgid "可以尝试手动安装Torch后再安装TorchNPU："
+msgstr "You can try manually installing Torch first, then install TorchNPU."
+
+#. type: code
+#: docs/zh/installation_guide.md:82
+msgid ""
+"```bash\n"
+"pip install torch==2.7.1+cpu --index-url https://download.pytorch.org/whl/cpu\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/installation_guide.md:84
+msgid "**问题二：编译安装Triton-Ascend时，如果GCC < 9.4.0，可能报错 “ld.lld: error: unable to find library -lstdc++fs”**"
+msgstr "**Issue 2: When compiling and installing Triton-Ascend, if GCC < 9.4.0, the error \"ld.lld: error: unable to find library -lstdc++fs\" may occur.**"
+
+#. type: text
+#: docs/zh/installation_guide.md:88
+msgid ""
+"一般是链接器无法找到stdc++fs库引起的报错。该库用于支持GCC 9之前版本的文件系统特性。此时需要手动把CMake文件中以下相关代码片段的注释打开。\n"
+"文件路径：triton-ascend/CMakeLists.txt\n"
+msgstr ""
+"This error is usually caused by the linker being unable to find the stdc++fs library. This library is used to support filesystem features in versions prior to GCC 9. In this case, you need to manually uncomment the relevant code snippet in the CMake file below.  \n"
+"File path: triton-ascend/CMakeLists.txt\n"
+
+#. type: code
+#: docs/zh/installation_guide.md:90
+msgid ""
+"```bash\n"
+"if (NOT WIN32 AND NOT APPLE)\n"
+"link_libraries(stdc++fs)\n"
+"endif()\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/installation_guide.md:92
+msgid "**问题三：执行算子时报错 ModuleNotFoundError: No module named 'triton._C.libtriton.ascend'; 'triton._C.libtriton' is not a package**"
+msgstr "**Issue 3: When executing an operator, an error is reported: ModuleNotFoundError: No module named 'triton._C.libtriton.ascend'; 'triton._C.libtriton' is not a package**"
+
+#. type: text
+#: docs/zh/installation_guide.md:94
+msgid "**根因分析**"
+msgstr "**Root Cause Analysis**"
+
+#. type: text
+#: docs/zh/installation_guide.md:96
+msgid " triton-ascend目录被triton覆盖,导致triton-ascend功能受损。"
+msgstr "The triton-ascend directory is overwritten by triton, causing triton-ascend functionality to be impaired."
+
+#. type: text
+#: docs/zh/installation_guide.md:98
+msgid "**解决措施**"
+msgstr "**Solution**"
+
+#. type: text
+#: docs/zh/installation_guide.md:100
+msgid " 卸载已损坏的triton-ascend,重新安装即可。以3.2.1 版本为例，可执行如下命令修复："
+msgstr "Uninstall the damaged triton-ascend, then reinstall it. Taking version 3.2.1 as an example, you can execute the following command to fix it:"
+
+#. type: code
+#: docs/zh/installation_guide.md:102
+msgid ""
+"```bash\n"
+"pip uninstall triton-ascend triton\n"
+"pip install triton-ascend==3.2.1 --extra-index-url=https://triton-ascend.osinfra.cn/pypi/simple\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/installation_guide.md:104
+msgid "**问题四：Triton-Ascend 3.2.1版本为何新增依赖triton？**"
+msgstr "**Question 4: Why does Triton-Ascend version 3.2.1 add a dependency on triton?**"
+
+#. type: text
+#: docs/zh/installation_guide.md:106
+msgid ""
+"答复：Triton-Ascend是基于Triton进行的二次开发，与Triton安装目录同名。若用户安装Triton-Ascend之后，在此安装Triton或依赖Triton的三方件，会覆盖Triton目录，导致Triton-Ascend功能受损。\n"
+"因此通过增加Triton依赖，当Triton被覆盖安装时会有如下提醒。\n"
+msgstr "Answer: Triton-Ascend is a secondary development based on Triton, and it shares the same installation directory name as Triton. If users install Triton or third-party components that depend on Triton after installing Triton-Ascend, the Triton directory will be overwritten, causing damage to Triton-Ascend's functionality. Therefore, by adding a Triton dependency, the following warning will be displayed when Triton is overwritten during installation."
+
+#. type: code
+#: docs/zh/installation_guide.md:108
+msgid ""
+"```text\n"
+"ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\n"
+"triton-ascend 3.2.1 requires triton==3.5.0, but you have triton 3.5.1 which is incompatible.\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/installation_guide.md:110
+msgid "若用户遇到且想恢复Triton-Ascend功能，可做如下操作："
+msgstr "If users encounter issues and wish to restore the Triton-Ascend functionality, they can perform the following operations:"
+
+#. type: code
+#: docs/zh/installation_guide.md:112
+msgid ""
+"```bash\n"
+"pip uninstall triton-ascend triton\n"
+"pip install triton-ascend==3.2.1 --extra-index-url=https://triton-ascend.osinfra.cn/pypi/simple\n"
+"\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/installation_guide.md:114
+msgid "**问题五：Triton-Ascend 3.2.1版本依赖的Triton版本为何不一致？**"
+msgstr "**Question 5: Why are the Triton versions that Triton-Ascend 3.2.1 depends on inconsistent?**"
+
+#. type: text
+#: docs/zh/installation_guide.md:116
+msgid "答复：X86与Arm使用不同版本的社区Triton安装包，是因为社区从Triton 3.2版本开始提供X86安装包，而Arm安装包是从Triton 3.5版本开始提供的。"
+msgstr "Answer: The community provides different versions of the Triton installation package for X86 and Arm because the community started offering the X86 installation package from Triton version 3.2, while the Arm installation package has been available since Triton version 3.5."
+
+#. type: text
+#: docs/zh/installation_guide.md:118
+msgid "**问题六：如何确认芯片类型**"
+msgstr "**Question 6: How to Confirm the Chip Type**"
+
+#. type: text
+#: docs/zh/installation_guide.md:120
+msgid "您可以使用npu-smi命令查看系统上的NPU型号。例如，在npu-smi info命令的输出中，\"910B4\" 对应芯片类型A2（昇腾910b系列）："
+msgstr "You can use the `npu-smi` command to check the NPU model on the system. For example, in the output of the `npu-smi info` command, \"910B4\" corresponds to chip type A2 (Ascend 910B series)."
+
+#. type: code
+#: docs/zh/installation_guide.md:122
+msgid ""
+"```Text\n"
+"root@localhost:/# npu-smi  info\n"
+"+------------------------------------------------------------------------------------------------------------------+\n"
+"| npu-smi 26.0.rc1                            Version: 26.0.rc1                                                    |\n"
+"+---------------------------+---------------+----------------------------------------------------------------------+\n"
+"| NPU   Name                | Health        | Power(W)             Temp(C)                 Hugepages-Usage(page)   |\n"
+"| Chip                      | Bus-Id        | AICore(%)            Memory-Usage(MB)        HBM-Usage(MB)           |\n"
+"+===========================+===============+======================================================================+\n"
+"| 0     910B4               | OK            | 82.6                 32                      0    / 0                |\n"
+"| 0                         | 0000:C1:00.0  | 0                    0    / 0                2871 / 32768            |\n"
+"+===========================+===============+======================================================================+\n"
+"+---------------------------+---------------+----------------------------------------------------------------------+\n"
+"| NPU     Chip              | Process id    | Process name       | Process memory(MB)    | Process id in container |\n"
+"+===========================+===============+======================================================================+\n"
+"| No running processes found in NPU 0                                                                              |\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/installation_guide.md:123
+msgid ""
+"\n"
+"\n"
+msgstr ""

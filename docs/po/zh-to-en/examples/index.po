@@ -1,0 +1,55 @@
+# PO translation file for docs/zh/examples/index.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-21 11:37+0000\n"
+"PO-Revision-Date: 2026-07-21 11:37+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/examples/index.md:0
+msgid "# Tutorials"
+msgstr "# Tutorials"
+
+#. type: text
+#: docs/zh/examples/index.md:2
+msgid "## Triton 示例列表"
+msgstr "## Triton Example List"
+
+#. type: text
+#: docs/zh/examples/index.md:4
+msgid ""
+"|示例|简要说明|\n"
+"|--|--|\n"
+"| [01_vector_add_example](./01_vector_add_example.md)| 简单加法示例 |\n"
+"| [02_fused_softmax_example](./02_fused_softmax_example.md)| Softmax 融合算子示例 |\n"
+"| [03_layer_norm_example](./03_layer_norm_example.md)| Layer Normalization 示例 |\n"
+"| [04_fused_attention_example](./04_fused_attention_example.md)| Flash Attention v2 融合注意力算法示例 |\n"
+"| [05_matrix_multiplication_example](./05_matrix_multiplication_example.md)| 矩阵乘法高效实现示例 |\n"
+"| [06_autotune_example](./06_autotune_example.md)| 使用 Autotune 进行内核自动调优示例 |\n"
+"| [07_accuracy_comparison_example](./07_accuracy_comparison_example.md)| 精度比对示例 |\n"
+"| [08_max_autotune_example](./08_max_autotune_example.md)| 使用 max_autotune 进行内核自动调优示例 |\n"
+msgstr ""
+"| Example | Brief Description |\n"
+"|--|--|\n"
+"| [01_vector_add_example](./01_vector_add_example.md) | Simple addition example |\n"
+"| [02_fused_softmax_example](./02_fused_softmax_example.md) | Softmax fused operator example |\n"
+"| [03_layer_norm_example](./03_layer_norm_example.md) | Layer Normalization example |\n"
+"| [04_fused_attention_example](./04_fused_attention_example.md) | Flash Attention v2 fused attention algorithm example |\n"
+"| [05_matrix_multiplication_example](./05_matrix_multiplication_example.md) | Efficient matrix multiplication implementation example |\n"
+"| [06_autotune_example](./06_autotune_example.md) | Kernel autotuning using Autotune example |\n"
+"| [07_accuracy_comparison_example](./07_accuracy_comparison_example.md) | Accuracy comparison example |\n"
+"| [08_max_autotune_example](./08_max_autotune_example.md) | Kernel autotuning using max_autotune example |\n"
+
+#. type: blank
+#: docs/zh/examples/index.md:5
+msgid ""
+"\n"
+"\n"
+msgstr ""

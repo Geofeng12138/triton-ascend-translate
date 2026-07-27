@@ -1,0 +1,180 @@
+# PO translation file for docs/zh/community/release_policy.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-21 11:28+0000\n"
+"PO-Revision-Date: 2026-07-21 11:28+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/community/release_policy.md:0
+msgid "# 版本发布策略"
+msgstr "# Release Policy"
+
+#. type: text
+#: docs/zh/community/release_policy.md:2
+msgid "## 版本编号"
+msgstr "## Version Numbering"
+
+#. type: text
+#: docs/zh/community/release_policy.md:4
+msgid "Triton-Ascend 遵循 [PEP 440](https://peps.python.org/pep-0440/) 版本规范，版本号与上游 Triton 对齐：`vMAJOR.MINOR.PATCH[rcN][.postN]`"
+msgstr "Triton-Ascend follows the [PEP 440](https://peps.python.org/pep-0440/) version specification, with version numbers aligned with upstream Triton: `vMAJOR.MINOR.PATCH[rcN][.postN]`"
+
+#. type: text
+#: docs/zh/community/release_policy.md:6
+msgid ""
+"- **MAJOR.MINOR**：与上游 Triton 版本一一对应，例如 Triton-Ascend `3.2` 基于 Triton `3.2`\n"
+"- **PATCH**：Triton-Ascend 的 `PATCH` 版本可能高于上游 Triton，用于 `MAJOR.MINOR` 级别的问题修复或改进，例如 Triton-Ascend `3.2.0` 和 `3.2.1` 均基于 Triton `3.2.0`\n"
+"- **rcN**：发布候选版本，根据需要发布以供社区早期测试和反馈\n"
+"- **postN**：已发布版本的后续补丁，根据需要发布以修复稳定版本中的问题\n"
+msgstr ""
+"- **MAJOR.MINOR**: Corresponds one-to-one with the upstream Triton version. For example, Triton-Ascend `3.2` is based on Triton `3.2`.\n"
+"- **PATCH**: The `PATCH` version of Triton-Ascend may be higher than the upstream Triton, used for bug fixes or improvements at the `MAJOR.MINOR` level. For example, both Triton-Ascend `3.2.0` and `3.2.1` are based on Triton `3.2.0`.\n"
+"- **rcN**: Release candidate version, released as needed for early community testing and feedback.\n"
+"- **postN**: Subsequent patch for a released version, released as needed to fix issues in a stable version.\n"
+
+#. type: text
+#: docs/zh/community/release_policy.md:8
+msgid "## 分支策略"
+msgstr "## Branch Strategy"
+
+#. type: text
+#: docs/zh/community/release_policy.md:10
+msgid ""
+"- `main` 分支为最新开发分支，跟踪最新上游 Triton 版本\n"
+"- 每个发布版本创建对应的发布开发分支（如 `release/3.2.x`），与社区发布具有相同的 commit id\n"
+"- 功能开发应在 fork 仓库中进行，通过 `PR` 合入 Triton-Ascend 仓库\n"
+msgstr ""
+"- The `main` branch is the latest development branch, tracking the latest upstream Triton version.\n"
+"- Each release version creates a corresponding release development branch (e.g., `release/3.2.x`), which has the same commit ID as the community release.\n"
+"- Feature development should be carried out in a forked repository and merged into the Triton-Ascend repository via a `PR`.\n"
+
+#. type: text
+#: docs/zh/community/release_policy.md:12
+msgid "**`main` 分支映射：**"
+msgstr "**`main` branch mapping:**"
+
+#. type: text
+#: docs/zh/community/release_policy.md:14
+msgid ""
+"| Triton-Ascend | Triton commit hash                                           | Python    | CANN  | PyTorch | LLVM commit hash                                             | 补丁                                                        |\n"
+"| ------------- | ------------------------------------------------------------ | --------- | ----- | ------- | ------------------------------------------------------------ | ------------------------------------------------------------ |\n"
+"| `main`        | [cfc0a9d](https://github.com/triton-lang/triton-ascend/commit/cfc0a9d) | `3.9~3.13` | `9.0.0` | `2.7.1`   | [fad3272](https://github.com/llvm/llvm-project/commit/fad3272) | [fad3272.patch](https://github.com/triton-lang/triton-ascend/blob/main/third_party/ascend/llvm_patch/fad3272.patch) |\n"
+msgstr ""
+"| Triton-Ascend | Triton commit hash                                           | Python    | CANN  | PyTorch | LLVM commit hash                                             | Patch                                                        |\n"
+"| ------------- | ------------------------------------------------------------ | --------- | ----- | ------- | ------------------------------------------------------------ | ------------------------------------------------------------ |\n"
+"| `main`        | [cfc0a9d](https://github.com/triton-lang/triton-ascend/commit/cfc0a9d) | `3.9~3.13` | `9.0.0` | `2.7.1`   | [fad3272](https://github.com/llvm/llvm-project/commit/fad3272) | [fad3272.patch](https://github.com/triton-lang/triton-ascend/blob/main/third_party/ascend/llvm_patch/fad3272.patch) |\n"
+
+#. type: text
+#: docs/zh/community/release_policy.md:16
+msgid "## 维护分支与生命周期"
+msgstr "## Maintenance Branches and Lifecycle"
+
+#. type: text
+#: docs/zh/community/release_policy.md:18
+msgid "维护分支状态包括："
+msgstr "Maintenance branch status includes:"
+
+#. type: text
+#: docs/zh/community/release_policy.md:20
+msgid ""
+"- **活跃（Active）**：持续接受缺陷修复、功能改进和安全补丁；将继续演进功能或发布新版本\n"
+"- **维护（Maintenance）**：仅接受关键缺陷修复和安全补丁；不再发布功能改进\n"
+"- **停止维护（End of Life）**：不再接受任何修复；分支维护已停止\n"
+msgstr ""
+"- **Active**: Continuously receives bug fixes, feature enhancements, and security patches; will continue to evolve features or release new versions  \n"
+"- **Maintenance**: Only accepts critical bug fixes and security patches; no longer releases feature enhancements  \n"
+"- **End of Life**: No longer accepts any fixes; branch maintenance has ceased\n"
+
+#. type: text
+#: docs/zh/community/release_policy.md:22
+msgid ""
+"| 分支              | 状态     | Triton 版本 | Triton-Ascend 发布              | 维护截止 |\n"
+"| ----------------- | -------- | ------------ | ----------------------------------- | -------- |\n"
+"| `main`            | `活跃`   | `3.5.0`      | /                                   | /        |\n"
+"| `release/3.2.1` | `活跃`   | `3.2.0`      | `3.2.1`                             | /        |\n"
+"| `release/3.2.x` | `维护`   | `3.2.0`      | `3.2.0rc2`，`3.2.0rc3`，`3.2.0rc4`，`3.2.0` | /        |\n"
+msgstr ""
+"| Branch             | Status   | Triton Version | Triton-Ascend Release              | Maintenance End |\n"
+"| ----------------- | -------- | -------------- | ----------------------------------- | -------------- |\n"
+"| `main`            | `Active` | `3.5.0`        | /                                   | /              |\n"
+"| `release/3.2.1`   | `Active` | `3.2.0`        | `3.2.1`                             | /              |\n"
+"| `release/3.2.x`   | `Maintenance` | `3.2.0`    | `3.2.0rc2`, `3.2.0rc3`, `3.2.0rc4`, `3.2.0` | /              |\n"
+
+#. type: text
+#: docs/zh/community/release_policy.md:24
+msgid "## 发布周期"
+msgstr "## Release Cycle"
+
+#. type: text
+#: docs/zh/community/release_policy.md:26
+msgid ""
+"- **稳定版本**：按照项目版本节奏发布，并非每个上游 Triton 版本都会有对应的稳定发布\n"
+"- **rc 版本**：与上游 Triton 版本节奏同步发布，供用户早期测试\n"
+"- **post 版本**：根据需要发布，用于修复现有稳定版本中的问题\n"
+msgstr ""
+"- **Stable version**: Released according to the project version cadence; not every upstream Triton version will have a corresponding stable release.\n"
+"- **rc version**: Released in sync with the upstream Triton version cadence for early user testing.\n"
+"- **post version**: Released as needed to fix issues in existing stable versions.\n"
+
+#. type: text
+#: docs/zh/community/release_policy.md:28
+msgid "### 发布时间线"
+msgstr "### Release Timeline"
+
+#. type: text
+#: docs/zh/community/release_policy.md:30
+msgid ""
+"| 日期       | 事件                     |\n"
+"| ---------- | ------------------------ |\n"
+"| 2026-05-06 | 发布稳定版本 `3.2.1`     |\n"
+"| 2026-01-21 | 发布稳定版本 `3.2.0`     |\n"
+"| 2025-11-14 | 发布预览版本 `3.2.0rc4`  |\n"
+"| 2025-11-12 | 发布预览版本 `3.2.0rc3`  |\n"
+"| 2025-05-26 | 发布预览版本 `3.2.0rc2`  |\n"
+msgstr ""
+"| Date       | Event                        |\n"
+"| ---------- | ---------------------------- |\n"
+"| 2026-05-06 | Released stable version `3.2.1` |\n"
+"| 2026-01-21 | Released stable version `3.2.0` |\n"
+"| 2025-11-14 | Released preview version `3.2.0rc4` |\n"
+"| 2025-11-12 | Released preview version `3.2.0rc3` |\n"
+"| 2025-05-26 | Released preview version `3.2.0rc2` |\n"
+
+#. type: text
+#: docs/zh/community/release_policy.md:32
+msgid "## 版本兼容性矩阵"
+msgstr "## Version Compatibility Matrix"
+
+#. type: text
+#: docs/zh/community/release_policy.md:34
+msgid ""
+"| Triton-Ascend | Triton | Python              | CANN  | PyTorch | LLVM commit hash | LLVM 补丁 |\n"
+"| ------------- | ------ | ------------------- | ----- | ------- | ---------------- | --------- |\n"
+"| `3.2.1`       | `3.2.0` | `3.9`(x86), `3.10-3.13` | `9.0.0` | `2.7.1`   | `b5cc222`        | -         |\n"
+"| `3.2.0`       | `3.2.0` | `3.9-3.11`          | `8.5.0` | `2.6.0`   | `b5cc222`        | -         |\n"
+"| `3.2.0rc4`    | `3.2.0` | `3.9-3.11`          | `8.5.0` | `2.6.0`   | `b5cc222`        | -         |\n"
+"| `3.2.0rc3`    | `3.2.0` | `3.9-3.11`          | `8.5.0` | `2.6.0`   | `86b69c3`        | -         |\n"
+"| `3.2.0rc2`    | `3.2.0` | `3.9-3.11`          | `8.5.0` | `2.6.0`   | `86b69c3`        | -         |\n"
+msgstr ""
+"| Triton-Ascend | Triton | Python              | CANN  | PyTorch | LLVM commit hash | LLVM Patch |\n"
+"| ------------- | ------ | ------------------- | ----- | ------- | ---------------- | --------- |\n"
+"| `3.2.1`       | `3.2.0` | `3.9`(x86), `3.10-3.13` | `9.0.0` | `2.7.1`   | `b5cc222`        | -         |\n"
+"| `3.2.0`       | `3.2.0` | `3.9-3.11`          | `8.5.0` | `2.6.0`   | `b5cc222`        | -         |\n"
+"| `3.2.0rc4`    | `3.2.0` | `3.9-3.11`          | `8.5.0` | `2.6.0`   | `b5cc222`        | -         |\n"
+"| `3.2.0rc3`    | `3.2.0` | `3.9-3.11`          | `8.5.0` | `2.6.0`   | `86b69c3`        | -         |\n"
+"| `3.2.0rc2`    | `3.2.0` | `3.9-3.11`          | `8.5.0` | `2.6.0`   | `86b69c3`        | -         |\n"
+
+#. type: blank
+#: docs/zh/community/release_policy.md:35
+msgid ""
+"\n"
+"\n"
+msgstr ""
