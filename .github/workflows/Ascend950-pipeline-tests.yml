@@ -45,7 +45,7 @@ jobs:
       head_branch: ${{ steps.pr.outputs.head_branch }}
       wheel_name: ${{ steps.wheel.outputs.name }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Mark cascade run on PR head SHA
         # Writes a pending commit status on the upstream's head SHA so /retry
@@ -150,7 +150,7 @@ jobs:
     steps:
       # Default checkout pulls the base repo at the workflow's ref (safe).
       # Do not pass ref: head_sha — that would execute fork code.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Resolve PR context
         id: ctx
