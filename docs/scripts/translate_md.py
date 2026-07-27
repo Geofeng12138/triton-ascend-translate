@@ -77,14 +77,21 @@ Text to translate:
 # subdirectory structure as the source, so we can match by path prefix.
 EXCLUDED_DIRS = ["python-api", "triton_api", "triton_api_extension", "libdevice"]
 
+# Filenames (stem only, no extension) that should NOT be translated.
+# These match .pot files whose stem (filename without .pot) is in this set.
+EXCLUDED_FILES = ["code_of_conduct"]
+
 
 def _is_excluded(pot_path: Path) -> bool:
-    """Check if a .pot file's source files come from an excluded directory.
+    """Check if a .pot file's source files come from an excluded directory or filename.
 
     Since Sphinx preserves the source directory structure in locale/zh/LC_MESSAGES/,
     a file like locale/zh/LC_MESSAGES/python-api/foo.pot corresponds to
-    docs/zh/python-api/foo.md. We check the relative path's first component.
+    docs/zh/python-api/foo.md. We check the relative path's first component
+    and also the filename stem.
     """
+    if pot_path.stem in EXCLUDED_FILES:
+        return True
     try:
         rel = pot_path.relative_to(POT_DIR)
     except ValueError:
