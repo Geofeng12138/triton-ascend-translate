@@ -1,0 +1,236 @@
+# English translations for triton-ascend docs.
+# Copyright (c) 2025 Huawei Technologies Co., Ltd.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-27 08:25+0000\n"
+"PO-Revision-Date: 2026-07-27 08:25+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid ""
+msgstr ""
+"Our Pledge\n"
+"\n"
+"In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to make participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.\n"
+"\n"
+"Our Standards\n"
+"\n"
+"Examples of behavior that contributes to creating a positive environment include:\n"
+"\n"
+"* Using welcoming and inclusive language\n"
+"* Being respectful of differing viewpoints and experiences\n"
+"* Gracefully accepting constructive criticism\n"
+"* Focusing on what is best for the community\n"
+"* Showing empathy towards other community members\n"
+"\n"
+"Examples of unacceptable behavior by participants include:\n"
+"\n"
+"* The use of sexualized language or imagery and unwelcome sexual attention or advances\n"
+"* Trolling, insulting/derogatory comments, and personal or political attacks\n"
+"* Public or private harassment\n"
+"* Publishing others' private information, such as a physical or electronic address, without explicit permission\n"
+"* Other conduct which could reasonably be considered inappropriate in a professional setting\n"
+"\n"
+"Our Responsibilities\n"
+"\n"
+"Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.\n"
+"\n"
+"Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned with this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.\n"
+"\n"
+"Scope\n"
+"\n"
+"This Code of Conduct applies both within project spaces and in public spaces when an individual is representing the project or its community. Examples of representing a project or community include using an official project e-mail address, posting via an official social media account, or acting as an appointed representative at an online or offline event. Representation of a project may be further defined and clarified by project maintainers.\n"
+"\n"
+"Enforcement\n"
+"\n"
+"Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at [INSERT EMAIL ADDRESS]. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.\n"
+"\n"
+"Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.\n"
+"\n"
+"Attribution\n"
+"\n"
+"This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4, available at [http://contributor-covenant.org/version/1/4][version]\n"
+"\n"
+"[homepage]: http://contributor-covenant.org\n"
+"[version]: http://contributor-covenant.org/version/1/4/\n"
+
+msgid "贡献者公约"
+msgstr "Contributor Covenant"
+
+msgid "我们的承诺"
+msgstr "Our Pledge"
+
+msgid "我们承诺使我们的社区对所有人保持友好、安全且公平。"
+msgstr "We are committed to keeping our community friendly, safe, and fair for everyone."
+
+msgid "我们承诺营造一个尊重并促进每位个体尊严、权利与贡献的环境，无论其种族、民族、种姓、肤色、年龄、体貌特征、神经多样性、残疾状况、生理性别或社会性别、性别认同或表达、性取向、语言、哲学或宗教信仰、国籍或社会出身、社会经济地位、教育程度或其他身份属性。所有真诚参与并遵守本公约者，均享有同等的参与权利。"
+msgstr "We are committed to fostering an environment that respects and promotes the dignity, rights, and contributions of every individual, regardless of race, ethnicity, caste, skin color, age, physical appearance, neurodiversity, disability status, sex or gender, gender identity or expression, sexual orientation, language, philosophical or religious beliefs, nationality or social origin, socioeconomic status, educational background, or other identity attributes. All individuals who sincerely participate and adhere to this code of conduct are entitled to equal participation rights."
+
+msgid "受鼓励的行为"
+msgstr "Encouraged Behaviors"
+
+msgid "虽然各自的社会规范可能有差异，但我们都努力达到这个社区对积极行为的期待。我们也了解，因为文化、背景或母语的不同，别人对我们的言行的解读可能不同于我们的初衷。"
+msgstr "Although social norms may differ, we all strive to meet this community's expectations for positive behavior. We also understand that due to differences in culture, background, or native language, others may interpret our words and actions differently from what we intended."
+
+msgid "考虑到以上这些，我们承诺以审慎的态度彼此相待，并以践行以下共同价值为行为准则："
+msgstr "With these considerations in mind, we commit to treating each other with care and to upholding the following shared values as our code of conduct:"
+
+msgid "尊重我们**社区的宗旨**、各项活动及集会方式"
+msgstr "Respect the **purpose** of our community, its activities, and ways of gathering."
+
+msgid "以**善意与诚实**的态度与他人互动"
+msgstr "Interact with others with **goodwill and honesty**."
+
+msgid "尊重**不同的观点与经历**"
+msgstr "Respect **different perspectives and experiences**"
+
+msgid "对自己的言行及贡献**负责**"
+msgstr "Take **responsibility** for one's own words, actions, and contributions."
+
+msgid "以得体的方式给予并接受**建设性意见**"
+msgstr "Give and receive **constructive feedback** in a respectful manner."
+
+msgid "承诺在造成伤害时进行**弥补**"
+msgstr "Commit to **repairing** harm when it occurs."
+
+msgid "采取其他有益于**社区福祉**的行为"
+msgstr "Take other actions that benefit the **community's well-being**"
+
+msgid "受限制的行为"
+msgstr "Restricted Behaviors"
+
+msgid "我们同意在社区内限制以下行为。出现这些行为、威胁实施这些行为、或宣传这些行为，均视为违反本行为准则。"
+msgstr "We agree to restrict the following behaviors within the community. Engaging in these behaviors, threatening to engage in them, or promoting them is considered a violation of this Code of Conduct."
+
+msgid "**骚扰**：在明确表达界限后仍侵犯这些界限，或在被清楚要求停止后，仍进行不必要的个人关注。"
+msgstr "**Harassment**: Continuing to violate boundaries after they have been clearly expressed, or giving unwanted personal attention after being explicitly asked to stop."
+
+msgid "**人身攻击**：针对社区成员或群体发表侮辱、贬低或带有蔑视性的言论。"
+msgstr "**Personal Attacks**: Making insulting, demeaning, or contemptuous remarks toward community members or groups."
+
+msgid "**刻板印象或歧视**：基于无法改变的身份或特征，来评判他人的性格或行为。"
+msgstr "**Stereotyping or Discrimination**: Judging others' character or behavior based on immutable identities or characteristics."
+
+msgid "**性化**：做出在社区场景或宗旨下普遍认为不恰当的亲密举动。"
+msgstr "**Sexualization**: Engaging in intimate behaviors generally considered inappropriate within the community context or purpose."
+
+msgid "**侵犯保密性**：未经允许分享或利用他人的个人或隐私信息。"
+msgstr "**Breach of Confidentiality**: Sharing or using others' personal or private information without permission."
+
+msgid "**危害行为**：对任何人或群体实施、煽动或威胁施加暴力及其他伤害。"
+msgstr "**Harmful Behavior**: Engaging in, inciting, or threatening violence and other harm against any person or group."
+
+msgid "其他威胁**社区福祉**的行为。"
+msgstr "Other behaviors that threaten **community well-being**."
+
+msgid "其他限制行为"
+msgstr "Other Restricted Conduct"
+
+msgid "**虚假身份**：出于任何原因冒充他人，或假扮他人以规避监管措施。"
+msgstr "**False Identity**: Impersonating others for any reason, or pretending to be someone else to circumvent regulatory measures."
+
+msgid "**未正确标明来源**：未正确标明所贡献内容的来源。"
+msgstr "**Improperly Citing Sources**: Failing to properly attribute the source of the contributed content."
+
+msgid "**宣传材料**：以不符合社区规范的方式分享营销或其他商业内容。"
+msgstr "**Promotional Materials**: Sharing marketing or other commercial content in a manner inconsistent with community guidelines."
+
+msgid "**不当传播**：未能以负责任的方式呈现包含、链接或描述任何其他受限制行为的内容。"
+msgstr "**Improper Dissemination**: Failure to present content that includes, links to, or describes any other restricted behavior in a responsible manner."
+
+msgid "通报问题"
+msgstr "Report Issues"
+
+msgid "即使社区成员之间尽其所能地合作，也仍然可能发生矛盾。并不是所有冲突都涉及违反行为准则，本准则旨在强化受鼓励的行为与规范，它们有助于预防冲突并将伤害降到最低。"
+msgstr "Even when community members do their best to cooperate, conflicts may still arise. Not all conflicts involve violations of the Code of Conduct; this Code is intended to reinforce encouraged behaviors and norms, which help prevent conflicts and minimize harm."
+
+msgid "当事件发生时，及时报告非常重要。要报告可能的违规行为，**[注意：请在此填入举报方式]**。"
+msgstr "When an incident occurs, timely reporting is very important. To report potential violations, **[Note: Please fill in the reporting method here]**."
+
+msgid "社区管理员会严肃对待违规报告，并尽力及时回应。将对所有违反行为准则的报告展开调查，方式包括查阅消息、日志及录音，或访谈证人及其他相关参与人。社区管理员在优先保障安全与保密性的前提下，会尽可能保持调查与执行过程的透明度。为践行这些价值观，执行措施会在涉事各方的私下环境中进行，但如经各方同意，将事件通报全体社区也可以作为解决方案的一部分。"
+msgstr "Community moderators take violation reports seriously and will strive to respond in a timely manner. All reports of Code of Conduct violations will be investigated, which may include reviewing messages, logs, and recordings, or interviewing witnesses and other relevant participants. Moderators will maintain as much transparency as possible in the investigation and enforcement process, while prioritizing safety and confidentiality. To uphold these values, enforcement actions will be conducted in private settings involving the relevant parties; however, with the consent of all parties, notifying the entire community about the incident may also be part of the resolution."
+
+msgid "处理与弥补伤害"
+msgstr "Handling and Remedying Harm"
+
+msgid "**[注意：下文所列的处理办法与补救措施，是基于行为准则执行过程中的最佳做法而提出的建议。如果你们的社区已经有既定的执行流程，请确保修改本段内容，以描述你们自己的政策。]**"
+msgstr "**[Note: The handling procedures and remedial measures listed below are suggestions based on best practices in the enforcement of the Code of Conduct. If your community already has an established enforcement process, please ensure that this section is modified to describe your own policies.]**"
+
+msgid "若社区管理员经调查确认存在违反此行为准则的行为，将参照以下\"分级处理\"机制，根据事件对相关人员及社区整体造成的影响程度，确定最适宜的伤害弥补方案。根据违规严重程度，可跳过较低级别的处理措施。"
+msgstr "If a community administrator, after investigation, confirms a violation of this Code of Conduct, the following \"graduated response\" mechanism will be referenced to determine the most appropriate remedy for the harm, based on the impact of the incident on the individuals involved and the community as a whole. Depending on the severity of the violation, lower-level response measures may be bypassed."
+
+msgid "警告"
+msgstr "Warning"
+
+msgid "**事件**：单次或连续违规行为"
+msgstr "**Incident**: A single or continuous violation"
+
+msgid "**后果**：社区管理员将发出书面私信警告"
+msgstr "**Consequence**: Community administrators will issue a written private message warning."
+
+msgid "**弥补**：弥补的方式如书面私下致歉、坦承自己的责任，或主动确认清楚今后该如何做才符合期待。"
+msgstr "**Remedy**: Ways to remedy include a written private apology, acknowledging one's responsibility, or proactively clarifying how to act in accordance with expectations in the future."
+
+msgid "暂时限制活动"
+msgstr "Temporarily restrict activity"
+
+msgid "**事件**：重复造成先前已被警告的违规，或首次发生略为严重的违规行为。"
+msgstr "**Event**: Repeated violations that have been previously warned, or a first occurrence of a slightly serious violation."
+
+msgid "**后果**：发出私下的书面警告，并设定一个有时间限制的冷静期，旨在强调事态的严重性，并让相关社区成员有时间消化与处理该事件。冷静期可能是限制在特定的交流渠道，或限制与特定社区成员的互动。"
+msgstr "**Consequences**: A private written warning is issued, accompanied by a time-limited cooling-off period, intended to emphasize the seriousness of the situation and allow the involved community member time to process and reflect on the incident. The cooling-off period may be restricted to specific communication channels or interactions with particular community members."
+
+msgid "**弥补**：修复的方式可能包括道歉、利用冷静期反思自身行为及其影响，以及充分意识到在冷静期结束后如何重新进入社区空间。"
+msgstr "**Remediation**: Methods of remediation may include apologizing, using a cooling-off period to reflect on one's behavior and its impact, and fully recognizing how to re-enter the community space after the cooling-off period ends."
+
+msgid "暂时停权"
+msgstr "Temporary suspension"
+
+msgid "**事件**：出现社区管理员已多次警告后仍然重复违规的模式，或一次严重违规行为。"
+msgstr "**Event**: A pattern of repeated violations after multiple warnings from community administrators, or a single serious violation."
+
+msgid "**后果**：发出私下的书面警告，并附上恢复权限所需满足的条件。通常，临时停权旨在给予被停权者时间，反思其行为以及考虑可能的改正措施。"
+msgstr "**Consequences**: A private written warning is issued, along with conditions that must be met to restore permissions. Typically, a temporary suspension is intended to give the suspended individual time to reflect on their behavior and consider possible corrective measures."
+
+msgid "**弥补**：弥补的条件包括尊重停权的意旨、达成恢复权限的指定条件，以及充分认识到在停权解除后如何重新融入社区。"
+msgstr "**Remedy**: Conditions for remedy include respecting the intent of the suspension, meeting the specified conditions for reinstatement of privileges, and fully understanding how to reintegrate into the community after the suspension is lifted."
+
+msgid "永久封禁"
+msgstr "Permanent ban"
+
+msgid "**事件**：多次违反行为准则，且其他分级处理措施均未能解决问题，或发生严重到社区管理员认定无法在该成员继续存在的情况下保障社区安全的违规行为。"
+msgstr "**Event**: Repeated violations of the Code of Conduct where other graduated measures have failed to resolve the issue, or a violation severe enough that the community administrators determine the member's continued presence compromises community safety."
+
+msgid "**后果**：撤销其对所有社区空间、工具及交流渠道的访问权限。一般而言，永久封禁应极少使用，必须有充分且有力的理由，且仅在其他弥补手段未能改变其行为时才作为最后手段实施。"
+msgstr "**Consequences**: Revocation of their access to all community spaces, tools, and communication channels. Generally, permanent bans should be used very rarely, must have sufficient and compelling reasons, and should only be implemented as a last resort when other remedial measures have failed to change their behavior."
+
+msgid "**弥补**：此类严重情形下，不存在可行的弥补途径。"
+msgstr "**Remedy**: In such serious circumstances, there is no feasible remedy."
+
+msgid "本分级处理措施旨在作为指导方针，并不限制社区管理者在符合社区最大利益的前提下，运用其自主裁量权与判断力。"
+msgstr "This tiered response measure is intended as a guideline and does not restrict community managers from exercising their discretion and judgment in the best interest of the community."
+
+msgid "施行范围"
+msgstr "Scope of Application"
+
+msgid "本行为准则适用于社区所有空间，同时也适用于个人在公共场合或其他场合正式代表社区的情况。代表社区的行为包括但不限于：使用官方电子邮件地址；通过官方社交媒体账号发布内容；作为指定代表出席线上或线下活动。"
+msgstr "This Code of Conduct applies to all community spaces, as well as to situations where an individual is formally representing the community in public or other settings. Actions representing the community include, but are not limited to: using an official email address; posting content via official social media accounts; or acting as a designated representative at online or offline events."
+
+msgid "贡献归属"
+msgstr "Attribution of Contributions"
+
+msgid "本行为准则改编自 贡献者公约 3.0 版，该公约永久可在此查阅：[https://www.contributor-covenant.org/version/3/0/](https://www.contributor-covenant.org/version/3/0/)。"
+msgstr "This Code of Conduct is adapted from the Contributor Covenant version 3.0, which is permanently available at: [https://www.contributor-covenant.org/version/3/0/](https://www.contributor-covenant.org/version/3/0/)."
+
+msgid "贡献者公约 由 Organization for Ethical Source 负责维护，并以 CC BY-SA 4.0 许可协议发布。查看该许可协议请访问：[https://creativecommons.org/licenses/by-sa/4.0/](https://creativecommons.org/licenses/by-sa/4.0/)。"
+msgstr "The Contributor Covenant is maintained by the Organization for Ethical Source and is published under the CC BY-SA 4.0 license. To view this license, please visit: [https://creativecommons.org/licenses/by-sa/4.0/](https://creativecommons.org/licenses/by-sa/4.0/)."
+
+msgid "关于 贡献者公约 的常见问题解答，请参阅：[https://www.contributor-covenant.org/faq](https://www.contributor-covenant.org/faq)。各语言版本译文请见：[https://www.contributor-covenant.org/translations](https://www.contributor-covenant.org/translations)。更多执行与社区指南资源请见：[https://www.contributor-covenant.org/resources](https://www.contributor-covenant.org/resources)。本分级措施的灵感来源于 [Mozilla 行为准则团队](https://github.com/mozilla/inclusion) 的工作。"
+msgstr "For frequently asked questions about the Contributor Covenant, please see: [https://www.contributor-covenant.org/faq](https://www.contributor-covenant.org/faq). Translations are available at: [https://www.contributor-covenant.org/translations](https://www.contributor-covenant.org/translations). For additional enforcement and community guidelines resources, please see: [https://www.contributor-covenant.org/resources](https://www.contributor-covenant.org/resources). This graduated enforcement approach is inspired by the work of the [Mozilla Code of Conduct Team](https://github.com/mozilla/inclusion)."
