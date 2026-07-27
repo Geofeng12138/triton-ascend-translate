@@ -103,11 +103,11 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: |
           if [ "${{ steps.detect.outputs.full_translate }}" = "true" ]; then
-            python docs/scripts/translate_md.py \
+            python .github/workflows/scripts/translate_md.py \
               --first-time \
               --output-json /tmp/translation_results.json
           else
-            python docs/scripts/translate_md.py \
+            python .github/workflows/scripts/translate_md.py \
               --all \
               --output-json /tmp/translation_results.json
           fi
@@ -167,7 +167,7 @@ jobs:
           git checkout -b "${BRANCH_NAME}"
 
           count=$(git diff --cached --name-only | wc -l)
-          git commit -s -m "[Doc] Auto-translate ${count} file(s) (Sphinx gettext)"
+          git commit -s -m "[doc](feat) Auto-translate ${count} file(s) (Sphinx gettext)"
           git push origin "${BRANCH_NAME}"
 
       - name: Create Pull Request
@@ -185,7 +185,10 @@ jobs:
           fi
 
           DATE=$(date +%Y-%m-%d)
-          TITLE="[Doc] Auto-translate Chinese docs to English ${DATE}"
+          # PR title must match: [<component>](<type>) <subject>
+          # Allowed types: feat | fix | NFC | style | test | chore | revert
+          # Max length: 72 chars
+          TITLE="[doc](feat) Auto-translate Chinese docs to English ${DATE}"
 
           BODY=$(cat <<-BODYEOF
           ## Auto-Translation Summary

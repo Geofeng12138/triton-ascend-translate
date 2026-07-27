@@ -79,7 +79,7 @@ EXCLUDED_DIRS = ["python-api", "triton_api", "triton_api_extension", "libdevice"
 
 # Filenames (stem only, no extension) that should NOT be translated.
 # These match .pot files whose stem (filename without .pot) is in this set.
-EXCLUDED_FILES = ["code_of_conduct"]
+EXCLUDED_FILES = ["CODE_OF_CONDUCT_zh"]
 
 
 def _is_excluded(pot_path: Path) -> bool:
