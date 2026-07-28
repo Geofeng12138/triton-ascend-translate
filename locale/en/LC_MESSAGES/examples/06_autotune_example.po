@@ -1,0 +1,108 @@
+# English translations for triton-ascend docs.
+# Copyright (c) 2025 Huawei Technologies Co., Ltd.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-28 03:51+0000\n"
+"PO-Revision-Date: 2026-07-28 03:51+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid ""
+msgstr "The following is an example of using the autotune feature."
+
+msgid "自动调优 （Autotune）"
+msgstr "Autotune"
+
+msgid "如果你希望先了解 Triton-Ascend autotune 的推荐用法、`configs=[]` 的含义，以及自动 Tiling 的适用边界，建议先阅读 [Triton-Ascend autotune 使用指南](../autotune_guide.md)。"
+msgstr "If you wish to first understand the recommended usage of Triton-Ascend autotune, the meaning of `configs=[]`, and the applicable boundaries of automatic Tiling, it is recommended to read the [Triton-Ascend autotune Usage Guide](../autotune_guide.md)."
+
+msgid "在本节中，我们将展示使用 Triton 的 autotune 方法自动选择最优的 kernel 配置参数。当前 Triton-Ascend autotune 完全兼容社区 autotune 的使用方法（参考[社区文档](https://triton-lang.org/main/python-api/generated/triton.autotune.html)），即需要用户手动传入一些定义好的 triton.Config，然后 autotune 会通过 benchmark 的方式选择其中的最优 kernel 配置；此外 Triton-Ascend 提供了**进阶的 autotune** 用法，用户无需提供triton kernel 的切分轴、tiling 轴等信息，autotune 会根据triton kernel语义自动解析切分轴、tiling轴等信息，并自动生成一些可能最优的 kernel 配置，然后通过 benchmark 或者 profiling 的方式选择其中的最优配置。"
+msgstr "In this section, we will demonstrate how to use Triton's autotune method to automatically select the optimal kernel configuration parameters. The current Triton-Ascend autotune is fully compatible with the community autotune usage (refer to the [community documentation](https://triton-lang.org/main/python-api/generated/triton.autotune.html)), meaning users need to manually pass in some predefined `triton.Config`, and then autotune will select the optimal kernel configuration among them through benchmarking. Additionally, Triton-Ascend provides an **advanced autotune** usage, where users do not need to provide information such as the split axes or tiling axes of the Triton kernel. The autotune will automatically parse the split axes, tiling axes, and other information based on the Triton kernel semantics, automatically generate some potentially optimal kernel configurations, and then select the optimal configuration through benchmarking or profiling."
+
+msgid "说明： 当前Triton-Ascend autotune支持block size、multibuffer（编译器的优化），因为硬件架构差异不支持num_warps、num_stages参数，未来还会持续增加autotune可调项。"
+msgstr "Note: The current Triton-Ascend autotune supports block size and multibuffer (compiler optimization). Due to differences in hardware architecture, the num_warps and num_stages parameters are not supported. More autotune tunable items will be continuously added in the future."
+
+msgid "社区 autotune 使用示例"
+msgstr "Community autotune usage example"
+
+msgid "进阶 autotune 使用示例"
+msgstr "Advanced autotune usage example"
+
+msgid "说明："
+msgstr "Description:"
+
+msgid "Triton-Ascend默认采取benchmark的方式取片上计算时间，当设置环境变量`export TRITON_BENCH_METHOD=\"npu\"`后，会通过`torch_npu.profiler.profile`的方式获取每个kernel配置下的片上计算时间，对于一些triton kernel计算快速的情况，例如小shape算子，相较于默认方式能够获取更准确的计算时间，但是会显著增加整体autotune的时间，请谨慎开启"
+msgstr "Triton-Ascend defaults to using the benchmark method to obtain on-chip computation time. When the environment variable `export TRITON_BENCH_METHOD=\"npu\"` is set, it will use `torch_npu.profiler.profile` to retrieve the on-chip computation time for each kernel configuration. For some triton kernels with fast computation, such as small-shape operators, this can obtain more accurate computation time compared to the default method. However, it will significantly increase the overall autotune time, so please enable it with caution."
+
+msgid "目前该进阶用法针对的是 Vector 类算子，不支持 Cube 类算子。更多进阶使用示例可以参考[autotune进阶使用示例](https://gitcode.com/Ascend/triton-ascend/tree/main/third_party/ascend/unittest/autotune_ut/)。"
+msgstr "Currently, this advanced usage is targeted at Vector class operators and does not support Cube class operators. For more advanced usage examples, please refer to [autotune advanced usage examples](https://gitcode.com/Ascend/triton-ascend/tree/main/third_party/ascend/unittest/autotune_ut/)."
+
+msgid "参数自动解析"
+msgstr "Automatic Parameter Parsing"
+
+msgid "执行参数自动解析前首先会获取`kernel`函数调用时未传入的参数，**将未传入的参数作为切分轴和分块轴参数的候选项**。"
+msgstr "Before performing automatic parameter parsing, the system first retrieves the parameters not passed during the `kernel` function call, **using the unpassed parameters as candidates for the split axis and block axis parameters**."
+
+msgid "切分轴参数解析"
+msgstr "Splitting axis parameter parsing"
+
+msgid "切分轴参数解析依据 `tl.program_id()`分核语句来确定 ，系统通过分析程序中 `tl.program_id()` 变量的使用情况及其与其他变量的乘法运算识别潜在的切分轴参数（当前支持直接相乘或通过中间变量间接相乘的场景），并根据候选参数列表（用户未提供的参数）进行过滤。"
+msgstr "The split axis parameter parsing is determined based on the `tl.program_id()` kernel splitting statement. The system identifies potential split axis parameters by analyzing the usage of the `tl.program_id()` variable in the program and its multiplication operations with other variables (currently supporting scenarios of direct multiplication or indirect multiplication through intermediate variables), and filters them according to the candidate parameter list (parameters not provided by the user)."
+
+msgid "最后通过掩码比较和 `autotune` 中传入的 `key` 确认当前参数对应的切分轴。"
+msgstr "Finally, confirm the split axis corresponding to the current parameters through mask comparison and the `key` passed in `autotune`."
+
+msgid "注意：1. 分割轴参数必须要与 `tl.program_id()` 相乘。 2. 必须要进行掩码比较，且该轴对应的key需要直接作为右值或以key为参数的min函数作为右值，才能对应到具体的切分轴，否则会导致参数解析失败。3. 识别出的分割轴参数仅限于候选参数列表，确保只有那些可以通过自动调优动态调整的参数才会被考虑。"
+msgstr "Note: 1. The split axis parameter must be multiplied by `tl.program_id()`. 2. A mask comparison must be performed, and the key corresponding to this axis must be used directly as the right-hand value or as the right-hand value of a min function with the key as a parameter, in order to correspond to the specific split axis; otherwise, parameter parsing will fail. 3. The identified split axis parameters are limited to the candidate parameter list, ensuring that only those parameters that can be dynamically adjusted through autotuning are considered."
+
+msgid "分块轴参数解析"
+msgstr "Block Axis Parameter Parsing"
+
+msgid "分块轴参数依据 `tl.arange()` ，`tl.range()`，`range()` 分块语句来确定。通过分析程序中`for` 循环里的 `tl.range()`，`tl.arange()`以及`range()` 的使用情况及其计算得到的变量来识别潜在的分块轴参数，提取 `tl.range()` 或 `range()` 中和 `tl.arange()` 的共同参数，并根据候选参数列表（用户未提供的参数）进行过滤。"
+msgstr "The block axis parameters are determined based on the `tl.arange()`, `tl.range()`, and `range()` block statements. By analyzing the usage of `tl.range()`, `tl.arange()`, and `range()` in the `for` loops of the program, along with the variables computed from them, potential block axis parameters are identified. Common parameters between `tl.range()` or `range()` and `tl.arange()` are extracted, and filtering is performed based on the candidate parameter list (parameters not provided by the user)."
+
+msgid "最后通过掩码比较和 `autotune` 中传入的 `key` 确认当前参数对应的分块轴。"
+msgstr "Finally, the chunk axis corresponding to the current parameter is confirmed through mask comparison and the `key` passed in `autotune`."
+
+msgid "注意：1. 分块轴参数必须出现在 `tl.arange()` 的调用中，并且需在 `for` 循环中通过 `tl.range()`、`range()` 或整除运算（`//`）参与循环范围的计算。 2. 必须要进行掩码比较，且该轴对应的key需要直接作为右值或以key为参数的min函数作为右值，才能对应到具体的分块轴，否则会导致参数解析失败。3. 识别出的分块轴参数仅限于候选参数列表，确保只有那些可以通过自动调优动态调整的参数才会被考虑。"
+msgstr "Note: 1. The block axis parameter must appear in the call to `tl.arange()` and must participate in the calculation of the loop range in the `for` loop via `tl.range()`, `range()`, or integer division (`//`). 2. A mask comparison must be performed, and the key corresponding to that axis must directly serve as the right-hand value or be used as the right-hand value via a min function with the key as a parameter; otherwise, parameter parsing will fail. 3. The identified block axis parameters are limited to the candidate parameter list, ensuring that only parameters that can be dynamically adjusted through autotuning are considered."
+
+msgid "低维轴参数解析"
+msgstr "Low-dimensional axis parameter analysis"
+
+msgid "低维轴参数解析依据 `tl.arange()` 分块语句来确定，通过分析程序中 `tl.arange()` 的使用情况及其计算得到的变量来识别潜在的低维轴参数，提取 `tl.arange()` 本身以及它参与计算的变量，通过是否进行切片操作来进行增维，以及通过判断增维维度来进行过滤。"
+msgstr "Low-dimensional axis parameter parsing is determined based on the `tl.arange()` block statement. By analyzing the usage of `tl.arange()` in the program and the variables it computes, potential low-dimensional axis parameters are identified. The `tl.arange()` itself and the variables it participates in computing are extracted. Dimensionality increase is performed based on whether slicing operations are applied, and filtering is carried out by determining the dimension of the increase."
+
+msgid "最后通过掩码比较和 `autotune` 中传入的 `key` 确认当前kernel的低维轴。"
+msgstr "Finally, confirm the low-dimensional axis of the current kernel through mask comparison and the `key` passed in `autotune`."
+
+msgid "注意：1. 低维轴必须要通过`tl.arange()`进行计算，并进行切片。并在非最低维进行维度扩充或不参与切片，才会被识别。 2. 若不进行掩码比较则无法对应到具体的低维轴，会导致参数解析失败。"
+msgstr "Note: 1. Low-dimensional axes must be computed using `tl.arange()` and sliced. They will only be recognized if dimension expansion is performed on non-lowest dimensions or if they do not participate in slicing. 2. Without mask comparison, it is impossible to map to specific low-dimensional axes, which will cause parameter parsing to fail."
+
+msgid "参数指针解析"
+msgstr "Parameter Pointer Resolution"
+
+msgid "指针类型的参数解析依据该参数是否参与 `tl.load()` 和 `tl.store()` 的访存类语句来确定。"
+msgstr "Pointer-type parameters are determined based on whether the parameter participates in memory access statements such as `tl.load()` and `tl.store()`."
+
+msgid "首先解析出kernel函数中的所有参数，之后递归寻找每一个参数参与计算的所有变量。"
+msgstr "First, parse all parameters in the kernel function, then recursively find all variables involved in the computation for each parameter."
+
+msgid "如果该参数直接参与或该参数计算得到的中间变量间接参与 `tl.load()` 和 `tl.store()` 的第一个参数计算，则认为该参数是一个指针类型参数。"
+msgstr "If the parameter directly participates in or the intermediate variable computed from the parameter indirectly participates in the calculation of the first argument of `tl.load()` and `tl.store()`, then the parameter is considered a pointer type parameter."
+
+msgid "注意：1. 使用 `tl.constexpr` 修饰的变量不会是指针类型的变量，不进行后续解析 2. 只计算参数直接参与或参数经过一次计算得到的中间变量间接参与的访存类语句，若参数进行两次以上计算得到的中间变量不进行统计。"
+msgstr "Note: 1. Variables modified with `tl.constexpr` will not be pointer-type variables and will not undergo subsequent parsing. 2. Only memory access statements that directly involve parameters or indirectly involve intermediate variables obtained through a single computation of parameters are calculated; intermediate variables obtained through two or more computations of parameters are not counted."
+
+msgid "更多功能"
+msgstr "More Features"
+
+msgid "自动生成最优配置的 Profiling 结果"
+msgstr "Profiling results for automatically generating optimal configuration"

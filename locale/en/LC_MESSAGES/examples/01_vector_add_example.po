@@ -1,0 +1,51 @@
+# English translations for triton-ascend docs.
+# Copyright (c) 2025 Huawei Technologies Co., Ltd.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-28 03:49+0000\n"
+"PO-Revision-Date: 2026-07-28 03:49+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid ""
+msgstr "This example demonstrates how to use the `VectorAdd` operator in the `OneFlow` framework."
+
+msgid "向量相加 （Vector Addition）"
+msgstr "Vector Addition"
+
+msgid "在本节中，我们将使用 Triton 编写一个简单的向量相加的程序。 在此过程中，你会学习到："
+msgstr "In this section, we will write a simple vector addition program using Triton. In the process, you will learn:"
+
+msgid "Triton 的基本编程模式。"
+msgstr "Basic programming model of Triton."
+
+msgid "用于定义Triton内核的`triton.jit`装饰器（decorator）。"
+msgstr "The `triton.jit` decorator used to define a Triton kernel."
+
+msgid "计算内核:"
+msgstr "Compute Kernel"
+
+msgid "创建一个辅助函数用于："
+msgstr "Create a helper function to:"
+
+msgid "生成 z 张量；"
+msgstr "Generate the z tensor."
+
+msgid "用适当的 grid/block sizes 将上述内核加入队列。"
+msgstr "Enqueue the above kernel with appropriate grid/block sizes."
+
+msgid "使用上述函数计算两个 `torch.tensor` 对象的 element-wise sum，并测试其正确性："
+msgstr "Use the above function to compute the element-wise sum of two `torch.tensor` objects and test its correctness."
+
+msgid "Out:"
+msgstr "Out:"
+
+msgid "\"The maximum difference between torch and triton is 0.0\" 表示Triton和PyTorch的输出结果一致。"
+msgstr "\"The maximum difference between torch and triton is 0.0\" indicates that the output results of Triton and PyTorch are consistent."
