@@ -1,0 +1,295 @@
+# English translations for triton-ascend docs.
+# Copyright (c) 2025 Huawei Technologies Co., Ltd.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-31 03:50+0000\n"
+"PO-Revision-Date: 2026-07-31 03:50+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid ""
+msgstr ""
+"# Contributing Guide\n"
+"\n"
+"Thank you for your interest in contributing to this project! We welcome all forms of contribution, including but not limited to: reporting issues, submitting code, improving documentation, and providing suggestions.\n"
+"\n"
+"## How to Contribute\n"
+"\n"
+"### Reporting Issues\n"
+"\n"
+"If you encounter a bug or have a feature request, please create an issue on the [GitHub Issues](https://github.com/your-repo/issues) page. When submitting an issue, please provide as much detail as possible, including:\n"
+"\n"
+"- A clear description of the problem or suggestion\n"
+"- Steps to reproduce the issue (if applicable)\n"
+"- Expected behavior and actual behavior\n"
+"- Environment information (operating system, browser version, etc.)\n"
+"\n"
+"### Submitting Code\n"
+"\n"
+"1. Fork this repository to your own GitHub account.\n"
+"2. Clone the forked repository to your local machine:\n"
+"   ```bash\n"
+"   git clone https://github.com/your-username/your-repo.git\n"
+"   ```\n"
+"3. Create a new branch for your changes:\n"
+"   ```bash\n"
+"   git checkout -b feature/your-feature-name\n"
+"   ```\n"
+"4. Make your changes and ensure the code style and quality meet the project standards.\n"
+"5. Commit your changes:\n"
+"   ```bash\n"
+"   git commit -m \"Description of your changes\"\n"
+"   ```\n"
+"6. Push your changes to your forked repository:\n"
+"   ```bash\n"
+"   git push origin feature/your-feature-name\n"
+"   ```\n"
+"7. Submit a Pull Request (PR) on GitHub, describing your changes and the problem they solve.\n"
+"\n"
+"### Code Style\n"
+"\n"
+"- Follow the existing code style and conventions in the project.\n"
+"- Ensure your code is readable and maintainable.\n"
+"- Add appropriate comments where necessary.\n"
+"\n"
+"### Testing\n"
+"\n"
+"- Before submitting code, make sure all existing tests pass.\n"
+"- If you add new features, please write corresponding tests.\n"
+"\n"
+"### Documentation\n"
+"\n"
+"If you improve or add documentation, please ensure the content is accurate and clear.\n"
+"\n"
+"## Development Process\n"
+"\n"
+"1. After submitting a PR, the maintainers will review your code.\n"
+"2. If changes are needed, we will provide feedback in the PR.\n"
+"3. Once the code is approved, it will be merged into the main branch.\n"
+"\n"
+"## Code of Conduct\n"
+"\n"
+"Please follow the project's [Code of Conduct](CODE_OF_CONDUCT.md) to ensure a friendly and respectful community environment.\n"
+"\n"
+"## Contact\n"
+"\n"
+"If you have any questions, feel free to contact us via [email](mailto:your-email@example.com).\n"
+"\n"
+"Thank you for your support and contributions!\n"
+
+msgid "贡献指南"
+msgstr "Contribution Guide"
+
+msgid "[入门](#入门.md)"
+msgstr "Getting Started"
+
+msgid "[开发者来源认证（DCO）](#开发者来源认证.md)"
+msgstr "[Developer Certificate of Origin (DCO)](#Developer-Certificate-of-Origin.md)"
+
+msgid "[开发指导](#开发指导.md)"
+msgstr "[Development Guide](#development-guide.md)"
+
+msgid "[代码风格](#代码风格.md)"
+msgstr "[Code Style](#code-style.md)"
+
+msgid "[Fork-Pull开发模式](#Fork-Pull开发模式.md)"
+msgstr "[Fork-Pull Development Workflow](#Fork-Pull开发模式.md)"
+
+msgid "[代码门禁异常处理](#代码门禁异常处理.md)"
+msgstr "[Code Gate Exception Handling](#代码门禁异常处理.md)"
+
+msgid "[ISSUE规范](#ISSUE规范.md)"
+msgstr "[ISSUE Guidelines](#ISSUE-guidelines.md)"
+
+msgid "[提出PR](#提出PR.md)"
+msgstr "[Submit a PR](#submit-a-pr.md)"
+
+msgid "在[GitHub](https://github.com/triton-lang/triton-ascend)上fork Triton-Ascend代码库。"
+msgstr "Fork the Triton-Ascend repository on [GitHub](https://github.com/triton-lang/triton-ascend)."
+
+msgid "阅读[README.md](https://github.com/triton-lang/triton-ascend/blob/main/README.md)获取项目信息和构建开发环境。"
+msgstr "Read [README.md](https://github.com/triton-lang/triton-ascend/blob/main/README.md) for project information and building the development environment."
+
+msgid "所有提交需包含 `Signed-off-by:` 行，使用 `git commit -s` 自动添加："
+msgstr "All submissions must include a `Signed-off-by:` line, which can be added automatically using `git commit -s`."
+
+msgid "这会在提交信息末尾自动添加一行 `Signed-off-by: Your Name <your.email@example.com>`，表明你确认该贡献的来源和授权。"
+msgstr "This will automatically add a line `Signed-off-by: Your Name <your.email@example.com>` at the end of the commit message, indicating that you confirm the origin and authorization of the contribution."
+
+msgid "**[代码风格](#代码风格.md)**"
+msgstr "**[Code Style](#code-style.md)**"
+
+msgid "**[Fork-Pull开发模式](#Fork-Pull开发模式.md)**"
+msgstr "**[Fork-Pull Development Mode](#Fork-Pull开发模式.md)**"
+
+msgid "**[代码门禁异常处理](#代码门禁异常处理.md)**"
+msgstr "**[Code Gate Exception Handling](#代码门禁异常处理.md)**"
+
+msgid "**[ISSUE规范](#ISSUE规范.md)**"
+msgstr "**[ISSUE Guidelines](#ISSUE-guidelines.md)**"
+
+msgid "**[提出PR](#提出PR.md)**"
+msgstr "**[Submitting a PR](#submitting-a-pr.md)**"
+
+msgid "请遵循以下编码风格，以使得Triton Ascend易于开发、维护和审查。"
+msgstr "Please follow the coding style below to make Triton Ascend easy to develop, maintain, and review."
+
+msgid "编码指南"
+msgstr "Coding Guidelines"
+
+msgid "请使用Triton Ascend社区统一的编码风格，python建议的编码风格是[PEP 8编码样式](https://pep8.org/)，C++编码所建议的风格是  [LLVM 编码规范](https://llvm.org/docs/CodingStandards.html)。可以使用[clang-tidy](https://github.com/llvm/llvm-project/blob/main/.clang-tidy)，[CppLint](https://github.com/cpplint/cpplint)，[CppCheck](http://cppcheck.sourceforge.net/)，[CMakeLint](https://github.com/cmake-lint/cmake-lint)，[CodeSpell](https://github.com/codespell-project/codespell)，[ShellCheck](https://github.com/koalaman/shellcheck)和[pylint](https://pylint.org/)检查代码的格式，建议在您的IDE中安装这些插件。"
+msgstr "Please use the unified coding style of the Triton Ascend community. The recommended coding style for Python is [PEP 8 Coding Style](https://pep8.org/), and the recommended style for C++ coding is [LLVM Coding Standards](https://llvm.org/docs/CodingStandards.html). You can use [clang-tidy](https://github.com/llvm/llvm-project/blob/main/.clang-tidy), [CppLint](https://github.com/cpplint/cpplint), [CppCheck](http://cppcheck.sourceforge.net/), [CMakeLint](https://github.com/cmake-lint/cmake-lint), [CodeSpell](https://github.com/codespell-project/codespell), [ShellCheck](https://github.com/koalaman/shellcheck), and [pylint](https://pylint.org/) to check the code format. It is recommended to install these plugins in your IDE."
+
+msgid "单元测试指南"
+msgstr "Unit Testing Guide"
+
+msgid "请使用Triton Ascend社区统一的单元测试风格，python建议的单元测试风格是[pytest](http://www.pytest.org/en/latest/)，C++建议的单元测试风格是[Googletest Primer](https://github.com/google/googletest/blob/main/docs/primer.md)。测试用例的设计意图应该通过它的注释名称来反映。测试用例的设计请参考[gather测试用例](https://github.com/triton-lang/triton-ascend/blob/main/third_party/ascend/unittest/custom_op/test_gather_load.py)，[layer_norm测试用例](https://github.com/triton-lang/triton-ascend/blob/main/third_party/ascend/tutorials/05-layer-norm.py)"
+msgstr "Please use the unified unit testing style of the Triton Ascend community. The recommended unit testing style for Python is [pytest](http://www.pytest.org/en/latest/), and for C++ it is [Googletest Primer](https://github.com/google/googletest/blob/main/docs/primer.md). The design intent of test cases should be reflected through their comment names. For test case design, please refer to the [gather test case](https://github.com/triton-lang/triton-ascend/blob/main/third_party/ascend/unittest/custom_op/test_gather_load.py) and the [layer_norm test case](https://github.com/triton-lang/triton-ascend/blob/main/third_party/ascend/tutorials/05-layer-norm.py)."
+
+msgid "重构指南"
+msgstr "Refactoring Guide"
+
+msgid "我们鼓励开发人员对我们的代码进行重构来消除【代码坏味道】。重构的代码也应该遵循编码风格和测试风格的要求。当您收到警告时，您需要重构要合并的代码。"
+msgstr "We encourage developers to refactor our code to eliminate code smells. Refactored code should also follow the coding style and testing style requirements. When you receive a warning, you need to refactor the code to be merged."
+
+msgid "1、Fork Triton Ascend项目"
+msgstr "1. Fork the Triton Ascend project."
+
+msgid "在您向Triton Ascend项目提交自己的代码之前，请确保已经将Triton Ascend项目Fork到您自己的存储库。后续您将在自己Fork的项目上进行开发，并通过Pull Request的方式合并到Triton Ascend项目。这意味着Triton Ascend存储库和您自己的存储库之间存在并行开发，因此请注意保持存储库之间的一致性。"
+msgstr "Before submitting your code to the Triton Ascend project, please ensure that you have forked the Triton Ascend project to your own repository. Subsequently, you will develop on your forked project and merge it into the Triton Ascend project via Pull Request. This means there is parallel development between the Triton Ascend repository and your own repository, so please pay attention to maintaining consistency between the repositories."
+
+msgid "2、克隆远程仓库"
+msgstr "2. Clone the remote repository"
+
+msgid "使用git克隆您fork的Triton Ascend项目&添加上游仓库upstream："
+msgstr "Use git to clone your forked Triton Ascend project and add the upstream repository:"
+
+msgid "3、本地环境开发代码"
+msgstr "3. Develop code in a local environment."
+
+msgid "在开发您的代码之前，您需要根据[Triton Ascend安装指南](https://github.com/triton-lang/triton-ascend/blob/main/docs/zh/installation_guide.md)搭建开发环境。"
+msgstr "Before developing your code, you need to set up the development environment according to the [Triton Ascend Installation Guide](https://github.com/triton-lang/triton-ascend/blob/main/docs/zh/installation_guide.md)."
+
+msgid "为避免多个分支间的不一致问题，请创建新的本地开发分支进行新特性的开发："
+msgstr "To avoid inconsistencies between multiple branches, please create a new local development branch for developing new features."
+
+msgid "以main分支为例，Triton Ascend可能会根据需要创建版本分支或下游开发分支。当您创建完分支&同步上游main分支更新后，就可以开始开发您的代码了。"
+msgstr "Taking the main branch as an example, Triton Ascend may create version branches or downstream development branches as needed. After you have created your branch and synced with the upstream main branch updates, you can start developing your code."
+
+msgid "4、代码更改自测"
+msgstr "4. Self-testing of code changes"
+
+msgid "完成代码更改后，请检查您的更改是否可以通过测试："
+msgstr "After completing your code changes, please check whether your changes pass the tests."
+
+msgid "在本地代码分支的ascend/examples/pytest_ut路径下为您开发的代码编写测试用例代码，并在本地环境中验证您的测试脚本，确保您的更改可以通过测试。"
+msgstr "Write test case code for your developed code under the ascend/examples/pytest_ut path in the local code branch, and verify your test script in the local environment to ensure that your changes can pass the tests."
+
+msgid "5、代码推送到远程仓库"
+msgstr "5. Push code to the remote repository."
+
+msgid "代码更新&测试完成后，推送您的commit到您的远程仓库。"
+msgstr "After completing code updates and testing, push your commit to your remote repository."
+
+msgid "6、向Triton Ascend主仓创建拉取请求"
+msgstr "6. Create a pull request to the Triton Ascend main repository."
+
+msgid "代码推送至您的远程仓库后，您需要在您的新分支和Triton Ascend main分支之间新建Pull Request。完成新建合并请求后，“Jenkins CI“将自动设置为您构建流水线测试。您的Pull Request请尽快合并到上游main分支，以降低合并风险。"
+msgstr "After pushing your code to your remote repository, you need to create a Pull Request between your new branch and the Triton Ascend main branch. Once the merge request is created, \"Jenkins CI\" will automatically be set up for your build pipeline testing. Please merge your Pull Request into the upstream main branch as soon as possible to reduce merge risks."
+
+msgid "代码门禁异常主要包含以下几种情况，请根据相关提示信息解决门禁异常问题。"
+msgstr "Code gate exceptions mainly include the following situations. Please resolve the gate exception issues based on the relevant prompt information."
+
+msgid "编译失败"
+msgstr "Compilation failed."
+
+msgid "请根据提示信息，检查编译失败的原因，解决后重新编译即可 。"
+msgstr "Please check the cause of the compilation failure based on the prompt information, resolve it, and then recompile."
+
+msgid "静态检查失败"
+msgstr "Static analysis check failed."
+
+msgid "请根据提示信息，查找出代码中的异常信息并解决。"
+msgstr "Please identify the exception information in the code based on the prompt and resolve it."
+
+msgid "CI流水线未通过"
+msgstr "CI pipeline did not pass."
+
+msgid "请根据提示信息，查找出CI流水线未通过的测试用例并检查原因，解决后重新运行CI流水线。"
+msgstr "Please identify the test cases that failed in the CI pipeline based on the prompt information, check the reasons, resolve them, and then rerun the CI pipeline."
+
+msgid "为项目做贡献的一个好的方法是在遇到问题时发送详细报告。我们总是非常感谢写得详细、彻底的错误报告，并会因此非常感谢您！"
+msgstr "A great way to contribute to the project is to send a detailed report when you encounter a problem. We always greatly appreciate well-written, thorough bug reports, and we would be very grateful for them!"
+
+msgid "在报告问题时，请参考以下格式："
+msgstr "When reporting issues, please refer to the following format:"
+
+msgid "您环境里使用的软件版本（Triton Ascend、python、os等）？"
+msgstr "What software versions are you using in your environment (Triton Ascend, Python, OS, etc.)?"
+
+msgid "这是一个错误报告还是功能请求？"
+msgstr "Is this a bug report or a feature request?"
+
+msgid "您报告的是什么样的问题，添加对应的标签以便在问题仪表盘上突出显示？"
+msgstr "What kind of issue are you reporting? Add the corresponding label to highlight it on the issue dashboard?"
+
+msgid "发生了什么？"
+msgstr "What happened?"
+
+msgid "您预计会发生什么？"
+msgstr "What do you expect to happen?"
+
+msgid "如何重现它？（尽可能精确）"
+msgstr "How to reproduce it? (Be as precise as possible)"
+
+msgid "您也可以选择其中一个预定义的[issue填写模板](https://github.com/triton-lang/triton-ascend/issues/new/choose)"
+msgstr "You can also choose one of the predefined [issue templates](https://github.com/triton-lang/triton-ascend/issues/new/choose)."
+
+msgid "问题咨询："
+msgstr "Issue Consultation:"
+
+msgid "如果您发现一个未解决的问题，而这个问题正是您要解决的，请对该问题发表评论，告诉其他人您将负责这个问题。"
+msgstr "If you find an open issue that is exactly what you need to solve, please comment on that issue to let others know you will be taking responsibility for it."
+
+msgid "如果问题已经打开一段时间，请您在解决该问题前进行预检查。"
+msgstr "If the issue has been open for a while, please perform a pre-check before resolving it."
+
+msgid "如果您解决了自己报告的问题，在关闭该问题前还需要让其他人知道。"
+msgstr "If you have resolved an issue you reported yourself, you still need to let others know before closing it."
+
+msgid "在[GitHub](https://github.com/triton-lang/triton-ascend)上提出您的想法作为问题。"
+msgstr "Submit your ideas as issues on [GitHub](https://github.com/triton-lang/triton-ascend)."
+
+msgid "如果要开发的新功能需要大量设计细节，您还应提交设计方案。"
+msgstr "If the new feature you are developing requires extensive design details, you should also submit a design proposal."
+
+msgid "在问题讨论和设计方案审查达成共识后，再进行fork开发并提交PR。"
+msgstr "After consensus is reached through issue discussions and design proposal reviews, proceed with fork development and submit a PR."
+
+msgid "在从Approver那里收到2+LGTM（Looks Good To Me）前不允许任何PR 。请注意审批人不允许在自己的PR上添加LGTM。"
+msgstr "No PR is allowed until receiving 2+ LGTM (Looks Good To Me) from Approvers. Please note that approvers are not allowed to add LGTM to their own PRs."
+
+msgid "在PR被充分讨论后，将根据讨论结果对PR进行合并、拒绝或放弃。"
+msgstr "After the PR has been fully discussed, it will be merged, rejected, or abandoned based on the outcome of the discussion."
+
+msgid "注意事项"
+msgstr "Notes"
+
+msgid "应避免任何不相关的更改。"
+msgstr "Avoid any unrelated changes."
+
+msgid "确保您的提交历史是简洁有序的。"
+msgstr "Ensure that your commit history is concise and well-organized."
+
+msgid "创建PR前请rebase上游仓库最新代码。"
+msgstr "Before creating a PR, please rebase the latest code from the upstream repository."
+
+msgid "对于错误修复 PR，请确保链接所有相关Issue 和 PR。"
+msgstr "For bug fix PRs, please ensure to link all related Issues and PRs."
