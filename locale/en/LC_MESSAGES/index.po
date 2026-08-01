@@ -1,0 +1,63 @@
+# English translations for triton-ascend docs.
+# Copyright (c) 2025 Huawei Technologies Co., Ltd.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-08-01 04:13+0000\n"
+"PO-Revision-Date: 2026-08-01 04:13+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid ""
+msgstr "The text to translate was not provided. Please provide the Chinese text you'd like me to translate into English."
+
+msgid "快速开始"
+msgstr "Quick Start"
+
+msgid "安装指南"
+msgstr "Installation Guide"
+
+msgid "架构设计与核心特性"
+msgstr "Architecture Design and Core Features"
+
+msgid "Triton 算子开发指南"
+msgstr "Triton Operator Development Guide"
+
+msgid "Triton 算子迁移指南"
+msgstr "Triton Operator Migration Guide"
+
+msgid "典型算子样例"
+msgstr "Typical operator examples"
+
+msgid "算子调试与调优"
+msgstr "Operator Debugging and Tuning"
+
+msgid "Triton API 接口说明"
+msgstr "Triton API Interface Description"
+
+msgid "Libdevice 开发者手册"
+msgstr "Libdevice Developer Guide"
+
+msgid "昇腾扩展 API 接口说明"
+msgstr "Ascend Extension API Interface Description"
+
+msgid "环境变量和编译选项"
+msgstr "Environment variables and compilation options"
+
+msgid "常见问题"
+msgstr "Frequently Asked Questions"
+
+msgid "贡献指南"
+msgstr "Contribution Guide"
+
+msgid "社区治理"
+msgstr "Community governance"
+
+msgid "Triton Ascend"
+msgstr "Triton Ascend"
