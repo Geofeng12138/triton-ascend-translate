@@ -1,0 +1,317 @@
+# English translations for triton-ascend docs.
+# Copyright (c) 2025 Huawei Technologies Co., Ltd.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-08-01 03:54+0000\n"
+"PO-Revision-Date: 2026-08-01 03:54+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid ""
+msgstr ""
+"Security Note\n"
+"\n"
+"This document describes the security mechanisms and best practices for the system. All users and administrators should read and follow these guidelines to ensure the security and integrity of the system.\n"
+"\n"
+"1. Authentication and Authorization\n"
+"   - All users must authenticate using a unique username and a strong password.\n"
+"   - Passwords must be at least 12 characters long and include a mix of uppercase letters, lowercase letters, numbers, and special characters.\n"
+"   - Multi-factor authentication (MFA) is strongly recommended for all accounts, especially for administrative accounts.\n"
+"   - Access control lists (ACLs) should be configured to grant the least privilege necessary for each user role.\n"
+"\n"
+"2. Data Protection\n"
+"   - All sensitive data must be encrypted in transit using TLS 1.2 or higher.\n"
+"   - Data at rest should be encrypted using industry-standard encryption algorithms (e.g., AES-256).\n"
+"   - Backups must be stored securely and encrypted to prevent unauthorized access.\n"
+"   - Regularly audit data access logs to detect any unauthorized or suspicious activity.\n"
+"\n"
+"3. Network Security\n"
+"   - Firewalls should be configured to restrict inbound and outbound traffic to only necessary ports and services.\n"
+"   - Use virtual private networks (VPNs) for remote access to the system.\n"
+"   - Segment the network to isolate critical components from less secure areas.\n"
+"   - Regularly update and patch all network devices and software to address known vulnerabilities.\n"
+"\n"
+"4. Application Security\n"
+"   - Validate and sanitize all user inputs to prevent injection attacks (e.g., SQL injection, cross-site scripting).\n"
+"   - Use parameterized queries and prepared statements when interacting with databases.\n"
+"   - Implement proper error handling to avoid exposing sensitive information in error messages.\n"
+"   - Regularly perform security testing, including penetration testing and code reviews.\n"
+"\n"
+"5. Incident Response\n"
+"   - Establish an incident response plan that outlines procedures for detecting, responding to, and recovering from security incidents.\n"
+"   - Designate a response team and define clear roles and responsibilities.\n"
+"   - Regularly test the incident response plan through drills and simulations.\n"
+"   - Document all incidents and lessons learned to improve future responses.\n"
+"\n"
+"6. Compliance and Auditing\n"
+"   - Ensure compliance with relevant regulations and standards (e.g., GDPR, HIPAA, PCI-DSS).\n"
+"   - Conduct regular security audits to assess the effectiveness of security controls.\n"
+"   - Maintain detailed logs of all security-related events and retain them for a specified period.\n"
+"   - Review and update security policies and procedures regularly to adapt to evolving threats.\n"
+"\n"
+"7. User Responsibilities\n"
+"   - Users must not share their credentials with others.\n"
+"   - Users should report any suspected security incidents or vulnerabilities immediately.\n"
+"   - Users must follow the organization's security policies and guidelines at all times.\n"
+"   - Users should be aware of phishing attempts and other social engineering attacks.\n"
+"\n"
+"By adhering to these security measures, you can help protect the system and its data from potential threats. For any questions or concerns, contact the system administrator.\n"
+
+msgid "安全声明"
+msgstr "Security Notice"
+
+msgid "系统安全加固"
+msgstr "System security hardening"
+
+msgid "建议用户在系统中配置开启ASLR（**地址空间布局随机化**），推荐使用级别 2（完全随机化模式），可参考以下方式进行配置："
+msgstr "It is recommended that users enable ASLR (**Address Space Layout Randomization**) in the system, with level 2 (full randomization mode) preferred. Configuration can be performed as follows:"
+
+msgid "运行用户建议"
+msgstr "Recommended running user."
+
+msgid "出于安全性及权限最小化角度考虑，不建议通过root等管理员类型账户使用Triton-Ascend。"
+msgstr "For security and least-privilege considerations, it is not recommended to use Triton-Ascend with administrator-type accounts such as root."
+
+msgid "文件权限控制"
+msgstr "File permission control"
+
+msgid "建议用户对个人的隐私数据、商业资产等敏感文件做好权限控制等安全措施，设定的权限建议参考[文件权限参考](#文件权限参考)进行设置。"
+msgstr "Users are advised to implement security measures such as access control for sensitive files including personal private data and commercial assets. It is recommended to configure permissions by referring to the [File Permission Reference](#文件权限参考)."
+
+msgid "用户安装和使用过程需要做好权限控制，建议参考[文件权限参考](#文件权限参考)进行设置。"
+msgstr "Users need to implement proper permission control during installation and usage. It is recommended to configure settings by referring to the [File Permission Reference](#文件权限参考)."
+
+msgid "文件权限参考"
+msgstr "File permission reference"
+
+msgid "类型"
+msgstr "Type"
+
+msgid "Linux权限参考最大值"
+msgstr "Linux permission reference maximum value"
+
+msgid "用户主目录"
+msgstr "User home directory"
+
+msgid "750（rwxr-x---）"
+msgstr "750 (rwxr-x---)"
+
+msgid "程序文件（含脚本文件、库文件等）"
+msgstr "Program files (including script files, library files, etc.)"
+
+msgid "550（r-xr-x---）"
+msgstr "550 (r-xr-x---)"
+
+msgid "程序文件目录"
+msgstr "Program file directory"
+
+msgid "配置文件"
+msgstr "Configuration file"
+
+msgid "640（rw-r-----）"
+msgstr "640 (rw-r-----)"
+
+msgid "配置文件目录"
+msgstr "Configuration file directory"
+
+msgid "日志文件（记录完毕或者已经归档）"
+msgstr "Log files (after recording is complete or they have been archived)"
+
+msgid "440（r--r-----）"
+msgstr "440 (r--r-----)"
+
+msgid "日志文件（正在记录）"
+msgstr "Log file (recording)"
+
+msgid "日志文件目录"
+msgstr "Log file directory"
+
+msgid "Debug文件"
+msgstr "Debug file"
+
+msgid "Debug文件目录"
+msgstr "Debug file directory"
+
+msgid "临时文件目录"
+msgstr "Temporary file directory"
+
+msgid "维护升级文件目录"
+msgstr "Maintenance upgrade file directory"
+
+msgid "770（rwxrwx---）"
+msgstr "770 (rwxrwx---)"
+
+msgid "业务数据文件"
+msgstr "Business data files"
+
+msgid "业务数据文件目录"
+msgstr "Business data file directory"
+
+msgid "密钥组件、私钥、证书、密文文件目录"
+msgstr "Key components, private keys, certificates, and ciphertext file directories."
+
+msgid "700（rwx------）"
+msgstr "700 (rwx------)"
+
+msgid "密钥组件、私钥、证书、加密密文"
+msgstr "Key components, private keys, certificates, encrypted ciphertext."
+
+msgid "600（rw-------）"
+msgstr "600 (rw-------)"
+
+msgid "加解密接口、加解密脚本"
+msgstr "Encryption/decryption interfaces, encryption/decryption scripts"
+
+msgid "500（r-x------）"
+msgstr "500 (r-x------)"
+
+msgid "构建安全声明"
+msgstr "Building Security Statement"
+
+msgid "Triton-Ascend支持源码编译安装，在编译时会下载依赖第三方库并执行构建shell脚本，在编译过程中会产生临时程序文件和编译目录。用户可根据需要自行对源代码目录内的文件进行权限管控降低安全风险。"
+msgstr "Triton-Ascend supports source code compilation and installation. During compilation, it downloads dependent third-party libraries and executes build shell scripts, which generates temporary program files and build directories during the compilation process. Users can manage permissions on files within the source code directory as needed to reduce security risks."
+
+msgid "公网地址声明"
+msgstr "Public network address declaration"
+
+msgid "在Triton-Ascend的配置文件和脚本中存在[公网地址](#公网地址)"
+msgstr "In the Triton-Ascend configuration files and scripts, there are [public addresses](#public-address)."
+
+msgid "公网地址"
+msgstr "Public network address"
+
+msgid "开源代码地址"
+msgstr "Open source code repository address."
+
+msgid "文件名"
+msgstr "File name"
+
+msgid "公网IP地址/公网URL地址/域名/邮箱地址"
+msgstr "Public IP address/Public URL address/Domain name/Email address"
+
+msgid "用途说明"
+msgstr "Purpose Description"
+
+msgid "开源引入"
+msgstr "Open-source introduction"
+
+msgid "<https://github.com/triton-lang/triton.git>"
+msgstr "<https://github.com/triton-lang/triton.git>"
+
+msgid ".gitmodules"
+msgstr ".gitmodules"
+
+msgid "Triton源码仓地址"
+msgstr "Triton source code repository address"
+
+msgid "<https://gitcode.com/Ascend/AscendNPU-IR.git>"
+msgstr "<https://gitcode.com/Ascend/AscendNPU-IR.git>"
+
+msgid "AscendNPU IR源码仓地址"
+msgstr "AscendNPU IR source code repository address"
+
+msgid "自研"
+msgstr "Self-developed"
+
+msgid "不涉及"
+msgstr "Not applicable."
+
+msgid "docker/devdocker/setup_triton-ascend_dev.sh"
+msgstr "docker/devdocker/setup_triton-ascend_dev.sh"
+
+msgid "<https://gitcode.com/Ascend/triton-ascend.git>"
+msgstr "<https://gitcode.com/Ascend/triton-ascend.git>"
+
+msgid "Triton-Ascend源码仓地址"
+msgstr "Triton-Ascend source code repository address"
+
+msgid "ascend/examples/generalization_cases/run_daily.sh & scripts/prepare_build.sh"
+msgstr "ascend/examples/generalization_cases/run_daily.sh & scripts/prepare_build.sh"
+
+msgid "<https://gitee.com/shijingchang/triton.git>"
+msgstr "<https://gitee.com/shijingchang/triton.git>"
+
+msgid "构建依赖代码仓"
+msgstr "Build dependency repository."
+
+msgid "setup.py"
+msgstr "setup.py"
+
+msgid "<https://gitcode.com/Ascend/triton-ascend/>"
+msgstr "<https://gitcode.com/Ascend/triton-ascend/>"
+
+msgid "<https://gitclone.com>"
+msgstr "<https://gitclone.com>"
+
+msgid "scripts/prepare_build.sh"
+msgstr "scripts/prepare_build.sh"
+
+msgid "<https://gitclone.com/github.com/llvm/llvm-project.git>"
+msgstr "<https://gitclone.com/github.com/llvm/llvm-project.git>"
+
+msgid "依赖的llvm源码仓"
+msgstr "Dependent LLVM source repository"
+
+msgid "<https://repo.huaweicloud.com>"
+msgstr "<https://repo.huaweicloud.com>"
+
+msgid "<https://repo.huaweicloud.com/repository/pypi/simple>"
+msgstr "<https://repo.huaweicloud.com/repository/pypi/simple>"
+
+msgid "用于配置pybind11下载链接"
+msgstr "Used to configure the pybind11 download link."
+
+msgid "<https://pypi.tuna.tsinghua.edu.cn>"
+msgstr "<https://pypi.tuna.tsinghua.edu.cn>"
+
+msgid "docker/devdocker/triton-ascend_dev.dockerfile"
+msgstr "docker/devdocker/triton-ascend_dev.dockerfile"
+
+msgid "<https://pypi.tuna.tsinghua.edu.cn/simple>"
+msgstr "<https://pypi.tuna.tsinghua.edu.cn/simple>"
+
+msgid "python pip源配置"
+msgstr "Python pip source configuration"
+
+msgid "<https://triton-ascend-artifacts.obs.myhuaweicloud.com>"
+msgstr "<https://triton-ascend-artifacts.obs.myhuaweicloud.com>"
+
+msgid "`https://triton-ascend-artifacts.obs.myhuaweicloud.com/llvm-builds/{name}.tar.gz`"
+msgstr "`https://triton-ascend-artifacts.obs.myhuaweicloud.com/llvm-builds/{name}.tar.gz`"
+
+msgid "用于下载预编译的LLVM工具"
+msgstr "For downloading precompiled LLVM tools."
+
+msgid "<https://bootstrap.pypa.io/get-pip.py>"
+msgstr "<https://bootstrap.pypa.io/get-pip.py>"
+
+msgid "docker/develop_env.dockerfile"
+msgstr "docker/develop_env.dockerfile"
+
+msgid "用于自动化安装pip"
+msgstr "Used for automated installation of pip."
+
+msgid "<https://llvm.org/LICENSE.txt>"
+msgstr "<https://llvm.org/LICENSE.txt>"
+
+msgid "third_party/ascend/include/Dialect/TritonAscend/IR/& third_party/ascend/lib/Dialect/TritonAscend/IR/"
+msgstr "third_party/ascend/include/Dialect/TritonAscend/IR/ & third_party/ascend/lib/Dialect/TritonAscend/IR/"
+
+msgid "Apache许可证链接"
+msgstr "Apache License link"
+
+msgid "<https://netlib.org/cephes/>"
+msgstr "<https://netlib.org/cephes/>"
+
+msgid "third_party/ascend/language/cann/libdevice.py"
+msgstr "third_party/ascend/language/cann/libdevice.py"
+
+msgid "函数来源声明"
+msgstr "Function source declaration"
