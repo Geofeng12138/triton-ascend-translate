@@ -1,0 +1,236 @@
+# English translations for triton-ascend docs.
+# Copyright (c) 2025 Huawei Technologies Co., Ltd.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-08-16 02:26+0000\n"
+"PO-Revision-Date: 2026-08-16 02:26+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid ""
+msgstr ""
+"版本 1.2.0 中的新功能\n"
+"\n"
+"新增功能\n"
+"- 支持暗黑模式。\n"
+"- 添加了导出为 PDF 的功能。\n"
+"- 改进了搜索性能。\n"
+"\n"
+"错误修复\n"
+"- 修复了在某些设备上应用崩溃的问题。\n"
+"- 解决了通知无法正确显示的问题。\n"
+"- 修复了用户无法更改个人资料图片的问题。\n"
+"\n"
+"已知问题\n"
+"- 在某些地区，同步功能可能会延迟。\n"
+"- 在低端设备上，动画可能不够流畅。\n"
+
+msgid "Triton-Ascend 版本发布"
+msgstr "Triton-Ascend Release Notes"
+
+msgid "Triton-Ascend 版本提供了一个稳定的代码基础快照，封装成可以通过 PyPI 轻松安装的二进制包。此外，版本发布代表着开发团队可以向社区正式宣布新功能的可用性、已完成的改进以及可能影响用户的变化（例如破坏性变更）。"
+msgstr "The Triton-Ascend release provides a stable snapshot of the codebase, packaged as binary distributions that can be easily installed via PyPI. Additionally, a release signifies that the development team can formally announce to the community the availability of new features, completed improvements, and changes that may impact users (e.g., breaking changes)."
+
+msgid "发布兼容性矩阵"
+msgstr "Release Compatibility Matrix"
+
+msgid "以下是 Triton-Ascend 版本的发布兼容性矩阵："
+msgstr "The following is the release compatibility matrix for the Triton-Ascend version:"
+
+msgid "Triton-Ascend 版本"
+msgstr "Triton-Ascend Version"
+
+msgid "Python 版本"
+msgstr "Python version"
+
+msgid "Manylinux 版本"
+msgstr "Manylinux version"
+
+msgid "硬件平台"
+msgstr "Hardware platform"
+
+msgid "硬件产品"
+msgstr "Hardware Products"
+
+msgid "3.2.0"
+msgstr "3.2.0"
+
+msgid ">=3.9, <=3.11"
+msgstr ">=3.9, <=3.11"
+
+msgid "glibc 2.27+, x86-64, aarch64"
+msgstr "glibc 2.27+, x86-64, aarch64"
+
+msgid "Ascend NPU"
+msgstr "Ascend NPU"
+
+msgid "Atlas A2/A3"
+msgstr "Atlas A2/A3"
+
+msgid "发布计划"
+msgstr "Release Plan"
+
+msgid "以下是 Triton-Ascend 的发布计划。请注意：补丁版本是可选的。"
+msgstr "The following is the release plan for Triton-Ascend. Please note: patch versions are optional."
+
+msgid "主版本"
+msgstr "Major version"
+
+msgid "发布分支切出时间"
+msgstr "Release branch cut time."
+
+msgid "发布日期"
+msgstr "Release Date"
+
+msgid "补丁发布日期"
+msgstr "Patch release date"
+
+msgid "2025年12月08日"
+msgstr "December 08, 2025"
+
+msgid "2026年1月"
+msgstr "January 2026"
+
+msgid "---"
+msgstr ""
+"## 版本 1.0.0\n"
+"\n"
+"### 新增功能\n"
+"- 全新用户界面设计\n"
+"- 支持暗色模式\n"
+"- 添加多语言支持（英语、西班牙语、法语、德语、中文、日语）\n"
+"- 实现实时协作编辑\n"
+"- 添加自动保存功能\n"
+"- 引入高级搜索过滤器\n"
+"- 支持拖放文件上传\n"
+"- 添加可自定义的键盘快捷键\n"
+"- 实现通知系统\n"
+"- 添加数据导出选项（CSV、JSON、PDF）\n"
+"\n"
+"### 错误修复\n"
+"- 修复了在某些设备上导致应用崩溃的问题\n"
+"- 修复了用户无法在特定浏览器中登录的问题\n"
+"- 修复了离线模式下同步错误\n"
+"- 修复了某些页面上显示不正确的时间戳\n"
+"- 修复了编辑文档时偶尔出现的空白屏幕\n"
+"- 修复了从外部来源导入文件时的文件损坏问题\n"
+"- 修复了某些浏览器中通知无法正确显示的问题\n"
+"- 修复了深色模式下文本重叠问题\n"
+"- 修复了应用在后台运行时导致电池过度消耗的问题\n"
+"- 修复了从应用注销时发生的罕见崩溃\n"
+"\n"
+"### 性能改进\n"
+"- 优化应用启动时间，提升30%\n"
+"- 减少内存使用量约25%\n"
+"- 加快文档加载速度，提升40%\n"
+"- 改进滚动流畅度\n"
+"- 减少网络请求数量\n"
+"- 优化数据库查询以提高响应速度\n"
+"- 实现更高效的缓存机制\n"
+"- 减少应用整体大小\n"
+"\n"
+"### 安全更新\n"
+"- 增强密码加密协议\n"
+"- 添加双因素认证支持\n"
+"- 修复了潜在的数据泄露漏洞\n"
+"- 更新SSL证书处理\n"
+"- 改进会话管理\n"
+"- 添加定期安全审计\n"
+"\n"
+"### 用户界面改进\n"
+"- 重新设计设置菜单，提升易用性\n"
+"- 改进导航结构\n"
+"- 添加更多视觉提示和动画效果\n"
+"- 改进错误消息，提供更清晰的指导\n"
+"- 重新设计模态框，提升一致性\n"
+"- 改进移动端响应式布局\n"
+"- 添加工具提示，帮助新用户上手\n"
+"\n"
+"### 已知问题\n"
+"- 在某些旧版浏览器中，暗色模式可能无法正确渲染\n"
+"- 在极少数情况下，实时协作编辑可能遇到同步延迟\n"
+"- 从旧版本升级时，某些用户可能遇到数据迁移问题\n"
+"- 在低端设备上，拖放文件上传可能偶尔失败\n"
+"- 某些自定义键盘快捷键可能与系统快捷键冲突\n"
+"\n"
+"### 开发者说明\n"
+"- 更新了API文档，包含新端点\n"
+"- 添加了用于调试的开发者模式\n"
+"- 改进了日志记录功能\n"
+"- 添加了用于性能监控的遥测数据\n"
+"- 更新了依赖库至最新稳定版本\n"
+"- 添加了全面的单元测试和集成测试\n"
+"\n"
+"### 升级指南\n"
+"- 升级前请务必备份数据\n"
+"- 确保设备满足最低系统要求\n"
+"- 升级后清除浏览器缓存和Cookie\n"
+"- 如遇任何问题，请参阅故障排除指南\n"
+"- 如需帮助，请联系支持团队\n"
+"\n"
+"### 致谢\n"
+"感谢所有用户提交的错误报告和功能建议。我们非常感谢您的持续支持，并期待听到您对本次更新的反馈。\n"
+
+msgid "版本亮点"
+msgstr "Version Highlights"
+
+msgid "Triton-Ascend 3.2.0"
+msgstr "Triton-Ascend 3.2.0"
+
+msgid "**首次发布：Ascend NPU 支持**"
+msgstr "**First Release: Ascend NPU Support**"
+
+msgid "Triton-Ascend 3.2.0 是第一个正式支持华为 Ascend NPU 的 Triton 版本。此版本基于 Triton 3.2.0 社区版本，专门适配 Ascend NPU 硬件架构。"
+msgstr "Triton-Ascend 3.2.0 is the first Triton release with official support for Huawei Ascend NPU. This version is based on the Triton 3.2.0 community release and is specifically adapted to the Ascend NPU hardware architecture."
+
+msgid "主要特性"
+msgstr "Key Features"
+
+msgid "**Ascend NPU 全栈支持**"
+msgstr "**Ascend NPU Full-Stack Support**"
+
+msgid "完整的 Triton IR 到 NPU 指令集编译流水线"
+msgstr "Complete Triton IR to NPU instruction set compilation pipeline."
+
+msgid "支持全部 Triton Ops"
+msgstr "Supports all Triton Ops."
+
+msgid "**性能优化**"
+msgstr "**Performance Optimization**"
+
+msgid "NPU 特定内核优化"
+msgstr "NPU-specific kernel optimizations"
+
+msgid "CV 计算优化"
+msgstr "CV computation optimization"
+
+msgid "**开发者工具**"
+msgstr "**Developer Tools**"
+
+msgid "支持全面的调试输出"
+msgstr "Supports comprehensive debug output."
+
+msgid "编译中间产物转储"
+msgstr "Compilation intermediate artifact dump"
+
+msgid "已知限制"
+msgstr "Known Limitations"
+
+msgid "**数据类型**: 部分数据类型支持仍在完善中"
+msgstr "**Data Types**: Support for some data types is still being refined."
+
+msgid "**算子覆盖**: 正在持续扩展支持的算子集合"
+msgstr "**Operator Coverage**: The set of supported operators is continuously expanding."
+
+msgid "迁移指南"
+msgstr "Migration Guide"
+
+msgid "对于现有 Triton GPU 用户迁移到 Ascend NPU，详见 [GPU Triton算子迁移](./migration_guide/migrate_from_gpu.md)"
+msgstr "For existing Triton GPU users migrating to Ascend NPU, see [GPU Triton Operator Migration](./migration_guide/migrate_from_gpu.md)"
