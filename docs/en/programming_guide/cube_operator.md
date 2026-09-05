@@ -1,16 +1,24 @@
 # Cube Operator Development
 
-Cube operators use matrix multiplication or batched matrix multiplication as the main workload. In Triton code, the core operation is usually `tl.dot`. The main task is to design M/N/K tiles so that A and B tiles can be moved on chip efficiently and accumulated on Cube Cores.
 
-## Simple Cube Operator Development
+The Cube operator primarily uses matrix multiplication or batched matrix multiplication as its main computational workload, with `tl.dot` typically at the core in Triton code. The key to the Cube operator is designing tiles around the three dimensions M, N, and K, so that A/B tiles can be efficiently moved on-chip and accumulated on the Cube Core.
 
-For a simple Cube operator, refer to the [Matrix Multiplication example](../examples/05_matrix_multiplication_example.md).
 
-1. Define input/output shapes and strides, for example `A[M, K]`, `B[K, N]`, and `C[M, N]`.
-2. Map `tl.program_id` to the output tile `(pid_m, pid_n)`.
-3. Build 2D offsets for A and B using `BLOCK_SIZE_M/N/K`.
-4. Loop over K, load A/B sub-blocks, and accumulate with `tl.dot` in fp32.
-5. Cast the accumulator to the output dtype and store with boundary masks.
+## Cube Simple Operator Development
+
+
+For simple Cube operators, refer to the [matrix multiplication example](../examples/05_matrix_multiplication_example.md) in this repository. A minimal development path includes:
+
+
+1. Clearly define the input/output shapes and strides, e.g., `A[M, K]`, `B[K, N]`, `C[M, N]`.
+2. Use `tl.program_id` to map the current program to the `(pid_m, pid_n)` tile of the output matrix.
+3. Construct 2D offsets for A and B using `BLOCK_SIZE_M/N/K`.
+4. Loop over the K dimension to load sub-blocks of A and B, and accumulate them into an fp32 accumulator using `tl.dot`.
+5. Convert the accumulator to the output dtype and write it back to C with boundary masks.
+
+
+The core structure is as follows:
+
 
 ```python
 @triton.jit
@@ -41,18 +49,30 @@ def matmul_kernel(a_ptr, b_ptr, c_ptr,
              acc, mask=(offs_m[:, None] < M) & (offs_n[None, :] < N))
 ```
 
-Tune `BLOCK_M/N/K` within hardware and UB/L1 limits, consider `multibuffer` for the K loop, and classify the operator as CV fusion if the epilogue becomes a non-trivial Vector reduction, softmax, or synchronized post-process.
 
-## Complex Cube Operator Development
+When tuning parameters for simple Cube operators, prioritize:
 
-Complex Cube cases often come from attention, batched matmul, grouped matmul, or irregular shapes. In the current main branch of [Ascend/triton-ascend-ops](https://github.com/Ascend/triton-ascend-ops), complex cases are mainly in `tutorial/best_practice/`. [`002-decode_grouped_attention.py`](https://github.com/Ascend/triton-ascend-ops/blob/main/tutorial/best_practice/002-decode_grouped_attention.py) is a useful reference for the Cube core because it contains QK and PV `tl.dot` stages and shows how to reorganize K/V memory access under discrete KV-cache indices.
 
-Recommended decomposition:
+- Whether `BLOCK_M/N/K` satisfies hardware support and UB/L1 capacity constraints.
+- Whether the K-dimension loop can enable `multibuffer` to form a pipeline of data movement and computation.
+- Whether the output tile includes additional bias, scale, or activation. If the post-processing is lightweight, it can still be classified as a Cube operator; if the post-processing involves significant Vector reduction or cross-core synchronization, it should be organized as a CV fusion operator.
 
-1. Extract the pure matmul core first and verify tile shapes, dtypes, accumulator dtype, and output shape.
-2. Handle irregular memory access next. If K/V cache access is discrete in a low dimension and contiguous in a high dimension, load along the contiguous dimension and reorganize in UB with transpose or the Ascend extension API `extension.insert_slice`.
-3. Keep reductions and normalization at clear boundaries. If `max/sum/exp` or softmax is fused into the same kernel, follow the [CV Fusion Operator Development](./cv_fusion_operator.md) guidance.
-4. Use inner loops for long K or long sequence dimensions to control on-chip usage.
-5. Use autotune to manage candidate `BLOCK_M/N/K` and `multibuffer` configurations.
 
-A common migration risk is directly keeping a GPU-style large grid. If the output tile count is far larger than the physical Cube Core count, let each program process multiple tiles in an inner loop, or set `TRITON_ALL_BLOCKS_PARALLEL=1` when logical programs are independent.
+## Cube Complex Operator Development
+
+
+Complex Cube scenarios often arise from attention, batched matmul, grouped matmul, or irregularly shaped matrix multiplications. The complex cases on the current main branch of [Ascend/triton-ascend-ops](https://github.com/Ascend/triton-ascend-ops) are concentrated in `tutorial/best_practice/`, where [`002-decode_grouped_attention.py`](https://github.com/Ascend/triton-ascend-ops/blob/main/tutorial/best_practice/002-decode_grouped_attention.py) can serve as a reference for the core logic of complex Cube operations: it includes two `tl.dot` segments for QK and PV, and demonstrates how to reorganize K/V memory access under discrete KV cache indexing.
+
+
+Complex Cube operators should be decomposed in the following order:
+
+
+1. **First extract the pure matrix multiplication core**: Confirm the input tile shape, dtype, accumulation dtype, and output tile shape for each `tl.dot`.
+2. **Then handle irregular memory access**: If the K/V cache has low-dimensional discreteness and high-dimensional continuity, a direct 2D load may degrade to scalar memory access. You can first load into UB along the continuous dimension, then reorganize into the layout required by `tl.dot` through transpose or the Ascend extension interface `extension.insert_slice`.
+3. **Leave reduction and normalization to well-defined boundaries**: For example, `max/sum/exp` in attention belong to Vector logic. If placed in the same kernel as `tl.dot`, you need to follow the approach of [CV Fusion Operator Development](./cv_fusion_operator.md).
+4. **Design inner loops for long K or long sequences**: The K-dimension loop should control the on-chip occupancy of a single A/B tile; the sequence dimension loop should avoid loading an excessively large K/V block at once.
+5. **Use Autotune to manage candidate tiles**: Prepare multiple sets of `BLOCK_M/N/K` and `multibuffer` configurations for common shapes, allowing the runtime to select the optimal combination.
+
+
+A common risk of complex Cube operators is directly migrating a large number of programs on the GPU to the NPU. If the number of output tiles is much larger than the number of physical Cube cores, consider having each program process multiple tiles through an inner loop, or set `TRITON_ALL_BLOCKS_PARALLEL=1` to reduce scheduling overhead when the logical cores are confirmed to be independent of each other.
+
