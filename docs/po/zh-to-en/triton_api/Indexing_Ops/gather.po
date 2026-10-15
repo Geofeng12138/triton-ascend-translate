@@ -1,0 +1,231 @@
+# PO translation file for docs/zh/triton_api/Indexing_Ops/gather.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 10:49+0000\n"
+"PO-Revision-Date: 2026-07-20 10:49+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:0
+msgid "# triton.language.gather"
+msgstr "# triton.language.gather"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:4
+msgid ""
+"简介：对`src`tensor沿`axis`维度按照`index`执行gather操作，gather操作含义见下图:\n"
+"![image](./gather.png)\n"
+"原型：\n"
+msgstr ""
+"Introduction: Perform a gather operation on the `src` tensor along the `axis` dimension according to `index`. The meaning of the gather operation is shown in the figure below:\n"
+"![image](./gather.png)\n"
+"Prototype:\n"
+
+#. type: code
+#: docs/zh/triton_api/Indexing_Ops/gather.md:6
+msgid ""
+"```python\n"
+"triton.language.gather(\n"
+" src: tensor,\n"
+" index: tensor,\n"
+" axis: int,\n"
+" _semantic=None\n"
+")\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:12
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `src`        | `tensor`          |  被执行gather操作的tensor                               |\n"
+"| `index`     | `tensor`    | 需要gather的索引 |\n"
+"| `axis`     | `int`    | 需要执行gather操作的维度 |\n"
+"| `_semantic`   | -                 | 保留参数，暂不支持外部调用|\n"
+msgstr ""
+"| Parameter Name | Type      | Description                                                |\n"
+"| ------------- | --------- | ---------------------------------------------------------- |\n"
+"| `src`         | `tensor`  | The tensor on which the gather operation is performed      |\n"
+"| `index`       | `tensor`  | The indices to gather                                      |\n"
+"| `axis`        | `int`     | The dimension along which to perform the gather operation  |\n"
+"| `_semantic`   | -         | Reserved parameter, currently not supported for external calls |\n"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:14
+msgid "返回值：`tensor`： gather后的结果"
+msgstr "Return value: `tensor`: the result after gather"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:20
+msgid ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | ×    | ×     | ×   | ×     | ×      | ×     | ×     | ×     | √    | √    | √    | √    | ×    |\n"
+"| Ascend A2/A3 | ×    | ×     | ×     | ×     | ×      | ×      | ×      | ×     | √    | √    | ×    | √    | ×    |\n"
+msgstr ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | ×    | ×     | ×   | ×     | ×      | ×     | ×     | ×     | √    | √    | √    | √    | ×    |\n"
+"| Ascend A2/A3 | ×    | ×     | ×     | ×     | ×      | ×      | ×      | ×     | √    | √    | ×    | √    | ×    |\n"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:22
+msgid "结论：Ascend 对比 GPU 缺失fp64的支持能力（硬件限制）。"
+msgstr "Conclusion: Ascend lacks fp64 support compared to GPU (hardware limitation)."
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:24
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:26
+msgid ""
+"|        | 支持维度范围          |\n"
+"| ------ | --------------- |\n"
+"| GPU    | 仅支持 1~5维 tensor |\n"
+"| Ascend A2/A3 | 仅支持 1~5维 tensor |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| ------ | ----------------------- |\n"
+"| GPU    | Only supports 1~5D tensor |\n"
+"| Ascend A2/A3 | Only supports 1~5D tensor |\n"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:28
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异，均支持 1 至 5 维张量。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms, both support 1 to 5-dimensional tensors."
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:30
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:32
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capability deficiency and inability to achieve"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:34
+msgid "- Ascend 对比 GPU 缺失fp64的支持能力（硬件限制）。"
+msgstr "- Ascend lacks fp64 support compared to GPU (hardware limitation)."
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:36
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/gather.md:38
+msgid "参考以下示例："
+msgstr "Refer to the following example:"
+
+#. type: code
+#: docs/zh/triton_api/Indexing_Ops/gather.md:40
+msgid ""
+"```python\n"
+"import math\n"
+"import numpy as np\n"
+"import torch\n"
+"import torch_npu\n"
+"import triton\n"
+"import triton.language as tl\n"
+"import triton.language.extra.ascend.libdevice as libdevice\n"
+"import test_common\n"
+"import pytest\n"
+"from test_common import TestUtils, check_ub_mem_overflow, get_dtype_size\n"
+"\n"
+"\n"
+"@pytest.mark.parametrize(\"src_shape, indices_shape, axis\", [\n"
+"    ([2, 2], [4, 2], 0),\n"
+"    ([3, 3], [1, 3], 0),\n"
+"    ([3, 4], [4, 4], 0),\n"
+"    ([4, 4], [8, 4], 0),\n"
+"    ([4, 32], [4, 16], 1),\n"
+"    ([4, 64], [4, 32], 1),\n"
+"    ([128, 64], [128, 128], 1),\n"
+"])\n"
+"def test_gather(src_shape, indices_shape, axis):\n"
+"    @triton.jit\n"
+"    def gather_kernel(src_ptr, idx_ptr, out_ptr, axis: tl.constexpr, src_dim0: tl.constexpr, src_dim1: tl.constexpr,\n"
+"                      src_stride0: tl.constexpr, src_stride1: tl.constexpr, idx_dim0: tl.constexpr,\n"
+"                      idx_dim1: tl.constexpr, idx_stride0: tl.constexpr, idx_stride1: tl.constexpr,\n"
+"                      out_dim0: tl.constexpr, out_dim1: tl.constexpr, out_stride0: tl.constexpr,\n"
+"                      out_stride1: tl.constexpr):\n"
+"        src_offs = (tl.arange(0, src_dim0)[:, None] * src_stride0 + tl.arange(0, src_dim1)[None, :] * src_stride1)\n"
+"        src = tl.load(src_ptr + src_offs)\n"
+"\n"
+"        idx_offs = (tl.arange(0, idx_dim0)[:, None] * idx_stride0 + tl.arange(0, idx_dim1)[None, :] * idx_stride1)\n"
+"        idx = tl.load(idx_ptr + idx_offs)\n"
+"\n"
+"        out = tl.gather(src, idx, axis)\n"
+"\n"
+"        out_offs = (tl.arange(0, out_dim0)[:, None] * out_stride0 + tl.arange(0, out_dim1)[None, :] * out_stride1)\n"
+"        tl.store(out_ptr + out_offs, out)\n"
+"\n"
+"    def triton_gather(src: torch.Tensor, axis: int, indices: torch.Tensor):\n"
+"        output = torch.empty(indices.shape, dtype=src.dtype, device=src.device)\n"
+"        gather_kernel[(1, )](src, indices, output, axis,\n"
+"                             src.shape[0], src.shape[1],\n"
+"                             src.stride(0), src.stride(1),\n"
+"                             indices.shape[0], indices.shape[1],\n"
+"                             indices.stride(0), indices.stride(1),\n"
+"                             output.shape[0], output.shape[1],\n"
+"                             output.stride(0), output.stride(1))\n"
+"        return output\n"
+"\n"
+"    DEV = \"npu\"\n"
+"    src = torch.randn(src_shape, device=DEV)\n"
+"    indices = torch.randint(0, src.shape[axis], indices_shape, device=DEV)\n"
+"\n"
+"    dtype_size = get_dtype_size('int32')\n"
+"    if dtype_size * math.prod(src.shape) >= (TestUtils.ub_size / 8):\n"
+"        print(f\"dtype:int32 shape:{src.shape} mem overflow\")\n"
+"        return\n"
+"\n"
+"    ref = torch.gather(src, axis, indices)\n"
+"    result = triton_gather(src, axis, indices)\n"
+"    torch.testing.assert_close(result, ref, rtol=0, atol=0)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Indexing_Ops/gather.md:41
+msgid ""
+"\n"
+"\n"
+msgstr ""

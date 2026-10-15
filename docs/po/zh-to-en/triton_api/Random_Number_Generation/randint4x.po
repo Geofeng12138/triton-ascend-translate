@@ -1,0 +1,187 @@
+# PO translation file for docs/zh/triton_api/Random_Number_Generation/randint4x.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 11:14+0000\n"
+"PO-Revision-Date: 2026-07-20 11:14+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:0
+msgid "# triton.language.randint4x"
+msgstr "# triton.language.randint4x"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:4
+msgid ""
+"简介：给定 1 个 seed 标量和 1 个 offset 块，返回 4 个 int32 类型的随机块。\n"
+"Triton 的 Philox 伪随机数生成器的最高效入口点。\n"
+"原型：\n"
+msgstr ""
+"Introduction: Given 1 seed scalar and 1 offset block, returns 4 random blocks of type int32.  \n"
+"The most efficient entry point of Triton's Philox pseudo-random number generator.  \n"
+"Prototype:\n"
+
+#. type: code
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:6
+msgid ""
+"```python\n"
+"triton.language.randint4x(\n"
+" seed,\n"
+" offset,\n"
+" n_rounds: constexpr = 10\n"
+")\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:12
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `seed`        |`int`或 `tensor`          | 用于生成随机数的种子                                                   |\n"
+"| `offset`       | `int`或 `tensor`      | 用于生成随机数的偏移量                     |\n"
+"| `n_rounds`     | `constexpr`，默认值为10   | Philox 算法的迭代轮数 |\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `seed`        | `int` or `tensor` | Seed used to generate random numbers |\n"
+"| `offset`      | `int` or `tensor` | Offset used to generate random numbers |\n"
+"| `n_rounds`    | `constexpr`, default value is 10 | Number of rounds for the Philox algorithm |\n"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:14
+msgid ""
+"返回值：\n"
+"4 个 int32 类型的随机块，每个块的shape与offset相同\n"
+msgstr ""
+"Return value:  \n"
+"4 random blocks of type int32, each block has the same shape as `offset`.\n"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:20
+msgid "输入seed的type："
+msgstr "Input seed type:"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:22
+msgid ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| Ascend A2/A3 | √    | √     | √     | √     | √    | √     | √     |√     | ×    | ×    | ×    | ×    | √    |\n"
+msgstr ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| Ascend A2/A3 | √    | √     | √     | √     | √    | √     | √     |√     | ×    | ×    | ×    | ×    | √    |\n"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:24
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:26
+msgid "无特殊要求"
+msgstr "No special requirements."
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:28
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:30
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relatively lacking in community capabilities and unable to achieve"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:32
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:34
+msgid "以下示例实现了offset标量时对randint4x的调用："
+msgstr "The following example demonstrates the call to `randint4x` when the offset is a scalar:"
+
+#. type: code
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:36
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def kernel_randint4x(x_ptr, n_rounds: tl.constexpr, N: tl.constexpr, XBLOCK: tl.constexpr):\n"
+"    block_offset = tl.program_id(0) * XBLOCK\n"
+"    indices = tl.arange(0, 4)\n"
+"    block_size = XBLOCK if block_offset + XBLOCK <= N else N - block_offset\n"
+"    for inner_idx in range(0, block_size, step=4):\n"
+"        global_offset = block_offset + inner_idx\n"
+"        rand_vals = tl.randint4x(5, 10 + global_offset, n_rounds) # 对每个索引生成一个随机数\n"
+"        mask = (global_offset + indices) < N\n"
+"        tl.store(x_ptr + global_offset + indices, rand_vals, mask) # 存储随机数\n"
+"\n"
+"y_cali = torch.zeros(shape, dtype=eval('torch.int32')).npu()\n"
+"kernel_randint4x[ncore, 1, 1](y_cali, 10, numel, xblock)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:38
+msgid "以下例子实现了offset非标量时对randint4x的调用，其中存储所用的tensor大小是offset的4倍："
+msgstr "The following example implements a call to `randint4x` when `offset` is non-scalar, where the tensor used for storage is 4 times the size of `offset`:"
+
+#. type: code
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:40
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def triton_randint4x1d(out_ptr, seed, L: tl.constexpr):\n"
+" idx = tl.arange(0, L)\n"
+" rnd0, rnd1, rnd2, rnd3 = tl.randint4x(seed, idx)\n"
+" pointers0 = out_ptr + idx\n"
+" pointers1 = out_ptr + L + idx\n"
+" pointers2 = out_ptr + 2 * L + idx\n"
+" pointers3 = out_ptr + 3 * L + idx\n"
+" tl.store(pointers0, rnd0)\n"
+" tl.store(pointers1, rnd1)\n"
+" tl.store(pointers2, rnd2)\n"
+" tl.store(pointers3, rnd3)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Random_Number_Generation/randint4x.md:41
+msgid ""
+"\n"
+"\n"
+msgstr ""

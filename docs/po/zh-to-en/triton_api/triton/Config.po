@@ -1,0 +1,97 @@
+# PO translation file for docs/zh/triton_api/triton/Config.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 11:26+0000\n"
+"PO-Revision-Date: 2026-07-20 11:26+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/triton/Config.md:0
+msgid "# triton.Config"
+msgstr "# triton.Config"
+
+#. type: code
+#: docs/zh/triton_api/triton/Config.md:2
+msgid ""
+"```python\n"
+"class triton.Config(self, kwargs, num_warps, num_stages, num_ctas, maxnreg, pre_hook)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/triton/Config.md:4
+msgid "表示自动调优可能尝试的内核配置的对象"
+msgstr "An object representing the kernel configurations that automatic tuning may attempt."
+
+#. type: text
+#: docs/zh/triton_api/triton/Config.md:6
+msgid "**变量：**"
+msgstr "**Variables:**"
+
+#. type: text
+#: docs/zh/triton_api/triton/Config.md:8
+msgid "- kwargs – 1 个元参数字典，用于作为关键字参数传递给内核。"
+msgstr "- kwargs – A dictionary of keyword arguments to be passed to the kernel."
+
+#. type: text
+#: docs/zh/triton_api/triton/Config.md:10
+msgid "- num_warps – 在为 GPU 编译时内核使用的线程数。例如，如果 num_warps=8，则每个内核实例将自动并行化，使用 8 * 32 = 256 个线程协作执行。"
+msgstr "- num_warps – The number of threads used by the kernel when compiling for GPU. For example, if num_warps=8, each kernel instance will be automatically parallelized, using 8 * 32 = 256 threads to execute cooperatively."
+
+#. type: text
+#: docs/zh/triton_api/triton/Config.md:12
+msgid "- num_stages – 编译器在软件流水线循环时应使用的阶段数。对于 SM80+ GPU 上的矩阵乘法工作负载非常有用。"
+msgstr "- num_stages – The number of stages the compiler should use when software pipelining loops. This is particularly useful for matrix multiplication workloads on SM80+ GPUs."
+
+#. type: text
+#: docs/zh/triton_api/triton/Config.md:14
+msgid "- num_ctas - 块集群中的块数。仅适用于 SM90+。"
+msgstr "- num_ctas - Number of blocks in a block cluster. Only applicable for SM90+."
+
+#. type: text
+#: docs/zh/triton_api/triton/Config.md:16
+msgid "- maxnreg - 单个线程可以使用的最大寄存器数。对应于 ptx 的 .maxnreg 指令。并非所有平台都支持。"
+msgstr "- maxnreg - The maximum number of registers that a single thread can use. Corresponds to the `.maxnreg` directive in PTX. Not supported on all platforms."
+
+#. type: text
+#: docs/zh/triton_api/triton/Config.md:18
+msgid "- pre_hook – 在调用内核之前将被调用的函数。该函数的参数是 args。"
+msgstr "- pre_hook – A function that will be called before invoking the kernel. The parameter of this function is args."
+
+#. type: code
+#: docs/zh/triton_api/triton/Config.md:20
+msgid ""
+"```python\n"
+"__init__(self, kwargs, num_warps=4, num_stages=2, num_ctas=1, maxnreg=None, pre_hook=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/triton/Config.md:22
+msgid "**方法：**"
+msgstr "**Method:**"
+
+#. type: text
+#: docs/zh/triton_api/triton/Config.md:24
+msgid ""
+"| init(self, kwargs[, num_warps, ...]) |\n"
+"|-----|\n"
+"|all_kwargs (self)|\n"
+msgstr ""
+"| init(self, kwargs[, num_warps, ...]) |\n"
+"|-----|\n"
+"|all_kwargs (self)|\n"
+
+#. type: blank
+#: docs/zh/triton_api/triton/Config.md:25
+msgid ""
+"\n"
+"\n"
+msgstr ""

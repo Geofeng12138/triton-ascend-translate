@@ -1,0 +1,180 @@
+# PO translation file for docs/zh/triton_api/Scan_Sort_Ops/histogram.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 11:19+0000\n"
+"PO-Revision-Date: 2026-07-20 11:19+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:0
+msgid "# triton.language.histogram"
+msgstr "# triton.language.histogram"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:4
+msgid ""
+"简介：基于 input 计算 1 个具有 num_bins 个 bin 的直方图，每个 bin 宽度为 1，起始于 0。\n"
+"原型：\n"
+msgstr ""
+"Introduction: Computes a histogram with `num_bins` bins based on `input`, where each bin has a width of 1, starting from 0.  \n"
+"Prototype:\n"
+
+#. type: code
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:6
+msgid ""
+"```python\n"
+"triton.language.histogram(\n"
+" input,\n"
+" num_bins,\n"
+" mask=None,\n"
+" _semantic=None,\n"
+" _generator=None\n"
+")\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:8
+msgid "可以作为tensor的成员函数调用，如`x.histogram(...)`，与`histogram(x, ...)`等效。"
+msgstr "Can be called as a member function of a tensor, such as `x.histogram(...)`, which is equivalent to `histogram(x, ...)`."
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:10
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:12
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:14
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `input`        | `tensor`          | 输入数据，包含需要统计分布的所有数值点                                                    |\n"
+"| `num_bins`       | `int`    | 定义要将整个数据范围划分成多少个等宽的区间                       |\n"
+"| `mask`     | `int1`或`tensor<int1>`，可选    | 指定数据范围，防止访问越界 |\n"
+"| `_semantic`   | -                 | 保留参数，暂不支持外部调用                                                |\n"
+"| `_generator` |-                 | 保留参数，暂不支持外部调用\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `input`        | `tensor`          | Input data, containing all numerical points whose distribution is to be counted |\n"
+"| `num_bins`       | `int`    | Defines how many equal-width intervals the entire data range is divided into |\n"
+"| `mask`     | `int1` or `tensor<int1>`, optional    | Specifies the data range to prevent out-of-bounds access |\n"
+"| `_semantic`   | -                 | Reserved parameter, external calls not supported for now |\n"
+"| `_generator` |-                 | Reserved parameter, external calls not supported for now |\n"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:16
+msgid ""
+"返回值：\n"
+"用tensor表示的直方图\n"
+"注：当前triton3.2版本暂未支持mask，待版本更新后支持；input输入范围限制在[0,num_bins-1]中，待版本更新后支持全范围\n"
+msgstr ""
+"Return value:  \n"
+"A histogram represented by a tensor.  \n"
+"\n"
+"Note: The current Triton 3.2 version does not yet support mask; support will be added in a future version update. The input range is limited to [0, num_bins-1]; full range support will be added in a future version update.\n"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:18
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:20
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:22
+msgid ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | ×    | ×     | √     | ×     | ×      | √      | ×      | ×     | ×    | ×    | ×    | ×    | ×       |\n"
+"| Ascend A2/A3 | ×    | ×     | √    | ×     | ×      | √      | √      | √     | ×    | ×    | ×    | ×    | ×    |\n"
+msgstr ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | ×    | ×     | √     | ×     | ×      | √      | ×      | ×     | ×    | ×    | ×    | ×    | ×    |\n"
+"| Ascend A2/A3 | ×    | ×     | √    | ×     | ×      | √      | √      | √     | ×    | ×    | ×    | ×    | ×    |\n"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:24
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:26
+msgid "目前仅支持一维"
+msgstr "Currently only one-dimensional is supported."
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:28
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:30
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capacity deficiency and inability to achieve"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:32
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:34
+msgid "以下示例实现了histogram的调用："
+msgstr "The following example demonstrates the invocation of histogram:"
+
+#. type: code
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:36
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def histogram_kernel(x_ptr, z_ptr, M: tl.constexpr, N: tl.constexpr):\n"
+"    offset1 = tl.arange(0, M)\n"
+"    offset2 = tl.arange(0, N)\n"
+"    x = tl.load(x_ptr + offset1)\n"
+"    z = tl.histogram(x, N)\n"
+"    tl.store(z_ptr + offset2, z)\n"
+"\n"
+"x = torch.randint(0, N, (M, ), device=device, dtype=torch.int32)\n"
+"z = torch.empty(N, dtype=torch.int32, device=device)\n"
+"histogram_kernel[(1, )](x, z, M=M, N=N)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:38
+msgid "## 3. 语义GAP"
+msgstr "## 3. Semantic Gap"
+
+#. type: text
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:40
+msgid "> 相对社区能力缺失但能开发支持"
+msgstr "Relative community capability is lacking but can develop support"
+
+#. type: blank
+#: docs/zh/triton_api/Scan_Sort_Ops/histogram.md:41
+msgid ""
+"\n"
+"\n"
+msgstr ""

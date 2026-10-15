@@ -1,0 +1,171 @@
+# PO translation file for docs/zh/triton_api/Indexing_Ops/swizzle2d.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 10:50+0000\n"
+"PO-Revision-Date: 2026-07-20 10:50+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:0
+msgid "# triton.language.swizzle2d"
+msgstr "# triton.language.swizzle2d"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:2
+msgid "## 1. 函数概述"
+msgstr "## 1. Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:4
+msgid "简介：**将一个大小为 size_i × size_j 的行优先矩阵的索引，按每 size_g 行一组，分别转换为列优先矩阵的索引。**。"
+msgstr "Introduction: **Convert the index of a row-major matrix of size size_i × size_j, grouped every size_g rows, into the index of a column-major matrix.**"
+
+#. type: code
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:6
+msgid ""
+"```python\n"
+"triton.language.swizzle2d(i, j, size_i, size_j, size_g)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:8
+msgid "## 2. 规格"
+msgstr "## 2. Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:12
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `i`        | `tensor`          | index索引值 ，最大值为size(i)-1                                                     |\n"
+"| `j`        | `tensor`          | index索引值 ，最大值为size(j)-1                                                     |\n"
+"| `size_i`        | `int`          | 整型，表示索引值i的长度                                                     |\n"
+"| `size_j`        | `int`          | 整型，表示索引值j的长度                                                          |\n"
+"| `size_g`        | `int`          | 整型                                                      |\n"
+msgstr ""
+"| Parameter | Type     | Description                                                  |\n"
+"| --------- | -------- | ------------------------------------------------------------ |\n"
+"| `i`       | `tensor` | Index value, maximum is `size(i)-1`                          |\n"
+"| `j`       | `tensor` | Index value, maximum is `size(j)-1`                          |\n"
+"| `size_i`  | `int`    | Integer, indicating the length of index value i              |\n"
+"| `size_j`  | `int`    | Integer, indicating the length of index value j              |\n"
+"| `size_g`  | `int`    | Integer                                                      |\n"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:14
+msgid ""
+"返回值：\n"
+"`out0, out1`：同i, j shape的张量\n"
+msgstr ""
+"Return value:  \n"
+"`out0, out1`: Tensors with the same shape as i, j\n"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:16
+msgid "### 2.2 OP 规格"
+msgstr "### 2.2 OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:20
+msgid ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | ×     | ×      | √     | ×      |  ×      |  ×       |  ×       | √      | ×    | ×   | ×    | ×    | ×    |\n"
+"| Ascend A2/A3 | ×    | ×     | √     | ×     | ×     | ×      | ×      | √     | ×    | ×   | ×    | ×   | ×\n"
+msgstr ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU    | ×     | ×      | √     | ×      |  ×      |  ×       |  ×       | √      | ×    | ×   | ×    | ×    | ×    |\n"
+"| Ascend A2/A3 | ×    | ×     | √     | ×     | ×     | ×      | ×      | √     | ×    | ×   | ×    | ×   | ×\n"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:22
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:24
+msgid ""
+"|        | 支持维度范围          |\n"
+"| ------ | --------------- |\n"
+"| GPU    | 仅支持 2维 tensor |\n"
+"| Ascend A2/A3 | 仅支持 2维 tensor |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| ------ | ----------------------- |\n"
+"| GPU    | Only supports 2D tensor |\n"
+"| Ascend A2/A3 | Only supports 2D tensor |\n"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:26
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异，均支持 2 维张量。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms, both support 2-dimensional tensors."
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:28
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:30
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capability deficiency and inability to achieve"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:32
+msgid "暂无。"
+msgstr "None."
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:34
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:36
+msgid "以下示例将行优先矩阵的索引按每 `size_g` 行一组转换为列优先矩阵的索引："
+msgstr "The following example converts row-major matrix indices into column-major matrix indices in groups of `size_g` rows each:"
+
+#. type: code
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:38
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def fn_npu_(out0, out1, XB: tl.constexpr, YB: tl.constexpr, ZB: tl.constexpr):\n"
+"    i = tl.arange(0, XB)[:, None]\n"
+"    j = tl.arange(0, YB)[None, :]\n"
+"    ij = i * YB + j\n"
+"    xx, yy = tl.swizzle2d(i, j, size_i=XB, size_j=YB, size_g=ZB)\n"
+"\n"
+"    ptr = tl.load(out0)\n"
+"    xx = tl.cast(xx, dtype=ptr.dtype)\n"
+"    yy = tl.cast(yy, dtype=ptr.dtype)\n"
+"    tl.store(out0 + ij, xx)\n"
+"    tl.store(out1 + ij, yy)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Indexing_Ops/swizzle2d.md:39
+msgid ""
+"\n"
+"\n"
+msgstr ""

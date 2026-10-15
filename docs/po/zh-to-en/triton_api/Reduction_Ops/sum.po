@@ -1,0 +1,173 @@
+# PO translation file for docs/zh/triton_api/Reduction_Ops/sum.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 11:17+0000\n"
+"PO-Revision-Date: 2026-07-20 11:17+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:0
+msgid "# triton.language.sum"
+msgstr "# triton.language.sum"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:4
+msgid "简介：`triton.language.sum` 计算输入tensor沿指定轴的元素和，返回求和结果。"
+msgstr "Introduction: `triton.language.sum` computes the sum of elements of the input tensor along the specified axis and returns the summation result."
+
+#. type: code
+#: docs/zh/triton_api/Reduction_Ops/sum.md:6
+msgid ""
+"```python\n"
+"triton.language.sum(input, axis=None, keep_dims=False)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:8
+msgid ""
+"> **版本差异说明**\n"
+">\n"
+"> `dtype` 参数为社区 Triton 3.5.0 引入的功能。当前发布的 Triton-Ascend 基于社区 Triton 3.2.0 开发，没有`dtype` 参数。后续升级至社区 Triton 3.5.0 版本时，将完整支持 `dtype` 参数的功能。\n"
+msgstr ""
+"> **Version Difference Note**\n"
+">\n"
+"> The `dtype` parameter is a feature introduced in community Triton 3.5.0. The currently released Triton-Ascend is developed based on community Triton 3.2.0 and does not have the `dtype` parameter. When upgrading to community Triton 3.5.0 in the future, full support for the `dtype` parameter will be provided.\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:10
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:12
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:14
+msgid ""
+"| 参数名 | 类型 | 说明 |\n"
+"|--------|------|------|\n"
+"| `input` | `Tensor` | 输入tensor |\n"
+"| `axis` | `int` 或 `None` | 沿着哪个维度进行求和操作。如果为None，则对所有维度求和 |\n"
+"| `keep_dims` | `bool` | 如果为True，保持被求和的维度为长度1 |\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"|----------------|------|-------------|\n"
+"| `input` | `Tensor` | Input tensor |\n"
+"| `axis` | `int` or `None` | The dimension along which to perform the sum operation. If None, sum over all dimensions |\n"
+"| `keep_dims` | `bool` | If True, keep the summed dimensions as length 1 |\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:16
+msgid ""
+"返回值：\n"
+"`tensor`：计算输入tensor沿指定轴的元素和，返回求和结果。\n"
+msgstr ""
+"Return value:  \n"
+"`tensor`: Computes the sum of elements of the input tensor along the specified axis, and returns the summation result.\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:18
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:20
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:22
+msgid ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"| Ascend A2/A3 | ✓ | ✓ | × | ✓ | × | ✓ | × | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+"| GPU支持 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+msgstr ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"| Ascend A2/A3 | ✓ | ✓ | × | ✓ | × | ✓ | × | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+"| GPU Support | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:24
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:26
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异。"
+msgstr "Conclusion: There is no difference between GPU and Ascend platform in terms of Shape."
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:28
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:30
+msgid ""
+"> 相对社区能力缺失且无法实现\n"
+"> keep_dims=True需要测试更多规格，来确定是否全面支持。目前已测3D dim=2情况下，支持 keep_dims=True。\n"
+"> `dtype` 参数当前版本暂未支持。社区 Triton 3.5.0 中，`dtype` 参数用于控制求和运算的累加数据类型：未指定时，位宽小于 32 的整数类型会自动提升为 `int32`/`uint32` 以避免溢出；显式指定时，输入会先转换为指定类型再执行求和。当前 Triton-Ascend 基于社区 Triton 3.2.0，该类型提升逻辑尚未支持，将在后续升级至 3.5.0 版本时完整支持。\n"
+msgstr ""
+"Relative community capability is missing and cannot be achieved.  \n"
+"`keep_dims=True` requires testing on more specifications to determine full support. Currently, it has been tested and supports `keep_dims=True` in the 3D dim=2 case.  \n"
+"The `dtype` parameter is not yet supported in the current version. In community Triton 3.5.0, the `dtype` parameter is used to control the accumulation data type for sum operations: when not specified, integer types with a bit width less than 32 are automatically promoted to `int32`/`uint32` to avoid overflow; when explicitly specified, the input is first converted to the specified type before performing the sum. The current Triton-Ascend is based on community Triton 3.2.0, and this type promotion logic is not yet supported. It will be fully supported in a future upgrade to version 3.5.0.\n"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:32
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Reduction_Ops/sum.md:34
+msgid "以下示例实现了对2Dshape的tensor进行sum运算："
+msgstr "The following example implements the sum operation on a 2D shape tensor:"
+
+#. type: code
+#: docs/zh/triton_api/Reduction_Ops/sum.md:36
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def tt_sum_2d(in_ptr, out_ptr,\n"
+"              xnumel: tl.constexpr, ynumel: tl.constexpr, znumel: tl.constexpr,\n"
+"              XB: tl.constexpr, YB: tl.constexpr, ZB: tl.constexpr, dim: tl.constexpr):\n"
+"    xoffs = tl.program_id(0) * XB\n"
+"    yoffs = tl.program_id(1) * YB\n"
+"    xidx = tl.arange(0, XB) + xoffs\n"
+"    yidx = tl.arange(0, YB) + yoffs\n"
+"    idx = xidx[:, None] * ynumel + yidx[None, :]\n"
+"\n"
+"    x = tl.load(in_ptr + idx)\n"
+"    ret = tl.sum(x, dim)\n"
+"\n"
+"    if dim == 0:\n"
+"        oidx = yidx\n"
+"    else:\n"
+"        oidx = xidx\n"
+"    tl.store(out_ptr + oidx, ret)\n"
+"\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Reduction_Ops/sum.md:37
+msgid ""
+"\n"
+"\n"
+msgstr ""

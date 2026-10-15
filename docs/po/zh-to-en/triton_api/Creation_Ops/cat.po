@@ -1,0 +1,185 @@
+# PO translation file for docs/zh/triton_api/Creation_Ops/cat.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 10:43+0000\n"
+"PO-Revision-Date: 2026-07-20 10:43+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:0
+msgid "# triton.language.cat"
+msgstr "# triton.language.cat"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:4
+msgid "简介：`triton.language.cat`函数用于将指定的tensor进行拼接。"
+msgstr "Introduction: The `triton.language.cat` function is used to concatenate specified tensors."
+
+#. type: code
+#: docs/zh/triton_api/Creation_Ops/cat.md:6
+msgid ""
+"```python\n"
+"triton.language.cat(input, other, can_reorder=False, _semantic=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:12
+msgid ""
+"| 参数名           | 类型                  | 说明                                   |\n"
+"| ------------- | ----------------- | ---------------------------- |\n"
+"| `input`           | `Tensor`               | 拼接的第一个tensor |\n"
+"| `other`            | `Tensor`               | 拼接的第二个tensor |\n"
+"| `can_reorder`            | `Bool`               | 重新排序 – 编译器提示。如果为真，编译器在连接输入时允许重新排序元素。仅支持can_reorder=True。  |\n"
+"| `_semantic`            | `Optional[str]`               | 保留参数，暂不支持外部调用 |\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"| ------------- | ---- | ----------- |\n"
+"| `input` | `Tensor` | The first tensor to concatenate |\n"
+"| `other` | `Tensor` | The second tensor to concatenate |\n"
+"| `can_reorder` | `Bool` | Reorder – compiler hint. If true, the compiler allows reordering elements when concatenating inputs. Only `can_reorder=True` is supported. |\n"
+"| `_semantic` | `Optional[str]` | Reserved parameter; external calls are not currently supported |\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:14
+msgid ""
+"返回值：\n"
+"`tensor`：完成拼接之后的tensor\n"
+msgstr ""
+"Return value:  \n"
+"`tensor`: The tensor after concatenation.\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:20
+msgid ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"| Ascend A2/A3 | ✓ | ✓ | × | ✓ | × | ✓ | × | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+"| GPU支持 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+msgstr ""
+"|| uint8 | int8 | uint16 | int16 | uint32 | int32 | uint64 | int64 | fp16 | fp32 | bf16 | bool/int1 |\n"
+"|---| ------- | ------ | -------- | ------- | -------- | ------- | -------- | ------- | ------ | ------ | ------ | ----------- |\n"
+"| Ascend A2/A3 | ✓ | ✓ | × | ✓ | × | ✓ | × | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+"| GPU Support | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:22
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:24
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异。cat 只支持1D shape 的拼接。"
+msgstr "Conclusion: There is no difference between GPU and Ascend platform in terms of Shape. cat only supports concatenation of 1D shapes."
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:26
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:28
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capability is lacking and cannot be achieved."
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:30
+msgid ""
+"1.ASCEND和CUDA都只支持 can_reorder=True，即拼接tensor后重新排序。\n"
+"2.cat 只支持1D shape 的拼接。\n"
+msgstr ""
+"1. Both ASCEND and CUDA only support `can_reorder=True`, meaning the tensors are reordered after concatenation.  \n"
+"2. `cat` only supports concatenation for 1D shapes.\n"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:32
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Creation_Ops/cat.md:34
+msgid "以下示例实现了对1D shape的两个tensor进行的拼接："
+msgstr "The following example demonstrates the concatenation of two tensors with a 1D shape:"
+
+#. type: code
+#: docs/zh/triton_api/Creation_Ops/cat.md:36
+msgid ""
+"```python\n"
+"import triton.language as tl\n"
+"\n"
+"import torch\n"
+"import torch_npu\n"
+"import pytest\n"
+"import test_common\n"
+"import math\n"
+"\n"
+"@triton.jit\n"
+"def fn_npu_(output_ptr, x_ptr, y_ptr, XB: tl.constexpr):\n"
+"\n"
+"    idx = tl.arange(0, XB)\n"
+"    X = tl.load(x_ptr + idx)\n"
+"    Y = tl.load(y_ptr + idx)\n"
+"\n"
+"    ret = tl.cat(X, Y, can_reorder=True)\n"
+"\n"
+"    oidx = tl.arange(0, XB * 2)\n"
+"\n"
+"    tl.store(output_ptr + oidx, ret)\n"
+"\n"
+"\n"
+"## The CAT operator in the Triton community also does not support boolean types.\n"
+"@pytest.mark.parametrize('shape', [(32,), (741,)]) #triton only support 1D cat\n"
+"@pytest.mark.parametrize('dtype', ['float32',])\n"
+"def test_cat(shape, dtype):\n"
+"    m = shape[0]\n"
+"    x = torch.full((m, ), 100, dtype=eval(\"torch.\" + dtype)).npu()\n"
+"    y = torch.full((m, ), 30, dtype=eval(\"torch.\" + dtype)).npu()\n"
+"\n"
+"    output = torch.randint(1, (m * 2, ), dtype=eval(\"torch.\" + dtype)).npu()\n"
+"\n"
+"    ans = torch.cat((x, y), dim=0)\n"
+"\n"
+"    fn_npu_[1, 1, 1](output, x, y, m)\n"
+"\n"
+"    test_common.validate_cmp(dtype, ans, output)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Creation_Ops/cat.md:37
+msgid ""
+"\n"
+"\n"
+msgstr ""

@@ -1,0 +1,56 @@
+# PO translation file for docs/zh/triton_api/triton/index.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 11:26+0000\n"
+"PO-Revision-Date: 2026-07-20 11:26+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/triton/index.md:0
+msgid "# triton"
+msgstr "# triton"
+
+#. type: text
+#: docs/zh/triton_api/triton/index.md:2
+msgid ""
+"| API | 简要说明 |\n"
+"|-----|----------|\n"
+"| [jit](./jit.md) | JIT 装饰器 - 使用 Triton 编译器编译函数 |\n"
+"| [autotune](./autotune.md) | 用于自动调优一个经过 `triton.jit` 编译的函数的装饰器 |\n"
+"| [heuristics](./heuristics.md) | 用于指定如何计算某些元参数值的装饰器 |\n"
+"| [Config](./Config.md) | 一个表示自动调优器可以尝试的可能内核配置的对象 |\n"
+msgstr ""
+"| API | Brief Description |\n"
+"|-----|------------------|\n"
+"| [jit](./jit.md) | JIT decorator - compiles functions using the Triton compiler |\n"
+"| [autotune](./autotune.md) | Decorator for automatically tuning a function compiled with `triton.jit` |\n"
+"| [heuristics](./heuristics.md) | Decorator for specifying how to compute certain meta-parameter values |\n"
+"| [Config](./Config.md) | An object representing possible kernel configurations that the autotuner can try |\n"
+
+#. type: code
+#: docs/zh/triton_api/triton/index.md:4
+msgid ""
+"```{toctree}\n"
+":maxdepth: 3\n"
+":hidden:\n"
+"\n"
+"jit.md\n"
+"autotune.md\n"
+"heuristics.md\n"
+"Config.md\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/triton/index.md:5
+msgid ""
+"\n"
+"\n"
+msgstr ""

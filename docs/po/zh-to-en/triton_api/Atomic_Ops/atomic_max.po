@@ -1,0 +1,191 @@
+# PO translation file for docs/zh/triton_api/Atomic_Ops/atomic_max.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 10:35+0000\n"
+"PO-Revision-Date: 2026-07-20 10:35+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:0
+msgid "# triton.language.atomic_max"
+msgstr "# triton.language.atomic_max"
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:4
+msgid ""
+"简介：原子性取最大值操作，在指定的内存位置执行原子最大值操作\n"
+"原型：\n"
+msgstr ""
+"Introduction: Atomic maximum operation, performs an atomic maximum operation at the specified memory location.  \n"
+"Prototype:\n"
+
+#. type: code
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:6
+msgid ""
+"```python\n"
+"triton.language.atomic_max(\n"
+"    pointer,\n"
+"    val,\n"
+"    mask=None,\n"
+"    sem=None,\n"
+"    scope=None,\n"
+"    _semantic=None\n"
+") -> pointer\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:8
+msgid "可以作为tensor的成员函数调用，如`x.atomic_max(...)`，与`atomic_max(x, ...)`等效。"
+msgstr "Can be called as a member function of a tensor, such as `x.atomic_max(...)`, which is equivalent to `atomic_max(x, ...)`."
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:10
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:12
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:14
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `pointer`        | `triton.PointerDType`          | 要操作的内存位置，执行 max(*pointer , val) 计算后的结果写回到该内存                                                     |\n"
+"| `val`       | `pointer.dtype.element_ty`    | 用于和目标内存进行比较的值                                                        |\n"
+"| `mask`     | `int1`或`tensor<int1>`，可选    | 指定数据范围，防止访问越界 |\n"
+"| `sem` | `str`，可选 | 指定操作的内存语义<br>社区官方配置可接受的值为“acquire”、“release”、“acq_rel”（默认，代表“ACQUIRE_RELEASE”）和“relaxed”<br>我们只支持“acq_rel”：<br>- acquire：获取锁后，能够看到之前的释放操作（相当于一个“读取”操作，并且这个读取操作会阻塞，直到能够读取到“最新”的数据，也就是其他线程释放后的数据）<br>- release：在释放锁之前的所有操作，对后续获取锁的线程可见（相当于一个“写入”操作，并且这个写入操作会“同步”所有之前的写操作）                                             |\n"
+"| `scope` | `str`，可选 | 观察原子操作同步效果的线程范围<br>可接受的值为“gpu”（默认）、“cta”（协作线程数组、线程块）或“sys”（代表“SYSTEM”） <br>我们只支持“gpu”                                            |\n"
+"| `_semantic`   | -                 | 保留参数，暂不支持外部调用                                                |\n"
+msgstr ""
+"| Parameter | Type | Description |\n"
+"| --------- | ---- | ----------- |\n"
+"| `pointer` | `triton.PointerDType` | The memory location to operate on. The result of `max(*pointer, val)` is written back to this memory location. |\n"
+"| `val` | `pointer.dtype.element_ty` | The value to compare with the target memory. |\n"
+"| `mask` | `int1` or `tensor<int1>`, optional | Specifies the data range to prevent out-of-bounds access. |\n"
+"| `sem` | `str`, optional | Specifies the memory semantics of the operation.<br>Community official configuration accepts values: \"acquire\", \"release\", \"acq_rel\" (default, representing \"ACQUIRE_RELEASE\"), and \"relaxed\".<br>We only support \"acq_rel\":<br>- acquire: After acquiring the lock, it can see previous release operations (equivalent to a \"read\" operation that blocks until the \"latest\" data, i.e., data released by other threads, is readable).<br>- release: All operations before releasing the lock are visible to threads that subsequently acquire the lock (equivalent to a \"write\" operation that \"synchronizes\" all previous writes). |\n"
+"| `scope` | `str`, optional | The thread scope over which the atomic operation's synchronization effects are observed.<br>Acceptable values are \"gpu\" (default), \"cta\" (cooperative thread array, thread block), or \"sys\" (representing \"SYSTEM\").<br>We only support \"gpu\". |\n"
+"| `_semantic` | - | Reserved parameter; external calls are not supported for now. |\n"
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:16
+msgid ""
+"返回值：\n"
+"`pointer`：tensor，执行操作之前的旧值\n"
+msgstr ""
+"Return value:  \n"
+"`pointer`: tensor, the old value before performing the operation.\n"
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:18
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:20
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:22
+msgid ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU     | ×     | ×      |  √     | ×     | ×      | ×      | ×      |√    | ×     | √    | ×      | ×      | ×     |\n"
+"| Ascend A2/A3 | √    | √     | √     | ×     | ×      | ×      | ×      | ×     | √    | √    | ×    | √    | ×    |\n"
+msgstr ""
+"|        | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"| ------ | ---- | ----- | ----- | ----- | ------ | ------ | ------ | ----- | ---- | ---- | ---- | ---- | ---- |\n"
+"| GPU     | ×     | ×      |  √     | ×     | ×      | ×      | ×      |√    | ×     | √    | ×      | ×      | ×     |\n"
+"| Ascend A2/A3 | √    | √     | √     | ×     | ×      | ×      | ×      | ×     | √    | √    | ×    | √    | ×    |\n"
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:24
+msgid "结论：Ascend 对比 GPU 缺失int64的支持能力。"
+msgstr "Conclusion: Ascend lacks int64 support compared to GPU."
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:26
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:28
+msgid "无特殊要求"
+msgstr "No special requirements"
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:30
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:32
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capability is lacking and cannot be achieved"
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:34
+msgid ""
+"| 差异点                   | 描述                                                                           |\n"
+"| --------------------- | ---------------------------------------------------------------------------- |\n"
+"|数据类型| Ascend 对比 GPU 缺失int64的支持能力（硬件限制） |\n"
+"|sem| 社区官方配置可接受的值为“acquire”、“release”、“acq_rel”（默认，代表“ACQUIRE_RELEASE”）和“relaxed”<br>我们只支持“acq_rel” |\n"
+"|scope               | 可接受的值为“gpu”、“cta”、或“sys”、 <br>我们只支持“gpu” |\n"
+msgstr ""
+"| Difference | Description |\n"
+"| ----------- | ----------- |\n"
+"| Data Type | Ascend lacks support for int64 compared to GPU (hardware limitation) |\n"
+"| sem | The officially accepted values for `sem` are \"acquire\", \"release\", \"acq_rel\" (default, representing \"ACQUIRE_RELEASE\"), and \"relaxed\".<br>We only support \"acq_rel\". |\n"
+"| scope | Accepted values are \"gpu\", \"cta\", or \"sys\".<br>We only support \"gpu\". |\n"
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:36
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:38
+msgid "以下示例实现了原子取最大值："
+msgstr "The following example implements atomic max operation:"
+
+#. type: code
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:40
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def triton_atomic_max(\n"
+"    in_ptr0, out_ptr0, n_elements: tl.constexpr, BLOCK_SIZE: tl.constexpr\n"
+"):\n"
+"    xoffset = tl.program_id(0) * BLOCK_SIZE\n"
+"    xindex = xoffset + tl.arange(0, BLOCK_SIZE)[:]\n"
+"    yindex = xoffset + tl.arange(0, BLOCK_SIZE)[:]\n"
+"    xmask = xindex < n_elements\n"
+"    x0 = xindex\n"
+"    x1 = yindex\n"
+"    tmp0 = tl.load(in_ptr0 + (x0), xmask)\n"
+"    tmp1 = tl.atomic_max(out_ptr0 + (x1), tmp0, xmask)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Atomic_Ops/atomic_max.md:41
+msgid ""
+"\n"
+"\n"
+msgstr ""

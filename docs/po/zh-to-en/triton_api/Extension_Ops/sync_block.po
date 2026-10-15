@@ -1,0 +1,293 @@
+# PO translation file for docs/zh/triton_api/Extension_Ops/sync_block.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 10:48+0000\n"
+"PO-Revision-Date: 2026-07-20 10:48+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:0
+msgid "# triton.language.sync_block_set"
+msgstr "# triton.language.sync_block_set"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:2
+msgid "## 1. 函数概述"
+msgstr "## 1. Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:4
+msgid "显式的核心间同步指令，用于协调 Cube-Vector 架构中不同核心间的执行顺序和数据一致性。"
+msgstr "Explicit inter-core synchronization instructions for coordinating execution order and data consistency between different cores in the Cube-Vector architecture."
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:6
+msgid "## 2. `sync_block_set` 操作"
+msgstr "## 2. `sync_block_set` Operation"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:8
+msgid "### 2.1 函数概述"
+msgstr "### 2.1 Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:10
+msgid "生产者核心完成任务后，向消费者发送同步信号。"
+msgstr "After the producer core completes its task, it sends a synchronization signal to the consumer core."
+
+#. type: code
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:12
+msgid ""
+"```python\n"
+"triton.language.sync_block_set(sender, receiver, event_id, _builder=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:14
+msgid "### 2.2 规格"
+msgstr "### 2.2 Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:16
+msgid "#### 2.2.1 参数说明"
+msgstr "#### 2.2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:18
+msgid ""
+"| 参数 | 类型 | 默认值 | 含义说明 |\n"
+"|------|------|--------|----------|\n"
+"| `sender` | `str` | 必需 | 发送方核心类型：\"cube\" 或 \"vector\" |\n"
+"| `receiver` | `str` | 必需 | 接收方核心类型：\"cube\" 或 \"vector\" |\n"
+"| `event_id` | `int` | 必需 | 事件ID，用于区分不同的同步点 |\n"
+"| `_builder` | - | `None` | 保留参数，暂不支持外部调用 |\n"
+msgstr ""
+"| Parameter | Type | Default | Description |\n"
+"|-----------|------|---------|-------------|\n"
+"| `sender` | `str` | Required | Sender core type: `\"cube\"` or `\"vector\"` |\n"
+"| `receiver` | `str` | Required | Receiver core type: `\"cube\"` or `\"vector\"` |\n"
+"| `event_id` | `int` | Required | Event ID, used to distinguish different synchronization points |\n"
+"| `_builder` | - | `None` | Reserved parameter, external calls not supported for now |\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:20
+msgid "#### 2.2.2 特殊限制说明"
+msgstr "#### 2.2.2 Special Restrictions Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:22
+msgid ""
+"1. `sender` 和 `receiver` 不能相同，不能自己给自己发信号\n"
+"2. `event_id` 必须在 0-15 范围内（共16个独立事件）\n"
+msgstr ""
+"1. `sender` and `receiver` cannot be the same; you cannot send a signal to yourself.  \n"
+"2. `event_id` must be in the range of 0-15 (16 independent events in total).\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:24
+msgid "## 3. `sync_block_wait` 操作"
+msgstr "## 3. `sync_block_wait` Operation"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:26
+msgid "### 3.1 函数概述"
+msgstr "### 3.1 Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:28
+msgid "消费者核心等待生产者的同步信号。"
+msgstr "The consumer core waits for the producer's synchronization signal."
+
+#. type: code
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:30
+msgid ""
+"```python\n"
+"triton.language.sync_block_wait(sender, receiver, event_id, _builder=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:32
+msgid "### 3.2 规格"
+msgstr "### 3.2 Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:34
+msgid "#### 3.2.1 参数说明"
+msgstr "#### 3.2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:36
+msgid ""
+"| 参数 | 类型 | 默认值 | 含义说明 |\n"
+"|------|------|--------|----------|\n"
+"| `sender` | `str` | 必需 | 发送方核心类型：\"cube\" 或 \"vector\" |\n"
+"| `receiver` | `str` | 必需 | 接收方核心类型：\"cube\" 或 \"vector\" |\n"
+"| `event_id` | `int` | 必需 | 等待的事件ID |\n"
+"| `_builder` | - | `None` | 保留参数，暂不支持外部调用 |\n"
+msgstr ""
+"| Parameter | Type | Default | Description |\n"
+"|-----------|------|---------|-------------|\n"
+"| `sender` | `str` | Required | Sender core type: `\"cube\"` or `\"vector\"` |\n"
+"| `receiver` | `str` | Required | Receiver core type: `\"cube\"` or `\"vector\"` |\n"
+"| `event_id` | `int` | Required | Event ID to wait for |\n"
+"| `_builder` | - | `None` | Reserved parameter, external calls not supported yet |\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:38
+msgid "#### 3.2.2 特殊限制说明"
+msgstr "#### 3.2.2 Special Restrictions Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:40
+msgid ""
+"1. `sender` 和 `receiver` 不能相同\n"
+"2. `event_id` 必须与对应 `sync_block_set` 使用的 ID 一致\n"
+msgstr ""
+"1. `sender` and `receiver` cannot be the same\n"
+"2. `event_id` must match the ID used by the corresponding `sync_block_set`\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:42
+msgid "## 4. `sync_block_all` 操作"
+msgstr "## 4. `sync_block_all` operation"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:44
+msgid "### 4.1 函数概述"
+msgstr "### 4.1 Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:46
+msgid "全局屏障同步，让所有指定类型的核心同步到同一点。"
+msgstr "Global barrier synchronization, synchronizing all cores of the specified type to the same point."
+
+#. type: code
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:48
+msgid ""
+"```python\n"
+"triton.language.sync_block_all(mode, event_id, _builder=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:50
+msgid "### 4.2 规格"
+msgstr "### 4.2 Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:52
+msgid "#### 4.2.1 参数说明"
+msgstr "#### 4.2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:54
+msgid ""
+"| 参数 | 类型 | 默认值 | 含义说明 |\n"
+"|------|------|--------|----------|\n"
+"| `mode` | `str` | 必需 | 同步模式：\"all_cube\"、\"all_vector\" 或 \"all\" |\n"
+"| `event_id` | `int` | 必需 | 全局同步事件ID |\n"
+"| `_builder` | - | `None` | 保留参数，暂不支持外部调用 |\n"
+msgstr ""
+"| Parameter | Type | Default | Description |\n"
+"|-----------|------|---------|-------------|\n"
+"| `mode` | `str` | Required | Sync mode: `\"all_cube\"`, `\"all_vector\"`, or `\"all\"` |\n"
+"| `event_id` | `int` | Required | Global sync event ID |\n"
+"| `_builder` | - | `None` | Reserved parameter, external calls not supported for now |\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:56
+msgid "#### 4.2.2 特殊限制说明"
+msgstr "#### 4.2.2 Special Limitations Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:58
+msgid ""
+"1. `mode` 必须为 \"all_cube\"、\"all_vector\" 或 \"all\" 之一\n"
+"2. `event_id` 必须在 0-15 范围内\n"
+msgstr ""
+"1. `mode` must be one of \"all_cube\", \"all_vector\", or \"all\"\n"
+"2. `event_id` must be in the range of 0-15\n"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:60
+msgid "## 5. 使用方法"
+msgstr "## 5. Usage"
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:62
+msgid "### 5.1 基础使用示例"
+msgstr "### 5.1 Basic Usage Example"
+
+#. type: code
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:64
+msgid ""
+"```python\n"
+"import triton\n"
+"import triton.language as tl\n"
+"import triton.language.ascend as al\n"
+"\n"
+"@triton.jit\n"
+"def sync_example():\n"
+"    # Cube 核心计算并通知 Vector\n"
+"    with al.Scope(core_mode=\"cube\"):\n"
+"        # ... 执行 Cube 计算 ...\n"
+"        tl.sync_block_set(\"cube\", \"vector\", 0)\n"
+"\n"
+"    # Vector 核心等待 Cube 完成\n"
+"    with al.Scope(core_mode=\"vector\"):\n"
+"        tl.sync_block_wait(\"cube\", \"vector\", 0)\n"
+"        # ... 执行 Vector 计算 ...\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:66
+msgid "### 5.2 Flash Attention 流水线示例"
+msgstr "### 5.2 Flash Attention Pipeline Example"
+
+#. type: code
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:68
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def flash_attention_fwd(q_ptr, k_ptr, v_ptr, o_ptr, ...):\n"
+"    acc = tl.zeros([BLOCK_M, HEAD_DIM], dtype=tl.float32)\n"
+"\n"
+"    with al.Scope(core_mode=\"cube\"):\n"
+"        for start_n in range(0, N, BLOCK_N):\n"
+"            qk = tl.dot(q, k)\n"
+"            tl.sync_block_set(\"cube\", \"vector\", 0)\n"
+"            tl.sync_block_wait(\"vector\", \"cube\", 1)\n"
+"            pv = tl.dot(p, v)\n"
+"            tl.sync_block_set(\"cube\", \"vector\", 2)\n"
+"\n"
+"    with al.Scope(core_mode=\"vector\"):\n"
+"        for start_n in range(0, N, BLOCK_N):\n"
+"            tl.sync_block_wait(\"cube\", \"vector\", 0)\n"
+"            m_new, l_new, softmax_out = _softmax(qk, m_prev, l_prev)\n"
+"            tl.sync_block_set(\"vector\", \"cube\", 1)\n"
+"            tl.sync_block_wait(\"cube\", \"vector\", 2)\n"
+"            acc = _update_output(pv, softmax_out, acc)\n"
+"\n"
+"    with al.Scope(core_mode=\"cube\"):\n"
+"        tl.sync_block_all(\"all\", 0)\n"
+"\n"
+"    tl.store(o_ptr + offsets, acc)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Extension_Ops/sync_block.md:69
+msgid ""
+"\n"
+"\n"
+msgstr ""

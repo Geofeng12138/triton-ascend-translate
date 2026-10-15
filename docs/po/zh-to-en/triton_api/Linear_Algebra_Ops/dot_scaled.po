@@ -1,0 +1,225 @@
+# PO translation file for docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 10:52+0000\n"
+"PO-Revision-Date: 2026-07-20 10:52+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:0
+msgid "# triton.language.dot_scaled"
+msgstr "# triton.language.dot_scaled"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:2
+msgid "## 1. OP 概述"
+msgstr "## 1. OP Overview"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:4
+msgid "简介：**计算以缩放格式表示两个矩阵块的矩阵乘积**"
+msgstr "Introduction: **Compute the matrix product of two matrix blocks represented in scaled format**"
+
+#. type: code
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:6
+msgid ""
+"```python\n"
+"triton.language.dot_scaled(lhs, lhs_scale, lhs_format, rhs, rhs_scale, rhs_format,\n"
+"    acc=None, lhs_k_pack=True, rhs_k_pack=True,\n"
+"    out_dtype=triton.language.float32, _semantic=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:8
+msgid "## 2. OP 规格"
+msgstr "## 2. OP Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:12
+msgid ""
+"| 参数名           | 类型                | 说明                                                             |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `lhs`        | `tensor`          | 左矩阵张量的基指针（支持bf16、fp16格式）                                                      |\n"
+"| `lhs_scale`        | `tensor`          | 左矩阵缩放张量的基指针（支持int8格式）                                                      |\n"
+"| `lhs_format`        | `string`          | 左矩阵张量的存放格式 （支持\"bf16\"和\"fp16\"）                                                     |\n"
+"| `rhs`        | `tensor`          | 右矩阵张量的基指针 （支持bf16、fp16格式）                                                     |\n"
+"| `rhs_scale`        | `tensor`          | 右矩阵缩放张量的基指针（支持int8格式）                                                       |\n"
+"| `rhs_format`        | `string`          | 右矩阵张量的存放格式 （支持\"bf16\"和\"fp16\"）                                                      |\n"
+"| `acc`       | `tensor`    | 累积张量                                                        |\n"
+"| `lhs_k_pack`     | `(bool, optional)`    | true 沿 K 维度打包<br>false 沿 M 维度打包<br>|\n"
+"| `rhs_k_pack` | `(bool, optional)` | true 沿 K 维度打包<br>false 沿 N 维度打包<br>|\n"
+"| `_semantic`   | -                 | 保留参数，暂不支持外部调用                                                |\n"
+msgstr ""
+"| Parameter Name | Type | Description |\n"
+"| ------------- | ----------------- | -------------------------------------------------------------- |\n"
+"| `lhs`        | `tensor`          | Base pointer of the left matrix tensor (supports bf16, fp16 formats) |\n"
+"| `lhs_scale`        | `tensor`          | Base pointer of the left matrix scaling tensor (supports int8 format) |\n"
+"| `lhs_format`        | `string`          | Storage format of the left matrix tensor (supports \"bf16\" and \"fp16\") |\n"
+"| `rhs`        | `tensor`          | Base pointer of the right matrix tensor (supports bf16, fp16 formats) |\n"
+"| `rhs_scale`        | `tensor`          | Base pointer of the right matrix scaling tensor (supports int8 format) |\n"
+"| `rhs_format`        | `string`          | Storage format of the right matrix tensor (supports \"bf16\" and \"fp16\") |\n"
+"| `acc`       | `tensor`    | Accumulation tensor |\n"
+"| `lhs_k_pack`     | `(bool, optional)`    | true: pack along K dimension<br>false: pack along M dimension<br>|\n"
+"| `rhs_k_pack` | `(bool, optional)` | true: pack along K dimension<br>false: pack along N dimension<br>|\n"
+"| `_semantic`   | -                 | Reserved parameter, external calls not supported currently |\n"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:14
+msgid ""
+"返回值：\n"
+"`out`：tensor类型，计算缩放矩阵乘后输出的值\n"
+msgstr ""
+"Return value:  \n"
+"`out`: tensor type, the output value after computing the scaled matrix multiplication.\n"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:16
+msgid "### 2.2 支持规格"
+msgstr "### 2.2 Supported Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:18
+msgid "#### 2.2.1 DataType 支持"
+msgstr "#### 2.2.1 DataType Support"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:20
+msgid ""
+"|        |     fp4     |    fp8    |    bf16    |    fp16    |\n"
+"| ------------- | --------- | -------- | -------- | -------- |\n"
+"| GPU    | √    | √     | √     | √     |\n"
+"| Ascend A2/A3 | ×    | ×     | √     | √    |\n"
+msgstr ""
+"|        | fp4     | fp8    | bf16    | fp16    |\n"
+"| ------------- | --------- | -------- | -------- | -------- |\n"
+"| GPU    | √    | √     | √     | √     |\n"
+"| Ascend A2/A3 | ×    | ×     | √     | √    |\n"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:22
+msgid ""
+"结论：\n"
+"1、Ascend 对比 GPU 缺失fp4、fp8的支持能力（硬件限制）。\n"
+"2、缩放张量的值为int8，GPU上为uint8。\n"
+msgstr ""
+"Conclusion:  \n"
+"1. Ascend lacks support for fp4 and fp8 compared to GPU (hardware limitation).  \n"
+"2. The value of the scaling tensor is int8, while on GPU it is uint8.\n"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:24
+msgid "#### 2.2.2 Shape 支持"
+msgstr "#### 2.2.2 Shape Support"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:26
+msgid ""
+"|        | 支持维度范围          |\n"
+"| ------ | --------------- |\n"
+"| GPU    | 可支持 2~3维 tensor |\n"
+"| Ascend | 可支持 2~3维 tensor |\n"
+msgstr ""
+"|        | Supported Dimension Range |\n"
+"| ------ | ----------------------- |\n"
+"| GPU    | Supports 2~3D tensors   |\n"
+"| Ascend | Supports 2~3D tensors   |\n"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:28
+msgid "结论：在 Shape 方面，GPU 与 Ascend 平台无差异，lhs/rhs矩阵均支持 2 至 3 维张量，但scale矩阵只支持2维。"
+msgstr "Conclusion: In terms of Shape, there is no difference between GPU and Ascend platforms. Both lhs/rhs matrices support 2 to 3-dimensional tensors, but the scale matrix only supports 2 dimensions."
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:30
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:32
+msgid ""
+"1、由于不支持fp8，左右矩阵不支持fp4、fp8格式，Ascend 对比 GPU 缺失lhs_k_pack、rhs_k_pack的矩阵解压缩支持能力（硬件限制）。\n"
+"2、输入矩阵lhs、rhs推荐输入范围为[-5, 5]，超过可能会出现极值inf。\n"
+"3、由于硬件存在对齐要求，需要限制scale矩阵做broadcast的倍数，至少应为16\n"
+msgstr ""
+"1. Due to lack of fp8 support, the left and right matrices do not support fp4 and fp8 formats. Compared to GPU, Ascend lacks matrix decompression support for `lhs_k_pack` and `rhs_k_pack` (hardware limitation).  \n"
+"2. The recommended input range for the input matrices `lhs` and `rhs` is [-5, 5]; values beyond this range may result in extreme values such as `inf`.  \n"
+"3. Due to hardware alignment requirements, the multiple for broadcasting the scale matrix must be limited to at least 16.\n"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:34
+msgid "4、当前支持的缩放矩阵格式为int8，社区为uint8"
+msgstr "4. The currently supported scaling matrix format is int8, and the community uses uint8."
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:36
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: text
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:38
+msgid "以下示例实现了对输入张量 `x` 做就地绝对值计算："
+msgstr "The following example implements an in-place absolute value calculation on the input tensor `x`:"
+
+#. type: code
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:40
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def dot_scale_kernel(a_base, stride_a0: tl.constexpr, stride_a1: tl.constexpr, a_scale, b_base, stride_b0: tl.constexpr,\n"
+"                     stride_b1: tl.constexpr, b_scale, out,\n"
+"                     BLOCK_M: tl.constexpr, BLOCK_N: tl.constexpr, BLOCK_K: tl.constexpr, type_a: tl.constexpr,\n"
+"                     type_b: tl.constexpr):\n"
+"    PACKED_BLOCK_K_A: tl.constexpr = BLOCK_K\n"
+"    PACKED_BLOCK_K_B: tl.constexpr = BLOCK_K\n"
+"    str_a0: tl.constexpr = stride_a0\n"
+"    a_ptr = a_base + tl.arange(0, BLOCK_M)[:, None] * stride_a0 + tl.arange(0,\n"
+"                                                                            str_a0)[None, :] * stride_a1\n"
+"    b_ptr = b_base + tl.arange(0, PACKED_BLOCK_K_B)[:, None] * stride_b0 + tl.arange(0,\n"
+"                                                                                     BLOCK_N)[None, :] * stride_b1\n"
+"\n"
+"    a = tl.load(a_ptr)\n"
+"    b = tl.load(b_ptr)\n"
+"    SCALE_BLOCK_K: tl.constexpr = BLOCK_K // 32\n"
+"    accumulator = tl.zeros((BLOCK_M, BLOCK_N), dtype=tl.float32)\n"
+"    if a_scale is not None:\n"
+"        scale_a_ptr = a_scale + tl.arange(0, BLOCK_M)[:, None] * SCALE_BLOCK_K + tl.arange(0,\n"
+"                                                                                           SCALE_BLOCK_K)[None, :]\n"
+"        a_scale = tl.load(scale_a_ptr)\n"
+"    if b_scale is not None:\n"
+"        scale_b_ptr = b_scale + tl.arange(0, BLOCK_N)[:, None] * SCALE_BLOCK_K + tl.arange(0,\n"
+"                                                                                           SCALE_BLOCK_K)[None, :]\n"
+"        b_scale = tl.load(scale_b_ptr)\n"
+"    accumulator = tl.dot_scaled(a, a_scale, type_a, b, b_scale, type_b, acc=accumulator, out_dtype=tl.float32)\n"
+"\n"
+"    out_ptr = out + tl.arange(0, BLOCK_M)[:, None] * BLOCK_N + tl.arange(0, BLOCK_N)[None, :]\n"
+"    tl.store(out_ptr, accumulator.to(a.dtype))\n"
+"\n"
+"x = torch.randn(shape, dtype=torch.bfloat16, device=\"npu\")\n"
+"y = torch.randn(shape, dtype=torch.bfloat16, device=\"npu\")\n"
+"M, K = shape[0], shape[1]\n"
+"scale_x = torch.randint(min_scale - 128, max_scale - 127, (M, K // 32), dtype=torch.int8, device=\"npu\")\n"
+"scale_y = torch.randint(min_scale - 128, max_scale - 127, (N, K // 32), dtype=torch.int8, device=\"npu\")\n"
+"type_a, type_b = \"bf16\", \"bf16\"\n"
+"pgm = dot_scale_kernel[(1,)](x, *x.stride(), scale_x, y, *y.stride(), scale_y, z, M, N, K, type_a, type_b)\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Linear_Algebra_Ops/dot_scaled.md:41
+msgid ""
+"\n"
+"\n"
+msgstr ""

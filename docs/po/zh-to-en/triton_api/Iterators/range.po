@@ -1,0 +1,171 @@
+# PO translation file for docs/zh/triton_api/Iterators/range.md
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: triton-ascend-docs\n"
+"POT-Creation-Date: 2026-07-20 10:51+0000\n"
+"PO-Revision-Date: 2026-07-20 10:51+0000\n"
+"Last-Translator: Auto Translation (DeepSeek)\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: text
+#: docs/zh/triton_api/Iterators/range.md:0
+msgid "# triton.language.range"
+msgstr "# triton.language.range"
+
+#. type: text
+#: docs/zh/triton_api/Iterators/range.md:2
+msgid "## 1. 函数概述"
+msgstr "## 1. Function Overview"
+
+#. type: text
+#: docs/zh/triton_api/Iterators/range.md:4
+msgid "`range` 是一个向上计数的迭代器，类似于 Python 的 `range()` 函数，但是允许传入更多的参数。"
+msgstr "`range` is an upward-counting iterator, similar to Python's `range()` function, but allows more parameters to be passed in."
+
+#. type: code
+#: docs/zh/triton_api/Iterators/range.md:6
+msgid ""
+"```python\n"
+"triton.language.range(arg1, arg2=None, step=None, num_stages=None, loop_unroll_factor=None, disallow_acc_multi_buffer=False, flatten=False, warp_specialize=False, disable_licm=False, _semantic=None)\n"
+"```\n"
+msgstr ""
+
+#. type: text
+#: docs/zh/triton_api/Iterators/range.md:8
+msgid "## 2. 规格"
+msgstr "## 2. Specifications"
+
+#. type: text
+#: docs/zh/triton_api/Iterators/range.md:10
+msgid "### 2.1 参数说明"
+msgstr "### 2.1 Parameter Description"
+
+#. type: text
+#: docs/zh/triton_api/Iterators/range.md:12
+msgid ""
+"| 参数 | 类型 | 默认值 | 含义说明 |\n"
+"|------|------|--------|----------|\n"
+"| `arg1` | `int` /`constexpr`| 必需 | 起始值（单参数时作为结束值，从0开始） |\n"
+"| `arg2` | `int`/`constexpr` | - | 结束值（不包含在范围内） |\n"
+"| `step` | `int` /`constexpr`| `1` | 一个整数，每次迭代的步长增量|\n"
+"| `num_stages` | `int` | - | 流水线阶段数（同时执行的迭代数量） |\n"
+"| `loop_unroll_factor` | `int` | - | 循环展开因子（<2表示不展开） |\n"
+"| `disallow_acc_multi_buffer` | `bool` | `False` | 禁止dot操作累加器的多缓冲优化 |\n"
+"| `flatten` | `bool` | `False` | 自动展平嵌套循环为单层循环 |\n"
+"| `warp_specialize` | `bool` | `False` | 启用warp专业化（仅Blackwell GPU） |\n"
+"| `disable_licm` | `bool` | `False` | 禁用循环不变代码外提优化 |\n"
+"| `_semantic` | - | - | 保留参数，暂不支持外部调用 |\n"
+msgstr ""
+"| Parameter | Type | Default | Description |\n"
+"|-----------|------|---------|-------------|\n"
+"| `arg1` | `int` / `constexpr` | Required | Start value (when single parameter, serves as end value, starting from 0) |\n"
+"| `arg2` | `int` / `constexpr` | - | End value (exclusive) |\n"
+"| `step` | `int` / `constexpr` | `1` | An integer, the step increment for each iteration |\n"
+"| `num_stages` | `int` | - | Number of pipeline stages (number of iterations executed concurrently) |\n"
+"| `loop_unroll_factor` | `int` | - | Loop unroll factor (<2 means no unrolling) |\n"
+"| `disallow_acc_multi_buffer` | `bool` | `False` | Disable multi-buffering optimization for the dot operation accumulator |\n"
+"| `flatten` | `bool` | `False` | Automatically flatten nested loops into a single loop |\n"
+"| `warp_specialize` | `bool` | `False` | Enable warp specialization (Blackwell GPU only) |\n"
+"| `disable_licm` | `bool` | `False` | Disable loop-invariant code motion optimization |\n"
+"| `_semantic` | - | - | Reserved parameter, external calls not supported yet |\n"
+
+#. type: text
+#: docs/zh/triton_api/Iterators/range.md:14
+msgid "### 2.2 类型支持"
+msgstr "### 2.2 Type Support"
+
+#. type: text
+#: docs/zh/triton_api/Iterators/range.md:16
+msgid "A3："
+msgstr "A3:"
+
+#. type: text
+#: docs/zh/triton_api/Iterators/range.md:18
+msgid ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | × | × | × | × | × |\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | ×|×| × | × | ✓ | × | × | × | × | × |\n"
+msgstr ""
+"| | int8 | int16 | int32 | uint8 | uint16 | uint32 | uint64 | int64 | fp16 | fp32 | fp64 | bf16 | bool |\n"
+"|------|-------|-------|-------|-------|--------|--------|--------|-------|------|------|------|------|------|\n"
+"| GPU | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | × | × | × | × | × |\n"
+"| Ascend A2/A3 | ✓ | ✓ | ✓ | ×|×| × | × | ✓ | × | × | × | × | × |\n"
+
+#. type: text
+#: docs/zh/triton_api/Iterators/range.md:20
+msgid "### 2.3 特殊限制说明"
+msgstr "### 2.3 Special Restrictions Explanation"
+
+#. type: text
+#: docs/zh/triton_api/Iterators/range.md:22
+msgid "> 相对社区能力缺失且无法实现"
+msgstr "Relative community capability is lacking and cannot be achieved."
+
+#. type: text
+#: docs/zh/triton_api/Iterators/range.md:24
+msgid ""
+"Ascend 对比 GPU 缺失uint8、uint16、uint32、uint64、fp64的支持能力（硬件限制）。\n"
+"disallow_acc_multi_buffer, flatten, warp_specialize, disable_licm 相关功能还不全。\n"
+msgstr "Ascend lacks support for uint8, uint16, uint32, uint64, and fp64 compared to GPU (hardware limitation). The functionalities related to disallow_acc_multi_buffer, flatten, warp_specialize, and disable_licm are not yet complete."
+
+#. type: text
+#: docs/zh/triton_api/Iterators/range.md:26
+msgid "### 2.4 使用方法"
+msgstr "### 2.4 Usage"
+
+#. type: code
+#: docs/zh/triton_api/Iterators/range.md:28
+msgid ""
+"```python\n"
+"import triton.language as tl\n"
+"\n"
+"@triton.jit\n"
+"def basic_examples():\n"
+"    # 单参数：0到9\n"
+"    for i in tl.range(10):\n"
+"        # i = 0, 1, 2, ..., 9\n"
+"        pass\n"
+"\n"
+"    # 双参数：2到9\n"
+"    for i in tl.range(2, 10):\n"
+"        # i = 2, 3, ..., 9\n"
+"        pass\n"
+"\n"
+"    # 三参数：0到10，步长为2\n"
+"    for i in tl.range(0, 10, 2):\n"
+"        # i = 0, 2, 4, 6, 8\n"
+"        pass\n"
+"```\n"
+msgstr ""
+
+#. type: code
+#: docs/zh/triton_api/Iterators/range.md:30
+msgid ""
+"```python\n"
+"@triton.jit\n"
+"def advanced_examples():\n"
+"    # 使用循环优化参数\n"
+"    for i in tl.range(0, 100, num_stages=3, loop_unroll_factor=4):\n"
+"        # 流水线阶段数为3，循环展开因子为4\n"
+"        pass\n"
+"\n"
+"    # 嵌套循环展平\n"
+"    for i in tl.range(0, 10, flatten=True):\n"
+"        for j in tl.range(0, 20, flatten=True):\n"
+"            # 两个循环会被自动展平为单层循环\n"
+"            pass\n"
+"```\n"
+msgstr ""
+
+#. type: blank
+#: docs/zh/triton_api/Iterators/range.md:31
+msgid ""
+"\n"
+"\n"
+msgstr ""
